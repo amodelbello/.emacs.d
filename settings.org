@@ -1,3 +1,8 @@
+#+title: Custom emacs settings
+#+author: Amo DelBello
+#+description: ""
+#+startup: content
+
 * Packages
 ** Ace Window
 #+begin_src emacs-lisp
