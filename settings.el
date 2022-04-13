@@ -11,9 +11,11 @@
 (use-package ivy
   :ensure t
   :diminish (ivy-mode)
-  :bind (("C-x b" . ivy-switch-buffer)
-	 ("C-c C-r" . ivy-resume)
-	 :map ivy-minibuffer-map ("M-y" . ivy-next-line))
+  :bind
+    (("C-x b" . ivy-switch-buffer)
+     ("C-c C-r" . ivy-resume)
+     :map ivy-minibuffer-map
+       ("M-y" . ivy-next-line))
   :init
     (ivy-mode 1)
   :config
@@ -23,30 +25,32 @@
 
 (use-package counsel
   :ensure t
-  :bind (("M-y" . counsel-yank-pop)
-	     ("M-x" . counsel-M-x)
-	     ("C-x C-f" . counsel-find-file)
-	     ("<f1> f" . counsel-describe-function)
-	     ("<f1> v" . counsel-describe-variable)
-	     ("<f1> l" . counsel-find-library)
-	     ("<f2> i" . counsel-info-lookup-symbol)
-	     ("<f2> u" . counsel-unicode-char)
-	     ("C-c g" . counsel-git) ; will override the keybinding for `magit-file-dispatch'
-	     ("C-c j" . counsel-git-grep)
-	     ("C-c a" . counsel-ag)
-	     ("C-x l" . counsel-locate)
-	     ("M-y" . counsel-yank-pop)
-	     ("M-x" . counsel-M-x)
-	     ("C-x C-f" . counsel-find-file)
-	     :map minibuffer-local-map ("C-r" . counsl-minibuffer-history)))
+  :bind
+    (("M-y" . counsel-yank-pop)
+     ("M-x" . counsel-M-x)
+     ("C-x C-f" . counsel-find-file)
+     ("<f1> f" . counsel-describe-function)
+     ("<f1> v" . counsel-describe-variable)
+     ("<f1> l" . counsel-find-library)
+     ("<f2> i" . counsel-info-lookup-symbol)
+     ("<f2> u" . counsel-unicode-char)
+     ("C-c g" . counsel-git) ; will override the keybinding for `magit-file-dispatch'
+     ("C-c j" . counsel-git-grep)
+     ("C-c a" . counsel-ag)
+     ("C-x l" . counsel-locate)
+     ("M-y" . counsel-yank-pop)
+     ("M-x" . counsel-M-x)
+     ("C-x C-f" . counsel-find-file)
+     :map minibuffer-local-map
+       ("C-r" . counsl-minibuffer-history)))
 
 (use-package swiper
   :ensure t
-  :bind (("C-s" . swiper-isearch)
-	 ("C-r" . swiper-isearch))
-  :config
-  (progn
-    (define-key read-expression-map (kbd "C-r") 'counsel-expression-history)))
+  :bind
+    (("C-s" . swiper-isearch)
+     ("C-r" . swiper-isearch)
+     :map read-expression-map
+       ("C-r" . counsel-expression-history)))
 
 (use-package nlinum
   :ensure t
@@ -71,6 +75,13 @@
 
 (use-package yasnippet-snippets
   :ensure t)
+
+(add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
+
+(use-package spacemacs-common
+  :ensure spacemacs-theme
+  :config
+    (load-theme 'spacemacs-light t))
 
 (global-set-key (kbd "\e\es")
 		(lambda ()

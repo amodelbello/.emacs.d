@@ -96,6 +96,17 @@
     (use-package yasnippet-snippets
       :ensure t)
   #+end_src
+* Themes
+#+begin_src emacs-lisp
+(add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
+#+end_src
+** Spacemacs
+#+begin_src emacs-lisp
+  (use-package spacemacs-common
+    :ensure spacemacs-theme
+    :config
+      (load-theme 'spacemacs-light t))
+#+end_src
 * Config
 ** Quick Open
   #+begin_src emacs-lisp
