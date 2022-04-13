@@ -64,6 +64,13 @@
 	   ("C-r" . counsel-expression-history)))
 
   #+end_src
+** Magit
+#+begin_src emacs-lisp
+  (use-package magit
+    :ensure t
+    :bind
+    (("C-x g" . magit)))
+#+end_src
 ** nlinum
 #+begin_src emacs-lisp
   (use-package nlinum
