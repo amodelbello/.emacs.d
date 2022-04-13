@@ -1,4 +1,7 @@
-(require 'package)
+(eval-when-compile
+  (require 'use-package))
+;; (require 'diminish)                ;; if you use :diminish
+;; (require 'bind-key)                ;; if you use any :bind variant
 
 (setq package-enable-at-startup nil)
 (add-to-list 'package-archives
@@ -8,7 +11,6 @@
 
 (package-initialize)
 
-;; Bootstrap `use-package'
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
   (package-install 'use-package))
