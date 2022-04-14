@@ -8,67 +8,66 @@
 #+begin_src emacs-lisp
   (use-package ace-window
     :ensure t
-    :config (progn
-	      (defvar aw-dispatch-always nil)
-	      (global-set-key (kbd "C-x o") 'ace-window)
-	      (global-set-key (kbd "s-w") 'ace-window)
-	      (custom-set-faces
-	       '(aw-leading-char-face
-		 ((t (:inherit ace-jump-face-foreground :height 3.0)))))))
+    :bind
+    (("C-x o" . ace-window)
+     ("s-w" . ace-window))
+    :config 
+    (defvar aw-dispatch-always nil)
+    (custom-set-faces
+     '(aw-leading-char-face
+       ((t (:inherit ace-jump-face-foreground :height 3.0))))))
 #+end_src
 ** Ivy & friends
 *** Ivy
-  #+begin_src emacs-lisp
-    (use-package ivy
-      :ensure t
-      :diminish (ivy-mode)
-      :bind
-	(("C-x b" . ivy-switch-buffer)
-	 ("C-c C-r" . ivy-resume)
-	 :map ivy-minibuffer-map
-	   ("M-y" . ivy-next-line))
-      :init
-	(ivy-mode 1)
-      :config
-	(setq ivy-use-virtual-buffers t)
-	(setq ivy-count-format "%d/%d ")
-	(setq ivy-display-style 'fancy))
-  #+end_src
+#+begin_src emacs-lisp
+  (use-package ivy
+    :ensure t
+    :diminish (ivy-mode)
+    :bind
+    (("C-x b" . ivy-switch-buffer)
+     ("C-c C-r" . ivy-resume)
+     :map ivy-minibuffer-map
+     ("M-y" . ivy-next-line))
+    :config
+    (setq ivy-use-virtual-buffers t)
+    (setq ivy-count-format "%d/%d ")
+    (setq ivy-display-style 'fancy))
+#+end_src
 *** Counsel
-  #+begin_src emacs-lisp
-    (use-package counsel
-      :ensure t
-      :bind
-	(("M-y" . counsel-yank-pop)
-	 ("M-x" . counsel-M-x)
-	 ("C-x C-f" . counsel-find-file)
-	 ("<f1> f" . counsel-describe-function)
-	 ("<f1> v" . counsel-describe-variable)
-	 ("<f1> l" . counsel-find-library)
-	 ("<f2> i" . counsel-info-lookup-symbol)
-	 ("<f2> u" . counsel-unicode-char)
-	 ("C-c g" . counsel-git) ; will override the keybinding for `magit-file-dispatch'
-	 ("C-c j" . counsel-git-grep)
-	 ("C-c a" . counsel-ag)
-	 ("C-x l" . counsel-locate)
-	 ("M-y" . counsel-yank-pop)
-	 ("M-x" . counsel-M-x)
-	 ("C-x C-f" . counsel-find-file)
-	 :map minibuffer-local-map
-	   ("C-r" . counsl-minibuffer-history)))
-  #+end_src
+#+begin_src emacs-lisp
+  (use-package counsel
+    :ensure t
+    :bind
+    (("M-y" . counsel-yank-pop)
+     ("M-x" . counsel-M-x)
+     ("C-x C-f" . counsel-find-file)
+     ("<f1> f" . counsel-describe-function)
+     ("<f1> v" . counsel-describe-variable)
+     ("<f1> l" . counsel-find-library)
+     ("<f2> i" . counsel-info-lookup-symbol)
+     ("<f2> u" . counsel-unicode-char)
+     ("C-c g" . counsel-git) ; will override the keybinding for `magit-file-dispatch'
+     ("C-c j" . counsel-git-grep)
+     ("C-c a" . counsel-ag)
+     ("C-x l" . counsel-locate)
+     ("M-y" . counsel-yank-pop)
+     ("M-x" . counsel-M-x)
+     ("C-x C-f" . counsel-find-file)
+     :map minibuffer-local-map
+       ("C-r" . counsl-minibuffer-history)))
+#+end_src
 
 *** Swiper
-  #+begin_src emacs-lisp
-    (use-package swiper
-      :ensure t
-      :bind
-	(("C-s" . swiper-isearch)
-	 ("C-r" . swiper-isearch)
-	 :map read-expression-map
-	   ("C-r" . counsel-expression-history)))
+#+begin_src emacs-lisp
+  (use-package swiper
+    :ensure t
+    :bind
+    (("C-s" . swiper-isearch)
+     ("C-r" . swiper-isearch)
+     :map read-expression-map
+     ("C-r" . counsel-expression-history)))
 
-  #+end_src
+#+end_src
 ** Magit
 #+begin_src emacs-lisp
   (use-package magit
@@ -80,17 +79,16 @@
 #+begin_src emacs-lisp
   (use-package nlinum
     :ensure t
-    :init (global-nlinum-mode 1))
+    :config
+    (global-nlinum-mode))
 #+end_src
 ** Org Bullets
-  #+begin_src emacs-lisp
-    (use-package org-bullets
-      :ensure t
-      :config
-      (add-hook 'org-mode-hook
-		(lambda ()
-		  (org-bullets-mode 1))))
-  #+end_src
+#+begin_src emacs-lisp
+  (use-package org-bullets
+    :ensure t
+    :hook
+    (org-mode . org-bullets-mode))
+#+end_src
 ** which-key
 #+begin_src emacs-lisp
   (use-package which-key
@@ -99,29 +97,28 @@
     (which-key-mode))
 #+end_src
 ** YASnippet
-  #+begin_src emacs-lisp
-    (use-package yasnippet
-      :ensure t
-      :init
-      (yas-global-mode 1)
-      :config
-      (use-package yasnippet-snippets
-	:ensure t))
-  #+end_src
+#+begin_src emacs-lisp
+  (use-package yasnippet
+    :ensure t
+    :config
+    (yas-global-mode)
+    (use-package yasnippet-snippets
+      :ensure t))
+#+end_src
 * Themes
 #+begin_src emacs-lisp
-(add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
+  (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
 #+end_src
 ** Spacemacs
 #+begin_src emacs-lisp
   (use-package spacemacs-common
     :ensure spacemacs-theme
     :config
-      (load-theme 'spacemacs-light t))
+    (load-theme 'spacemacs-light t))
 #+end_src
 * Config
 ** Quick Open
-  #+begin_src emacs-lisp
+#+begin_src emacs-lisp
   (global-set-key (kbd "\e\es")
 		  (lambda ()
 		    (interactive)
@@ -131,93 +128,91 @@
 		  (lambda ()
 		    (interactive)
 		    (find-file "~/.emacs.d/init.el")))
-  #+end_src
+#+end_src
 ** Font Size
-  #+BEGIN_SRC emacs-lisp
-    (set-frame-font "DejaVu Sans Mono-14" nil t)
-    (setq-default line-spacing 0.3)
-    (setq-default fill-column 80)
-    (setq-default sentence-end-double-space nil)
-    (setq-default whitespace-line-column 110)
+#+BEGIN_SRC emacs-lisp
+  (set-frame-font "DejaVu Sans Mono-14" nil t)
+  (setq-default line-spacing 0.3)
+  (setq-default fill-column 80)
+  (setq-default sentence-end-double-space nil)
+  (setq-default whitespace-line-column 110)
 
-    ;; Because the line-spacing above messes up calc
-    (add-hook 'calc-mode-hook
-              (lambda ()
-                (setq line-spacing 0)))
-    (add-hook 'calc-trail-mode-hook
-              (lambda ()
-                (setq line-spacing 0)))
-
-  #+END_SRC
+  ;; Because the line-spacing above messes up calc
+  (add-hook 'calc-mode-hook
+	    (lambda ()
+	      (setq line-spacing 0)))
+  (add-hook 'calc-trail-mode-hook
+	    (lambda ()
+	      (setq line-spacing 0)))
+#+END_SRC
 ** Window Things
-  #+begin_src emacs-lisp
-    (setq-default global-tab-line-mode nil)
-    (setq-default tab-line-mode nil)
-    (setq-default tab-bar-mode nil)
-    (toggle-scroll-bar -1)
+#+begin_src emacs-lisp
+  (setq-default global-tab-line-mode nil)
+  (setq-default tab-line-mode nil)
+  (setq-default tab-bar-mode nil)
+  (toggle-scroll-bar -1)
 
-    ; easily shrink window vertically
-    (global-set-key (kbd "C-x %") (kbd "C-u -1 C-x ^"))
-
-  #+end_src
+  ; easily shrink window vertically
+  (global-set-key (kbd "C-x %") (kbd "C-u -1 C-x ^"))
+#+end_src
 ** ibuffer
-   #+begin_src emacs-lisp
-     (global-set-key (kbd "C-x C-b") 'ibuffer)
-     (setq ibuffer-saved-filter-groups
-		(quote (("default"
-			 ("org" (mode . org-mode))
-			 ("IRC" (or (mode . circe-channel-mode) (mode . circe-server-mode)))
-			 ("web" (or (mode . web-mode) (mode . js2-mode)))
-			 ("shell" (or (mode . eshell-mode) (mode . shell-mode)))
-			 ("mu4e" (or
-				  (mode . mu4e-compose-mode)
-				  (name . "\*mu4e\*")
-				  ))
-			 ("programming" (or
-					 (mode . emacs-lisp-mode)
-					 (mode . lisp-mode)
-					 (mode . clojure-mode)
-					 (mode . clojurescript-mode)
-					 (mode . python-mode)
-					 (mode . c-mode)
-					 (mode . c++-mode)))
-			 ("text" (mode . text-mode))
-			 ("magit" (mode . magit-mode))
-			 ("dired" (mode . dired-mode))
-			 ("emacs" (or
-				   (name . "^\\*scratch\\*$")
-				   (name . "^\\*Messages\\*$")))
-			 ))))
-	  (add-hook 'ibuffer-mode-hook
-		    (lambda ()
-		      (ibuffer-auto-mode 1)
-		      (ibuffer-switch-to-saved-filter-groups "default")))
+#+begin_src emacs-lisp
+  (global-set-key (kbd "C-x C-b") 'ibuffer)
+  (setq ibuffer-saved-filter-groups
+	     (quote (("default"
+		      ("org" (mode . org-mode))
+		      ("IRC" (or (mode . circe-channel-mode) (mode . circe-server-mode)))
+		      ("web" (or (mode . web-mode) (mode . js2-mode)))
+		      ("shell" (or (mode . eshell-mode) (mode . shell-mode)))
+		      ("mu4e" (or
+			       (mode . mu4e-compose-mode)
+			       (name . "\*mu4e\*")
+			       ))
+		      ("programming" (or
+				      (mode . emacs-lisp-mode)
+				      (mode . lisp-mode)
+				      (mode . clojure-mode)
+				      (mode . clojurescript-mode)
+				      (mode . python-mode)
+				      (mode . c-mode)
+				      (mode . c++-mode)))
+		      ("text" (mode . text-mode))
+		      ("magit" (mode . magit-mode))
+		      ("dired" (mode . dired-mode))
+		      ("emacs" (or
+				(name . "^\\*scratch\\*$")
+				(name . "^\\*Messages\\*$")))
+		      ))))
+       (add-hook 'ibuffer-mode-hook
+		 (lambda ()
+		   (ibuffer-auto-mode 1)
+		   (ibuffer-switch-to-saved-filter-groups "default")))
 
-	  ;; Don't show filter groups if there are no buffers in that group
-	  (setq ibuffer-show-empty-filter-groups nil)
-   #+end_src
+       ;; Don't show filter groups if there are no buffers in that group
+       (setq ibuffer-show-empty-filter-groups nil)
+#+end_src
 ** Misc
-  #+begin_src emacs-lisp
-    (setq-default visual-line-mode t)
-    (desktop-save-mode 1)
-    (setq-default org-catch-invisible-edits 'show)
-    (setq-default prelude-whitespace nil)
-    ;;    (save-interprogram-paste-before-kill t)
-    (setq auto-mode-alist (append '(("\\.cl$" . lisp-mode))
-				  auto-mode-alist))
+#+begin_src emacs-lisp
+  (setq-default visual-line-mode t)
+  (desktop-save-mode 1)
+  (setq-default org-catch-invisible-edits 'show)
+  (setq-default prelude-whitespace nil)
+  ;;    (save-interprogram-paste-before-kill t)
+  (setq auto-mode-alist (append '(("\\.cl$" . lisp-mode))
+				auto-mode-alist))
 
-    (setq inferior-lisp-program "/usr/local/bin/sbcl")
+  (setq inferior-lisp-program "/usr/local/bin/sbcl")
 
-    ;;keep cursor at same position when scrolling
-    ;;(setq scroll-preserve-screen-position 1)
-    ;;scroll window up/down by one line
-    ;; (global-set-key (kbd "M-n") (kbd "C-u 1 C-v"))
-    ;; (global-set-key (kbd "M-p") (kbd "C-u 1 M-v"))
-    ;; (global-set-key (kbd "C-M-q") 'query-replace)
+  ;;keep cursor at same position when scrolling
+  ;;(setq scroll-preserve-screen-position 1)
+  ;;scroll window up/down by one line
+  ;; (global-set-key (kbd "M-n") (kbd "C-u 1 C-v"))
+  ;; (global-set-key (kbd "M-p") (kbd "C-u 1 M-v"))
+  ;; (global-set-key (kbd "C-M-q") 'query-replace)
 
-    ;; Spell check
-    (setq-default ispell-program-name "/usr/local/bin/aspell")
+  ;; Spell check
+  (setq-default ispell-program-name "/usr/local/bin/aspell")
 
-    ;; allow remembering risky variables
-    (defun risky-local-variable-p (sym &optional _ignored) nil)
-  #+end_src
+  ;; allow remembering risky variables
+  (defun risky-local-variable-p (sym &optional _ignored) nil)
+#+end_src
