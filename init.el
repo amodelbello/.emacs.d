@@ -15,6 +15,9 @@
   (package-refresh-contents)
   (package-install 'use-package))
 
+(use-package use-package-ensure-system-package
+  :ensure t)
+
 (org-babel-load-file (expand-file-name "~/.emacs.d/settings.org"))
 
 (setq custom-file "~/.emacs.d/customize.el")

@@ -17,6 +17,13 @@
      '(aw-leading-char-face
        ((t (:inherit ace-jump-face-foreground :height 3.0))))))
 #+end_src
+** Atomic Chrome
+#+begin_src emacs-lisp
+  (use-package atomic-chrome
+    :ensure t
+    :config (atomic-chrome-start-server))
+  (setq atomic-chrome-buffer-open-style 'frame)
+#+end_src
 ** Avy
 #+begin_src emacs-lisp
     (use-package avy
@@ -69,6 +76,14 @@
      (magit-pre-refresh . diff-hl-magit-pre-refresh)
      (magit-post-refresh . diff-hl-magit-post-refresh)))
 #+end_src
+** exec-path-from-shell
+#+begin_src emacs-lisp
+  (when (memq window-system '(mac ns x))
+    (use-package exec-path-from-shell
+      :ensure t
+      :config
+      (exec-path-from-shell-initialize)))
+#+end_src
 ** expand-region
 #+begin_src emacs-lisp
   (use-package expand-region
@@ -82,6 +97,14 @@
     :ensure t
     :config 
     (eyebrowse-mode))
+#+end_src
+** gnuplot
+#+begin_src emacs-lisp
+  (use-package gnuplot
+    :ensure t
+    :ensure-system-package gnuplot
+    :config
+    (add-to-list 'auto-mode-alist '("\\.gp?\\'" . gnuplot-mode)))
 #+end_src
 ** Flycheck
 #+begin_src emacs-lisp
