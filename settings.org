@@ -65,6 +65,22 @@
      '(company-quick-access-modifier 'super))
     )
 #+end_src
+** Crux
+#+begin_src emacs-lisp
+  (use-package crux
+    :ensure t
+    :bind
+    (("s-o" . crux-smart-open-line-above)
+     ("M-o" . crux-smart-open-line)
+     ("s-r" . crux-recentf-find-file)
+     ("C-c D" . crux-delete-file-and-buffer)
+     ("C-c d" . crux-duplicate-current-line-or-region)
+     ("C-c M-d" . crux-duplicate-and-comment-current-line-or-region)
+     ("C-c r" . crux-rename-file-and-buffer)
+     ("s-j" . crux-top-join-line)
+     ("s-k" . crux-kill-whole-line)
+     ("<C-backspace>" . crux-kill-line-backwards)))
+#+end_src
 ** diff-hl
 #+begin_src emacs-lisp
   (use-package diff-hl
@@ -75,6 +91,13 @@
     ((dired-mode . diff-hl-dired-mode)
      (magit-pre-refresh . diff-hl-magit-pre-refresh)
      (magit-post-refresh . diff-hl-magit-post-refresh)))
+#+end_src
+** easy-kill
+#+begin_src emacs-lisp
+  (use-package easy-kill
+    :ensure t
+    :bind
+    ([remap kill-ring-save] . easy-kill))
 #+end_src
 ** exec-path-from-shell
 #+begin_src emacs-lisp
