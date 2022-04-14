@@ -49,6 +49,19 @@
     ((magit-pre-refresh . diff-hl-magit-pre-refresh)
      (magit-post-refresh . diff-hl-magit-post-refresh)))
 #+end_src
+** expand-region
+#+begin_src emacs-lisp
+  (use-package expand-region
+    :ensure t
+    :bind
+    ("C-=" . er/expand-region))
+#+end_src
+** Flycheck
+#+begin_src emacs-lisp
+(use-package flycheck
+  :ensure t
+  :init (global-flycheck-mode))
+#+end_src
 ** Ivy & friends
 *** Ivy
 #+begin_src emacs-lisp
@@ -120,6 +133,16 @@
     :ensure t
     :hook
     (org-mode . org-bullets-mode))
+#+end_src
+** Projectile
+#+begin_src emacs-lisp
+(use-package projectile
+  :ensure t
+  :init
+  (projectile-mode +1)
+  :bind (:map projectile-mode-map
+              ("s-p" . projectile-command-map)
+              ("C-c p" . projectile-command-map)))
 #+end_src
 ** which-key
 #+begin_src emacs-lisp
