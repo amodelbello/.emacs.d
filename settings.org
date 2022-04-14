@@ -47,7 +47,7 @@
     (global-diff-hl-mode)
     :hook
     ((magit-pre-refresh . diff-hl-magit-pre-refresh)
-     (magit-post-refresh-hook . diff-hl-magit-post-refresh)))
+     (magit-post-refresh . diff-hl-magit-post-refresh)))
 #+end_src
 ** Ivy & friends
 *** Ivy
