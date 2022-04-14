@@ -13,6 +13,7 @@
      ("s-w" . ace-window))
     :config 
     (defvar aw-dispatch-always nil)
+    (setq aw-scope 'frame)
     (custom-set-faces
      '(aw-leading-char-face
        ((t (:inherit ace-jump-face-foreground :height 3.0))))))
@@ -281,6 +282,13 @@
 		  (lambda ()
 		    (interactive)
 		    (find-file "~/.emacs.d/init.el")))
+
+  (global-set-key (kbd "\e\ek") 'customize-themes)
+
+  (global-set-key (kbd "\e\ec")
+		  (lambda ()
+		    (interactive)
+		    (set-cursor-color 'magenta)))
 #+end_src
 ** Font Size
 #+BEGIN_SRC emacs-lisp
@@ -346,8 +354,22 @@
 #+end_src
 ** Misc
 #+begin_src emacs-lisp
-  (setq-default visual-line-mode t)
   (desktop-save-mode 1)
+  (fset 'yes-or-no-p 'y-or-n-p)
+  (tool-bar-mode -1)
+  (blink-cursor-mode 0)
+
+  ;; (setq ring-bell-function 'ignore)
+  ;; Blink modeline instead of ring bell
+  (setq ring-bell-function
+      (lambda ()
+	(let ((orig-fg (face-foreground 'mode-line)))
+	  (set-face-foreground 'mode-line "Magenta")
+	  (run-with-idle-timer 0.1 nil
+			       (lambda (fg) (set-face-foreground 'mode-line fg))
+			       orig-fg))))
+
+  (setq-default visual-line-mode t)
   (setq-default org-catch-invisible-edits 'show)
   (setq-default prelude-whitespace nil)
   (setq save-interprogram-paste-before-kill t)
@@ -368,6 +390,5 @@
 
   ;; allow remembering risky variables
   (defun risky-local-variable-p (sym &optional _ignored) nil)
-  (blink-cursor-mode 0)
 #+end_src
 
