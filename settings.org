@@ -5,8 +5,7 @@
 
 * Packages
 ** Ace Window
-   :PROPERTIES:
-   :Repo: [[https://github.com/abo-abo/ace-window][https://github.com/abo-abo/ace-window]]
+   - Repo :: [[https://github.com/abo-abo/ace-window]] 
 #+begin_src emacs-lisp
   (use-package ace-window
     :ensure t
