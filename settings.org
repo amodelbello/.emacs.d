@@ -27,9 +27,10 @@
 #+end_src
 ** Avy
 #+begin_src emacs-lisp
-    (use-package avy
-      :ensure t
-      :bind ("C-'" . avy-goto-char-2))
+  (use-package avy
+    :ensure t
+    :bind ("C-;" . avy-goto-char-2)
+    :bind ("C-'" . avy-goto-char-2))
 #+end_src
 ** Beacon
 #+begin_src emacs-lisp
@@ -64,7 +65,9 @@
     (setq company-tooltip-flip-when-above nil)
     (custom-set-variables
      '(company-quick-access-modifier 'super))
-    )
+    (use-package company-box
+      :ensure t
+      :hook (company-mode . company-box-mode)))
 #+end_src
 ** Crux
 #+begin_src emacs-lisp
@@ -73,7 +76,11 @@
     :bind
     (("s-o" . crux-smart-open-line-above)
      ("M-o" . crux-smart-open-line)
-     ("s-r" . crux-recentf-find-file)
+
+     ; this all of a sudden stopped working
+     ; switching to coucel-recentf for now
+     ; ("s-r" . crux-recentf-find-file)
+   
      ("C-c D" . crux-delete-file-and-buffer)
      ("C-c d" . crux-duplicate-current-line-or-region)
      ("C-c M-d" . crux-duplicate-and-comment-current-line-or-region)
@@ -208,7 +215,7 @@
      ("C-x l" . counsel-locate)
      ("M-y" . counsel-yank-pop)
      ("M-x" . counsel-M-x)
-     ("C-x C-f" . counsel-find-file)
+     ("s-r" . counsel-recentf)
      :map minibuffer-local-map
        ("C-r" . counsl-minibuffer-history)))
 #+end_src
@@ -354,11 +361,26 @@
   ;;                           (require 'lsp-pyright)
   ;;                           (lsp))))  ; or lsp-deferred
 #+end_src
-* Themes
+* Appearance
 #+begin_src emacs-lisp
   (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
 #+end_src
-** Spacemacs
+** All The Icons
+#+begin_src emacs-lisp
+  (use-package all-the-icons
+    :ensure t
+    :if (display-graphic-p))
+#+end_src
+** Doom Modeline
+#+begin_src emacs-lisp
+(use-package doom-modeline
+  :ensure t
+  :hook (after-init . doom-modeline-mode)
+  :config
+  (progn
+    (setq doom-modeline-minor-modes nil)))
+#+end_src
+** Spacemacs Theme
 #+begin_src emacs-lisp
   (use-package spacemacs-common
     :ensure spacemacs-theme
