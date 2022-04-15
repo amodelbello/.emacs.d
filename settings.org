@@ -106,6 +106,7 @@
     (use-package exec-path-from-shell
       :ensure t
       :config
+      (setq exec-path-from-shell-arguments nil) ; non-interactive, i.e. .zshenv not .zshrc
       (exec-path-from-shell-initialize)))
 #+end_src
 ** expand-region
