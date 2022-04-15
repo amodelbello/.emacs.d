@@ -295,6 +295,64 @@
     (use-package yasnippet-snippets
       :ensure t))
 #+end_src
+* Programming
+** lsp-mode
+#+begin_src emacs-lisp
+  (setq gc-cons-threshold 100000000)
+  (setq read-process-output-max (* 1024 1024))
+  (setq lsp-use-plists t)
+
+  (use-package lsp-mode
+    :ensure t
+    :hook ((python-mode . lsp)
+	   (lsp-mode . lsp-enable-which-key-integration))
+    :config
+    (setq lsp-keymap-prefix "C-c l")
+    :commands lsp lsp-format-buffer)
+
+  (use-package lsp-ui
+    :ensure t
+    :bind ((:map lsp-ui-mode-map
+		 ("s-7" . lsp-ui-imenu)
+		 ([remap xref-find-definitions] . lsp-ui-peek-find-definitions)
+		 ([remap xref-find-references] . lsp-ui-peek-find-references)))
+    :commands lsp-ui-mode)
+
+  (use-package lsp-ivy
+    :ensure t
+    :commands lsp-ivy-workspace-symbol)
+
+  (add-hook 'python-mode-hook
+	    (lambda ()
+	      (add-hook 'before-save-hook 'lsp-format-buffer)))
+  
+  ;; optionally if you want to use debugger
+  ; (use-package dap-mode)
+  ;; (use-package dap-LANGUAGE) to load the dap adapter for your language
+
+  (setq lsp-modeline-diagnostics-enable t)
+  (setq lsp-modeline-code-actions-mode t)
+  (with-eval-after-load 'lsp-mode
+    ;; :global/:workspace/:file
+    (setq lsp-modeline-diagnostics-scope :workspace)
+    (setq lsp-modeline-code-actions-segments '(icon)))
+
+
+#+end_src
+** lsp servers
+*** Python
+#+begin_src bash
+  # language server 
+  pip3 install 'python-lsp-server[all]'
+#+end_src
+#+begin_src emacs-lisp
+  (setq lsp-pylsp-plugins-autopep8-enabled t)
+  ;; (use-package lsp-pyright
+  ;;   :ensure t
+  ;;   :hook (python-mode . (lambda ()
+  ;;                           (require 'lsp-pyright)
+  ;;                           (lsp))))  ; or lsp-deferred
+#+end_src
 * Themes
 #+begin_src emacs-lisp
   (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
