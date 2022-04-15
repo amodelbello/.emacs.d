@@ -136,6 +136,42 @@
   :ensure t
   :init (global-flycheck-mode))
 #+end_src
+** ibuffer
+#+begin_src emacs-lisp
+  (global-set-key (kbd "C-x C-b") 'ibuffer)
+  (setq ibuffer-saved-filter-groups
+	     (quote (("default"
+		      ("org" (mode . org-mode))
+		      ("IRC" (or (mode . circe-channel-mode) (mode . circe-server-mode)))
+		      ("web" (or (mode . web-mode) (mode . js2-mode)))
+		      ("shell" (or (mode . eshell-mode) (mode . shell-mode)))
+		      ("mu4e" (or
+			       (mode . mu4e-compose-mode)
+			       (name . "\*mu4e\*")
+			       ))
+		      ("programming" (or
+				      (mode . emacs-lisp-mode)
+				      (mode . lisp-mode)
+				      (mode . clojure-mode)
+				      (mode . clojurescript-mode)
+				      (mode . python-mode)
+				      (mode . c-mode)
+				      (mode . c++-mode)))
+		      ("text" (mode . text-mode))
+		      ("magit" (mode . magit-mode))
+		      ("dired" (mode . dired-mode))
+		      ("emacs" (or
+				(name . "^\\*scratch\\*$")
+				(name . "^\\*Messages\\*$")))
+		      ))))
+       (add-hook 'ibuffer-mode-hook
+		 (lambda ()
+		   (ibuffer-auto-mode 1)
+		   (ibuffer-switch-to-saved-filter-groups "default")))
+
+       ;; Don't show filter groups if there are no buffers in that group
+       (setq ibuffer-show-empty-filter-groups nil)
+#+end_src
 ** Ivy & friends
 *** Ivy
 #+begin_src emacs-lisp
@@ -316,48 +352,16 @@
   ; easily shrink window vertically
   (global-set-key (kbd "C-x %") (kbd "C-u -1 C-x ^"))
 #+end_src
-** ibuffer
-#+begin_src emacs-lisp
-  (global-set-key (kbd "C-x C-b") 'ibuffer)
-  (setq ibuffer-saved-filter-groups
-	     (quote (("default"
-		      ("org" (mode . org-mode))
-		      ("IRC" (or (mode . circe-channel-mode) (mode . circe-server-mode)))
-		      ("web" (or (mode . web-mode) (mode . js2-mode)))
-		      ("shell" (or (mode . eshell-mode) (mode . shell-mode)))
-		      ("mu4e" (or
-			       (mode . mu4e-compose-mode)
-			       (name . "\*mu4e\*")
-			       ))
-		      ("programming" (or
-				      (mode . emacs-lisp-mode)
-				      (mode . lisp-mode)
-				      (mode . clojure-mode)
-				      (mode . clojurescript-mode)
-				      (mode . python-mode)
-				      (mode . c-mode)
-				      (mode . c++-mode)))
-		      ("text" (mode . text-mode))
-		      ("magit" (mode . magit-mode))
-		      ("dired" (mode . dired-mode))
-		      ("emacs" (or
-				(name . "^\\*scratch\\*$")
-				(name . "^\\*Messages\\*$")))
-		      ))))
-       (add-hook 'ibuffer-mode-hook
-		 (lambda ()
-		   (ibuffer-auto-mode 1)
-		   (ibuffer-switch-to-saved-filter-groups "default")))
-
-       ;; Don't show filter groups if there are no buffers in that group
-       (setq ibuffer-show-empty-filter-groups nil)
-#+end_src
 ** Misc
 #+begin_src emacs-lisp
   (desktop-save-mode 1)
   (fset 'yes-or-no-p 'y-or-n-p)
   (tool-bar-mode -1)
   (blink-cursor-mode 0)
+
+  (recentf-mode 1)
+  (setq recentf-max-menu-items 25)
+  (setq recentf-max-saved-items 25)
 
   ;; (setq ring-bell-function 'ignore)
   ;; Blink modeline instead of ring bell
