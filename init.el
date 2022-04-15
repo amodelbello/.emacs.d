@@ -1,7 +1,8 @@
 (eval-when-compile
-  (require 'use-package)
+  (require 'package)
 ;;  (require 'diminish)
-  (require 'bind-key))
+;;  (require 'bind-key)
+)
 
 
 (setq package-enable-at-startup nil)

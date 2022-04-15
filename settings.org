@@ -11,7 +11,7 @@
     :bind
     (("C-x o" . ace-window)
      ("s-w" . ace-window))
-    :config 
+    :config
     (defvar aw-dispatch-always nil)
     (setq aw-scope 'frame)
     (custom-set-faces
@@ -29,8 +29,9 @@
 #+begin_src emacs-lisp
   (use-package avy
     :ensure t
-    :bind ("C-;" . avy-goto-char-2)
-    :bind ("C-'" . avy-goto-char-2))
+    :bind (("C-'" . avy-goto-char-2)
+	   :map org-mode-map
+	   ("C-'" . nil)))
 #+end_src
 ** Beacon
 #+begin_src emacs-lisp
@@ -80,7 +81,7 @@
      ; this all of a sudden stopped working
      ; switching to coucel-recentf for now
      ; ("s-r" . crux-recentf-find-file)
-   
+
      ("C-c D" . crux-delete-file-and-buffer)
      ("C-c d" . crux-duplicate-current-line-or-region)
      ("C-c M-d" . crux-duplicate-and-comment-current-line-or-region)
@@ -127,8 +128,13 @@
 #+begin_src emacs-lisp
   (use-package eyebrowse
     :ensure t
-    :config 
+    :config
     (eyebrowse-mode))
+#+end_src
+** Git time machine
+#+begin_src emacs-lisp
+  (use-package git-timemachine
+    :ensure t)
 #+end_src
 ** gnuplot
 #+begin_src emacs-lisp
@@ -180,6 +186,12 @@
        ;; Don't show filter groups if there are no buffers in that group
        (setq ibuffer-show-empty-filter-groups nil)
 #+end_src
+** iedit
+#+begin_src emacs-lisp
+  (use-package iedit
+    :ensure t
+    :bind ("C-;" . iedit-mode))
+#+end_src
 ** Ivy & friends
 *** Ivy
 #+begin_src emacs-lisp
@@ -229,7 +241,6 @@
      ("C-r" . swiper-isearch)
      :map read-expression-map
      ("C-r" . counsel-expression-history)))
-
 #+end_src
 ** Magit
 #+begin_src emacs-lisp
@@ -288,7 +299,7 @@
 ** which-key
 #+begin_src emacs-lisp
   (use-package which-key
-    :ensure t 
+    :ensure t
     :config
     (which-key-mode))
 #+end_src
@@ -298,7 +309,7 @@
     :ensure t
     :config
     (yas-global-mode)
-    (setq yas-snippet-dirs 
+    (setq yas-snippet-dirs
 	  '("~/.emacs.d/snippets"))
     (use-package yasnippet-snippets
       :ensure t))
@@ -333,7 +344,7 @@
   (add-hook 'python-mode-hook
 	    (lambda ()
 	      (add-hook 'before-save-hook 'lsp-format-buffer)))
-  
+
   ;; optionally if you want to use debugger
   ; (use-package dap-mode)
   ;; (use-package dap-LANGUAGE) to load the dap adapter for your language
@@ -344,41 +355,28 @@
     ;; :global/:workspace/:file
     (setq lsp-modeline-diagnostics-scope :workspace)
     (setq lsp-modeline-code-actions-segments '(icon)))
-
-
 #+end_src
 ** lsp servers
 *** Python
 #+begin_src bash
-  # language server 
+  # language server
   pip3 install 'python-lsp-server[all]'
 #+end_src
 #+begin_src emacs-lisp
   (setq lsp-pylsp-plugins-autopep8-enabled t)
-  ;; (use-package lsp-pyright
-  ;;   :ensure t
-  ;;   :hook (python-mode . (lambda ()
-  ;;                           (require 'lsp-pyright)
-  ;;                           (lsp))))  ; or lsp-deferred
 #+end_src
 * Appearance
 #+begin_src emacs-lisp
   (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
 #+end_src
-** All The Icons
-#+begin_src emacs-lisp
-  ;; (use-package all-the-icons
-  ;;   :ensure t
-  ;;   :if (display-graphic-p))
-#+end_src
 ** Doom Modeline
 #+begin_src emacs-lisp
-(use-package doom-modeline
-  :ensure t
-  :hook (after-init . doom-modeline-mode)
-  :config
-  (progn
-    (setq doom-modeline-minor-modes nil)))
+  (use-package doom-modeline
+    :ensure t
+    :hook (after-init . doom-modeline-mode)
+    :config
+    (progn
+      (setq doom-modeline-minor-modes nil)))
 #+end_src
 ** Spacemacs Theme
 #+begin_src emacs-lisp
@@ -449,22 +447,20 @@
   (setq recentf-max-menu-items 25)
   (setq recentf-max-saved-items 25)
 
-  ;; (setq ring-bell-function 'ignore)
   ;; Blink modeline instead of ring bell
   (setq ring-bell-function
-      (lambda ()
-	(let ((orig-fg (face-foreground 'mode-line)))
-	  (set-face-foreground 'mode-line "Magenta")
-	  (run-with-idle-timer 0.1 nil
-			       (lambda (fg) (set-face-foreground 'mode-line fg))
-			       orig-fg))))
+	  (lambda ()
+	    (let ((orig-fg (face-foreground 'mode-line)))
+	      (set-face-foreground 'mode-line "Magenta")
+	      (run-with-idle-timer 0.1 nil
+				   (lambda (fg) (set-face-foreground 'mode-line fg))
+				   orig-fg))))
 
   (setq-default visual-line-mode t)
   (setq-default org-catch-invisible-edits 'show)
-  (setq-default prelude-whitespace nil)
   (setq save-interprogram-paste-before-kill t)
   (setq auto-mode-alist (append '(("\\.cl$" . lisp-mode))
-				auto-mode-alist))
+				    auto-mode-alist))
 
   (setq inferior-lisp-program "/usr/local/bin/sbcl")
 
@@ -480,5 +476,11 @@
 
   ;; allow remembering risky variables
   (defun risky-local-variable-p (sym &optional _ignored) nil)
-#+end_src
 
+  (global-set-key (kbd "s-7") 'lsp-ui-imenu)
+
+  (whitespace-mode -1)
+  (add-hook 'before-save-hook 'whitespace-cleanup)
+
+  ;; (define-key org-mode-map (kbd "C-'") nil)
+#+end_src
