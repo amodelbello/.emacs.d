@@ -47,5 +47,11 @@ flycheck_*.el
 # network security
 /network-security.data
 
+.lsp-session-v1
+projectile-bookmarks.eld
+projectile.cache
+recentf
+transient/
+
 customize.el
 settings.el
