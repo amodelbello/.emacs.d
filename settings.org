@@ -5,6 +5,8 @@
 
 * Packages
 ** Ace Window
+   :PROPERTIES:
+   :Repo: [[https://github.com/abo-abo/ace-window][https://github.com/abo-abo/ace-window]]
 #+begin_src emacs-lisp
   (use-package ace-window
     :ensure t
@@ -19,6 +21,9 @@
        ((t (:inherit ace-jump-face-foreground :height 3.0))))))
 #+end_src
 ** Atomic Chrome
+   :REPO:
+   [[https://github.com/alpha22jp/atomic-chrome]]
+   :END:
 #+begin_src emacs-lisp
   (use-package atomic-chrome
     :ensure t
