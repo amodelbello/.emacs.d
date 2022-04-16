@@ -19,6 +19,12 @@
      '(aw-leading-char-face
        ((t (:inherit ace-jump-face-foreground :height 3.0))))))
 #+end_src
+** Ag
+   - Repo :: https://github.com/Wilfred/ag.el
+     #+begin_src emacs-lisp
+       (use-package ag
+         :ensure t)
+     #+end_src
 ** Atomic Chrome
    - Repo :: [[https://github.com/alpha22jp/atomic-chrome]]
 #+begin_src emacs-lisp
