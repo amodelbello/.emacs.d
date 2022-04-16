@@ -5,7 +5,7 @@
 
 * Packages
 ** Ace Window
-   - Repo :: [[https://github.com/abo-abo/ace-window]] 
+   - Repo :: [[https://github.com/abo-abo/ace-window]]
 #+begin_src emacs-lisp
   (use-package ace-window
     :ensure t
@@ -33,8 +33,8 @@
   (use-package avy
     :ensure t
     :bind (("C-'" . avy-goto-char-2)
-	   :map org-mode-map
-	   ("C-'" . nil)))
+           :map org-mode-map
+           ("C-'" . nil)))
 #+end_src
 ** Beacon
    - Repo :: [[https://github.com/Malabarba/beacon]]
@@ -134,8 +134,8 @@
 #+begin_src emacs-lisp
   (use-package expand-region
     :ensure t
-    :bind
-    ("C-=" . er/expand-region))
+    :bind (("C-=" . er/expand-region)
+           ("C--" . er/contract-region)))
 #+end_src
 ** Eyebrowse
    - Repo :: https://depp.brause.cc/eyebrowse/
@@ -145,6 +145,24 @@
     :config
     (eyebrowse-mode))
 #+end_src
+** format-all
+   #+begin_src emacs-lisp
+     ;; (use-package format-all
+     ;;   :ensure t
+     ;;   :hook
+     ;;   ((web-mode . format-all-mode)
+     ;;    ;(format-all-mode-hook . format-all-ensure-formatter)
+     ;;    )
+     ;;   :config
+     ;;   (format-all-mode +1)
+     ;;   (custom-set-variables
+     ;;    '(format-all-formatters
+     ;;      (quote (("JavaScript" prettier)
+     ;;              ("TypeScript" prettier)
+     ;;              ("JSON" prettier)
+     ;;              ("JSON5" prettier))))))
+
+   #+end_src
 ** Git time machine
    - Repo :: https://github.com/emacsmirror/git-timemachine
 #+begin_src emacs-lisp
@@ -173,34 +191,34 @@
 #+begin_src emacs-lisp
   (global-set-key (kbd "C-x C-b") 'ibuffer)
   (setq ibuffer-saved-filter-groups
-	     (quote (("default"
-		      ("org" (mode . org-mode))
-		      ("IRC" (or (mode . circe-channel-mode) (mode . circe-server-mode)))
-		      ("web" (or (mode . web-mode) (mode . js2-mode)))
-		      ("shell" (or (mode . eshell-mode) (mode . shell-mode)))
-		      ("mu4e" (or
-			       (mode . mu4e-compose-mode)
-			       (name . "\*mu4e\*")
-			       ))
-		      ("programming" (or
-				      (mode . emacs-lisp-mode)
-				      (mode . lisp-mode)
-				      (mode . clojure-mode)
-				      (mode . clojurescript-mode)
-				      (mode . python-mode)
-				      (mode . c-mode)
-				      (mode . c++-mode)))
-		      ("text" (mode . text-mode))
-		      ("magit" (mode . magit-mode))
-		      ("dired" (mode . dired-mode))
-		      ("emacs" (or
-				(name . "^\\*scratch\\*$")
-				(name . "^\\*Messages\\*$")))
-		      ))))
+             (quote (("default"
+                      ("org" (mode . org-mode))
+                      ("IRC" (or (mode . circe-channel-mode) (mode . circe-server-mode)))
+                      ("web" (or (mode . web-mode) (mode . js2-mode)))
+                      ("shell" (or (mode . eshell-mode) (mode . shell-mode)))
+                      ("mu4e" (or
+                               (mode . mu4e-compose-mode)
+                               (name . "\*mu4e\*")
+                               ))
+                      ("programming" (or
+                                      (mode . emacs-lisp-mode)
+                                      (mode . lisp-mode)
+                                      (mode . clojure-mode)
+                                      (mode . clojurescript-mode)
+                                      (mode . python-mode)
+                                      (mode . c-mode)
+                                      (mode . c++-mode)))
+                      ("text" (mode . text-mode))
+                      ("magit" (mode . magit-mode))
+                      ("dired" (mode . dired-mode))
+                      ("emacs" (or
+                                (name . "^\\*scratch\\*$")
+                                (name . "^\\*Messages\\*$")))
+                      ))))
        (add-hook 'ibuffer-mode-hook
-		 (lambda ()
-		   (ibuffer-auto-mode 1)
-		   (ibuffer-switch-to-saved-filter-groups "default")))
+                 (lambda ()
+                   (ibuffer-auto-mode 1)
+                   (ibuffer-switch-to-saved-filter-groups "default")))
 
        ;; Don't show filter groups if there are no buffers in that group
        (setq ibuffer-show-empty-filter-groups nil)
@@ -264,6 +282,12 @@
      :map read-expression-map
      ("C-r" . counsel-expression-history)))
 #+end_src
+** json-mode
+   - Repo :: https://github.com/joshwnj/json-mode
+   #+begin_src emacs-lisp
+     (use-package json-mode
+       :ensure t)
+   #+end_src
 ** Magit
    - Repo :: https://github.com/magit/magit
    - Docs :: https://magit.vc/
@@ -314,8 +338,15 @@
     (projectile-global-mode)
     (setq projectile-completion-system 'ivy)
     :bind (("s-p" . projectile-command-map)
-	   ("C-c p" . projectile-command-map)))
+           ("C-c p" . projectile-command-map)))
 #+end_src
+** rainbow-delimiters
+   - Repo :: https://github.com/Fanael/rainbow-delimiters
+     #+begin_src emacs-lisp
+       (use-package rainbow-delimiters
+         :ensure t
+         :hook (prog-mode . rainbow-delimiters-mode))
+     #+end_src
 ** undo-tree
    - Repo :: https://github.com/apchamberlain/undo-tree.el
    - Docs :: https://www.emacswiki.org/emacs/UndoTree
@@ -325,10 +356,34 @@
     :config
     (global-undo-tree-mode)
     (setq undo-tree-history-directory-alist
-	`((".*" . ,temporary-file-directory)))
+        `((".*" . ,temporary-file-directory)))
     (setq undo-tree-auto-save-history t)
     :diminish (undo-tree-mode))
 #+end_src
+** web-mode
+   - Repo :: https://github.com/fxbois/web-mode
+   - Docs :: https://web-mode.org/
+     #+begin_src emacs-lisp
+              ;; (defun my-web-mode-hook ()
+              ;;   "Hooks for Web mode."
+              ;;   (setq web-mode-markup-indent-offset 2)
+              ;;   (setq web-mode-code-indent-offset 2)
+              ;;   (setq web-mode-css-indent-offset 2))
+
+              (use-package web-mode
+                :ensure t
+                ;;         :hook (web-mode . my-web-mode-hook)
+                :custom
+                (setq web-mode-markup-indent-offset 2)
+                (setq web-mode-code-indent-offset 2)
+                (setq web-mode-css-indent-offset 2)
+                :mode (("\\.js\\'" . web-mode)
+                       ("\\.jsx\\'" .  web-mode)
+                       ("\\.ts\\'" . web-mode)
+                       ("\\.tsx\\'" . web-mode)
+                       ("\\.html\\'" . web-mode))
+                :commands web-mode)
+     #+end_src
 ** which-key
    - Repo :: https://github.com/justbur/emacs-which-key
 #+begin_src emacs-lisp
@@ -345,7 +400,7 @@
     :config
     (yas-global-mode)
     (setq yas-snippet-dirs
-	  '("~/.emacs.d/snippets"))
+          '("~/.emacs.d/snippets"))
     (use-package yasnippet-snippets
       :ensure t))
 #+end_src
@@ -360,18 +415,21 @@
 
   (use-package lsp-mode
     :ensure t
-    :hook ((python-mode . lsp)
-	   (lsp-mode . lsp-enable-which-key-integration))
+    :hook ((python-mode . lsp-deferred)
+           (web-mode . lsp-deferred)
+           (lsp-mode . lsp-enable-which-key-integration))
     :config
     (setq lsp-keymap-prefix "C-c l")
-    :commands lsp lsp-format-buffer)
+    (setq lsp-ui-sideline-show-hover t)
+    (setq lsp-ui-sideline-show-code-actions t)
+    :commands lsp-deferred)
 
   (use-package lsp-ui
     :ensure t
     :bind ((:map lsp-ui-mode-map
-		 ("s-7" . lsp-ui-imenu)
-		 ([remap xref-find-definitions] . lsp-ui-peek-find-definitions)
-		 ([remap xref-find-references] . lsp-ui-peek-find-references)))
+                 ("s-7" . lsp-ui-imenu)
+                 ([remap xref-find-definitions] . lsp-ui-peek-find-definitions)
+                 ([remap xref-find-references] . lsp-ui-peek-find-references)))
     :commands lsp-ui-mode)
 
   (use-package lsp-ivy
@@ -379,8 +437,8 @@
     :commands lsp-ivy-workspace-symbol)
 
   (add-hook 'python-mode-hook
-	    (lambda ()
-	      (add-hook 'before-save-hook 'lsp-format-buffer)))
+            (lambda ()
+              (add-hook 'before-save-hook 'lsp-format-buffer nil 'make-it-local)))
 
   ;; optionally if you want to use debugger
   ; (use-package dap-mode)
@@ -388,21 +446,83 @@
 
   (setq lsp-modeline-diagnostics-enable t)
   (setq lsp-modeline-code-actions-mode t)
+
+  ;; (setq lsp-before-save-edits nil)
+  ;; (setq lsp-enable-on-type-formatting nil)
+  ;; (setq lsp-enable-indentation nil)
+  ;; (setq lsp-enable-relative-indentation nil)
+
+  ;; (setq lsp-typescript-format-enable nil)
+  ;; (setq lsp-typescript-format-indent-size "2")
+  ;; (setq lsp-typescript-format-tab-size "2")
+  ;; (setq lsp-typescript-format-base-indent-size "2")
+
+
   (with-eval-after-load 'lsp-mode
     ;; :global/:workspace/:file
     (setq lsp-modeline-diagnostics-scope :workspace)
     (setq lsp-modeline-code-actions-segments '(icon)))
 #+end_src
-** lsp servers
+** Languages
 *** Python
-    - Repo :: https://github.com/python-lsp/python-lsp-server
-#+begin_src bash
-  # language server
-  pip3 install 'python-lsp-server[all]'
-#+end_src
-#+begin_src emacs-lisp
-  (setq lsp-pylsp-plugins-autopep8-enabled t)
-#+end_src
+**** lsp-server
+     - Repo :: https://github.com/python-lsp/python-lsp-server
+     #+begin_src bash
+       pip3 install 'python-lsp-server[all]'
+     #+end_src
+     #+begin_src emacs-lisp
+       (setq lsp-pylsp-plugins-autopep8-enabled t)
+     #+end_src
+**** pyvenv
+     - Repo :: https://github.com/jorgenschaefer/pyvenv
+     #+begin_src emacs-lisp
+       (use-package pyvenv
+         :ensure t
+         :diminish
+         :config
+         (setq pyvenv-mode-line-indicator
+               '(pyvenv-virtual-env-name ("[venv:" pyvenv-virtual-env-name "] ")))
+         (pyvenv-mode +1))
+     #+end_src
+*** JavaScript/Typescript
+**** lsp-server
+     - Repo :: https://github.com/typescript-language-server/typescript-language-server
+       #+begin_src bash
+         npm i -g typescript-language-server; npm i -g typescript
+       #+end_src
+**** Config
+     #+begin_src emacs-lisp
+       (setq js-indent-level 2)
+       (setq typescript-indent-level 2)
+     #+end_src
+**** prettier-js
+     - Repo :: https://github.com/prettier/prettier-emacs
+       #+begin_src emacs-lisp
+         (defun enable-minor-mode (my-pair)
+           "Enable minor mode if filename match the regexp.  MY-PAIR is a cons cell (regexp . minor-mode)."
+           (if (buffer-file-name)
+               (if (string-match (car my-pair) buffer-file-name)
+                   (funcall (cdr my-pair)))))
+
+         (use-package prettier-js
+           :ensure-system-package prettier
+           :ensure t
+           :hook (web-mode . prettier-js-mode)
+           :config
+           (setq prettier-js-args '(
+                                    "--single-quote" "true"
+                                    "--trailing-comma" "all"
+                                    "--semi" "false"
+                                    "--arrow-parens" "avoid"
+                                    "--tab-width" "2"
+                                    "--use-tabs" "false")))
+
+         (add-hook 'web-mode-hook #'(lambda ()
+                                      (enable-minor-mode
+                                       '("\\.jsx?\\'" . prettier-js-mode))
+                                      (enable-minor-mode
+                                       '("\\.tsx?\\'" . prettier-js-mode))))
+       #+end_src
 * Appearance
 #+begin_src emacs-lisp
   (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
@@ -417,7 +537,7 @@
     (progn
       (setq doom-modeline-minor-modes nil)))
 #+end_src
-** Spacemacs Theme
+** Spacemacs Themes
    - Repo :: https://github.com/nashamri/spacemacs-theme
 #+begin_src emacs-lisp
   (use-package spacemacs-common
@@ -425,25 +545,45 @@
     :config
     (load-theme 'spacemacs-light t))
 #+end_src
+** Modus Themes
+   - Repo :: https://github.com/protesilaos/modus-themes
+   - Docs :: https://protesilaos.com/emacs/modus-themes
+     #+begin_src emacs-lisp
+       (use-package modus-themes
+         :ensure t
+         :config
+         ;; Add all your customizations prior to loading the themes
+         (setq modus-themes-italic-constructs t
+               modus-themes-bold-constructs nil
+               modus-themes-region '(bg-only no-extend))
+
+         ;; ;; Load the theme files before enabling a theme
+         ;; (modus-themes-load-themes)
+         ;; :config
+         ;; ;; Load the theme of your choice:
+         ;; (modus-themes-load-operandi) ;; OR (modus-themes-load-vivendi)
+         ;; :bind ("<f5>" . modus-themes-toggle)
+       )
+     #+end_src
 * Config
 ** Quick Open
 #+begin_src emacs-lisp
   (global-set-key (kbd "\e\es")
-		  (lambda ()
-		    (interactive)
-		    (find-file "~/.emacs.d/settings.org")))
+                  (lambda ()
+                    (interactive)
+                    (find-file "~/.emacs.d/settings.org")))
 
   (global-set-key (kbd "\e\ei")
-		  (lambda ()
-		    (interactive)
-		    (find-file "~/.emacs.d/init.el")))
+                  (lambda ()
+                    (interactive)
+                    (find-file "~/.emacs.d/init.el")))
 
   (global-set-key (kbd "\e\ek") 'customize-themes)
 
   (global-set-key (kbd "\e\ec")
-		  (lambda ()
-		    (interactive)
-		    (set-cursor-color 'magenta)))
+                  (lambda ()
+                    (interactive)
+                    (set-cursor-color 'magenta)))
 #+end_src
 ** Font Size
 #+BEGIN_SRC emacs-lisp
@@ -455,11 +595,11 @@
 
   ;; Because the line-spacing above messes up calc
   (add-hook 'calc-mode-hook
-	    (lambda ()
-	      (setq line-spacing 0)))
+            (lambda ()
+              (setq line-spacing 0)))
   (add-hook 'calc-trail-mode-hook
-	    (lambda ()
-	      (setq line-spacing 0)))
+            (lambda ()
+              (setq line-spacing 0)))
 #+END_SRC
 ** Window Things
 #+begin_src emacs-lisp
@@ -489,18 +629,18 @@
 
   ;; Blink modeline instead of ring bell
   (setq ring-bell-function
-	  (lambda ()
-	    (let ((orig-fg (face-foreground 'mode-line)))
-	      (set-face-foreground 'mode-line "Magenta")
-	      (run-with-idle-timer 0.1 nil
-				   (lambda (fg) (set-face-foreground 'mode-line fg))
-				   orig-fg))))
+          (lambda ()
+            (let ((orig-fg (face-foreground 'mode-line)))
+              (set-face-foreground 'mode-line "Magenta")
+              (run-with-idle-timer 0.1 nil
+                                   (lambda (fg) (set-face-foreground 'mode-line fg))
+                                   orig-fg))))
 
   (setq-default visual-line-mode t)
   (setq-default org-catch-invisible-edits 'show)
   (setq save-interprogram-paste-before-kill t)
   (setq auto-mode-alist (append '(("\\.cl$" . lisp-mode))
-				    auto-mode-alist))
+                                    auto-mode-alist))
 
   (setq inferior-lisp-program "/usr/local/bin/sbcl")
 
@@ -523,4 +663,10 @@
   (add-hook 'before-save-hook 'whitespace-cleanup)
 
   ;; (define-key org-mode-map (kbd "C-'") nil)
+
+  (setq auto-save-default nil)
+  (setq make-backup-files nil)
+  (setq create-lockfiles nil)
+  (setq-default indent-tabs-mode nil)
+
 #+end_src
