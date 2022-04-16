@@ -20,9 +20,7 @@
        ((t (:inherit ace-jump-face-foreground :height 3.0))))))
 #+end_src
 ** Atomic Chrome
-   :PROPERTIES:
-   :Repo: [[https://github.com/alpha22jp/atomic-chrome]]
-   :END:
+   - Repo :: [[https://github.com/alpha22jp/atomic-chrome]]
 #+begin_src emacs-lisp
   (use-package atomic-chrome
     :ensure t
@@ -30,6 +28,7 @@
   (setq atomic-chrome-buffer-open-style 'frame)
 #+end_src
 ** Avy
+   - Repo :: [[https://github.com/abo-abo/avy]]
 #+begin_src emacs-lisp
   (use-package avy
     :ensure t
@@ -38,6 +37,7 @@
 	   ("C-'" . nil)))
 #+end_src
 ** Beacon
+   - Repo :: [[https://github.com/Malabarba/beacon]]
 #+begin_src emacs-lisp
   (use-package beacon
     :ensure t
@@ -47,6 +47,7 @@
     (setq beacon-blink-delay 0.1))
 #+end_src
 ** buffer-move
+   - Repo :: https://github.com/lukhas/buffer-move
 #+begin_src emacs-lisp
   (use-package buffer-move
     :ensure t
@@ -57,6 +58,8 @@
      ("<C-s-right>" .  buf-move-right)))
 #+end_src
 ** Company
+   - Repo :: https://github.com/company-mode/company-mode
+   - Docs :: https://company-mode.github.io/
 #+begin_src emacs-lisp
   (use-package company
     :ensure t
@@ -75,6 +78,8 @@
       :hook (company-mode . company-box-mode)))
 #+end_src
 ** Crux
+   - Repo :: https://github.com/bbatsov/crux
+   - Docs :: [[https://emacsredux.com/blog/2016/01/30/crux/]]
 #+begin_src emacs-lisp
   (use-package crux
     :ensure t
@@ -95,6 +100,7 @@
      ("<C-backspace>" . crux-kill-line-backwards)))
 #+end_src
 ** diff-hl
+   - Repo :: https://github.com/dgutov/diff-hl
 #+begin_src emacs-lisp
   (use-package diff-hl
     :ensure t
@@ -106,6 +112,7 @@
      (magit-post-refresh . diff-hl-magit-post-refresh)))
 #+end_src
 ** easy-kill
+   - Repo :: https://github.com/leoliu/easy-kill
 #+begin_src emacs-lisp
   (use-package easy-kill
     :ensure t
@@ -113,6 +120,7 @@
     ([remap kill-ring-save] . easy-kill))
 #+end_src
 ** exec-path-from-shell
+   - Repo :: https://github.com/purcell/exec-path-from-shell
 #+begin_src emacs-lisp
   (when (memq window-system '(mac ns x))
     (use-package exec-path-from-shell
@@ -122,6 +130,7 @@
       (exec-path-from-shell-initialize)))
 #+end_src
 ** expand-region
+   - Repo :: https://github.com/magnars/expand-region.el
 #+begin_src emacs-lisp
   (use-package expand-region
     :ensure t
@@ -129,6 +138,7 @@
     ("C-=" . er/expand-region))
 #+end_src
 ** Eyebrowse
+   - Repo :: https://depp.brause.cc/eyebrowse/
 #+begin_src emacs-lisp
   (use-package eyebrowse
     :ensure t
@@ -136,11 +146,13 @@
     (eyebrowse-mode))
 #+end_src
 ** Git time machine
+   - Repo :: https://github.com/emacsmirror/git-timemachine
 #+begin_src emacs-lisp
   (use-package git-timemachine
     :ensure t)
 #+end_src
 ** gnuplot
+   - Repo :: https://github.com/emacs-gnuplot/gnuplot
 #+begin_src emacs-lisp
   (use-package gnuplot
     :ensure t
@@ -149,12 +161,15 @@
     (add-to-list 'auto-mode-alist '("\\.gp?\\'" . gnuplot-mode)))
 #+end_src
 ** Flycheck
+   - Repo :: https://github.com/flycheck/flycheck
+   - Docs :: https://www.flycheck.org/en/latest/
 #+begin_src emacs-lisp
 (use-package flycheck
   :ensure t
   :init (global-flycheck-mode))
 #+end_src
 ** ibuffer
+   - Docs :: https://www.emacswiki.org/emacs/IbufferMode
 #+begin_src emacs-lisp
   (global-set-key (kbd "C-x C-b") 'ibuffer)
   (setq ibuffer-saved-filter-groups
@@ -191,12 +206,15 @@
        (setq ibuffer-show-empty-filter-groups nil)
 #+end_src
 ** iedit
+   - Repo :: https://github.com/victorhge/iedit
 #+begin_src emacs-lisp
   (use-package iedit
     :ensure t
     :bind ("C-;" . iedit-mode))
 #+end_src
 ** Ivy & friends
+   - Repo :: https://github.com/abo-abo/swiper
+   - Docs :: https://oremacs.com/swiper/
 *** Ivy
 #+begin_src emacs-lisp
   (use-package ivy
@@ -247,6 +265,8 @@
      ("C-r" . counsel-expression-history)))
 #+end_src
 ** Magit
+   - Repo :: https://github.com/magit/magit
+   - Docs :: https://magit.vc/
 #+begin_src emacs-lisp
   (use-package magit
     :ensure t
@@ -254,6 +274,7 @@
     (("C-x g" . magit)))
 #+end_src
 ** nlinum
+   - Repo :: https://github.com/hlissner/emacs-nlinum-hl
 #+begin_src emacs-lisp
   (use-package nlinum
     :ensure t
@@ -261,6 +282,7 @@
     (global-nlinum-mode))
 #+end_src
 ** Org Bullets
+   - Repo :: https://github.com/sabof/org-bullets
 #+begin_src emacs-lisp
   (use-package org-bullets
     :ensure t
@@ -268,6 +290,9 @@
     (org-mode . org-bullets-mode))
 #+end_src
 ** Paredit
+   - Repo :: https://github.com/emacsmirror/paredit/blob/master/paredit.el
+   - Docs :: https://www.emacswiki.org/emacs/ParEdit
+   - Docs :: https://wikemacs.org/wiki/Paredit-mode
 #+begin_src emacs-lisp
   (use-package paredit
     :ensure t
@@ -280,6 +305,8 @@
     (add-hook 'cider-repl-mode-hook 'paredit-mode))
 #+end_src
 ** Projectile
+   - Repo :: https://github.com/bbatsov/projectile
+   - Docs :: https://docs.projectile.mx/projectile/index.html
 #+begin_src emacs-lisp
   (use-package projectile
     :ensure t
@@ -290,6 +317,8 @@
 	   ("C-c p" . projectile-command-map)))
 #+end_src
 ** undo-tree
+   - Repo :: https://github.com/apchamberlain/undo-tree.el
+   - Docs :: https://www.emacswiki.org/emacs/UndoTree
 #+begin_src emacs-lisp
   (use-package undo-tree
     :ensure t
@@ -301,6 +330,7 @@
     :diminish (undo-tree-mode))
 #+end_src
 ** which-key
+   - Repo :: https://github.com/justbur/emacs-which-key
 #+begin_src emacs-lisp
   (use-package which-key
     :ensure t
@@ -308,6 +338,7 @@
     (which-key-mode))
 #+end_src
 ** YASnippet
+   - Repo :: https://github.com/joaotavora/yasnippet
 #+begin_src emacs-lisp
   (use-package yasnippet
     :ensure t
@@ -320,6 +351,8 @@
 #+end_src
 * Programming
 ** lsp-mode
+   - Repo :: https://github.com/emacs-lsp/lsp-mode
+   - Docs :: https://emacs-lsp.github.io/lsp-mode
 #+begin_src emacs-lisp
   (setq gc-cons-threshold 100000000)
   (setq read-process-output-max (* 1024 1024))
@@ -362,6 +395,7 @@
 #+end_src
 ** lsp servers
 *** Python
+    - Repo :: https://github.com/python-lsp/python-lsp-server
 #+begin_src bash
   # language server
   pip3 install 'python-lsp-server[all]'
@@ -374,6 +408,7 @@
   (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
 #+end_src
 ** Doom Modeline
+   - Repo :: https://github.com/seagle0128/doom-modeline
 #+begin_src emacs-lisp
   (use-package doom-modeline
     :ensure t
@@ -383,6 +418,7 @@
       (setq doom-modeline-minor-modes nil)))
 #+end_src
 ** Spacemacs Theme
+   - Repo :: https://github.com/nashamri/spacemacs-theme
 #+begin_src emacs-lisp
   (use-package spacemacs-common
     :ensure spacemacs-theme
