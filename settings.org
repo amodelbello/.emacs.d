@@ -6,19 +6,19 @@
 * Packages
 ** Ace Window
    - Repo :: [[https://github.com/abo-abo/ace-window]]
-#+begin_src emacs-lisp
-  (use-package ace-window
-    :ensure t
-    :bind
-    (("C-x o" . ace-window)
-     ("s-w" . ace-window))
-    :config
-    (defvar aw-dispatch-always nil)
-    (setq aw-scope 'frame)
-    (custom-set-faces
-     '(aw-leading-char-face
-       ((t (:inherit ace-jump-face-foreground :height 3.0))))))
-#+end_src
+     #+begin_src emacs-lisp
+       (use-package ace-window
+         :ensure t
+         :bind
+         (("C-x o" . ace-window)
+          ("s-w" . ace-window))
+         :config
+         (defvar aw-dispatch-always nil)
+         (setq aw-scope 'frame)
+         (custom-set-faces
+          '(aw-leading-char-face
+            ((t (:inherit ace-jump-face-foreground :height 3.0))))))
+     #+end_src
 ** Ag
    - Repo :: https://github.com/Wilfred/ag.el
      #+begin_src emacs-lisp
@@ -27,200 +27,195 @@
      #+end_src
 ** Atomic Chrome
    - Repo :: [[https://github.com/alpha22jp/atomic-chrome]]
-#+begin_src emacs-lisp
-  (use-package atomic-chrome
-    :ensure t
-    :config (atomic-chrome-start-server))
-  (setq atomic-chrome-buffer-open-style 'frame)
-#+end_src
+     #+begin_src emacs-lisp
+       (use-package atomic-chrome
+         :ensure t
+         :config (atomic-chrome-start-server))
+       (setq atomic-chrome-buffer-open-style 'frame)
+     #+end_src
 ** Avy
    - Repo :: [[https://github.com/abo-abo/avy]]
-#+begin_src emacs-lisp
-  (use-package avy
-    :ensure t
-    :bind (("C-'" . avy-goto-char-2)
-           :map org-mode-map
-           ("C-'" . nil)))
-#+end_src
+     #+begin_src emacs-lisp
+       (use-package avy
+         :ensure t
+         :bind (("C-'" . avy-goto-char-2)
+                :map org-mode-map
+                ("C-'" . nil)))
+     #+end_src
 ** Beacon
    - Repo :: [[https://github.com/Malabarba/beacon]]
-#+begin_src emacs-lisp
-  (use-package beacon
-    :ensure t
-    :config
-    (beacon-mode 1)
-    (setq beacon-blink-duration 0.5)
-    (setq beacon-blink-delay 0.1))
-#+end_src
+     #+begin_src emacs-lisp
+       (use-package beacon
+         :ensure t
+         :config
+         (beacon-mode 1)
+         (setq beacon-blink-duration 0.5)
+         (setq beacon-blink-delay 0.1))
+     #+end_src
 ** buffer-move
    - Repo :: https://github.com/lukhas/buffer-move
-#+begin_src emacs-lisp
-  (use-package buffer-move
-    :ensure t
-    :bind
-    (("<C-s-up>" . buf-move-up)
-     ("<C-s-down>" . buf-move-down)
-     ("<C-s-left>" . buf-move-left)
-     ("<C-s-right>" .  buf-move-right)))
-#+end_src
+     #+begin_src emacs-lisp
+       (use-package buffer-move
+         :ensure t
+         :bind
+         (("<C-s-up>" . buf-move-up)
+          ("<C-s-down>" . buf-move-down)
+          ("<C-s-left>" . buf-move-left)
+          ("<C-s-right>" .  buf-move-right)))
+     #+end_src
 ** Company
    - Repo :: https://github.com/company-mode/company-mode
    - Docs :: https://company-mode.github.io/
-#+begin_src emacs-lisp
-  (use-package company
-    :ensure t
-    :config
-    (global-company-mode)
-    (setq company-idle-delay 0.4)
-    (setq company-show-numbers t)
-    (setq company-tooltip-limit 10)
-    (setq company-minimum-prefix-length 2)
-    (setq company-tooltip-align-annotations t)
-    (setq company-tooltip-flip-when-above nil)
-    (custom-set-variables
-     '(company-quick-access-modifier 'super))
-    (use-package company-box
-      :ensure t
-      :hook (company-mode . company-box-mode)))
-#+end_src
+     #+begin_src emacs-lisp
+       (use-package company
+         :ensure t
+         :config
+         (global-company-mode)
+         (setq company-idle-delay 0.4)
+         (setq company-show-numbers t)
+         (setq company-tooltip-limit 10)
+         (setq company-minimum-prefix-length 2)
+         (setq company-tooltip-align-annotations t)
+         (setq company-tooltip-flip-when-above nil)
+         (custom-set-variables
+          '(company-quick-access-modifier 'super))
+         (use-package company-box
+           :ensure t
+           :hook (company-mode . company-box-mode)))
+     #+end_src
 ** Crux
    - Repo :: https://github.com/bbatsov/crux
    - Docs :: [[https://emacsredux.com/blog/2016/01/30/crux/]]
-#+begin_src emacs-lisp
-  (use-package crux
-    :ensure t
-    :bind
-    (("s-o" . crux-smart-open-line-above)
-     ("M-o" . crux-smart-open-line)
+     #+begin_src emacs-lisp
+       (use-package crux
+         :ensure t
+         :bind
+         (("s-o" . crux-smart-open-line-above)
+          ("M-o" . crux-smart-open-line)
 
-     ; this all of a sudden stopped working
-     ; switching to coucel-recentf for now
-     ; ("s-r" . crux-recentf-find-file)
+          ; this all of a sudden stopped working
+          ; switching to coucel-recentf for now
+          ; ("s-r" . crux-recentf-find-file)
 
-     ("C-c D" . crux-delete-file-and-buffer)
-     ("C-c d" . crux-duplicate-current-line-or-region)
-     ("C-c M-d" . crux-duplicate-and-comment-current-line-or-region)
-     ("C-c r" . crux-rename-file-and-buffer)
-     ("s-j" . crux-top-join-line)
-     ("s-k" . crux-kill-whole-line)
-     ("<C-backspace>" . crux-kill-line-backwards)))
-#+end_src
+          ("C-c D" . crux-delete-file-and-buffer)
+          ("C-c d" . crux-duplicate-current-line-or-region)
+          ("C-c M-d" . crux-duplicate-and-comment-current-line-or-region)
+          ("C-c r" . crux-rename-file-and-buffer)
+          ("s-j" . crux-top-join-line)
+          ("s-k" . crux-kill-whole-line)
+          ("<C-backspace>" . crux-kill-line-backwards)))
+     #+end_src
 ** diff-hl
    - Repo :: https://github.com/dgutov/diff-hl
-#+begin_src emacs-lisp
-  (use-package diff-hl
-    :ensure t
-    :config
-    (global-diff-hl-mode)
-    :hook
-    ((dired-mode . diff-hl-dired-mode)
-     (magit-pre-refresh . diff-hl-magit-pre-refresh)
-     (magit-post-refresh . diff-hl-magit-post-refresh)))
-#+end_src
+     #+begin_src emacs-lisp
+       (use-package diff-hl
+         :ensure t
+         :config
+         (global-diff-hl-mode)
+         :hook
+         ((dired-mode . diff-hl-dired-mode)
+          (magit-pre-refresh . diff-hl-magit-pre-refresh)
+          (magit-post-refresh . diff-hl-magit-post-refresh)))
+     #+end_src
 ** easy-kill
    - Repo :: https://github.com/leoliu/easy-kill
-#+begin_src emacs-lisp
-  (use-package easy-kill
-    :ensure t
-    :bind
-    ([remap kill-ring-save] . easy-kill))
-#+end_src
+     #+begin_src emacs-lisp
+       (use-package easy-kill
+         :ensure t
+         :bind
+         ([remap kill-ring-save] . easy-kill))
+     #+end_src
 ** exec-path-from-shell
    - Repo :: https://github.com/purcell/exec-path-from-shell
-#+begin_src emacs-lisp
-  (when (memq window-system '(mac ns x))
-    (use-package exec-path-from-shell
-      :ensure t
-      :config
-      (setq exec-path-from-shell-arguments nil) ; non-interactive, i.e. .zshenv not .zshrc
-      (exec-path-from-shell-initialize)))
-#+end_src
+     #+begin_src emacs-lisp
+       (when (memq window-system '(mac ns x))
+         (use-package exec-path-from-shell
+           :ensure t
+           :config
+           (setq exec-path-from-shell-arguments nil) ; non-interactive, i.e. .zshenv not .zshrc
+           (exec-path-from-shell-initialize)))
+     #+end_src
 ** expand-region
    - Repo :: https://github.com/magnars/expand-region.el
-#+begin_src emacs-lisp
-  (use-package expand-region
-    :ensure t
-    :bind (("C-=" . er/expand-region)
-           ("C--" . er/contract-region)))
-#+end_src
+     #+begin_src emacs-lisp
+       (use-package expand-region
+         :ensure t
+         :bind (("C-=" . er/expand-region)
+                ("C--" . er/contract-region)))
+     #+end_src
 ** Eyebrowse
    - Repo :: https://depp.brause.cc/eyebrowse/
-#+begin_src emacs-lisp
-  (use-package eyebrowse
-    :ensure t
-    :config
-    (eyebrowse-mode))
-#+end_src
+     #+begin_src emacs-lisp
+       (use-package eyebrowse
+         :ensure t
+         :config
+         (eyebrowse-mode))
+     #+end_src
 ** format-all
-   #+begin_src emacs-lisp
-     ;; (use-package format-all
-     ;;   :ensure t
-     ;;   :hook
-     ;;   ((web-mode . format-all-mode)
-     ;;    ;(format-all-mode-hook . format-all-ensure-formatter)
-     ;;    )
-     ;;   :config
-     ;;   (format-all-mode +1)
-     ;;   (custom-set-variables
-     ;;    '(format-all-formatters
-     ;;      (quote (("JavaScript" prettier)
-     ;;              ("TypeScript" prettier)
-     ;;              ("JSON" prettier)
-     ;;              ("JSON5" prettier))))))
-
-   #+end_src
+   - Repo :: https://github.com/lassik/emacs-format-all-the-code
+     #+begin_src emacs-lisp
+       ;; (use-package format-all
+       ;;   :ensure t
+       ;;   :hook
+       ;;   ((web-mode . format-all-mode)
+       ;;    ;(format-all-mode-hook . format-all-ensure-formatter)
+       ;;    )
+       ;;   :config
+       ;;   (format-all-mode +1)
+       ;;   (custom-set-variables
+       ;;    '(format-all-formatters
+       ;;      (quote (("JavaScript" prettier)
+       ;;              ("TypeScript" prettier)
+       ;;              ("JSON" prettier)
+     n  ;;              ("JSON5" prettier))))))
+     #+end_src
 ** Git time machine
    - Repo :: https://github.com/emacsmirror/git-timemachine
-#+begin_src emacs-lisp
-  (use-package git-timemachine
-    :ensure t)
-#+end_src
+     #+begin_src emacs-lisp
+       (use-package git-timemachine
+         :ensure t)
+     #+end_src
 ** gnuplot
    - Repo :: https://github.com/emacs-gnuplot/gnuplot
-#+begin_src emacs-lisp
-  (use-package gnuplot
-    :ensure t
-    :ensure-system-package gnuplot
-    :config
-    (add-to-list 'auto-mode-alist '("\\.gp?\\'" . gnuplot-mode)))
-#+end_src
+     #+begin_src emacs-lisp
+       (use-package gnuplot
+         :ensure t
+         :ensure-system-package gnuplot
+         :config
+         (add-to-list 'auto-mode-alist '("\\.gp?\\'" . gnuplot-mode)))
+     #+end_src
 ** Flycheck
    - Repo :: https://github.com/flycheck/flycheck
    - Docs :: https://www.flycheck.org/en/latest/
-#+begin_src emacs-lisp
-(use-package flycheck
-  :ensure t
-  :init (global-flycheck-mode))
-#+end_src
+     #+begin_src emacs-lisp
+     (use-package flycheck
+       :ensure t
+       :init (global-flycheck-mode))
+     #+end_src
 ** ibuffer
    - Docs :: https://www.emacswiki.org/emacs/IbufferMode
-#+begin_src emacs-lisp
-  (global-set-key (kbd "C-x C-b") 'ibuffer)
-  (setq ibuffer-saved-filter-groups
+     #+begin_src emacs-lisp
+       (global-set-key (kbd "C-x C-b") 'ibuffer)
+       (setq ibuffer-saved-filter-groups
              (quote (("default"
-                      ("org" (mode . org-mode))
-                      ("IRC" (or (mode . circe-channel-mode) (mode . circe-server-mode)))
-                      ("web" (or (mode . web-mode) (mode . js2-mode)))
-                      ("shell" (or (mode . eshell-mode) (mode . shell-mode)))
-                      ("mu4e" (or
-                               (mode . mu4e-compose-mode)
-                               (name . "\*mu4e\*")
-                               ))
-                      ("programming" (or
-                                      (mode . emacs-lisp-mode)
-                                      (mode . lisp-mode)
-                                      (mode . clojure-mode)
-                                      (mode . clojurescript-mode)
-                                      (mode . python-mode)
-                                      (mode . c-mode)
-                                      (mode . c++-mode)))
-                      ("text" (mode . text-mode))
-                      ("magit" (mode . magit-mode))
-                      ("dired" (mode . dired-mode))
-                      ("emacs" (or
-                                (name . "^\\*scratch\\*$")
-                                (name . "^\\*Messages\\*$")))
-                      ))))
+                     ("org" (mode . org-mode))
+                     ("web" (or (mode . web-mode) (mode . js2-mode)))
+                     ("shell" (or (mode . eshell-mode) (mode . shell-mode)))
+                     ("programming" (or
+                                     (mode . emacs-lisp-mode)
+                                     (mode . lisp-mode)
+                                     (mode . clojure-mode)
+                                     (mode . clojurescript-mode)
+                                     (mode . python-mode)
+                                     (mode . c-mode)
+                                     (mode . c++-mode)))
+                     ("text" (mode . text-mode))
+                     ("magit" (mode . magit-mode))
+                     ("dired" (mode . dired-mode))
+                     ("emacs" (or
+                               (name . "^\\*scratch\\*$")
+                               (name . "^\\*Warnings\\*$")
+                               (name . "^\\*Messages\\*$")))))))
        (add-hook 'ibuffer-mode-hook
                  (lambda ()
                    (ibuffer-auto-mode 1)
@@ -228,124 +223,124 @@
 
        ;; Don't show filter groups if there are no buffers in that group
        (setq ibuffer-show-empty-filter-groups nil)
-#+end_src
+     #+end_src
 ** iedit
    - Repo :: https://github.com/victorhge/iedit
-#+begin_src emacs-lisp
-  (use-package iedit
-    :ensure t
-    :bind ("C-;" . iedit-mode))
-#+end_src
+     #+begin_src emacs-lisp
+       (use-package iedit
+         :ensure t
+         :bind ("C-;" . iedit-mode))
+     #+end_src
 ** Ivy & friends
    - Repo :: https://github.com/abo-abo/swiper
    - Docs :: https://oremacs.com/swiper/
 *** Ivy
-#+begin_src emacs-lisp
-  (use-package ivy
-    :ensure t
-    :diminish (ivy-mode)
-    :bind
-    (("C-x b" . ivy-switch-buffer)
-     ("C-c C-r" . ivy-resume)
-     :map ivy-minibuffer-map
-     ("M-y" . ivy-next-line))
-    :config
-    (setq ivy-use-virtual-buffers t)
-    (setq ivy-count-format "%d/%d ")
-    (setq ivy-display-style 'fancy))
-#+end_src
+    #+begin_src emacs-lisp
+      (use-package ivy
+        :ensure t
+        :diminish (ivy-mode)
+        :bind
+        (("C-x b" . ivy-switch-buffer)
+         ("C-c C-r" . ivy-resume)
+         :map ivy-minibuffer-map
+         ("M-y" . ivy-next-line))
+        :config
+        (setq ivy-use-virtual-buffers t)
+        (setq ivy-count-format "%d/%d ")
+        (setq ivy-display-style 'fancy))
+    #+end_src
 *** Counsel
-#+begin_src emacs-lisp
-  (use-package counsel
-    :ensure t
-    :bind
-    (("M-y" . counsel-yank-pop)
-     ("M-x" . counsel-M-x)
-     ("C-x C-f" . counsel-find-file)
-     ("<f1> f" . counsel-describe-function)
-     ("<f1> v" . counsel-describe-variable)
-     ("<f1> l" . counsel-find-library)
-     ("<f2> i" . counsel-info-lookup-symbol)
-     ("<f2> u" . counsel-unicode-char)
-     ("C-c g" . counsel-git) ; will override the keybinding for `magit-file-dispatch'
-     ("C-c j" . counsel-git-grep)
-     ("C-c a" . counsel-ag)
-     ("C-x l" . counsel-locate)
-     ("M-y" . counsel-yank-pop)
-     ("M-x" . counsel-M-x)
-     ("s-r" . counsel-recentf)
-     :map minibuffer-local-map
-       ("C-r" . counsl-minibuffer-history)))
-#+end_src
+    #+begin_src emacs-lisp
+      (use-package counsel
+        :ensure t
+        :bind
+        (("M-y" . counsel-yank-pop)
+         ("M-x" . counsel-M-x)
+         ("C-x C-f" . counsel-find-file)
+         ("<f1> f" . counsel-describe-function)
+         ("<f1> v" . counsel-describe-variable)
+         ("<f1> l" . counsel-find-library)
+         ("<f2> i" . counsel-info-lookup-symbol)
+         ("<f2> u" . counsel-unicode-char)
+         ("C-c g" . counsel-git) ; will override the keybinding for `magit-file-dispatch'
+         ("C-c j" . counsel-git-grep)
+         ("C-c a" . counsel-ag)
+         ("C-x l" . counsel-locate)
+         ("M-y" . counsel-yank-pop)
+         ("M-x" . counsel-M-x)
+         ("s-r" . counsel-recentf)
+         :map minibuffer-local-map
+           ("C-r" . counsl-minibuffer-history)))
+    #+end_src
 
 *** Swiper
-#+begin_src emacs-lisp
-  (use-package swiper
-    :ensure t
-    :bind
-    (("C-s" . swiper-isearch)
-     ("C-r" . swiper-isearch)
-     :map read-expression-map
-     ("C-r" . counsel-expression-history)))
-#+end_src
+    #+begin_src emacs-lisp
+      (use-package swiper
+        :ensure t
+        :bind
+        (("C-s" . swiper-isearch)
+         ("C-r" . swiper-isearch)
+         :map read-expression-map
+         ("C-r" . counsel-expression-history)))
+    #+end_src
 ** json-mode
    - Repo :: https://github.com/joshwnj/json-mode
-   #+begin_src emacs-lisp
-     (use-package json-mode
-       :ensure t)
-   #+end_src
+     #+begin_src emacs-lisp
+       (use-package json-mode
+         :ensure t)
+     #+end_src
 ** Magit
    - Repo :: https://github.com/magit/magit
    - Docs :: https://magit.vc/
-#+begin_src emacs-lisp
-  (use-package magit
-    :ensure t
-    :bind
-    (("C-x g" . magit)))
-#+end_src
+     #+begin_src emacs-lisp
+       (use-package magit
+         :ensure t
+         :bind
+         (("C-x g" . magit)))
+     #+end_src
 ** nlinum
    - Repo :: https://github.com/hlissner/emacs-nlinum-hl
-#+begin_src emacs-lisp
-  (use-package nlinum
-    :ensure t
-    :config
-    (global-nlinum-mode))
-#+end_src
+     #+begin_src emacs-lisp
+       (use-package nlinum
+         :ensure t
+         :config
+         (global-nlinum-mode))
+     #+end_src
 ** Org Bullets
    - Repo :: https://github.com/sabof/org-bullets
-#+begin_src emacs-lisp
-  (use-package org-bullets
-    :ensure t
-    :hook
-    (org-mode . org-bullets-mode))
-#+end_src
+     #+begin_src emacs-lisp
+       (use-package org-bullets
+         :ensure t
+         :hook
+         (org-mode . org-bullets-mode))
+     #+end_src
 ** Paredit
    - Repo :: https://github.com/emacsmirror/paredit/blob/master/paredit.el
    - Docs :: https://www.emacswiki.org/emacs/ParEdit
    - Docs :: https://wikemacs.org/wiki/Paredit-mode
-#+begin_src emacs-lisp
-  (use-package paredit
-    :ensure t
-    :config
-    (add-hook 'lisp-mode-hook 'paredit-mode)
-    (add-hook 'emacs-lisp-mode-hook 'paredit-mode)
-    (add-hook 'clojure-mode-hook 'paredit-mode)
-    (add-hook 'clojurescript-mode-hook 'paredit-mode)
-    (add-hook 'clojurec-mode-hook 'paredit-mode)
-    (add-hook 'cider-repl-mode-hook 'paredit-mode))
-#+end_src
+     #+begin_src emacs-lisp
+       (use-package paredit
+         :ensure t
+         :config
+         (add-hook 'lisp-mode-hook 'paredit-mode)
+         (add-hook 'emacs-lisp-mode-hook 'paredit-mode)
+         (add-hook 'clojure-mode-hook 'paredit-mode)
+         (add-hook 'clojurescript-mode-hook 'paredit-mode)
+         (add-hook 'clojurec-mode-hook 'paredit-mode)
+         (add-hook 'cider-repl-mode-hook 'paredit-mode))
+     #+end_src
 ** Projectile
    - Repo :: https://github.com/bbatsov/projectile
    - Docs :: https://docs.projectile.mx/projectile/index.html
-#+begin_src emacs-lisp
-  (use-package projectile
-    :ensure t
-    :config
-    (projectile-global-mode)
-    (setq projectile-completion-system 'ivy)
-    :bind (("s-p" . projectile-command-map)
-           ("C-c p" . projectile-command-map)))
-#+end_src
+     #+begin_src emacs-lisp
+       (use-package projectile
+         :ensure t
+         :config
+         (projectile-global-mode)
+         (setq projectile-completion-system 'ivy)
+         :bind (("s-p" . projectile-command-map)
+                ("C-c p" . projectile-command-map)))
+     #+end_src
 ** rainbow-delimiters
    - Repo :: https://github.com/Fanael/rainbow-delimiters
      #+begin_src emacs-lisp
@@ -356,16 +351,16 @@
 ** undo-tree
    - Repo :: https://github.com/apchamberlain/undo-tree.el
    - Docs :: https://www.emacswiki.org/emacs/UndoTree
-#+begin_src emacs-lisp
-  (use-package undo-tree
-    :ensure t
-    :config
-    (global-undo-tree-mode)
-    (setq undo-tree-history-directory-alist
-        `((".*" . ,temporary-file-directory)))
-    (setq undo-tree-auto-save-history t)
-    :diminish (undo-tree-mode))
-#+end_src
+     #+begin_src emacs-lisp
+       (use-package undo-tree
+         :ensure t
+         :config
+         (global-undo-tree-mode)
+         (setq undo-tree-history-directory-alist
+             `((".*" . ,temporary-file-directory)))
+         (setq undo-tree-auto-save-history t)
+         :diminish (undo-tree-mode))
+     #+end_src
 ** web-mode
    - Repo :: https://github.com/fxbois/web-mode
    - Docs :: https://web-mode.org/
@@ -392,104 +387,104 @@
      #+end_src
 ** which-key
    - Repo :: https://github.com/justbur/emacs-which-key
-#+begin_src emacs-lisp
-  (use-package which-key
-    :ensure t
-    :config
-    (which-key-mode))
-#+end_src
+     #+begin_src emacs-lisp
+       (use-package which-key
+         :ensure t
+         :config
+         (which-key-mode))
+     #+end_src
 ** YASnippet
    - Repo :: https://github.com/joaotavora/yasnippet
-#+begin_src emacs-lisp
-  (use-package yasnippet
-    :ensure t
-    :config
-    (yas-global-mode)
-    (setq yas-snippet-dirs
-          '("~/.emacs.d/snippets"))
-    (use-package yasnippet-snippets
-      :ensure t))
-#+end_src
+     #+begin_src emacs-lisp
+       (use-package yasnippet
+         :ensure t
+         :config
+         (yas-global-mode)
+         (setq yas-snippet-dirs
+               '("~/.emacs.d/snippets"))
+         (use-package yasnippet-snippets
+           :ensure t))
+     #+end_src
 * Programming
 ** lsp-mode
    - Repo :: https://github.com/emacs-lsp/lsp-mode
    - Docs :: https://emacs-lsp.github.io/lsp-mode
-#+begin_src emacs-lisp
-  (setq gc-cons-threshold 100000000)
-  (setq read-process-output-max (* 1024 1024))
-  (setq lsp-use-plists t)
+     #+begin_src emacs-lisp
+       (setq gc-cons-threshold 100000000)
+       (setq read-process-output-max (* 1024 1024))
+       (setq lsp-use-plists t)
 
-  (use-package lsp-mode
-    :ensure t
-    :hook ((python-mode . lsp-deferred)
-           (web-mode . lsp-deferred)
-           (lsp-mode . lsp-enable-which-key-integration))
-    :config
-    (setq lsp-keymap-prefix "C-c l")
-    (setq lsp-ui-sideline-show-hover t)
-    (setq lsp-ui-sideline-show-code-actions t)
-    :commands lsp-deferred)
+       (use-package lsp-mode
+         :ensure t
+         :hook ((python-mode . lsp-deferred)
+                (web-mode . lsp-deferred)
+                (lsp-mode . lsp-enable-which-key-integration))
+         :config
+         (setq lsp-keymap-prefix "C-c l")
+         (setq lsp-ui-sideline-show-hover t)
+         (setq lsp-ui-sideline-show-code-actions t)
+         :commands lsp-deferred)
 
-  (use-package lsp-ui
-    :ensure t
-    :bind ((:map lsp-ui-mode-map
-                 ("s-7" . lsp-ui-imenu)
-                 ([remap xref-find-definitions] . lsp-ui-peek-find-definitions)
-                 ([remap xref-find-references] . lsp-ui-peek-find-references)))
-    :commands lsp-ui-mode)
+       (use-package lsp-ui
+         :ensure t
+         :bind ((:map lsp-ui-mode-map
+                      ("s-7" . lsp-ui-imenu)
+                      ([remap xref-find-definitions] . lsp-ui-peek-find-definitions)
+                      ([remap xref-find-references] . lsp-ui-peek-find-references)))
+         :commands lsp-ui-mode)
 
-  (use-package lsp-ivy
-    :ensure t
-    :commands lsp-ivy-workspace-symbol)
+       (use-package lsp-ivy
+         :ensure t
+         :commands lsp-ivy-workspace-symbol)
 
-  (add-hook 'python-mode-hook
-            (lambda ()
-              (add-hook 'before-save-hook 'lsp-format-buffer nil 'make-it-local)))
+       (add-hook 'python-mode-hook
+                 (lambda ()
+                   (add-hook 'before-save-hook 'lsp-format-buffer nil 'make-it-local)))
 
-  ;; optionally if you want to use debugger
-  ; (use-package dap-mode)
-  ;; (use-package dap-LANGUAGE) to load the dap adapter for your language
+       ;; optionally if you want to use debugger
+       ; (use-package dap-mode)
+       ;; (use-package dap-LANGUAGE) to load the dap adapter for your language
 
-  (setq lsp-modeline-diagnostics-enable t)
-  (setq lsp-modeline-code-actions-mode t)
+       (setq lsp-modeline-diagnostics-enable t)
+       (setq lsp-modeline-code-actions-mode t)
 
-  ;; (setq lsp-before-save-edits nil)
-  ;; (setq lsp-enable-on-type-formatting nil)
-  ;; (setq lsp-enable-indentation nil)
-  ;; (setq lsp-enable-relative-indentation nil)
+       ;; (setq lsp-before-save-edits nil)
+       ;; (setq lsp-enable-on-type-formatting nil)
+       ;; (setq lsp-enable-indentation nil)
+       ;; (setq lsp-enable-relative-indentation nil)
 
-  ;; (setq lsp-typescript-format-enable nil)
-  ;; (setq lsp-typescript-format-indent-size "2")
-  ;; (setq lsp-typescript-format-tab-size "2")
-  ;; (setq lsp-typescript-format-base-indent-size "2")
+       ;; (setq lsp-typescript-format-enable nil)
+       ;; (setq lsp-typescript-format-indent-size "2")
+       ;; (setq lsp-typescript-format-tab-size "2")
+       ;; (setq lsp-typescript-format-base-indent-size "2")
 
 
-  (with-eval-after-load 'lsp-mode
-    ;; :global/:workspace/:file
-    (setq lsp-modeline-diagnostics-scope :workspace)
-    (setq lsp-modeline-code-actions-segments '(icon)))
-#+end_src
+       (with-eval-after-load 'lsp-mode
+         ;; :global/:workspace/:file
+         (setq lsp-modeline-diagnostics-scope :workspace)
+         (setq lsp-modeline-code-actions-segments '(icon)))
+     #+end_src
 ** Languages
 *** Python
 **** lsp-server
      - Repo :: https://github.com/python-lsp/python-lsp-server
-     #+begin_src bash
-       pip3 install 'python-lsp-server[all]'
-     #+end_src
-     #+begin_src emacs-lisp
-       (setq lsp-pylsp-plugins-autopep8-enabled t)
-     #+end_src
+       #+begin_src bash
+         pip3 install 'python-lsp-server[all]'
+       #+end_src
+       #+begin_src emacs-lisp
+         (setq lsp-pylsp-plugins-autopep8-enabled t)
+       #+end_src
 **** pyvenv
      - Repo :: https://github.com/jorgenschaefer/pyvenv
-     #+begin_src emacs-lisp
-       (use-package pyvenv
-         :ensure t
-         :diminish
-         :config
-         (setq pyvenv-mode-line-indicator
-               '(pyvenv-virtual-env-name ("[venv:" pyvenv-virtual-env-name "] ")))
-         (pyvenv-mode +1))
-     #+end_src
+       #+begin_src emacs-lisp
+         (use-package pyvenv
+           :ensure t
+           :diminish
+           :config
+           (setq pyvenv-mode-line-indicator
+                 '(pyvenv-virtual-env-name ("[venv:" pyvenv-virtual-env-name "] ")))
+           (pyvenv-mode +1))
+       #+end_src
 *** JavaScript/Typescript
 **** lsp-server
      - Repo :: https://github.com/typescript-language-server/typescript-language-server
@@ -530,27 +525,27 @@
                                        '("\\.tsx?\\'" . prettier-js-mode))))
        #+end_src
 * Appearance
-#+begin_src emacs-lisp
-  (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
-#+end_src
+   #+begin_src emacs-lisp
+     (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
+   #+end_src
 ** Doom Modeline
    - Repo :: https://github.com/seagle0128/doom-modeline
-#+begin_src emacs-lisp
-  (use-package doom-modeline
-    :ensure t
-    :hook (after-init . doom-modeline-mode)
-    :config
-    (progn
-      (setq doom-modeline-minor-modes nil)))
-#+end_src
+     #+begin_src emacs-lisp
+       (use-package doom-modeline
+         :ensure t
+         :hook (after-init . doom-modeline-mode)
+         :config
+         (progn
+           (setq doom-modeline-minor-modes nil)))
+     #+end_src
 ** Spacemacs Themes
    - Repo :: https://github.com/nashamri/spacemacs-theme
-#+begin_src emacs-lisp
-  (use-package spacemacs-common
-    :ensure spacemacs-theme
-    :config
-    (load-theme 'spacemacs-light t))
-#+end_src
+     #+begin_src emacs-lisp
+       (use-package spacemacs-common
+         :ensure spacemacs-theme
+         :config
+         (load-theme 'spacemacs-light t))
+     #+end_src
 ** Modus Themes
    - Repo :: https://github.com/protesilaos/modus-themes
    - Docs :: https://protesilaos.com/emacs/modus-themes
@@ -573,106 +568,106 @@
      #+end_src
 * Config
 ** Quick Open
-#+begin_src emacs-lisp
-  (global-set-key (kbd "\e\es")
-                  (lambda ()
-                    (interactive)
-                    (find-file "~/.emacs.d/settings.org")))
+    #+begin_src emacs-lisp
+      (global-set-key (kbd "\e\es")
+                      (lambda ()
+                        (interactive)
+                        (find-file "~/.emacs.d/settings.org")))
 
-  (global-set-key (kbd "\e\ei")
-                  (lambda ()
-                    (interactive)
-                    (find-file "~/.emacs.d/init.el")))
+      (global-set-key (kbd "\e\ei")
+                      (lambda ()
+                        (interactive)
+                        (find-file "~/.emacs.d/init.el")))
 
-  (global-set-key (kbd "\e\ek") 'customize-themes)
+      (global-set-key (kbd "\e\ek") 'customize-themes)
 
-  (global-set-key (kbd "\e\ec")
-                  (lambda ()
-                    (interactive)
-                    (set-cursor-color 'magenta)))
-#+end_src
+      (global-set-key (kbd "\e\ec")
+                      (lambda ()
+                        (interactive)
+                        (set-cursor-color 'magenta)))
+    #+end_src
 ** Font Size
-#+BEGIN_SRC emacs-lisp
-  (set-frame-font "DejaVu Sans Mono-14" nil t)
-  (setq-default line-spacing 0.3)
-  (setq-default fill-column 80)
-  (setq-default sentence-end-double-space nil)
-  (setq-default whitespace-line-column 110)
+    #+begin_src emacs-lisp
+      (set-frame-font "DejaVu Sans Mono-14" nil t)
+      (setq-default line-spacing 0.3)
+      (setq-default fill-column 80)
+      (setq-default sentence-end-double-space nil)
+      (setq-default whitespace-line-column 110)
 
-  ;; Because the line-spacing above messes up calc
-  (add-hook 'calc-mode-hook
-            (lambda ()
-              (setq line-spacing 0)))
-  (add-hook 'calc-trail-mode-hook
-            (lambda ()
-              (setq line-spacing 0)))
-#+END_SRC
+      ;; Because the line-spacing above messes up calc
+      (add-hook 'calc-mode-hook
+                (lambda ()
+                  (setq line-spacing 0)))
+      (add-hook 'calc-trail-mode-hook
+                (lambda ()
+                  (setq line-spacing 0)))
+    #+end_src
 ** Window Things
-#+begin_src emacs-lisp
-  (setq-default global-tab-line-mode nil)
-  (setq-default tab-line-mode nil)
-  (setq-default tab-bar-mode nil)
-  (toggle-scroll-bar -1)
+    #+begin_src emacs-lisp
+      (setq-default global-tab-line-mode nil)
+      (setq-default tab-line-mode nil)
+      (setq-default tab-bar-mode nil)
+      (toggle-scroll-bar -1)
 
-  ; easily shrink window vertically
-  (global-set-key (kbd "C-x %") (kbd "C-u -1 C-x ^"))
-#+end_src
+      ; easily shrink window vertically
+      (global-set-key (kbd "C-x %") (kbd "C-u -1 C-x ^"))
+    #+end_src
 ** Spelling
-#+begin_src emacs-lisp
-(dolist (hook '(text-mode-hook))
-  (add-hook hook (lambda () (flyspell-mode 1))))
-#+end_src
+    #+begin_src emacs-lisp
+    (dolist (hook '(text-mode-hook))
+      (add-hook hook (lambda () (flyspell-mode 1))))
+    #+end_src
 ** Misc
-#+begin_src emacs-lisp
-  (desktop-save-mode 1)
-  (fset 'yes-or-no-p 'y-or-n-p)
-  (tool-bar-mode -1)
-  (blink-cursor-mode 0)
+    #+begin_src emacs-lisp
+      (desktop-save-mode 1)
+      (fset 'yes-or-no-p 'y-or-n-p)
+      (tool-bar-mode -1)
+      (blink-cursor-mode 0)
 
-  (recentf-mode 1)
-  (setq recentf-max-menu-items 25)
-  (setq recentf-max-saved-items 25)
+      (recentf-mode 1)
+      (setq recentf-max-menu-items 25)
+      (setq recentf-max-saved-items 25)
 
-  ;; Blink modeline instead of ring bell
-  (setq ring-bell-function
-          (lambda ()
-            (let ((orig-fg (face-foreground 'mode-line)))
-              (set-face-foreground 'mode-line "Magenta")
-              (run-with-idle-timer 0.1 nil
-                                   (lambda (fg) (set-face-foreground 'mode-line fg))
-                                   orig-fg))))
+      ;; Blink modeline instead of ring bell
+      (setq ring-bell-function
+              (lambda ()
+                (let ((orig-fg (face-foreground 'mode-line)))
+                  (set-face-foreground 'mode-line "Magenta")
+                  (run-with-idle-timer 0.1 nil
+                                       (lambda (fg) (set-face-foreground 'mode-line fg))
+                                       orig-fg))))
 
-  (setq-default visual-line-mode t)
-  (setq-default org-catch-invisible-edits 'show)
-  (setq save-interprogram-paste-before-kill t)
-  (setq auto-mode-alist (append '(("\\.cl$" . lisp-mode))
-                                    auto-mode-alist))
+      (setq-default visual-line-mode t)
+      (setq-default org-catch-invisible-edits 'show)
+      (setq save-interprogram-paste-before-kill t)
+      (setq auto-mode-alist (append '(("\\.cl$" . lisp-mode))
+                                        auto-mode-alist))
 
-  (setq inferior-lisp-program "/usr/local/bin/sbcl")
+      (setq inferior-lisp-program "/usr/local/bin/sbcl")
 
-  ;;keep cursor at same position when scrolling
-  ;;(setq scroll-preserve-screen-position 1)
-  ;;scroll window up/down by one line
-  ;; (global-set-key (kbd "M-n") (kbd "C-u 1 C-v"))
-  ;; (global-set-key (kbd "M-p") (kbd "C-u 1 M-v"))
-  ;; (global-set-key (kbd "C-M-q") 'query-replace)
+      ;;keep cursor at same position when scrolling
+      ;;(setq scroll-preserve-screen-position 1)
+      ;;scroll window up/down by one line
+      ;; (global-set-key (kbd "M-n") (kbd "C-u 1 C-v"))
+      ;; (global-set-key (kbd "M-p") (kbd "C-u 1 M-v"))
+      ;; (global-set-key (kbd "C-M-q") 'query-replace)
 
-  ;; Spell check
-  (setq-default ispell-program-name "/usr/local/bin/aspell")
+      ;; Spell check
+      (setq-default ispell-program-name "/usr/local/bin/aspell")
 
-  ;; allow remembering risky variables
-  (defun risky-local-variable-p (sym &optional _ignored) nil)
+      ;; allow remembering risky variables
+      (defun risky-local-variable-p (sym &optional _ignored) nil)
 
-  (global-set-key (kbd "s-7") 'lsp-ui-imenu)
+      (global-set-key (kbd "s-7") 'lsp-ui-imenu)
 
-  (whitespace-mode -1)
-  (add-hook 'before-save-hook 'whitespace-cleanup)
+      (whitespace-mode -1)
+      (add-hook 'before-save-hook 'whitespace-cleanup)
 
-  ;; (define-key org-mode-map (kbd "C-'") nil)
+      ;; (define-key org-mode-map (kbd "C-'") nil)
 
-  (setq auto-save-default nil)
-  (setq make-backup-files nil)
-  (setq create-lockfiles nil)
-  (setq-default indent-tabs-mode nil)
+      (setq auto-save-default nil)
+      (setq make-backup-files nil)
+      (setq create-lockfiles nil)
+      (setq-default indent-tabs-mode nil)
 
-#+end_src
+    #+end_src
