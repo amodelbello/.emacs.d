@@ -52,6 +52,7 @@ projectile-bookmarks.eld
 projectile.cache
 recentf
 transient/
+.cache
 
 customize.el
 settings.el
