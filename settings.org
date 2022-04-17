@@ -117,6 +117,17 @@
           (magit-pre-refresh . diff-hl-magit-pre-refresh)
           (magit-post-refresh . diff-hl-magit-post-refresh)))
      #+end_src
+** Drag Stuff
+   - Repo :: https://github.com/rejeep/drag-stuff.el
+     #+begin_src emacs-lisp
+       (use-package drag-stuff
+         :ensure t
+         :bind (("<M-up>" . drag-stuff-up)
+                ("<M-down>" . drag-stuff-down))
+         :config
+         (drag-stuff-global-mode +1)
+         (drag-stuff-define-keys))
+     #+end_src
 ** easy-kill
    - Repo :: https://github.com/leoliu/easy-kill
      #+begin_src emacs-lisp
@@ -125,6 +136,15 @@
          :bind
          ([remap kill-ring-save] . easy-kill))
      #+end_src
+** Evil
+   Repo :: https://github.com/emacs-evil/evil
+   Docs :: https://evil.readthedocs.io/en/latest/index.html
+   #+begin_src emacs-lisp
+     (use-package evil
+       :ensure t
+       :config
+       (evil-mode -1))
+   #+end_src
 ** exec-path-from-shell
    - Repo :: https://github.com/purcell/exec-path-from-shell
      #+begin_src emacs-lisp
@@ -341,6 +361,8 @@
          (setq popper-reference-buffers
                '("\\*Messages\\*"
                  "\\*Warnings\\*"
+                 "\\*flycheck errors\\*"
+                 "\\*lsp-log\\*"
                  "Output\\*$"
                  "\\*Async Shell Command\\*"
                  help-mode
@@ -605,18 +627,16 @@
 * Config
 ** Quick Open
     #+begin_src emacs-lisp
+      ;; Open settings.org (this file)
       (global-set-key (kbd "\e\es")
                       (lambda ()
                         (interactive)
                         (find-file "~/.emacs.d/settings.org")))
 
-      (global-set-key (kbd "\e\ei")
-                      (lambda ()
-                        (interactive)
-                        (find-file "~/.emacs.d/init.el")))
+      ;; Open theme chooser
+      (global-set-key (kbd "\e\et") 'customize-themes)
 
-      (global-set-key (kbd "\e\ek") 'customize-themes)
-
+      ;; Set cursor color to magenta
       (global-set-key (kbd "\e\ec")
                       (lambda ()
                         (interactive)
@@ -681,25 +701,21 @@
 
       (setq inferior-lisp-program "/usr/local/bin/sbcl")
 
-      ;;keep cursor at same position when scrolling
-      ;;(setq scroll-preserve-screen-position 1)
-      ;;scroll window up/down by one line
-      ;; (global-set-key (kbd "M-n") (kbd "C-u 1 C-v"))
-      ;; (global-set-key (kbd "M-p") (kbd "C-u 1 M-v"))
-      ;; (global-set-key (kbd "C-M-q") 'query-replace)
-
       ;; Spell check
       (setq-default ispell-program-name "/usr/local/bin/aspell")
 
       ;; allow remembering risky variables
-      (defun risky-local-variable-p (sym &optional _ignored) nil)
+      ;; (defun risky-local-variable-p (sym &optional _ignored) nil)
 
       (global-set-key (kbd "s-7") 'lsp-ui-imenu)
 
       (whitespace-mode -1)
       (add-hook 'before-save-hook 'whitespace-cleanup)
 
-      ;; (define-key org-mode-map (kbd "C-'") nil)
+      ;; disable checkdoc in org-mode source blocks
+      (defun disable-fylcheck-in-org-src-block ()
+        (setq-local flycheck-disabled-checkers '(emacs-lisp emacs-lisp-checkdoc)))
+      (add-hook 'org-src-mode-hook 'disable-fylcheck-in-org-src-block)
 
       (setq auto-save-default nil)
       (setq make-backup-files nil)
