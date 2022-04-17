@@ -363,6 +363,7 @@
                '("\\*scratch\\*"
                  "\\*Messages\\*"
                  "\\*Warnings\\*"
+                 "\\*Backtrace\\*"
                  "\\*flycheck errors\\*"
                  "\\*lsp-log\\*"
                  "Output\\*$"
