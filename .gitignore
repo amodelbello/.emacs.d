@@ -53,6 +53,7 @@ projectile.cache
 recentf
 transient/
 .cache
+forge-database.sqlite
 
 customize.el
 settings.el

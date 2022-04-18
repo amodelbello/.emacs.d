@@ -172,9 +172,19 @@
          :config
          (eyebrowse-mode))
      #+end_src
+** Forge
+   - Repo :: https://github.com/magit/forge
+   - Docs :: https://magit.vc/manual/forge/
+     #+begin_src emacs-lisp
+       (use-package forge
+         :ensure t
+         :after magit)
+     #+end_src
 ** format-all
    - Repo :: https://github.com/lassik/emacs-format-all-the-code
      #+begin_src emacs-lisp
+       ;; ;; Holding off on this for now. Maybe lsp-mode can handle it?
+
        ;; (use-package format-all
        ;;   :ensure t
        ;;   :hook
