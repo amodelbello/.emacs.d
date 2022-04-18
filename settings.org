@@ -1,7 +1,7 @@
 #+title: Custom emacs settings
 #+author: Amo DelBello
 #+description: ""
-#+startup: overview
+#+startup: content
 
 * Packages
 ** Ace Window
@@ -38,7 +38,7 @@
      #+begin_src emacs-lisp
        (use-package avy
          :ensure t
-         :bind (("C-\"" . avy-goto-char)
+         :bind (("C-;" . avy-goto-char)
                 ("C-'" . avy-goto-char-2)
                 :map org-mode-map
                 ("C-'" . nil)))
@@ -260,7 +260,7 @@
      #+begin_src emacs-lisp
        (use-package iedit
          :ensure t
-         :bind ("C-;" . iedit-mode))
+         :bind ("C-\"" . iedit-mode))
      #+end_src
 ** Ivy & friends
    - Repo :: https://github.com/abo-abo/swiper
@@ -276,9 +276,10 @@
          :map ivy-minibuffer-map
          ("M-y" . ivy-next-line))
         :config
-        (setq ivy-use-virtual-buffers t)
-        (setq ivy-count-format "%d/%d ")
-        (setq ivy-display-style 'fancy))
+        (setq enable-recursive-minibuffers t
+              ivy-use-virtual-buffers t
+              ivy-count-format "%d/%d "
+              ivy-display-style 'fancy))
     #+end_src
 *** Counsel
     #+begin_src emacs-lisp
@@ -373,6 +374,7 @@
                '("\\*scratch\\*"
                  "\\*Messages\\*"
                  "\\*Warnings\\*"
+                 "\\*Completions\\*"
                  "\\*Backtrace\\*"
                  "\\*flycheck errors\\*"
                  "\\*lsp-log\\*"
@@ -683,8 +685,10 @@
     #+end_src
 ** Spelling
     #+begin_src emacs-lisp
-    (dolist (hook '(text-mode-hook))
-      (add-hook hook (lambda () (flyspell-mode 1))))
+      (dolist (hook '(text-mode-hook))
+        (add-hook hook (lambda ()
+                         (flyspell-mode 1)
+                         (define-key flyspell-mode-map (kbd "C-;") nil))))
     #+end_src
 ** Misc
     #+begin_src emacs-lisp
