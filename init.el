@@ -7,9 +7,9 @@
 
 (setq package-enable-at-startup nil)
 (add-to-list 'package-archives
-	     '("melpa" . "https://melpa.org/packages/"))
+             '("melpa" . "https://melpa.org/packages/"))
 (add-to-list 'package-archives
- 	     '("gnu" . "https://elpa.gnu.org/packages/"))
+             '("gnu" . "https://elpa.gnu.org/packages/"))
 
 (package-initialize)
 
@@ -28,3 +28,4 @@
 (unless (file-exists-p custom-file)
   (write-region "" "" custom-file))
 (load-file custom-file)
+(put 'narrow-to-region 'disabled nil)

@@ -274,12 +274,16 @@
         (("C-x b" . ivy-switch-buffer)
          ("C-c C-r" . ivy-resume)
          :map ivy-minibuffer-map
-         ("M-y" . ivy-next-line))
+         ("M-y" . ivy-next-line)
+         :map org-mode-map
+         ("C-c C-r" . nil))
         :config
         (setq enable-recursive-minibuffers t
               ivy-use-virtual-buffers t
               ivy-count-format "%d/%d "
-              ivy-display-style 'fancy))
+              ivy-display-style 'fancy)
+        (use-package ivy-hydra
+          :ensure t))
     #+end_src
 *** Counsel
     #+begin_src emacs-lisp
@@ -297,6 +301,7 @@
          ("C-c g" . counsel-git) ; will override the keybinding for `magit-file-dispatch'
          ("C-c j" . counsel-git-grep)
          ("C-c a" . counsel-ag)
+         ("C-c t" . counsel-load-theme)
          ("C-x l" . counsel-locate)
          ("M-y" . counsel-yank-pop)
          ("M-x" . counsel-M-x)
