@@ -124,7 +124,7 @@
        (use-package drag-stuff
          :ensure t
          :bind (("<M-up>" . drag-stuff-up)
-                ("<M-down>" . drag-stuff-down))
+              ("<M-down>" . drag-stuff-down))
          :config
          (drag-stuff-global-mode +1)
          (drag-stuff-define-keys))
@@ -196,9 +196,9 @@
        ;;   (custom-set-variables
        ;;    '(format-all-formatters
        ;;      (quote (("JavaScript" prettier)
-       ;;              ("TypeScript" prettier)
-       ;;              ("JSON" prettier)
-       ;;              ("JSON5" prettier))))))
+       ;;            ("TypeScript" prettier)
+       ;;            ("JSON" prettier)
+       ;;            ("JSON5" prettier))))))
      #+end_src
 ** Git time machine
    - Repo :: https://github.com/emacsmirror/git-timemachine
@@ -219,9 +219,9 @@
    - Repo :: https://github.com/flycheck/flycheck
    - Docs :: https://www.flycheck.org/en/latest/
      #+begin_src emacs-lisp
-     (use-package flycheck
-       :ensure t
-       :init (global-flycheck-mode))
+       (use-package flycheck
+         :ensure t
+         :init (global-flycheck-mode))
      #+end_src
 ** ibuffer
    - Docs :: https://www.emacswiki.org/emacs/IbufferMode
@@ -229,28 +229,28 @@
        (global-set-key (kbd "C-x C-b") 'ibuffer)
        (setq ibuffer-saved-filter-groups
              (quote (("default"
-                     ("org" (mode . org-mode))
-                     ("web" (or (mode . web-mode) (mode . js2-mode)))
-                     ("shell" (or (mode . eshell-mode) (mode . shell-mode)))
-                     ("programming" (or
-                                     (mode . emacs-lisp-mode)
-                                     (mode . lisp-mode)
-                                     (mode . clojure-mode)
-                                     (mode . clojurescript-mode)
-                                     (mode . python-mode)
-                                     (mode . c-mode)
-                                     (mode . c++-mode)))
-                     ("text" (mode . text-mode))
-                     ("magit" (mode . magit-mode))
-                     ("dired" (mode . dired-mode))
-                     ("emacs" (or
-                               (name . "^\\*scratch\\*$")
-                               (name . "^\\*Warnings\\*$")
-                               (name . "^\\*Messages\\*$")))))))
+                   ("org" (mode . org-mode))
+                   ("web" (or (mode . web-mode) (mode . js2-mode)))
+                   ("shell" (or (mode . eshell-mode) (mode . shell-mode)))
+                   ("programming" (or
+                                   (mode . emacs-lisp-mode)
+                                   (mode . lisp-mode)
+                                   (mode . clojure-mode)
+                                   (mode . clojurescript-mode)
+                                   (mode . python-mode)
+                                   (mode . c-mode)
+                                   (mode . c++-mode)))
+                   ("text" (mode . text-mode))
+                   ("magit" (mode . magit-mode))
+                   ("dired" (mode . dired-mode))
+                   ("emacs" (or
+                             (name . "^\\*scratch\\*$")
+                             (name . "^\\*Warnings\\*$")
+                             (name . "^\\*Messages\\*$")))))))
        (add-hook 'ibuffer-mode-hook
-                 (lambda ()
-                   (ibuffer-auto-mode 1)
-                   (ibuffer-switch-to-saved-filter-groups "default")))
+               (lambda ()
+                 (ibuffer-auto-mode 1)
+                 (ibuffer-switch-to-saved-filter-groups "default")))
 
        ;; Don't show filter groups if there are no buffers in that group
        (setq ibuffer-show-empty-filter-groups nil)
@@ -421,25 +421,25 @@
    - Repo :: https://github.com/fxbois/web-mode
    - Docs :: https://web-mode.org/
      #+begin_src emacs-lisp
-              ;; (defun my-web-mode-hook ()
-              ;;   "Hooks for Web mode."
-              ;;   (setq web-mode-markup-indent-offset 2)
-              ;;   (setq web-mode-code-indent-offset 2)
-              ;;   (setq web-mode-css-indent-offset 2))
+       ;; (defun my-web-mode-hook ()
+       ;;   "Hooks for Web mode."
+       ;;   (setq web-mode-markup-indent-offset 2)
+       ;;   (setq web-mode-code-indent-offset 2)
+       ;;   (setq web-mode-css-indent-offset 2))
 
-              (use-package web-mode
-                :ensure t
-                ;;         :hook (web-mode . my-web-mode-hook)
-                :custom
-                (setq web-mode-markup-indent-offset 2)
-                (setq web-mode-code-indent-offset 2)
-                (setq web-mode-css-indent-offset 2)
-                :mode (("\\.js\\'" . web-mode)
-                       ("\\.jsx\\'" .  web-mode)
-                       ("\\.ts\\'" . web-mode)
-                       ("\\.tsx\\'" . web-mode)
-                       ("\\.html\\'" . web-mode))
-                :commands web-mode)
+       (use-package web-mode
+         :ensure t
+         ;;         :hook (web-mode . my-web-mode-hook)
+         :custom
+         (setq web-mode-markup-indent-offset 2)
+         (setq web-mode-code-indent-offset 2)
+         (setq web-mode-css-indent-offset 2)
+         :mode (("\\.js\\'" . web-mode)
+                ("\\.jsx\\'" .  web-mode)
+                ("\\.ts\\'" . web-mode)
+                ("\\.tsx\\'" . web-mode)
+                ("\\.html\\'" . web-mode))
+         :commands web-mode)
      #+end_src
 ** which-key
    - Repo :: https://github.com/justbur/emacs-which-key
@@ -528,7 +528,7 @@
          pip3 install 'python-lsp-server[all]'
        #+end_src
        #+begin_src emacs-lisp
-         (setq lsp-pylsp-plugins-autopep8-enabled t)
+         (setq lsp-pylsp-plugins-flake8-enabled t)
        #+end_src
 **** pyvenv
      - Repo :: https://github.com/jorgenschaefer/pyvenv
@@ -549,8 +549,8 @@
        #+end_src
 **** Config
      #+begin_src emacs-lisp
-       (setq js-indent-level 2)
-       (setq typescript-indent-level 2)
+       ;; (setq js-indent-level 2)
+       ;; (setq typescript-indent-level 2)
      #+end_src
 **** prettier-js
      - Repo :: https://github.com/prettier/prettier-emacs
@@ -619,26 +619,6 @@
          :config
          (load-theme 'spacemacs-light t))
      #+end_src
-** Modus Themes
-   - Repo :: https://github.com/protesilaos/modus-themes
-   - Docs :: https://protesilaos.com/emacs/modus-themes
-     #+begin_src emacs-lisp
-       (use-package modus-themes
-         :ensure t
-         :config
-         ;; Add all your customizations prior to loading the themes
-         (setq modus-themes-italic-constructs t
-               modus-themes-bold-constructs nil
-               modus-themes-region '(bg-only no-extend))
-
-         ;; ;; Load the theme files before enabling a theme
-         ;; (modus-themes-load-themes)
-         ;; :config
-         ;; ;; Load the theme of your choice:
-         ;; (modus-themes-load-operandi) ;; OR (modus-themes-load-vivendi)
-         ;; :bind ("<f5>" . modus-themes-toggle)
-       )
-     #+end_src
 * Config
 ** Quick Open
     #+begin_src emacs-lisp
@@ -696,6 +676,8 @@
       (fset 'yes-or-no-p 'y-or-n-p)
       (tool-bar-mode -1)
       (blink-cursor-mode 0)
+      (electric-pair-mode 1)
+      (delete-selection-mode 1)
 
       (recentf-mode 1)
       (setq recentf-max-menu-items 25)
