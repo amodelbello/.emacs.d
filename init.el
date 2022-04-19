@@ -7,9 +7,9 @@
 
 (setq package-enable-at-startup nil)
 (add-to-list 'package-archives
-             '("melpa" . "https://melpa.org/packages/"))
+             '("melpa" . "https://melpa.org/packages/") t)
 (add-to-list 'package-archives
-             '("gnu" . "https://elpa.gnu.org/packages/"))
+             '("gnu" . "https://elpa.gnu.org/packages/") t)
 
 (package-initialize)
 

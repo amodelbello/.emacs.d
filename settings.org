@@ -278,6 +278,7 @@
          :map org-mode-map
          ("C-c C-r" . nil))
         :config
+        (ivy-mode)
         (setq enable-recursive-minibuffers t
               ivy-use-virtual-buffers t
               ivy-count-format "%d/%d "
