@@ -310,7 +310,6 @@
          :map minibuffer-local-map
            ("C-r" . counsl-minibuffer-history)))
     #+end_src
-
 *** Swiper
     #+begin_src emacs-lisp
       (use-package swiper
@@ -321,6 +320,31 @@
          :map read-expression-map
          ("C-r" . counsel-expression-history)))
     #+end_src
+*** Counsel Projectile
+    - Repo :: https://github.com/ericdanan/counsel-projectile
+      #+begin_src emacs-lisp
+        (use-package counsel-projectile
+          :ensure t
+          :config
+          (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map))
+      #+end_src
+*** All the icons ivy-rich
+    - Repo :: https://github.com/seagle0128/all-the-icons-ivy-rich
+      #+begin_src emacs-lisp
+        (use-package all-the-icons-ivy-rich
+          :ensure t
+          :config
+          (all-the-icons-ivy-rich-mode 1)
+          (setq all-the-icons-ivy-rich-color-icon t))
+      #+end_src
+** ivy-rich
+   - Repo :: https://github.com/Yevgnen/ivy-rich
+     #+begin_src emacs-lisp
+       (use-package ivy-rich
+         :ensure t
+         :config
+         (ivy-rich-mode 1))
+     #+end_src
 ** json-mode
    - Repo :: https://github.com/joshwnj/json-mode
      #+begin_src emacs-lisp
