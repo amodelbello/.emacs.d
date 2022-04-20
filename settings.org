@@ -410,6 +410,12 @@
          :ensure t
          :hook (prog-mode . rainbow-delimiters-mode))
      #+end_src
+** Try
+   - Repo :: https://github.com/larstvei/Try
+     #+begin_src emacs-lisp
+       (use-package try
+               :ensure t)
+     #+end_src
 ** undo-tree
    - Repo :: https://github.com/apchamberlain/undo-tree.el
    - Docs :: https://www.emacswiki.org/emacs/UndoTree
@@ -684,10 +690,18 @@
       (blink-cursor-mode 0)
       (electric-pair-mode 1)
       (delete-selection-mode 1)
+      (global-hl-line-mode t)
 
       (recentf-mode 1)
       (setq recentf-max-menu-items 25)
       (setq recentf-max-saved-items 25)
+
+      ;; Set the right mode when you create a buffer
+      (setq-default major-mode
+                    (lambda () (if buffer-file-name
+                                (fundamental-mode)
+                                  (let ((buffer-file-name (buffer-name)))
+                                    (set-auto-mode)))))
 
       ;; Blink modeline instead of ring bell
       (setq ring-bell-function
