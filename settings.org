@@ -180,26 +180,6 @@
          :ensure t
          :after magit)
      #+end_src
-** format-all
-   - Repo :: https://github.com/lassik/emacs-format-all-the-code
-     #+begin_src emacs-lisp
-       ;; ;; Holding off on this for now. Maybe lsp-mode can handle it?
-
-       ;; (use-package format-all
-       ;;   :ensure t
-       ;;   :hook
-       ;;   ((web-mode . format-all-mode)
-       ;;    ;(format-all-mode-hook . format-all-ensure-formatter)
-       ;;    )
-       ;;   :config
-       ;;   (format-all-mode +1)
-       ;;   (custom-set-variables
-       ;;    '(format-all-formatters
-       ;;      (quote (("JavaScript" prettier)
-       ;;            ("TypeScript" prettier)
-       ;;            ("JSON" prettier)
-       ;;            ("JSON5" prettier))))))
-     #+end_src
 ** Git time machine
    - Repo :: https://github.com/emacsmirror/git-timemachine
      #+begin_src emacs-lisp
@@ -337,15 +317,6 @@
           (all-the-icons-ivy-rich-mode 1)
           (setq all-the-icons-ivy-rich-color-icon t))
       #+end_src
-*** Counsel Projectile
-    - Repo :: https://github.com/ericdanan/counsel-projectile
-      #+begin_src emacs-lisp
-        (use-package counsel-projectile
-          :ensure t
-          :config
-          (counsel-projectile-mode)
-          (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map))
-      #+end_src
 ** json-mode
    - Repo :: https://github.com/joshwnj/json-mode
      #+begin_src emacs-lisp
@@ -404,7 +375,9 @@
          (setq popper-reference-buffers
                '("\\*scratch\\*"
                  "\\*Messages\\*"
+                 "\\*format-all-errors\\*"
                  "\\*Warnings\\*"
+                 "\\*Compile-Log\\*"
                  "\\*Completions\\*"
                  "\\*Backtrace\\*"
                  "\\*flycheck errors\\*"
@@ -516,6 +489,9 @@
          (setq lsp-keymap-prefix "C-c l")
          (setq lsp-ui-sideline-show-hover t)
          (setq lsp-ui-sideline-show-code-actions t)
+         (setq lsp-modeline-diagnostics-enable t)
+         (setq lsp-modeline-code-actions-mode t)
+         (setq lsp-modeline-diagnostics-scope :workspace)
          :commands lsp-deferred)
 
        (use-package lsp-ui
@@ -530,32 +506,44 @@
          :ensure t
          :commands lsp-ivy-workspace-symbol)
 
-       (add-hook 'python-mode-hook
-                 (lambda ()
-                   (add-hook 'before-save-hook 'lsp-format-buffer nil 'make-it-local)))
+       ;; I don't use treemacs but this is necessary for
+       ;; icons to show up in the breadcrumbs for some reason
+       (use-package lsp-treemacs
+         :ensure t
+         :commands lsp-treemacs-errors-list)
 
        ;; optionally if you want to use debugger
-       ; (use-package dap-mode)
+                                               ; (use-package dap-mode)
        ;; (use-package dap-LANGUAGE) to load the dap adapter for your language
+     #+end_src
+** format-all
+   - Repo :: https://github.com/lassik/emacs-format-all-the-code
+     #+begin_src emacs-lisp
+       (use-package format-all
+         :ensure t
+         :bind
+         (("C-c C-f" . format-all-buffer))
+         :hook
+         ((python-mode . format-all-mode)
+          (emacs-lisp-mode . format-all-mode)
+          (format-all-mode-hook . format-all-ensure-formatter))
+         :config
+         (custom-set-variables
+          '(format-all-formatters
+            (quote (("Emacs Lisp" emacs-lisp)
+                    ("Python" black))))))
 
-       (setq lsp-modeline-diagnostics-enable t)
-       (setq lsp-modeline-code-actions-mode t)
 
-       ;; (setq lsp-before-save-edits nil)
-       ;; (setq lsp-enable-on-type-formatting nil)
-       ;; (setq lsp-enable-indentation nil)
-       ;; (setq lsp-enable-relative-indentation nil)
+       ;; Hook examples that might be needed later:
 
-       ;; (setq lsp-typescript-format-enable nil)
-       ;; (setq lsp-typescript-format-indent-size "2")
-       ;; (setq lsp-typescript-format-tab-size "2")
-       ;; (setq lsp-typescript-format-base-indent-size "2")
+       ;; for :hook
+       ;; (emacs-lisp-mode . (lambda ()
+       ;;                      (add-hook 'before-save-hook 'format-all-buffer nil 'make-it-local)))
 
-
-       (with-eval-after-load 'lsp-mode
-         ;; :global/:workspace/:file
-         (setq lsp-modeline-diagnostics-scope :workspace)
-         (setq lsp-modeline-code-actions-segments '(icon)))
+       ;; normal way
+       ;; (add-hook 'emacs-lisp-mode-hook
+       ;;           (lambda ()
+       ;;             (add-hook 'before-save-hook 'format-all-buffer nil 'make-it-local)))
      #+end_src
 ** Languages
 *** Python
@@ -566,6 +554,7 @@
        #+end_src
        #+begin_src emacs-lisp
          (setq lsp-pylsp-plugins-flake8-enabled t)
+         (setq lsp-pylsp-plugins-flake8-ignore '(D100 D101 D102 E501))
        #+end_src
 **** pyvenv
      - Repo :: https://github.com/jorgenschaefer/pyvenv
