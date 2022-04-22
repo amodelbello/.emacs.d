@@ -486,12 +486,11 @@
                 (web-mode . lsp-deferred)
                 (lsp-mode . lsp-enable-which-key-integration))
          :config
-         (setq lsp-keymap-prefix "C-c l")
-         (setq lsp-ui-sideline-show-hover t)
-         (setq lsp-ui-sideline-show-code-actions t)
-         (setq lsp-modeline-diagnostics-enable t)
-         (setq lsp-modeline-code-actions-mode t)
-         (setq lsp-modeline-diagnostics-scope :workspace)
+         (setq lsp-keymap-prefix "C-c l"
+               lsp-modeline-diagnostics-enable t
+               lsp-modeline-code-actions-mode t
+               lsp-headerline-breadcrumb-enable t
+               lsp-modeline-diagnostics-scope :workspace)
          :commands lsp-deferred)
 
        (use-package lsp-ui
@@ -500,6 +499,9 @@
                       ("s-7" . lsp-ui-imenu)
                       ([remap xref-find-definitions] . lsp-ui-peek-find-definitions)
                       ([remap xref-find-references] . lsp-ui-peek-find-references)))
+         :config
+         (setq lsp-ui-sideline-show-hover t
+               lsp-ui-sideline-show-code-actions t)
          :commands lsp-ui-mode)
 
        (use-package lsp-ivy
