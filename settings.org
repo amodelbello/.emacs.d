@@ -1,6 +1,6 @@
 #+title: Custom emacs settings
 #+author: Amo DelBello
-#+description: ""
+#+description: "NO! The beard stays. You go."
 #+startup: content
 
 * Packages
@@ -143,8 +143,14 @@
    #+begin_src emacs-lisp
      (use-package evil
        :ensure t
+       :bind
+       :init
+       (setq evil-disable-insert-state-bindings t
+             evil-toggle-key "")
        :config
-       (evil-mode -1))
+       (setq evil-insert-state-cursor '(box "#824BB9")  ;; purple for emacs
+             evil-normal-state-cursor '(box "#41903F")) ;; green for vim
+       (evil-mode))
    #+end_src
 ** exec-path-from-shell
    - Repo :: https://github.com/purcell/exec-path-from-shell
@@ -671,23 +677,6 @@
          (load-theme 'spacemacs-light t))
      #+end_src
 * Config
-** Quick Open
-    #+begin_src emacs-lisp
-      ;; Open settings.org (this file)
-      (global-set-key (kbd "\e\es")
-                      (lambda ()
-                        (interactive)
-                        (find-file "~/.emacs.d/settings.org")))
-
-      ;; Open theme chooser
-      (global-set-key (kbd "\e\et") 'customize-themes)
-
-      ;; Set cursor color to magenta
-      (global-set-key (kbd "\e\ec")
-                      (lambda ()
-                        (interactive)
-                        (set-cursor-color 'magenta)))
-    #+end_src
 ** Font Size
     #+begin_src emacs-lisp
       (set-frame-font "DejaVu Sans Mono-14" nil t)
@@ -716,10 +705,43 @@
     #+end_src
 ** Spelling
     #+begin_src emacs-lisp
+      (setq-default ispell-program-name "/usr/local/bin/aspell")
+
       (dolist (hook '(text-mode-hook))
         (add-hook hook (lambda ()
                          (flyspell-mode 1)
                          (define-key flyspell-mode-map (kbd "C-;") nil))))
+    #+end_src
+** Custom Bindings
+*** Set prefix key ("C-z")
+    #+begin_src emacs-lisp
+     ;; "C-z" is the custom prefix key
+     (define-prefix-command 'z-map)
+     (global-set-key (kbd "C-z") 'z-map)
+    #+end_src
+*** Toggle evil mode
+    #+begin_src emacs-lisp
+      (define-key z-map (kbd "z") 'evil-mode)
+    #+end_src
+*** Open settings.org (this file)
+    #+begin_src emacs-lisp
+      (defun open-settings-file ()
+        "Open settings.org"
+        (interactive)
+        (find-file "~/.emacs.d/settings.org"))
+      (define-key z-map (kbd "s") 'open-settings-file)
+    #+end_src
+*** Open customize-themes
+    #+begin_src emacs-lisp
+      (define-key z-map (kbd "t") 'customize-themes)
+    #+end_src
+*** Set cursor to magenta
+    #+begin_src emacs-lisp
+      (defun set-cursor-to-magenta ()
+        "Because sometimes you just gotta set the cursor color to magenta"
+        (interactive)
+        (set-cursor-color 'magenta))
+      (define-key z-map (kbd "c") 'set-cursor-color-to-magenta)
     #+end_src
 ** Misc
     #+begin_src emacs-lisp
@@ -730,8 +752,8 @@
       (electric-pair-mode 1)
       (delete-selection-mode 1)
       (global-hl-line-mode t)
-
       (recentf-mode 1)
+      (setq scroll-step 1)
       (setq recentf-max-menu-items 25)
       (setq recentf-max-saved-items 25)
 
@@ -759,13 +781,14 @@
 
       (setq inferior-lisp-program "/usr/local/bin/sbcl")
 
-      ;; Spell check
-      (setq-default ispell-program-name "/usr/local/bin/aspell")
-
       ;; allow remembering risky variables
       ;; (defun risky-local-variable-p (sym &optional _ignored) nil)
 
+      ;; show imenu
       (global-set-key (kbd "s-7") 'lsp-ui-imenu)
+
+      ;; move cursor to middle of window
+      (global-set-key (kbd "C-i") 'move-to-window-line-top-bottom)
 
       (whitespace-mode -1)
       (add-hook 'before-save-hook 'whitespace-cleanup)
