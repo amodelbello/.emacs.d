@@ -262,7 +262,9 @@
         (setq enable-recursive-minibuffers t
               ivy-use-virtual-buffers t
               ivy-count-format "%d/%d "
-              ivy-display-style 'fancy)
+              ivy-display-style 'fancy
+              ivy-re-builders-alist '((swiper . ivy--regex-plus)
+                                      (t . ivy--regex-fuzzy)))
         (use-package ivy-hydra
           :ensure t))
     #+end_src
@@ -316,6 +318,12 @@
           :config
           (all-the-icons-ivy-rich-mode 1)
           (setq all-the-icons-ivy-rich-color-icon t))
+      #+end_src
+*** flx
+    - Repo :: https://github.com/lewang/flx
+      #+begin_src emacs-lisp
+        (use-package flx
+          :ensure t)
       #+end_src
 ** json-mode
    - Repo :: https://github.com/joshwnj/json-mode
@@ -374,14 +382,18 @@
          :init
          (setq popper-reference-buffers
                '("\\*scratch\\*"
-                 "\\*Messages\\*"
                  "\\*format-all-errors\\*"
+                 "\\*lsp-log\\*"
+                 "\\*flycheck errors\\*"
+                 "\\*cider-error\\*"
+                 "\\*cider-doc\\*"
+                 "\\*cider-scratch\\*"
+                 "\\*cider-apropos\\*"
+                 "\\*Messages\\*"
                  "\\*Warnings\\*"
                  "\\*Compile-Log\\*"
                  "\\*Completions\\*"
                  "\\*Backtrace\\*"
-                 "\\*flycheck errors\\*"
-                 "\\*lsp-log\\*"
                  "Output\\*$"
                  "\\*Async Shell Command\\*"
                  help-mode
@@ -548,6 +560,17 @@
        ;;             (add-hook 'before-save-hook 'format-all-buffer nil 'make-it-local)))
      #+end_src
 ** Languages
+*** Clojure
+**** cider
+     - Repo :: https://github.com/clojure-emacs/cider
+     - Docs :: https://docs.cider.mx/
+       #+begin_src emacs-lisp
+         (use-package cider
+           :ensure t
+           :hook
+           (cider-mode . (lambda ()
+                           (add-hook 'before-save-hook 'cider-format-buffer nil 'make-it-local))))
+       #+end_src
 *** Python
 **** lsp-server
      - Repo :: https://github.com/python-lsp/python-lsp-server
@@ -556,7 +579,7 @@
        #+end_src
        #+begin_src emacs-lisp
          (setq lsp-pylsp-plugins-flake8-enabled t)
-         (setq lsp-pylsp-plugins-flake8-ignore '(D100 D101 D102 E501))
+         (setq lsp-pylsp-plugins-flake8-ignore '('D100 'D101 'D102 'E501))
        #+end_src
 **** pyvenv
      - Repo :: https://github.com/jorgenschaefer/pyvenv
