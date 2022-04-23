@@ -269,8 +269,11 @@
               ivy-use-virtual-buffers t
               ivy-count-format "%d/%d "
               ivy-display-style 'fancy
-              ivy-re-builders-alist '((swiper . ivy--regex-plus)
-                                      (t . ivy--regex-fuzzy)))
+              ivy-re-builders-alist '((counsel-M-x . ivy--regex-fuzzy)
+                                      (counsel-describe-variable . ivy--regex-fuzzy)
+                                      (counsel-describe-function . ivy--regex-fuzzy)
+                                      (swiper-isearch . ivy--regex-plus)
+                                      (t . ivy--regex-plus)))
         (use-package ivy-hydra
           :ensure t))
     #+end_src
