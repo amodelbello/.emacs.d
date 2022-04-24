@@ -501,10 +501,15 @@
        (setq read-process-output-max (* 1024 1024))
        (setq lsp-use-plists t)
 
+       ;; This disables the default lsp checker
+       ;; and falls back to normal flycheck
+       ;; (setq lsp-diagnostics-provider :none)
+
        (use-package lsp-mode
          :ensure t
          :hook ((python-mode . lsp-deferred)
                 (web-mode . lsp-deferred)
+                (go-mode . lsp-deferred)
                 (lsp-mode . lsp-enable-which-key-integration))
          :config
          (setq lsp-keymap-prefix "C-c l"
@@ -587,8 +592,17 @@
          pip3 install 'python-lsp-server[all]'
        #+end_src
        #+begin_src emacs-lisp
+         ;; None of these options seem to work at all...
+
+         ;; (setq lsp-pylsp-plugins-pylint-enabled t)
+         ;; (setq lsp-pylsp-plugins-pylint-args ["--rcfile=~/.pylintrc"])
+
          (setq lsp-pylsp-plugins-flake8-enabled t)
-         (setq lsp-pylsp-plugins-flake8-ignore '('D100 'D101 'D102 'E501))
+         (setq lsp-pylsp-plugins-flake8-config "~/.flake8")
+         ;; (setq lsp-pylsp-plugins-flake8-ignore ["D100" "D101" "D102" "E501"])
+
+         ;; (setq flycheck-flake8rc "~/.flake8")
+
        #+end_src
 **** pyvenv
      - Repo :: https://github.com/jorgenschaefer/pyvenv
@@ -642,6 +656,26 @@
                                       (enable-minor-mode
                                        '("\\.tsx?\\'" . prettier-js-mode))))
        #+end_src
+*** Go
+    - Repo :: https://github.com/dominikh/go-mode.el
+    #+begin_src emacs-lisp
+      (use-package go-mode
+        :ensure t
+        :hook
+        ((go-mode . lsp-go-install-config))
+        :config
+        (add-to-list 'auto-mode-alist '("\\.go\\'" . go-mode)))
+
+      (defun lsp-go-install-config ()
+        (add-hook 'before-save-hook #'lsp-format-buffer t t)
+        (add-hook 'before-save-hook #'lsp-organize-imports t t)
+        (setq-default indent-tabs-mode nil)
+        (setq-default tab-width 2)
+        (setq indent-line-function 'insert-tab)
+        ;; (setq-default tab-width 2)
+        ;; (setq indent-tabs-mode 1)
+        )
+    #+end_src
 * Appearance
    #+begin_src emacs-lisp
      (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
