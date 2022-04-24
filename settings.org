@@ -30,8 +30,9 @@
      #+begin_src emacs-lisp
        (use-package atomic-chrome
          :ensure t
-         :config (atomic-chrome-start-server))
-       (setq atomic-chrome-buffer-open-style 'frame)
+         :config
+         (atomic-chrome-start-server)
+         (setq atomic-chrome-buffer-open-style 'frame))
      #+end_src
 ** Avy
    - Repo :: [[https://github.com/abo-abo/avy]]
@@ -50,8 +51,8 @@
          :ensure t
          :config
          (beacon-mode 1)
-         (setq beacon-blink-duration 0.5)
-         (setq beacon-blink-delay 0.1))
+         (setq beacon-blink-duration 0.5
+               beacon-blink-delay 0.1))
      #+end_src
 ** buffer-move
    - Repo :: https://github.com/lukhas/buffer-move
@@ -72,17 +73,18 @@
          :ensure t
          :config
          (global-company-mode)
-         (setq company-idle-delay 0.4)
-         (setq company-show-numbers t)
-         (setq company-tooltip-limit 10)
-         (setq company-minimum-prefix-length 2)
-         (setq company-tooltip-align-annotations t)
-         (setq company-tooltip-flip-when-above nil)
+         (setq company-idle-delay 0.4
+               company-show-numbers t
+               company-tooltip-limit 10
+               company-minimum-prefix-length 2
+               company-tooltip-align-annotations t
+               company-tooltip-flip-when-above nil)
          (custom-set-variables
           '(company-quick-access-modifier 'super))
          (use-package company-box
            :ensure t
-           :hook (company-mode . company-box-mode)))
+           :hook
+           (company-mode . company-box-mode)))
      #+end_src
 ** Crux
    - Repo :: https://github.com/bbatsov/crux
@@ -372,13 +374,13 @@
      #+begin_src emacs-lisp
        (use-package paredit
          :ensure t
-         :config
-         (add-hook 'lisp-mode-hook 'paredit-mode)
-         (add-hook 'emacs-lisp-mode-hook 'paredit-mode)
-         (add-hook 'clojure-mode-hook 'paredit-mode)
-         (add-hook 'clojurescript-mode-hook 'paredit-mode)
-         (add-hook 'clojurec-mode-hook 'paredit-mode)
-         (add-hook 'cider-repl-mode-hook 'paredit-mode))
+         :hook
+         ((lisp-mode . paredit-mode)
+          (emacs-lisp-mode . paredit-mode)
+          (clojure-mode . paredit-mode)
+          (clojurescript-mode . paredit-mode)
+          (clojurec-mode . paredit-mode)
+          (cider-repl-mode . paredit-mode)))
      #+end_src
 ** Popper
    - Repo :: https://github.com/karthink/popper
@@ -444,27 +446,20 @@
          :config
          (global-undo-tree-mode)
          (setq undo-tree-history-directory-alist
-             `((".*" . ,temporary-file-directory)))
-         (setq undo-tree-auto-save-history t)
+               `((".*" . ,temporary-file-directory))
+               (undo-tree-auto-save-history t))
          :diminish (undo-tree-mode))
      #+end_src
 ** web-mode
    - Repo :: https://github.com/fxbois/web-mode
    - Docs :: https://web-mode.org/
      #+begin_src emacs-lisp
-       ;; (defun my-web-mode-hook ()
-       ;;   "Hooks for Web mode."
-       ;;   (setq web-mode-markup-indent-offset 2)
-       ;;   (setq web-mode-code-indent-offset 2)
-       ;;   (setq web-mode-css-indent-offset 2))
-
        (use-package web-mode
          :ensure t
-         ;;         :hook (web-mode . my-web-mode-hook)
          :custom
-         (setq web-mode-markup-indent-offset 2)
-         (setq web-mode-code-indent-offset 2)
-         (setq web-mode-css-indent-offset 2)
+         (setq web-mode-markup-indent-offset 2
+               web-mode-code-indent-offset 2
+               web-mode-css-indent-offset 2)
          :mode (("\\.js\\'" . web-mode)
                 ("\\.jsx\\'" .  web-mode)
                 ("\\.ts\\'" . web-mode)
@@ -497,9 +492,9 @@
    - Repo :: https://github.com/emacs-lsp/lsp-mode
    - Docs :: https://emacs-lsp.github.io/lsp-mode
      #+begin_src emacs-lisp
-       (setq gc-cons-threshold 100000000)
-       (setq read-process-output-max (* 1024 1024))
-       (setq lsp-use-plists t)
+       (setq gc-cons-threshold 100000000
+             read-process-output-max (* 1024 1024)
+             lsp-use-plists t)
 
        ;; This disables the default lsp checker
        ;; and falls back to normal flycheck
@@ -593,15 +588,9 @@
        #+end_src
        #+begin_src emacs-lisp
          ;; None of these options seem to work at all...
-
-         ;; (setq lsp-pylsp-plugins-pylint-enabled t)
-         ;; (setq lsp-pylsp-plugins-pylint-args ["--rcfile=~/.pylintrc"])
-
-         (setq lsp-pylsp-plugins-flake8-enabled t)
-         (setq lsp-pylsp-plugins-flake8-config "~/.flake8")
-         ;; (setq lsp-pylsp-plugins-flake8-ignore ["D100" "D101" "D102" "E501"])
-
-         ;; (setq flycheck-flake8rc "~/.flake8")
+         (setq lsp-pylsp-plugins-flake8-enabled t
+               lsp-pylsp-plugins-flake8-config "~/.flake8"
+               lsp-pylsp-plugins-flake8-ignore ["D100" "D101" "D102" "E501"])
 
        #+end_src
 **** pyvenv
@@ -671,10 +660,7 @@
         (add-hook 'before-save-hook #'lsp-organize-imports t t)
         (setq-default indent-tabs-mode nil)
         (setq-default tab-width 2)
-        (setq indent-line-function 'insert-tab)
-        ;; (setq-default tab-width 2)
-        ;; (setq indent-tabs-mode 1)
-        )
+        (setq indent-line-function 'insert-tab))
     #+end_src
 * Appearance
    #+begin_src emacs-lisp
@@ -717,10 +703,10 @@
 ** Font Size
     #+begin_src emacs-lisp
       (set-frame-font "DejaVu Sans Mono-14" nil t)
-      (setq-default line-spacing 0.3)
-      (setq-default fill-column 80)
-      (setq-default sentence-end-double-space nil)
-      (setq-default whitespace-line-column 110)
+      (setq-default line-spacing 0.3
+                    fill-column 80
+                    sentence-end-double-space nil
+                    whitespace-line-column 110)
 
       ;; Because the line-spacing above messes up calc
       (add-hook 'calc-mode-hook
@@ -732,13 +718,10 @@
     #+end_src
 ** Window Things
     #+begin_src emacs-lisp
-      (setq-default global-tab-line-mode nil)
-      (setq-default tab-line-mode nil)
-      (setq-default tab-bar-mode nil)
+      (setq-default global-tab-line-mode nil
+                    tab-line-mode nil
+                    tab-bar-mode nil)
       (toggle-scroll-bar -1)
-
-      ; easily shrink window vertically
-      (global-set-key (kbd "C-x %") (kbd "C-u -1 C-x ^"))
     #+end_src
 ** Spelling
     #+begin_src emacs-lisp
@@ -780,6 +763,18 @@
         (set-cursor-color 'magenta))
       (define-key z-map (kbd "c") 'set-cursor-color-to-magenta)
     #+end_src
+*** Shrink window vertically
+    #+begin_src emacs-lisp
+      (global-set-key (kbd "C-x %") (kbd "C-u -1 C-x ^"))
+    #+end_src
+*** Show imenu
+    #+begin_src emacs-lisp
+      (global-set-key z-map (kbd "i") 'lsp-ui-imenu)
+    #+end_src
+*** Move cursor to middle of window
+    #+begin_src emacs-lisp
+      (global-set-key (kbd "C-i") 'move-to-window-line-top-bottom)
+    #+end_src
 ** Misc
     #+begin_src emacs-lisp
       (desktop-save-mode 1)
@@ -790,54 +785,43 @@
       (delete-selection-mode 1)
       (global-hl-line-mode t)
       (recentf-mode 1)
-      (setq scroll-step 1)
-      (setq recentf-max-menu-items 25)
-      (setq recentf-max-saved-items 25)
+      (whitespace-mode -1)
+
+      (setq scroll-step 1
+            recentf-max-menu-items 25
+            recentf-max-saved-items 25
+            save-interprogram-paste-before-kill t
+            auto-mode-alist (append '(("\\.cl$" . lisp-mode))
+                                    auto-mode-alist)
+            inferior-lisp-program "/usr/local/bin/sbcl"
+            auto-save-default nil
+            make-backup-files nil
+            create-lockfiles nil)
+
+      (setq-default indent-tabs-mode nil
+                    visual-line-mode t
+                    org-catch-invisible-edits 'show)
+
+      (add-hook 'before-save-hook 'whitespace-cleanup)
 
       ;; Set the right mode when you create a buffer
       (setq-default major-mode
                     (lambda () (if buffer-file-name
-                                (fundamental-mode)
-                                  (let ((buffer-file-name (buffer-name)))
-                                    (set-auto-mode)))))
+                                   (fundamental-mode)
+                                 (let ((buffer-file-name (buffer-name)))
+                                   (set-auto-mode)))))
 
       ;; Blink modeline instead of ring bell
       (setq ring-bell-function
-              (lambda ()
-                (let ((orig-fg (face-foreground 'mode-line)))
-                  (set-face-foreground 'mode-line "Magenta")
-                  (run-with-idle-timer 0.1 nil
-                                       (lambda (fg) (set-face-foreground 'mode-line fg))
-                                       orig-fg))))
-
-      (setq-default visual-line-mode t)
-      (setq-default org-catch-invisible-edits 'show)
-      (setq save-interprogram-paste-before-kill t)
-      (setq auto-mode-alist (append '(("\\.cl$" . lisp-mode))
-                                        auto-mode-alist))
-
-      (setq inferior-lisp-program "/usr/local/bin/sbcl")
-
-      ;; allow remembering risky variables
-      ;; (defun risky-local-variable-p (sym &optional _ignored) nil)
-
-      ;; show imenu
-      (global-set-key (kbd "s-7") 'lsp-ui-imenu)
-
-      ;; move cursor to middle of window
-      (global-set-key (kbd "C-i") 'move-to-window-line-top-bottom)
-
-      (whitespace-mode -1)
-      (add-hook 'before-save-hook 'whitespace-cleanup)
+            (lambda ()
+              (let ((orig-fg (face-foreground 'mode-line)))
+                (set-face-foreground 'mode-line "Magenta")
+                (run-with-idle-timer 0.1 nil
+                                     (lambda (fg) (set-face-foreground 'mode-line fg))
+                                     orig-fg))))
 
       ;; disable checkdoc in org-mode source blocks
       (defun disable-fylcheck-in-org-src-block ()
         (setq-local flycheck-disabled-checkers '(emacs-lisp emacs-lisp-checkdoc)))
       (add-hook 'org-src-mode-hook 'disable-fylcheck-in-org-src-block)
-
-      (setq auto-save-default nil)
-      (setq make-backup-files nil)
-      (setq create-lockfiles nil)
-      (setq-default indent-tabs-mode nil)
-
     #+end_src
