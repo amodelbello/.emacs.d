@@ -445,10 +445,10 @@
          :ensure t
          :config
          (global-undo-tree-mode)
-         (setq undo-tree-history-directory-alist
-               `((".*" . ,temporary-file-directory))
-               (undo-tree-auto-save-history t))
-         :diminish (undo-tree-mode))
+         (setq undo-tree-history-directory-alist `((".*" . ,temporary-file-directory))
+               undo-tree-auto-save-history t)
+         :diminish
+         (undo-tree-mode))
      #+end_src
 ** web-mode
    - Repo :: https://github.com/fxbois/web-mode
@@ -769,11 +769,11 @@
     #+end_src
 *** Show imenu
     #+begin_src emacs-lisp
-      (global-set-key z-map (kbd "i") 'lsp-ui-imenu)
+      (define-key z-map (kbd "i") 'lsp-ui-imenu)
     #+end_src
 *** Move cursor to middle of window
     #+begin_src emacs-lisp
-      (global-set-key (kbd "C-i") 'move-to-window-line-top-bottom)
+      (define-key z-map (kbd "m") 'move-to-window-line-top-bottom)
     #+end_src
 ** Misc
     #+begin_src emacs-lisp
