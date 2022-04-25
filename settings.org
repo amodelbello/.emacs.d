@@ -757,7 +757,7 @@
     #+end_src
 *** Set cursor to magenta
     #+begin_src emacs-lisp
-      (defun set-cursor-to-magenta ()
+      (defun set-cursor-color-to-magenta ()
         "Because sometimes you just gotta set the cursor color to magenta"
         (interactive)
         (set-cursor-color 'magenta))
