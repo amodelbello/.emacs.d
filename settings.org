@@ -188,6 +188,15 @@
          :ensure t
          :after magit)
      #+end_src
+** Flyspell
+   #+begin_src emacs-lisp
+     (setq-default ispell-program-name "/usr/local/bin/aspell")
+
+     (dolist (hook '(text-mode-hook))
+       (add-hook hook (lambda ()
+                        (flyspell-mode 1)
+                        (define-key flyspell-mode-map (kbd "C-;") nil))))
+   #+end_src
 ** Git time machine
    - Repo :: https://github.com/emacsmirror/git-timemachine
      #+begin_src emacs-lisp
@@ -699,129 +708,109 @@
          :config
          (load-theme 'spacemacs-light t))
      #+end_src
-* Config
-** Font Size
-    #+begin_src emacs-lisp
-      (set-frame-font "DejaVu Sans Mono-14" nil t)
-      (setq-default line-spacing 0.3
-                    fill-column 80
-                    sentence-end-double-space nil
-                    whitespace-line-column 110)
+* Custom Bindings
+** Set prefix key ("C-z")
+   #+begin_src emacs-lisp
+    ;; "C-z" is the custom prefix key
+    (define-prefix-command 'z-map)
+    (global-set-key (kbd "C-z") 'z-map)
+   #+end_src
+** Toggle evil mode
+   #+begin_src emacs-lisp
+     (define-key z-map (kbd "z") 'evil-mode)
+   #+end_src
+** Open settings.org (this file)
+   #+begin_src emacs-lisp
+     (defun open-settings-file ()
+       "Open settings.org"
+       (interactive)
+       (find-file "~/.emacs.d/settings.org"))
+     (define-key z-map (kbd "s") 'open-settings-file)
+   #+end_src
+** Open customize-themes
+   #+begin_src emacs-lisp
+     (define-key z-map (kbd "t") 'customize-themes)
+   #+end_src
+** Set cursor to magenta
+   #+begin_src emacs-lisp
+     (defun set-cursor-color-to-magenta ()
+       "Because sometimes you just gotta set the cursor color to magenta"
+       (interactive)
+       (set-cursor-color 'magenta))
+     (define-key z-map (kbd "c") 'set-cursor-color-to-magenta)
+   #+end_src
+** Shrink window vertically
+   #+begin_src emacs-lisp
+     (global-set-key (kbd "C-x %") (kbd "C-u -1 C-x ^"))
+   #+end_src
+** Show imenu
+   #+begin_src emacs-lisp
+     (define-key z-map (kbd "i") 'lsp-ui-imenu)
+   #+end_src
+** Move cursor to middle of window
+   #+begin_src emacs-lisp
+     (define-key z-map (kbd "l") 'move-to-window-line-top-bottom)
+   #+end_src
+* General Configuration
+   #+begin_src emacs-lisp
+     (set-frame-font "DejaVu Sans Mono-14" nil t)
+     (desktop-save-mode 1)
+     (fset 'yes-or-no-p 'y-or-n-p)
+     (tool-bar-mode -1)
+     (blink-cursor-mode 0)
+     (electric-pair-mode 1)
+     (delete-selection-mode 1)
+     (global-hl-line-mode t)
+     (recentf-mode 1)
+     (whitespace-mode -1)
+     (toggle-scroll-bar -1)
 
-      ;; Because the line-spacing above messes up calc
-      (add-hook 'calc-mode-hook
-                (lambda ()
-                  (setq line-spacing 0)))
-      (add-hook 'calc-trail-mode-hook
-                (lambda ()
-                  (setq line-spacing 0)))
-    #+end_src
-** Window Things
-    #+begin_src emacs-lisp
-      (setq-default global-tab-line-mode nil
-                    tab-line-mode nil
-                    tab-bar-mode nil)
-      (toggle-scroll-bar -1)
-    #+end_src
-** Spelling
-    #+begin_src emacs-lisp
-      (setq-default ispell-program-name "/usr/local/bin/aspell")
+     (setq scroll-step 1
+           recentf-max-menu-items 25
+           recentf-max-saved-items 25
+           save-interprogram-paste-before-kill t
+           auto-mode-alist (append '(("\\.cl$" . lisp-mode))
+                                   auto-mode-alist)
+           inferior-lisp-program "/usr/local/bin/sbcl"
+           auto-save-default nil
+           make-backup-files nil
+           create-lockfiles nil)
 
-      (dolist (hook '(text-mode-hook))
-        (add-hook hook (lambda ()
-                         (flyspell-mode 1)
-                         (define-key flyspell-mode-map (kbd "C-;") nil))))
-    #+end_src
-** Custom Bindings
-*** Set prefix key ("C-z")
-    #+begin_src emacs-lisp
-     ;; "C-z" is the custom prefix key
-     (define-prefix-command 'z-map)
-     (global-set-key (kbd "C-z") 'z-map)
-    #+end_src
-*** Toggle evil mode
-    #+begin_src emacs-lisp
-      (define-key z-map (kbd "z") 'evil-mode)
-    #+end_src
-*** Open settings.org (this file)
-    #+begin_src emacs-lisp
-      (defun open-settings-file ()
-        "Open settings.org"
-        (interactive)
-        (find-file "~/.emacs.d/settings.org"))
-      (define-key z-map (kbd "s") 'open-settings-file)
-    #+end_src
-*** Open customize-themes
-    #+begin_src emacs-lisp
-      (define-key z-map (kbd "t") 'customize-themes)
-    #+end_src
-*** Set cursor to magenta
-    #+begin_src emacs-lisp
-      (defun set-cursor-color-to-magenta ()
-        "Because sometimes you just gotta set the cursor color to magenta"
-        (interactive)
-        (set-cursor-color 'magenta))
-      (define-key z-map (kbd "c") 'set-cursor-color-to-magenta)
-    #+end_src
-*** Shrink window vertically
-    #+begin_src emacs-lisp
-      (global-set-key (kbd "C-x %") (kbd "C-u -1 C-x ^"))
-    #+end_src
-*** Show imenu
-    #+begin_src emacs-lisp
-      (define-key z-map (kbd "i") 'lsp-ui-imenu)
-    #+end_src
-*** Move cursor to middle of window
-    #+begin_src emacs-lisp
-      (define-key z-map (kbd "m") 'move-to-window-line-top-bottom)
-    #+end_src
-** Misc
-    #+begin_src emacs-lisp
-      (desktop-save-mode 1)
-      (fset 'yes-or-no-p 'y-or-n-p)
-      (tool-bar-mode -1)
-      (blink-cursor-mode 0)
-      (electric-pair-mode 1)
-      (delete-selection-mode 1)
-      (global-hl-line-mode t)
-      (recentf-mode 1)
-      (whitespace-mode -1)
+     (setq-default indent-tabs-mode nil
+                   visual-line-mode t
+                   org-catch-invisible-edits 'show
+                   global-tab-line-mode nil
+                   tab-line-mode nil
+                   tab-bar-mode nil
+                   line-spacing 0.3
+                   fill-column 80
+                   sentence-end-double-space nil
+                   whitespace-line-column 110)
 
-      (setq scroll-step 1
-            recentf-max-menu-items 25
-            recentf-max-saved-items 25
-            save-interprogram-paste-before-kill t
-            auto-mode-alist (append '(("\\.cl$" . lisp-mode))
-                                    auto-mode-alist)
-            inferior-lisp-program "/usr/local/bin/sbcl"
-            auto-save-default nil
-            make-backup-files nil
-            create-lockfiles nil)
+     ;; Because the line-spacing above messes up calc
+     (add-hook 'calc-mode-hook (lambda () (setq line-spacing 0)))
+     (add-hook 'calc-trail-mode-hook (lambda () (setq line-spacing 0)))
 
-      (setq-default indent-tabs-mode nil
-                    visual-line-mode t
-                    org-catch-invisible-edits 'show)
+     (add-hook 'before-save-hook 'whitespace-cleanup)
 
-      (add-hook 'before-save-hook 'whitespace-cleanup)
+     ;; Set the right mode when you create a buffer
+     (setq-default major-mode
+                   (lambda () (if buffer-file-name
+                                  (fundamental-mode)
+                                (let ((buffer-file-name (buffer-name)))
+                                  (set-auto-mode)))))
 
-      ;; Set the right mode when you create a buffer
-      (setq-default major-mode
-                    (lambda () (if buffer-file-name
-                                   (fundamental-mode)
-                                 (let ((buffer-file-name (buffer-name)))
-                                   (set-auto-mode)))))
+     ;; Blink modeline instead of ring bell
+     (setq ring-bell-function
+           (lambda ()
+             (let ((orig-fg (face-foreground 'mode-line)))
+               (set-face-foreground 'mode-line "Magenta")
+               (run-with-idle-timer 0.1 nil
+                                    (lambda (fg) (set-face-foreground 'mode-line fg))
+                                    orig-fg))))
 
-      ;; Blink modeline instead of ring bell
-      (setq ring-bell-function
-            (lambda ()
-              (let ((orig-fg (face-foreground 'mode-line)))
-                (set-face-foreground 'mode-line "Magenta")
-                (run-with-idle-timer 0.1 nil
-                                     (lambda (fg) (set-face-foreground 'mode-line fg))
-                                     orig-fg))))
-
-      ;; disable checkdoc in org-mode source blocks
-      (defun disable-fylcheck-in-org-src-block ()
-        (setq-local flycheck-disabled-checkers '(emacs-lisp emacs-lisp-checkdoc)))
-      (add-hook 'org-src-mode-hook 'disable-fylcheck-in-org-src-block)
-    #+end_src
+     ;; disable checkdoc in org-mode source blocks
+     (defun disable-fylcheck-in-org-src-block ()
+       (setq-local flycheck-disabled-checkers '(emacs-lisp emacs-lisp-checkdoc)))
+     (add-hook 'org-src-mode-hook 'disable-fylcheck-in-org-src-block)
+   #+end_src
