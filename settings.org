@@ -145,13 +145,12 @@
    #+begin_src emacs-lisp
      (use-package evil
        :ensure t
-       :bind
        :init
        (setq evil-disable-insert-state-bindings t
              evil-toggle-key "")
        :config
-       (setq evil-insert-state-cursor '(box "#824BB9")  ;; purple for emacs
-             evil-normal-state-cursor '(box "#41903F")) ;; green for vim
+       (setq evil-insert-state-cursor '("#824BB9" box)  ;; purple for emacs
+             evil-normal-state-cursor '("#41903F" box)) ;; green for vim
        (evil-mode))
    #+end_src
 ** exec-path-from-shell
