@@ -147,6 +147,7 @@
        :ensure t
        :init
        (setq evil-disable-insert-state-bindings t
+             evil-default-state 'insert
              evil-toggle-key "")
        :config
        (setq evil-insert-state-cursor '("#824BB9" box)  ;; purple for emacs
@@ -217,7 +218,10 @@
      #+begin_src emacs-lisp
        (use-package flycheck
          :ensure t
-         :init (global-flycheck-mode))
+         :init (global-flycheck-mode)
+         :config
+         (use-package flycheck-pos-tip
+           :ensure t))
      #+end_src
 ** ibuffer
    - Docs :: https://www.emacswiki.org/emacs/IbufferMode
@@ -408,6 +412,7 @@
                  "\\*cider-doc\\*"
                  "\\*cider-scratch\\*"
                  "\\*cider-apropos\\*"
+                 "\\*eshell\\*"
                  "\\*Messages\\*"
                  "\\*Warnings\\*"
                  "\\*Compile-Log\\*"
@@ -588,6 +593,24 @@
            (cider-mode . (lambda ()
                            (add-hook 'before-save-hook 'cider-format-buffer nil 'make-it-local))))
        #+end_src
+**** clj-refactor
+     - Repo :: https://github.com/clojure-emacs/clj-refactor.el
+       #+begin_src emacs-lisp
+         (use-package clj-refactor
+           :ensure t
+           :config
+           (clj-refactor-mode 1)
+           (cljr-add-keybindings-with-prefix "C-c C-m"))
+       #+end_src
+**** flycheck-clj-kondo
+     - Repo :: https://github.com/borkdude/flycheck-clj-kondo
+     - Prerequisite  :: https://github.com/clj-kondo/clj-kondo/blob/master/doc/install.md
+       #+begin_src emacs-lisp
+         (use-package flycheck-clj-kondo
+           :ensure t
+           :hook
+           (clojure-mode . (require 'flycheck-clj-kondo)))
+       #+end_src
 *** Python
 **** lsp-server
      - Repo :: https://github.com/python-lsp/python-lsp-server
@@ -752,7 +775,7 @@
    #+end_src
 * General Configuration
    #+begin_src emacs-lisp
-     (set-frame-font "DejaVu Sans Mono-14" nil t)
+     (set-frame-font "DejaVu Sans Mono-13" nil t)
      (desktop-save-mode 1)
      (fset 'yes-or-no-p 'y-or-n-p)
      (tool-bar-mode -1)
