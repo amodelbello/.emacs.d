@@ -120,6 +120,26 @@
           (magit-pre-refresh . diff-hl-magit-pre-refresh)
           (magit-post-refresh . diff-hl-magit-post-refresh)))
      #+end_src
+** dired-sidebar
+   - Repo :: https://github.com/jojojames/dired-sidebar
+     #+begin_src emacs-lisp
+       (use-package dired-sidebar
+         :bind (("C-x C-n" . dired-sidebar-toggle-sidebar))
+         :ensure t
+         :commands (dired-sidebar-toggle-sidebar)
+         :init
+         (add-hook 'dired-sidebar-mode-hook
+                   (lambda ()
+                     (unless (file-remote-p default-directory)
+                       (auto-revert-mode))))
+         :config
+         (push 'toggle-window-split dired-sidebar-toggle-hidden-commands)
+         (push 'rotate-windows dired-sidebar-toggle-hidden-commands)
+
+         (setq dired-sidebar-subtree-line-prefix "__")
+         (setq dired-sidebar-use-term-integration t)
+         (setq dired-sidebar-theme 'icons))
+     #+end_src
 ** Drag Stuff
    - Repo :: https://github.com/rejeep/drag-stuff.el
      #+begin_src emacs-lisp
@@ -138,6 +158,13 @@
          :ensure t
          :bind
          ([remap kill-ring-save] . easy-kill))
+     #+end_src
+** emacs-emojify
+   - Repo :: https://github.com/iqbalansari/emacs-emojify
+     #+begin_src emacs-lisp
+       (use-package emojify
+         :ensure t
+         :hook (after-init . global-emojify-mode))
      #+end_src
 ** Evil
    Repo :: https://github.com/emacs-evil/evil
@@ -180,13 +207,16 @@
          :config
          (eyebrowse-mode))
      #+end_src
-** Forge
-   - Repo :: https://github.com/magit/forge
-   - Docs :: https://magit.vc/manual/forge/
+** Flycheck
+   - Repo :: https://github.com/flycheck/flycheck
+   - Docs :: https://www.flycheck.org/en/latest/
      #+begin_src emacs-lisp
-       (use-package forge
+       (use-package flycheck
          :ensure t
-         :after magit)
+         :init (global-flycheck-mode)
+         :config
+         (use-package flycheck-pos-tip
+           :ensure t))
      #+end_src
 ** Flyspell
    #+begin_src emacs-lisp
@@ -197,6 +227,14 @@
                         (flyspell-mode 1)
                         (define-key flyspell-mode-map (kbd "C-;") nil))))
    #+end_src
+** Forge
+   - Repo :: https://github.com/magit/forge
+   - Docs :: https://magit.vc/manual/forge/
+     #+begin_src emacs-lisp
+       (use-package forge
+         :ensure t
+         :after magit)
+     #+end_src
 ** Git time machine
    - Repo :: https://github.com/emacsmirror/git-timemachine
      #+begin_src emacs-lisp
@@ -211,17 +249,6 @@
          :ensure-system-package gnuplot
          :config
          (add-to-list 'auto-mode-alist '("\\.gp?\\'" . gnuplot-mode)))
-     #+end_src
-** Flycheck
-   - Repo :: https://github.com/flycheck/flycheck
-   - Docs :: https://www.flycheck.org/en/latest/
-     #+begin_src emacs-lisp
-       (use-package flycheck
-         :ensure t
-         :init (global-flycheck-mode)
-         :config
-         (use-package flycheck-pos-tip
-           :ensure t))
      #+end_src
 ** ibuffer
    - Docs :: https://www.emacswiki.org/emacs/IbufferMode
@@ -254,6 +281,18 @@
 
        ;; Don't show filter groups if there are no buffers in that group
        (setq ibuffer-show-empty-filter-groups nil)
+     #+end_src
+** Idle Highlight Mode
+   - Repo :: https://gitlab.com/ideasman42/emacs-idle-highlight-mode/
+     #+begin_src emacs-lisp
+       (use-package idle-highlight-mode
+         :ensure t
+         :config
+         (setq idle-highlight-idle-time 0.2
+               idle-highlight-exclude-point t)
+         :hook
+         ((prog-mode text-mode) . idle-highlight-mode))
+
      #+end_src
 ** iedit
    - Repo :: https://github.com/victorhge/iedit
@@ -371,6 +410,12 @@
          :config
          (global-nlinum-mode))
      #+end_src
+** Org Mode
+   - Docs :: https://orgmode.org/
+     #+begin_src emacs-lisp
+       (setq org-directory "~/pCloud Drive"
+             org-default-notes-file (concat org-directory "/notes.org"))
+     #+end_src
 ** Org Bullets
    - Repo :: https://github.com/sabof/org-bullets
      #+begin_src emacs-lisp
@@ -378,6 +423,29 @@
          :ensure t
          :hook
          (org-mode . org-bullets-mode))
+     #+end_src
+** Org Roam
+   - Repo :: https://github.com/org-roam/org-roam
+     #+begin_src emacs-lisp
+       (use-package org-roam
+         :ensure t
+         :custom
+         (org-roam-directory (file-truename "~/pCloud Drive/org-roam"))
+         :bind (("C-c n l" . org-roam-buffer-toggle)
+                ("C-c n f" . org-roam-node-find)
+                ("C-c n g" . org-roam-graph)
+                ("C-c n i" . org-roam-node-insert)
+                ("C-c n c" . org-roam-capture)
+                ("C-c n j" . org-roam-dailies-capture-today)
+                :map org-mode-map
+                ("C-M-i" . completion-at-point))
+         :config
+         ;; If you're using a vertical completion framework, you might want a more informative completion interface
+         (setq org-roam-node-display-template (concat "${title:*} " (propertize "${tags:10}" 'face 'org-tag))
+               org-roam-completion-everywhere t)
+         (org-roam-db-autosync-mode)
+         ;; If using org-roam-protocol
+         (require 'org-roam-protocol))
      #+end_src
 ** Paredit
    - Repo :: https://github.com/emacsmirror/paredit/blob/master/paredit.el
@@ -409,10 +477,7 @@
                  "\\*lsp-log\\*"
                  "\\*flycheck errors\\*"
                  "\\*cider-error\\*"
-                 "\\*cider-doc\\*"
                  "\\*cider-scratch\\*"
-                 "\\*cider-apropos\\*"
-                 "\\*eshell\\*"
                  "\\*Messages\\*"
                  "\\*Warnings\\*"
                  "\\*Compile-Log\\*"
@@ -524,6 +589,7 @@
                lsp-modeline-diagnostics-enable t
                lsp-modeline-code-actions-mode t
                lsp-headerline-breadcrumb-enable t
+               lsp-signature-render-documentation nil
                lsp-modeline-diagnostics-scope :workspace)
          :commands lsp-deferred)
 
@@ -603,13 +669,11 @@
            (cljr-add-keybindings-with-prefix "C-c C-m"))
        #+end_src
 **** flycheck-clj-kondo
-     - Repo :: https://github.com/borkdude/flycheck-clj-kondo
      - Prerequisite  :: https://github.com/clj-kondo/clj-kondo/blob/master/doc/install.md
+     - Repo :: https://github.com/borkdude/flycheck-clj-kondo
        #+begin_src emacs-lisp
          (use-package flycheck-clj-kondo
-           :ensure t
-           :hook
-           (clojure-mode . (require 'flycheck-clj-kondo)))
+           :ensure t)
        #+end_src
 *** Python
 **** lsp-server
@@ -635,6 +699,11 @@
                  '(pyvenv-virtual-env-name ("[venv:" pyvenv-virtual-env-name "] ")))
            (pyvenv-mode +1))
        #+end_src
+**** interpreter
+     #+begin_src emacs-lisp
+       (when (executable-find "ipython")
+         (setq python-shell-interpreter "ipython"))
+     #+end_src
 *** JavaScript/Typescript
 **** lsp-server
      - Repo :: https://github.com/typescript-language-server/typescript-language-server
