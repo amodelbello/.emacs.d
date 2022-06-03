@@ -34,6 +34,15 @@
          (atomic-chrome-start-server)
          (setq atomic-chrome-buffer-open-style 'frame))
      #+end_src
+** AuTex
+   - Docs :: https://www.gnu.org/software/auctex/index.html
+     #+begin_src emacs-lisp
+       (use-package tex
+         :ensure auctex
+         :config (setq TeX-auto-save t
+                       TeX-parse-self t)
+                 (setq-default TeX-master nil))
+     #+end_src
 ** Avy
    - Repo :: [[https://github.com/abo-abo/avy]]
      #+begin_src emacs-lisp
@@ -483,6 +492,7 @@
                  "\\*Compile-Log\\*"
                  "\\*Completions\\*"
                  "\\*Backtrace\\*"
+                 "\\*TeX Help\\*"
                  "Output\\*$"
                  "\\*Async Shell Command\\*"
                  help-mode
@@ -686,7 +696,6 @@
          (setq lsp-pylsp-plugins-flake8-enabled t
                lsp-pylsp-plugins-flake8-config "~/.flake8"
                lsp-pylsp-plugins-flake8-ignore ["D100" "D101" "D102" "E501"])
-
        #+end_src
 **** pyvenv
      - Repo :: https://github.com/jorgenschaefer/pyvenv
@@ -863,6 +872,7 @@
            auto-mode-alist (append '(("\\.cl$" . lisp-mode))
                                    auto-mode-alist)
            inferior-lisp-program "/usr/local/bin/sbcl"
+           font-latex-fontify-script nil
            auto-save-default nil
            make-backup-files nil
            create-lockfiles nil)
