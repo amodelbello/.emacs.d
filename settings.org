@@ -154,8 +154,8 @@
      #+begin_src emacs-lisp
        (use-package drag-stuff
          :ensure t
-         :bind (("<M-up>" . drag-stuff-up)
-              ("<M-down>" . drag-stuff-down))
+         ;; :bind (("<M-up>" . drag-stuff-up)
+         ;;      ("<M-down>" . drag-stuff-down))
          :config
          (drag-stuff-global-mode +1)
          (drag-stuff-define-keys))
@@ -277,6 +277,7 @@
                                    (mode . c-mode)
                                    (mode . c++-mode)))
                    ("text" (mode . text-mode))
+                   ("LaTeX" (mode . latex-mode))
                    ("magit" (mode . magit-mode))
                    ("dired" (mode . dired-mode))
                    ("emacs" (or
@@ -538,6 +539,15 @@
          :diminish
          (undo-tree-mode))
      #+end_src
+** unfill
+   - Repo :: https://github.com/purcell/unfill
+     #+begin_src emacs-lisp
+       (use-package unfill
+         :ensure t)
+     #+end_src
+
+     #+RESULTS:
+
 ** web-mode
    - Repo :: https://github.com/fxbois/web-mode
    - Docs :: https://web-mode.org/
@@ -695,7 +705,7 @@
          ;; None of these options seem to work at all...
          (setq lsp-pylsp-plugins-flake8-enabled t
                lsp-pylsp-plugins-flake8-config "~/.flake8"
-               lsp-pylsp-plugins-flake8-ignore ["D100" "D101" "D102" "E501"])
+               lsp-pylsp-plugins-flake8-ignore ["D100" "D103" "D101" "D102" "E501"])
        #+end_src
 **** pyvenv
      - Repo :: https://github.com/jorgenschaefer/pyvenv
@@ -878,14 +888,14 @@
            create-lockfiles nil)
 
      (setq-default indent-tabs-mode nil
-                   visual-line-mode t
                    org-catch-invisible-edits 'show
                    global-tab-line-mode nil
                    tab-line-mode nil
                    tab-bar-mode nil
                    line-spacing 0.3
-                   fill-column 80
+                   fill-column 100
                    sentence-end-double-space nil
+                   visual-line-mode t
                    whitespace-line-column 110)
 
      ;; Because the line-spacing above messes up calc
