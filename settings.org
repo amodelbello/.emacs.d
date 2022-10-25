@@ -520,6 +520,12 @@
          :ensure t
          :hook (prog-mode . rainbow-delimiters-mode))
      #+end_src
+** sml-mode
+   - Docs :: http://smlnj.org/doc/Emacs/sml-mode.html
+     #+begin_src emacs-lisp
+       (use-package sml-mode
+         :ensure t)
+     #+end_src
 ** Try
    - Repo :: https://github.com/larstvei/Try
      #+begin_src emacs-lisp
@@ -840,6 +846,10 @@
 ** Open customize-themes
    #+begin_src emacs-lisp
      (define-key z-map (kbd "t") 'customize-themes)
+   #+end_src
+** Start eshell
+   #+begin_src emacs-lisp
+     (define-key z-map (kbd "e") 'eshell)
    #+end_src
 ** Set cursor to magenta
    #+begin_src emacs-lisp
