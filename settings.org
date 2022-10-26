@@ -94,6 +94,8 @@
            :ensure t
            :hook
            (company-mode . company-box-mode)))
+       (define-key company-active-map (kbd "<return>") nil)
+       (define-key company-active-map (kbd "RET") nil)
      #+end_src
 ** Crux
    - Repo :: https://github.com/bbatsov/crux
