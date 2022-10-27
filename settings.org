@@ -189,8 +189,7 @@
              evil-toggle-key "")
        :config
        (setq evil-insert-state-cursor '("#824BB9" box)  ;; purple for emacs
-             evil-normal-state-cursor '("#41903F" box)) ;; green for vim
-       (evil-mode))
+             evil-normal-state-cursor '("#41903F" box))) ;; green for vim
    #+end_src
 ** exec-path-from-shell
    - Repo :: https://github.com/purcell/exec-path-from-shell
