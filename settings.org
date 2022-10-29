@@ -151,17 +151,6 @@
          (setq dired-sidebar-use-term-integration t)
          (setq dired-sidebar-theme 'icons))
      #+end_src
-** Drag Stuff
-   - Repo :: https://github.com/rejeep/drag-stuff.el
-     #+begin_src emacs-lisp
-       (use-package drag-stuff
-         :ensure t
-         ;; :bind (("<M-up>" . drag-stuff-up)
-         ;;      ("<M-down>" . drag-stuff-down))
-         :config
-         (drag-stuff-global-mode +1)
-         (drag-stuff-define-keys))
-     #+end_src
 ** easy-kill
    - Repo :: https://github.com/leoliu/easy-kill
      #+begin_src emacs-lisp
