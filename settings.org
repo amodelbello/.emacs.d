@@ -818,6 +818,10 @@
    #+begin_src emacs-lisp
      (define-key z-map (kbd "e") 'eshell)
    #+end_src
+** Open Calendar
+   #+begin_src emacs-lisp
+     (define-key z-map (kbd "c") 'calendar)
+   #+end_src
 ** Set cursor to magenta
    #+begin_src emacs-lisp
      (defun set-cursor-color-to-magenta ()
