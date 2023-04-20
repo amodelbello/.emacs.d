@@ -672,6 +672,13 @@
    #+begin_src emacs-lisp
      (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
    #+end_src
+** Catppuccin Themes
+   - Repo :: https://github.com/catppuccin/emacs
+     #+begin_src emacs-lisp
+       ;; 'frappe, 'latte, 'macchiato, or 'mocha
+       (setq catppuccin-flavor 'latte)
+       ;; (catppuccin-reload)
+     #+end_src
 ** Doom Modeline
    - Repo :: https://github.com/seagle0128/doom-modeline
      #+begin_src emacs-lisp
