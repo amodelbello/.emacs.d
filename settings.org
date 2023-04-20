@@ -162,7 +162,7 @@
      #+end_src
 ** Flyspell
    #+begin_src emacs-lisp
-     (setq-default ispell-program-name "/usr/local/bin/aspell")
+     (setq-default ispell-program-name "/opt/homebrew/opt/ispell/bin/ispell")
 
      (dolist (hook '(text-mode-hook))
        (add-hook hook (lambda ()
@@ -791,7 +791,6 @@
      ;; Because the line-spacing above messes up calc
      (add-hook 'calc-mode-hook (lambda () (setq line-spacing 0)))
      (add-hook 'calc-trail-mode-hook (lambda () (setq line-spacing 0)))
-
      (add-hook 'before-save-hook 'whitespace-cleanup)
 
      ;; Set the right mode when you create a buffer
