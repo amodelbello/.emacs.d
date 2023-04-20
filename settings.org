@@ -738,14 +738,6 @@
    #+begin_src emacs-lisp
      (define-key z-map (kbd "c") 'calendar)
    #+end_src
-** Set cursor to magenta
-   #+begin_src emacs-lisp
-     (defun set-cursor-color-to-magenta ()
-       "Because sometimes you just gotta set the cursor color to magenta"
-       (interactive)
-       (set-cursor-color 'magenta))
-     (define-key z-map (kbd "c") 'set-cursor-color-to-magenta)
-   #+end_src
 ** Shrink window vertically
    #+begin_src emacs-lisp
      (global-set-key (kbd "C-x %") (kbd "C-u -1 C-x ^"))
