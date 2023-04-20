@@ -509,8 +509,6 @@
          :ensure t
          :commands lsp-ivy-workspace-symbol)
 
-       ;; I don't use treemacs but this is necessary for
-       ;; icons to show up in the breadcrumbs for some reason
        (use-package lsp-treemacs
          :ensure t
          :commands lsp-treemacs-errors-list)
@@ -737,6 +735,10 @@
 ** Open Calendar
    #+begin_src emacs-lisp
      (define-key z-map (kbd "c") 'calendar)
+   #+end_src
+** Open Treemacs
+   #+begin_src emacs-lisp
+     (define-key z-map (kbd "w") 'treemacs)
    #+end_src
 ** Shrink window vertically
    #+begin_src emacs-lisp
