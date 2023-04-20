@@ -571,7 +571,7 @@
        #+begin_src emacs-lisp
          (setq lsp-pylsp-plugins-flake8-enabled t
                lsp-pylsp-plugins-flake8-config "~/.flake8"
-               lsp-pylsp-plugins-pydocstyle-ignore ["D100" "D103" "D101" "D102" "E501"])
+               lsp-pylsp-plugins-pydocstyle-ignore ["D100" "D101" "D102" "D103" "D104" "E501"])
        #+end_src
 **** pyvenv
      - Repo :: https://github.com/jorgenschaefer/pyvenv
@@ -704,10 +704,8 @@
 ** Spacemacs Themes
    - Repo :: https://github.com/nashamri/spacemacs-theme
      #+begin_src emacs-lisp
-       (use-package spacemacs-common
-         :ensure spacemacs-theme
-         :config
-         (load-theme 'spacemacs-light t))
+       (use-package spacemacs-theme
+         :defer t)
      #+end_src
 * Custom Bindings
 ** Set prefix key ("C-z")
@@ -736,9 +734,10 @@
    #+begin_src emacs-lisp
      (define-key z-map (kbd "c") 'calendar)
    #+end_src
-** Open Treemacs
+** Treemacs Bindings
    #+begin_src emacs-lisp
      (define-key z-map (kbd "w") 'treemacs)
+     (define-key z-map (kbd "q") 'treemacs-select-window)
    #+end_src
 ** Shrink window vertically
    #+begin_src emacs-lisp
@@ -815,4 +814,7 @@
      (defun disable-fylcheck-in-org-src-block ()
        (setq-local flycheck-disabled-checkers '(emacs-lisp emacs-lisp-checkdoc)))
      (add-hook 'org-src-mode-hook 'disable-fylcheck-in-org-src-block)
+
+     ;; Fix bug with missing svg type (should be fixed in emacs 29)
+     (add-to-list 'image-types 'svg)
    #+end_src
