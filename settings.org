@@ -19,6 +19,12 @@
           '(aw-leading-char-face
             ((t (:inherit ace-jump-face-foreground :height 3.0))))))
      #+end_src
+** Ag
+   - Repo :: https://github.com/Wilfred/ag.el
+     #+begin_src emacs-lisp
+       (use-package ag
+         :ensure t)
+     #+end_src
 ** AuTex
    - Docs :: https://www.gnu.org/software/auctex/index.html
      #+begin_src emacs-lisp
@@ -54,10 +60,10 @@
        (use-package buffer-move
          :ensure t
          :bind
-         (("<C-s-up>" . buf-move-up)
-          ("<C-s-down>" . buf-move-down)
-          ("<C-s-left>" . buf-move-left)
-          ("<C-s-right>" .  buf-move-right)))
+         (("<C-S-up>" . buf-move-up)
+          ("<C-S-down>" . buf-move-down)
+          ("<C-S-left>" . buf-move-left)
+          ("<C-S-right>" .  buf-move-right)))
      #+end_src
 ** Company
    - Repo :: https://github.com/company-mode/company-mode
@@ -122,6 +128,12 @@
        (use-package emojify
          :ensure t
          :hook (after-init . global-emojify-mode))
+     #+end_src
+** emacs-sqllite3
+   - Repo :: https://github.com/pekingduck/emacs-sqlite3-api
+     #+begin_src emacs-lisp
+       (use-package sqlite3
+         :ensure t)
      #+end_src
 ** exec-path-from-shell
    - Repo :: https://github.com/purcell/exec-path-from-shell
@@ -227,6 +239,13 @@
          :hook
          ((prog-mode text-mode) . idle-highlight-mode))
 
+     #+end_src
+** iedit
+   - Repo :: https://github.com/victorhge/iedit
+     #+begin_src emacs-lisp
+       (use-package iedit
+         :ensure t
+         :bind ("C-\"" . iedit-mode))
      #+end_src
 ** Ivy & friends
    - Repo :: https://github.com/abo-abo/swiper
@@ -372,9 +391,9 @@
      #+begin_src emacs-lisp
        (use-package popper
          :ensure t ; or :straight t
-         :bind (("s-1"   . popper-toggle-latest)
-                ("s-2"   . popper-cycle)
-                ("s-3" . popper-toggle-type))
+         :bind (("s-3"   . popper-toggle-latest)
+                ("M-s-2"   . popper-cycle)
+                ("M-s-3" . popper-toggle-type))
          :init
          (setq popper-reference-buffers
                '("\\*scratch\\*"
@@ -498,11 +517,14 @@
          :ensure t
          :bind ((:map lsp-ui-mode-map
                       ("s-7" . lsp-ui-imenu)
+                      ("<M-return>" . lsp-ui-peek-find-references)
                       ([remap xref-find-definitions] . lsp-ui-peek-find-definitions)
                       ([remap xref-find-references] . lsp-ui-peek-find-references)))
          :config
          (setq lsp-ui-sideline-show-hover t
-               lsp-ui-sideline-show-code-actions t)
+               lsp-ui-sideline-show-code-actions t
+               lsp-ui-imenu-auto-refresh t
+               imenu-auto-rescan t)
          :commands lsp-ui-mode)
 
        (use-package lsp-ivy
@@ -571,7 +593,26 @@
        #+begin_src emacs-lisp
          (setq lsp-pylsp-plugins-flake8-enabled t
                lsp-pylsp-plugins-flake8-config "~/.flake8"
-               lsp-pylsp-plugins-pydocstyle-ignore ["D100" "D101" "D102" "D103" "D104" "E501"])
+               lsp-pylsp-plugins-pydocstyle-enabled nil)
+       #+end_src
+**** conda
+     - Repo :: xxx
+       #+begin_src emacs-lisp
+         (use-package conda
+           :ensure t
+           :init
+           (setq conda-anaconda-home (expand-file-name "~/opt/miniconda3"))
+           (setq conda-env-home-directory (expand-file-name "~/opt/miniconda3")))
+       #+end_src
+**** pandoc
+     - Repo :: https://github.com/joostkremers/pandoc-mode
+     - Docs: :: https://joostkremers.github.io/pandoc-mode/
+       #+begin_src emacs-lisp
+         (use-package pandoc-mode
+           :ensure t
+           :config (setq markdown-command "/opt/homebrew/bin/pandoc")
+           :hook ((markdown-mode . pandoc-mode)
+                  (pandoc-mode . pandoc-load-default-settings)))
        #+end_src
 **** pyvenv
      - Repo :: https://github.com/jorgenschaefer/pyvenv
@@ -734,27 +775,28 @@
    #+begin_src emacs-lisp
      (define-key z-map (kbd "c") 'calendar)
    #+end_src
-** Treemacs Bindings
+** Bindings for "IDE-like" tool windows
    #+begin_src emacs-lisp
-     (define-key z-map (kbd "w") 'treemacs)
+     (global-set-key (kbd "s-1") 'treemacs)
      (define-key z-map (kbd "q") 'treemacs-select-window)
+     (global-set-key (kbd "s-7") 'lsp-ui-imenu)
    #+end_src
 ** Shrink window vertically
    #+begin_src emacs-lisp
      (global-set-key (kbd "C-x %") (kbd "C-u -1 C-x ^"))
-   #+end_src
-** Show imenu
-   #+begin_src emacs-lisp
-     (define-key z-map (kbd "i") 'lsp-ui-imenu)
    #+end_src
 ** One line scroll
    #+begin_src emacs-lisp
      (global-set-key (kbd "C-s-p") 'scroll-down-line)
      (global-set-key (kbd "C-s-n") 'scroll-up-line)
    #+end_src
+** Counsel mark-ring
+   #+begin_src emacs-lisp
+     (global-set-key (kbd "C-c m") 'counsel-mark-ring)
+   #+end_src
 * General Configuration
    #+begin_src emacs-lisp
-     (set-frame-font "DejaVu Sans Mono-13" nil t)
+     (set-frame-font "DejaVu Sans Mono-12" nil t)
      (desktop-save-mode 1)
      (fset 'yes-or-no-p 'y-or-n-p)
      (tool-bar-mode -1)
