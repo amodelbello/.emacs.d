@@ -571,10 +571,9 @@
          pip3 install 'python-lsp-server[all]'
        #+end_src
        #+begin_src emacs-lisp
-         ;; None of these options seem to work at all...
          (setq lsp-pylsp-plugins-flake8-enabled t
                lsp-pylsp-plugins-flake8-config "~/.flake8"
-               lsp-pylsp-plugins-flake8-ignore ["D100" "D103" "D101" "D102" "E501"])
+               lsp-pylsp-plugins-pydocstyle-ignore ["D100" "D103" "D101" "D102" "E501"])
        #+end_src
 **** pyvenv
      - Repo :: https://github.com/jorgenschaefer/pyvenv
