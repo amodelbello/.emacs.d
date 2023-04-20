@@ -576,6 +576,7 @@
          :hook ((python-mode . lsp-deferred)
                 (web-mode . lsp-deferred)
                 (go-mode . lsp-deferred)
+                (haskell-mode . lsp-deferred)
                 (lsp-mode . lsp-enable-which-key-integration))
          :config
          (setq lsp-keymap-prefix "C-c l"
@@ -759,13 +760,18 @@
     #+begin_src emacs-lisp
       (use-package haskell-mode
         :ensure t)
+
+      (defun on-haskell-mode ()
+        "Enable lsp & interactive-haskell-mode"
+        (lsp)
+        (interactive-haskell-mode t))
       (use-package lsp-haskell
         :ensure t
-        :config
-        (setq haskell-process-path-hie 'haskell-language-server-wrapper)
         :hook
-        (haskell-mode . lsp)
-        (haskell-literate-mode lsp))
+        (haskell-mode . on-haskell-mode)
+        (before-save . lsp-format-buffer))
+
+
     #+end_src
 * Appearance
    #+begin_src emacs-lisp
