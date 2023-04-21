@@ -434,6 +434,27 @@
          :ensure t
          :hook (prog-mode . rainbow-delimiters-mode))
      #+end_src
+** Treemacs
+   - Repo :: https://github.com/Alexander-Miller/treemacs
+     #+begin_src emacs-lisp
+       (use-package treemacs
+         :ensure t
+         :defer t
+         :config
+         (treemacs-resize-icons 16))
+
+       (use-package treemacs-projectile
+         :after (treemacs projectile)
+         :ensure t)
+
+       (use-package treemacs-icons-dired
+         :hook (dired-mode . treemacs-icons-dired-enable-once)
+         :ensure t)
+
+       (use-package treemacs-magit
+         :after (treemacs magit)
+         :ensure t)
+     #+end_src
 ** undo-tree
    - Repo :: https://github.com/apchamberlain/undo-tree.el
    - Docs :: https://www.emacswiki.org/emacs/UndoTree
