@@ -784,7 +784,7 @@
 ** Bindings for "IDE-like" tool windows
    #+begin_src emacs-lisp
      (global-set-key (kbd "s-1") 'treemacs)
-     (define-key z-map (kbd "q") 'treemacs-select-window)
+     (global-set-key (kbd "s-2") 'treemacs-select-window)
      (global-set-key (kbd "s-7") 'lsp-ui-imenu)
    #+end_src
 ** Shrink window vertically
