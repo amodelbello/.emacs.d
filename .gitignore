@@ -59,3 +59,4 @@ customize.el
 settings.el
 bookmarks
 emojis/
+.dap-breakpoints
