@@ -138,12 +138,17 @@
 ** exec-path-from-shell
    - Repo :: https://github.com/purcell/exec-path-from-shell
      #+begin_src emacs-lisp
-       (when (memq window-system '(mac ns x))
-         (use-package exec-path-from-shell
-           :ensure t
-           :config
-           (setq exec-path-from-shell-arguments nil) ; non-interactive, i.e. .zshenv not .zshrc
-           (exec-path-from-shell-initialize)))
+       (when (memq window-system '(mac ns)) ;; MacOS
+                (use-package exec-path-from-shell
+                  :ensure t
+                  :config
+                  (setq exec-path-from-shell-arguments nil) ; non-interactive, i.e. .zshenv not .zshrc
+                  (exec-path-from-shell-initialize)))
+       (when (memq window-system '(x)) ;; Linux
+                (use-package exec-path-from-shell
+                  :ensure t
+                  :config
+                  (exec-path-from-shell-initialize)))
      #+end_src
 ** expand-region
    - Repo :: https://github.com/magnars/expand-region.el
