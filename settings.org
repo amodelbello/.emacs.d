@@ -11,7 +11,7 @@
          :ensure t
          :bind
          (("C-x o" . ace-window)
-          ("s-w" . ace-window))
+          ("M-z" . ace-window))
          :config
          (defvar aw-dispatch-always nil)
          (setq aw-scope 'frame)
@@ -40,7 +40,9 @@
        (use-package avy
          :ensure t
          :bind (("C-;" . avy-goto-char)
-                ("C-i" . avy-goto-char-2)))
+                ("C-'" . avy-goto-char-2)
+                :map org-mode-map
+                ("C-'" . nil)))
      #+end_src
 ** Beacon
    - Repo :: [[https://github.com/Malabarba/beacon]]

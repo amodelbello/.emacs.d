@@ -74,7 +74,7 @@
   :ensure t
   :bind
   (("C-x o" . ace-window)
-   ("s-w" . ace-window))
+   ("M-z" . ace-window))
   :config
   (defvar aw-dispatch-always nil)
   (setq aw-scope 'frame)
