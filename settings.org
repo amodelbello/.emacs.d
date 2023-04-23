@@ -40,9 +40,7 @@
        (use-package avy
          :ensure t
          :bind (("C-;" . avy-goto-char)
-                ("C-'" . avy-goto-char-2)
-                :map org-mode-map
-                ("C-'" . nil)))
+                ("C-i" . avy-goto-char-2)))
      #+end_src
 ** Beacon
    - Repo :: [[https://github.com/Malabarba/beacon]]

@@ -23,6 +23,7 @@
 
 (setq inhibit-startup-screen t
       save-interprogram-paste-before-kill t
+      x-select-enable-clipboard t
       auto-save-default nil
       make-backup-files nil
       create-lockfiles nil)
@@ -84,8 +85,7 @@
 (use-package avy
   :ensure t
   :bind (("C-;" . avy-goto-char)
-         ("C-'" . avy-goto-char-2)
-         ("C-'" . nil)))
+         ("C-i" . avy-goto-char-2)))
 
 (use-package crux
   :ensure t
