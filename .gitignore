@@ -60,3 +60,8 @@ settings.el
 bookmarks
 emojis/
 .dap-breakpoints
+
+# Terminal config
+/terminal/elpa
+/terminal/.emacs.desktop
+!/terminal/settings.el
