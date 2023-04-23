@@ -452,9 +452,11 @@
          :after (treemacs projectile)
          :ensure t)
 
-       (use-package treemacs-icons-dired
-         :hook (dired-mode . treemacs-icons-dired-enable-once)
-         :ensure t)
+       ;; This seems to be broken.
+       ;; Error: "Symbol's function definition is void: treemacs-icon-for-dired"
+       ;; (use-package treemacs-icons-dired
+       ;;   :hook (dired-mode . treemacs-icons-dired-enable-once)
+       ;;   :ensure t)
 
        (use-package treemacs-magit
          :after (treemacs magit)
