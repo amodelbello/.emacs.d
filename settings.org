@@ -406,8 +406,7 @@
                 ("s-5" . popper-toggle-type))
          :init
          (setq popper-reference-buffers
-               '("\\*scratch\\*"
-                 "\\*format-all-errors\\*"
+               '("\\*format-all-errors\\*"
                  "\\*lsp-log\\*"
                  "\\*flycheck errors\\*"
                  "\\*cider-error\\*"
