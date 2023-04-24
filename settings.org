@@ -63,7 +63,12 @@
          (("<C-S-up>" . buf-move-up)
           ("<C-S-down>" . buf-move-down)
           ("<C-S-left>" . buf-move-left)
-          ("<C-S-right>" .  buf-move-right)))
+          ("<C-S-right>" .  buf-move-right)
+          :map org-mode-map
+          ("<C-S-up>" . buf-move-up)
+          ("<C-S-down>" . buf-move-down)
+          ("<C-S-left>" . buf-move-left)
+          ("<C-S-right>" . buf-move-right)))
      #+end_src
 ** Company
    - Repo :: https://github.com/company-mode/company-mode
@@ -397,8 +402,8 @@
        (use-package popper
          :ensure t ; or :straight t
          :bind (("s-3"   . popper-toggle-latest)
-                ("M-s-2"   . popper-cycle)
-                ("M-s-3" . popper-toggle-type))
+                ("s-4"   . popper-cycle)
+                ("s-5" . popper-toggle-type))
          :init
          (setq popper-reference-buffers
                '("\\*scratch\\*"
@@ -415,6 +420,7 @@
                  "\\*TeX Help\\*"
                  "Output\\*$"
                  "\\*Async Shell Command\\*"
+                 "^pop-"
                  help-mode
                  compilation-mode))
          (popper-mode +1)
@@ -446,9 +452,11 @@
          :ensure t
          :defer t
          :config
-         (treemacs-resize-icons 16))
+         (treemacs-resize-icons 16)
+         (define-key treemacs-mode-map [mouse-1] #'treemacs-single-click-expand-action))
 
-       (use-package treemacs-projectile
+       (use-package
+         treemacs-projectile
          :after (treemacs projectile)
          :ensure t)
 
