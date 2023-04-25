@@ -552,7 +552,7 @@
          :ensure t
          :bind ((:map lsp-ui-mode-map
                       ("s-7" . lsp-ui-imenu)
-                      ("<M-return>" . lsp-ui-peek-find-references)
+                      ("<C-return>" . lsp-ui-peek-find-references)
                       ([remap xref-find-definitions] . lsp-ui-peek-find-definitions)
                       ([remap xref-find-references] . lsp-ui-peek-find-references)))
          :config
@@ -905,4 +905,13 @@
 
      ;; Fix bug with missing svg type (should be fixed in emacs 29)
      (add-to-list 'image-types 'svg)
+
+     ;; Copy whole line to kill ring
+     (defadvice kill-ring-save (before slick-copy activate compile)
+       "When called interactively with no active region, copy a single line instead."
+       (interactive
+        (if mark-active
+            (list (region-beginning) (region-end))
+          (message "Copied line")
+          (list (line-beginning-position) (line-beginning-position 2)))))
    #+end_src
