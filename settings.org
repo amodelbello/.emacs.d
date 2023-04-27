@@ -71,15 +71,21 @@
           ("<C-S-right>" . buf-move-right)))
      #+end_src
 ** centaur-tabs
-   - Repo :: xxx
+   - Repo :: https://github.com/ema2159/centaur-tabs
      #+begin_src emacs-lisp
        (use-package centaur-tabs
          :ensure t
          :init (centaur-tabs-mode t)
          :config (setq centaur-tabs-set-icons t
+                       centaur-tabs-set-modified-marker t
+                       centaur-tabs-modified-marker "*"
                        centaur-tabs-height 32
-                       centaur-tabs-set-bar 'over
-                       x-underline-at-descent-line t)
+                       centaur-tabs-set-bar 'under
+                       centaur-tabs-cycle-scope 'tabs
+                       x-underline-at-descent-line t
+                       centaur-tabs-style "bar")
+         (centaur-tabs-group-by-projectile-project)
+         (centaur-tabs-headline-match)
          :bind
          ("s-M-<left>" . centaur-tabs-backward)
          ("s-M-<right>" . centaur-tabs-forward))
@@ -851,6 +857,10 @@
 ** Open customize-themes
    #+begin_src emacs-lisp
      (define-key z-map (kbd "t") 'customize-themes)
+   #+end_src
+** Open centaur-tabs groups
+   #+begin_src emacs-lisp
+     (define-key z-map (kbd "a") 'centaur-tabs-counsel-switch-group)
    #+end_src
 ** Start eshell
    #+begin_src emacs-lisp
