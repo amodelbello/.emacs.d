@@ -70,6 +70,20 @@
           ("<C-S-left>" . buf-move-left)
           ("<C-S-right>" . buf-move-right)))
      #+end_src
+** centaur-tabs
+   - Repo :: xxx
+     #+begin_src emacs-lisp
+       (use-package centaur-tabs
+         :ensure t
+         :init (centaur-tabs-mode t)
+         :config (setq centaur-tabs-set-icons t
+                       centaur-tabs-height 32
+                       centaur-tabs-set-bar 'over
+                       x-underline-at-descent-line t)
+         :bind
+         ("s-M-<left>" . centaur-tabs-backward)
+         ("s-M-<right>" . centaur-tabs-forward))
+     #+end_src
 ** Company
    - Repo :: https://github.com/company-mode/company-mode
    - Docs :: https://company-mode.github.io/
@@ -126,6 +140,17 @@
          ((dired-mode . diff-hl-dired-mode)
           (magit-pre-refresh . diff-hl-magit-pre-refresh)
           (magit-post-refresh . diff-hl-magit-post-refresh)))
+     #+end_src
+** Drag Stuff
+   - Repo :: https://github.com/rejeep/drag-stuff.el
+     #+begin_src emacs-lisp
+       (use-package drag-stuff
+         :ensure t
+         :bind (("<S-M-up>" . drag-stuff-up)
+              ("<S-M-down>" . drag-stuff-down))
+         :config
+         (drag-stuff-global-mode +1)
+         (drag-stuff-define-keys))
      #+end_src
 ** emacs-emojify
    - Repo :: https://github.com/iqbalansari/emacs-emojify
@@ -641,8 +666,13 @@
          (use-package conda
            :ensure t
            :init
-           (setq conda-anaconda-home (expand-file-name "~/opt/miniconda3"))
-           (setq conda-env-home-directory (expand-file-name "~/opt/miniconda3")))
+           (setq conda-anaconda-home (expand-file-name "~/opt/miniconda3")
+                 conda-env-home-directory (expand-file-name "~/opt/miniconda3")
+                 conda-env-autoactivate-mode t)
+
+           (add-hook 'find-file-hook (lambda () (when (bound-and-true-p conda-project-env-path)
+                                                   (conda-env-activate-for-buffer))))
+           (setq-default mode-line-format (cons '(:exec conda-env-current-name) mode-line-format)))
        #+end_src
 **** pandoc
      - Repo :: https://github.com/joostkremers/pandoc-mode
@@ -743,8 +773,17 @@
         :hook
         (haskell-mode . on-haskell-mode)
         (before-save . lsp-format-buffer))
+    #+end_src
+*** Yaml
+    - Repo :: https://github.com/yoshiki/yaml-mode
+    #+begin_src emacs-lisp
+      (use-package yaml-mode
+        :ensure t)
 
-
+      (add-to-list 'auto-mode-alist '("\\.yml\\'" . yaml-mode))
+      (add-hook 'yaml-mode-hook
+            '(lambda ()
+              (define-key yaml-mode-map "\C-m" 'newline-and-indent)))
     #+end_src
 * Appearance
    #+begin_src emacs-lisp
@@ -852,7 +891,7 @@
      (global-hl-line-mode t)
      (recentf-mode 1)
      (whitespace-mode -1)
-     (toggle-scroll-bar -1)
+     (scroll-bar-mode 1)
 
      (setq scroll-step 1
            recentf-max-menu-items 25
