@@ -381,6 +381,25 @@
         (use-package flx
           :ensure t)
       #+end_src
+*** orderless
+    - Repo :: https://github.com/oantolin/orderless
+      #+begin_src emacs-lisp
+        (use-package orderless
+          :ensure t
+          :config
+          (setq ivy-re-builders-alist '((t . orderless-ivy-re-builder)))
+          (add-to-list 'ivy-highlight-functions-alist '(orderless-ivy-re-builder . orderless-ivy-highlight))
+          :custom
+          (completion-styles '(orderless basic))
+          (completion-category-overrides '((file (styles basic partial-completion)))))
+      #+end_src
+*** ivy-prescient
+    - Repo :: https://github.com/radian-software/prescient.el
+      #+begin_src emacs-lisp
+        (use-package ivy-prescient
+          :ensure t
+          :config (ivy-prescient-mode 1))
+      #+end_src
 ** json-mode
    - Repo :: https://github.com/joshwnj/json-mode
      #+begin_src emacs-lisp
