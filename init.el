@@ -1,8 +1,8 @@
 (eval-when-compile
   (require 'package)
-;;  (require 'diminish)
-;;  (require 'bind-key)
-)
+  ;;  (require 'diminish)
+  ;;  (require 'bind-key)
+  )
 
 
 (setq package-enable-at-startup nil)
@@ -29,3 +29,8 @@
   (write-region "" "" custom-file))
 (load-file custom-file)
 (put 'narrow-to-region 'disabled nil)
+
+
+;; the selected tab highlighting doesn't work otherwise...
+(centaur-tabs-mode 0)
+(centaur-tabs-mode t)

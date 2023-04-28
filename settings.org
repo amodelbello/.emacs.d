@@ -75,15 +75,21 @@
      #+begin_src emacs-lisp
        (use-package centaur-tabs
          :ensure t
-         :init (centaur-tabs-mode t)
-         :config (setq centaur-tabs-set-icons t
-                       centaur-tabs-set-modified-marker t
-                       centaur-tabs-modified-marker "*"
-                       centaur-tabs-height 32
-                       centaur-tabs-set-bar 'under
-                       centaur-tabs-cycle-scope 'tabs
-                       x-underline-at-descent-line t
-                       centaur-tabs-style "bar")
+         :init
+         (centaur-tabs-mode t)
+         :config
+         (setq centaur-tabs-style "bar"
+               centaur-tabs-height 32
+               centaur-tabs-set-icons t
+               centaur-tabs-cycle-scope 'tabs
+               centaur-tabs-set-modified-marker t
+               centaur-tabs-set-bar 'under
+               centaur-tabs-show-count nil
+               x-underline-at-descent-line t
+               uniquify-separator "/"
+               uniquify-buffer-name-style 'forward
+               centaur-tabs-left-edge-margin nil)
+         (centaur-tabs-change-fonts (face-attribute 'default :font) 110)
          (centaur-tabs-group-by-projectile-project)
          (centaur-tabs-headline-match)
          :bind
