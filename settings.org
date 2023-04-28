@@ -415,6 +415,15 @@
          :bind
          (("C-x g" . magit)))
      #+end_src
+** mlscrollbar
+   - Repo :: https://github.com/jdtsmith/mlscroll
+     #+begin_src emacs-lisp
+       (use-package mlscroll
+         :ensure t
+         :config
+         (setq mlscroll-shortfun-min-width 11) ;truncate which-func, for default mode-line-format's
+         (mlscroll-mode 1))
+     #+end_src
 ** nlinum
    - Repo :: https://github.com/hlissner/emacs-nlinum-hl
      #+begin_src emacs-lisp
