@@ -93,8 +93,8 @@
          (centaur-tabs-group-by-projectile-project)
          (centaur-tabs-headline-match)
          :bind
-         ("s-M-<left>" . centaur-tabs-backward)
-         ("s-M-<right>" . centaur-tabs-forward))
+         ("s-M-h" . centaur-tabs-backward)
+         ("s-M-l" . centaur-tabs-forward))
      #+end_src
 ** Company
    - Repo :: https://github.com/company-mode/company-mode
