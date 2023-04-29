@@ -638,11 +638,8 @@
        (use-package dap-mode
          :ensure t
          :bind (("s-l d" . dap-hydra))
-         :config (setq dap-auto-configure-mode 1))
-
-       (use-package dap-python
-         :ensure t
-         :config (setq dap-python-debugger 'debugpy))
+         :config (setq dap-auto-configure-mode 1
+                       dap-python-debugger 'debugpy))
      #+end_src
 ** format-all
    - Repo :: https://github.com/lassik/emacs-format-all-the-code
