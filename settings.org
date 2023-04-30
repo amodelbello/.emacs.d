@@ -612,7 +612,8 @@
          :config
          (yas-global-mode)
          (setq yas-snippet-dirs
-               '("~/.emacs.d/snippets"))
+               '("~/.emacs.d/snippets"
+                 "~/.emacs.d/elpa/yasnippet-snippets-*/snippets"))
          (use-package yasnippet-snippets
            :ensure t))
      #+end_src
