@@ -885,6 +885,14 @@
        (find-file "~/.emacs.d/settings.org"))
      (define-key z-map (kbd "s") 'open-settings-file)
    #+end_src
+** Reload config
+   #+begin_src emacs-lisp
+     (defun reload-config ()
+       "Reload configuration"
+       (interactive)
+       (load-file "~/.emacs.d/init.el"))
+     (define-key z-map (kbd "r") 'reload-config)
+   #+end_src
 ** Open customize-themes
    #+begin_src emacs-lisp
      (define-key z-map (kbd "t") 'customize-themes)
