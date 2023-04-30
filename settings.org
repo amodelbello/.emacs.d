@@ -967,7 +967,7 @@
    #+end_src
 * General Configuration
    #+begin_src emacs-lisp
-     (set-frame-font "DejaVu Sans Mono-12" nil t)
+     (set-frame-font "DejaVu Sans Mono-11" nil t)
      (desktop-save-mode 1)
      (fset 'yes-or-no-p 'y-or-n-p)
      (tool-bar-mode -1)
