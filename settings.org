@@ -649,7 +649,6 @@
        (use-package lsp-ui
          :ensure t
          :bind ((:map lsp-ui-mode-map
-                      ("s-7" . lsp-ui-imenu)
                       ("<C-return>" . lsp-ui-peek-find-references)
                       ([remap xref-find-definitions] . lsp-ui-peek-find-definitions)
                       ([remap xref-find-references] . lsp-ui-peek-find-references)))
@@ -950,7 +949,7 @@
    #+begin_src emacs-lisp
      (global-set-key (kbd "s-1") 'treemacs)
      (global-set-key (kbd "s-2") 'treemacs-select-window)
-     (global-set-key (kbd "s-7") 'lsp-ui-imenu)
+     (global-set-key (kbd "s-7") 'lsp-treemacs-symbols)
    #+end_src
 ** Shrink window vertically
    #+begin_src emacs-lisp
