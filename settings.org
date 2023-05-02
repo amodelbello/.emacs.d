@@ -93,8 +93,8 @@
          (centaur-tabs-group-by-projectile-project)
          (centaur-tabs-headline-match)
          :bind
-         ("s-M-h" . centaur-tabs-backward)
-         ("s-M-l" . centaur-tabs-forward))
+         ("s-M-<left>" . centaur-tabs-backward)
+         ("s-M-<right>" . centaur-tabs-forward))
 
        (defun centaur-tabs-hide-tab (x)
          "Do no to show buffer X in tabs."
@@ -966,7 +966,7 @@
    #+end_src
 * General Configuration
    #+begin_src emacs-lisp
-     (set-frame-font "DejaVu Sans Mono-11" nil t)
+     (set-frame-font "DejaVu Sans Mono-12" nil t)
      (desktop-save-mode 1)
      (fset 'yes-or-no-p 'y-or-n-p)
      (tool-bar-mode -1)
