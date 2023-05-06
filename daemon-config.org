@@ -35,6 +35,5 @@
 
 ** Run in terminal
    #+begin_src bash
-   # homebrew emacs with daemon for command line
-   launchctl load -w ~/Library/LaunchAgents/gnu.emacs-terminal.daemon.plist  1
+   launchctl load -w ~/Library/LaunchAgents/gnu.emacs-terminal.daemon.plist
    #+end_src
