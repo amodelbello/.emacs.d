@@ -966,20 +966,29 @@
    #+end_src
 ** Move point to other window immediately after split
    #+begin_src emacs-lisp
-     (defun adb-split-below ()
+     (defun adb-split-window-below ()
        "Create a new window below and move point to new window."
        (interactive)
        (split-window-below)
        (other-window 1))
 
-     (defun adb-split-right ()
+     (defun adb-split-window-horizontally()
        "Create a new window to the right and move point to new window."
        (interactive)
        (split-window-horizontally)
        (other-window 1))
 
-     (global-set-key (kbd "C-x 2") 'adb-split-below)
-     (global-set-key (kbd "C-x 3") 'adb-split-right)
+     (global-set-key (kbd "C-x 2") 'adb-split-window-below)
+     (global-set-key (kbd "C-x 3") 'adb-split-window-horizontally)
+   #+end_src
+** Un-highlight region after mark jump
+   #+begin_src emacs-lisp
+     (defun adb-exchange-point-and-mark ()
+       "Deactivates mark after exchanging point and mark"
+       (interactive)
+       (exchange-point-and-mark)
+       (deactivate-mark))
+     (global-set-key (kbd "C-x C-x") 'adb-exchange-point-and-mark)
    #+end_src
 * General Configuration
    #+begin_src emacs-lisp
