@@ -3,8 +3,13 @@
    #+begin_src bash
    # homebrew emacs with daemon for command line
    alias emacs-daemon="/opt/homebrew/opt/emacs/bin/emacs -nw -q --load '~/.emacs.d/terminal/init.el' --daemon=terminal-daemon"
+   alias restart-emacs-daemon="pkill -9 emacs && emacs-daemon"
    alias emacs="emacsclient --socket-name=terminal-daemon -t -a ''"
-   alias restart-emacs-daemon="pkill -9 emacs && emacs-daemon”
+   #+end_src
+
+** Add to /usr/local/bin/start-emacs-terminal-daemon.sh (must use sudo)
+   #+begin_src bash
+   /opt/homebrew/opt/emacs/bin/emacs -nw -q --load '~/.emacs.d/terminal/init.el' --daemon=terminal-daemon
    #+end_src
 
 ** Add to ~/Library/LaunchAgents/gnu.emacs-terminal.daemon.plist
