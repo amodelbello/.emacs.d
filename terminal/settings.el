@@ -19,7 +19,7 @@
 ;; [ ][ wheatgrass] -- High-contrast green/blue/brown faces on a black background.
 ;; [ ][ whiteboard] -- Face colors similar to markers on a whiteboard.
 ;; [ ][ wombat] -- Medium-contrast faces with a dark gray background.
-(load-theme 'deeper-blue t)
+;; (load-theme 'deeper-blue t)
 
 (setq inhibit-startup-screen t
       save-interprogram-paste-before-kill t

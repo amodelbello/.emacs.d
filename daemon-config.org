@@ -8,8 +8,14 @@
    #+end_src
 
 ** Add to /usr/local/bin/start-emacs-terminal-daemon.sh (must use sudo)
+   You may need to change the path to the emacs executable
    #+begin_src bash
    /opt/homebrew/opt/emacs/bin/emacs -nw -q --load '~/.emacs.d/terminal/init.el' --daemon=terminal-daemon
+   #+end_src
+
+** Make executable
+   #+begin_src bash
+   chmod +x /usr/local/bin/start-emacs-terminal-daemon.sh
    #+end_src
 
 ** Add to ~/Library/LaunchAgents/gnu.emacs-terminal.daemon.plist
