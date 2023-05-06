@@ -1,0 +1,35 @@
+* Daemon configuration for terminal emacs in MacOS
+** bash/zsh config
+   #+begin_src bash
+   # homebrew emacs with daemon for command line
+   alias emacs-daemon="/opt/homebrew/opt/emacs/bin/emacs -nw -q --load '~/.emacs.d/terminal/init.el' --daemon=terminal-daemon"
+   alias emacs="emacsclient --socket-name=terminal-daemon -t -a ''"
+   alias restart-emacs-daemon="pkill -9 emacs && emacs-daemon”
+   #+end_src
+
+** Add to ~/Library/LaunchAgents/gnu.emacs-terminal.daemon.plist
+   #+begin_src xml
+   <?xml version="1.0" encoding="UTF-8"?>
+   <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN"
+     "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+    <plist version="1.0">
+   <dict>
+     <key>Label</key>
+     <string>gnu.emacs-terminal.daemon</string>
+     <key>ProgramArguments</key>
+     <array>
+       <string>/usr/local/bin/start-emacs-terminal-daemon.sh</string>
+     </array>
+    <key>RunAtLoad</key>
+    <true/>
+    <key>ServiceDescription</key>
+    <string>Gnu Emacs Daemon</string>
+   </dict>
+   </plist>
+   #+end_src
+
+** Run in terminal
+   #+begin_src bash
+   # homebrew emacs with daemon for command line
+   launchctl load -w ~/Library/LaunchAgents/gnu.emacs-terminal.daemon.plist  1
+   #+end_src
