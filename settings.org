@@ -964,6 +964,23 @@
    #+begin_src emacs-lisp
      (global-set-key (kbd "C-c m") 'counsel-mark-ring)
    #+end_src
+** Move point to other window immediately after split
+   #+begin_src emacs-lisp
+     (defun adb-split-below ()
+       "Create a new window below and move point to new window."
+       (interactive)
+       (split-window-below)
+       (other-window 1))
+
+     (defun adb-split-right ()
+       "Create a new window to the right and move point to new window."
+       (interactive)
+       (split-window-horizontally)
+       (other-window 1))
+
+     (global-set-key (kbd "C-x 2") 'adb-split-below)
+     (global-set-key (kbd "C-x 3") 'adb-split-right)
+   #+end_src
 * General Configuration
    #+begin_src emacs-lisp
      (set-frame-font "DejaVu Sans Mono-12" nil t)
