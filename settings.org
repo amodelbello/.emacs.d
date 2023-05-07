@@ -1076,6 +1076,9 @@
        (defadvice load-theme (after run-after-load-theme-hook activate)
          "Run `after-load-theme-hook'."
          (run-hooks 'after-load-theme-hook))
+       (defadvice custom-theme-save (after run-after-load-theme-hook activate)
+         "Run `after-load-theme-hook'."
+         (run-hooks 'after-load-theme-hook))
      (add-hook 'after-load-theme-hook 'reload-centaur-tabs)
    #+end_src
 ** org-mode-hook
