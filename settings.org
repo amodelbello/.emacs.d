@@ -373,6 +373,7 @@
          ("C-c j" . counsel-git-grep)
          ("C-c a" . counsel-ag)
          ("C-c t" . counsel-load-theme)
+         ("C-c m" . counsel-mark-ring)
          ("C-x l" . counsel-locate)
          ("M-y" . counsel-yank-pop)
          ("M-x" . counsel-M-x)
@@ -959,10 +960,6 @@
    #+begin_src emacs-lisp
      (global-set-key (kbd "C-s-p") 'scroll-down-line)
      (global-set-key (kbd "C-s-n") 'scroll-up-line)
-   #+end_src
-** Counsel mark-ring
-   #+begin_src emacs-lisp
-     (global-set-key (kbd "C-c m") 'counsel-mark-ring)
    #+end_src
 ** Move point to other window immediately after split
    #+begin_src emacs-lisp
