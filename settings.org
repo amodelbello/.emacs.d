@@ -448,15 +448,6 @@
          :bind
          (("C-x g" . magit)))
      #+end_src
-** mlscrollbar
-   - Repo :: https://github.com/jdtsmith/mlscroll
-     #+begin_src emacs-lisp
-       (use-package mlscroll
-         :ensure t
-         :config
-         (setq mlscroll-shortfun-min-width 11) ;truncate which-func, for default mode-line-format's
-         (mlscroll-mode 1))
-     #+end_src
 ** nlinum
    - Repo :: https://github.com/hlissner/emacs-nlinum-hl
      #+begin_src emacs-lisp
@@ -618,6 +609,15 @@
                  "~/.emacs.d/elpa/yasnippet-snippets-*/snippets"))
          (use-package yasnippet-snippets
            :ensure t))
+     #+end_src
+** yascroll
+   - Repo :: https://github.com/emacsorphanage/yascroll
+     #+begin_src emacs-lisp
+       (use-package yascroll
+         :ensure t
+         :config
+         (global-yascroll-bar-mode 1)
+         (setq yascroll:delay-to-hide nil))
      #+end_src
 * Programming
 ** lsp-mode
