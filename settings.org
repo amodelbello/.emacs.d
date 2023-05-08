@@ -477,7 +477,8 @@
        (use-package org-bullets
          :ensure t
          :hook
-         (org-mode . org-bullets-mode))
+         (org-mode . org-bullets-mode)
+         (org-mode . org-indent-mode))
      #+end_src
 ** Paredit
    - Repo :: https://github.com/emacsmirror/paredit/blob/master/paredit.el
