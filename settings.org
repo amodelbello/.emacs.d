@@ -448,6 +448,14 @@
        (use-package json-mode
          :ensure t)
      #+end_src
+** minions
+   - Repo :: https://github.com/tarsius/minions
+     #+begin_src emacs-lisp
+       (use-package minions
+         :ensure t
+         :config
+         (minions-mode 1))
+     #+end_src
 ** Magit
    - Repo :: https://github.com/magit/magit
    - Docs :: https://magit.vc/
@@ -887,7 +895,9 @@
          :ensure t
          :hook (after-init . doom-modeline-mode)
          :config
-         (setq doom-modeline-minor-modes nil))
+         (setq doom-modeline-minor-modes t
+               doom-modeline-vcs-max-length 28
+               doom-modeline-buffer-encoding nil))
      #+end_src
 ** Doom Themes
    - Repo :: https://github.com/doomemacs/themes
