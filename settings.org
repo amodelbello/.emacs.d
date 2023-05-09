@@ -268,6 +268,15 @@
          :ensure t
          :after magit)
      #+end_src
+** git-messenger
+   - Repo :: https://github.com/emacsorphanage/git-messenger
+     #+begin_src emacs-lisp
+       (use-package git-messenger
+         :ensure t
+         :config (setq git-messenger:show-detail t
+                       git-messenger:use-magit-popup t)
+         :bind ("C-x m" . git-messenger:popup-message))
+     #+end_src
 ** Git time machine
    - Repo :: https://github.com/emacsmirror/git-timemachine
      #+begin_src emacs-lisp
