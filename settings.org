@@ -1007,6 +1007,10 @@
        (deactivate-mark))
      (global-set-key (kbd "C-x C-x") 'adb-exchange-point-and-mark)
    #+end_src
+** Kill current buffer and delete current window
+   #+begin_src emacs-lisp
+     (global-set-key (kbd "C-x K") 'kill-buffer-and-window)
+   #+end_src
 * General Configuration
    #+begin_src emacs-lisp
      (set-frame-font "DejaVu Sans Mono-12" nil t)
