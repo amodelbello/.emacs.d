@@ -122,6 +122,7 @@
             (string-prefix-p "*Ibuffer" name)
             (string-prefix-p "*Messages" name)
             (string-prefix-p "*Scratch" name)
+            (string-match "\\`\*.*'\*" name)
 
             ;; Is not magit buffer.
             (and (string-prefix-p "magit" name)
@@ -896,7 +897,7 @@
          :hook (after-init . doom-modeline-mode)
          :config
          (setq doom-modeline-minor-modes t
-               doom-modeline-vcs-max-length 28
+               doom-modeline-vcs-max-length 40
                doom-modeline-buffer-encoding nil))
      #+end_src
 ** Doom Themes
@@ -1055,7 +1056,11 @@
      ;; Because the line-spacing above messes up calc
      (add-hook 'calc-mode-hook (lambda () (setq line-spacing 0)))
      (add-hook 'calc-trail-mode-hook (lambda () (setq line-spacing 0)))
-     (add-hook 'before-save-hook 'whitespace-cleanup)
+
+     (defun my-before-save-actions ()
+       (whitespace-cleanup)
+       (delete-trailing-whitespace))
+     (add-hook 'before-save-hook #'my-before-save-actions)
 
      ;; Set the right mode when you create a buffer
      (setq-default major-mode
@@ -1089,6 +1094,8 @@
             (list (region-beginning) (region-end))
           (message "Copied line")
           (list (line-beginning-position) (line-beginning-position 2)))))
+
+     (custom-set-variables '(ediff-split-window-function (quote split-window-horizontally)))
    #+end_src
 
 * Hooks

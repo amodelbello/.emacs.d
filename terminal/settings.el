@@ -21,6 +21,10 @@
 ;; [ ][ wombat] -- Medium-contrast faces with a dark gray background.
 ;; (load-theme 'deeper-blue t)
 
+(defun on-after-init()
+  (unless (display-graphic-p (selected-frame))
+    (set-face-background 'default "unspecified-bg" (selected-frame))))
+
 (setq inhibit-startup-screen t
       save-interprogram-paste-before-kill t
       x-select-enable-clipboard t
