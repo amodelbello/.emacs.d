@@ -560,6 +560,13 @@
          :ensure t
          :hook (prog-mode . rainbow-delimiters-mode))
      #+end_src
+** Transpose Frame
+- Docs :: https://www.emacswiki.org/emacs/TransposeFrame
+  #+begin_src emacs-lisp
+    (use-package transpose-frame
+      :ensure t
+      :bind (("C-c s"   . transpose-frame)))
+  #+end_src
 ** Treemacs
    - Repo :: https://github.com/Alexander-Miller/treemacs
      #+begin_src emacs-lisp
