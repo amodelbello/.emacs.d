@@ -529,9 +529,17 @@
                  "\\*Async Shell Command\\*"
                  "^pop-"
                  help-mode
-                 compilation-mode))
+                 compilation-mode)
+               popper-mode-line "")
          (popper-mode +1)
-         (popper-echo-mode +1))
+         (popper-echo-mode +1)
+         (defun add-popper-status-to-modeline ()
+           "If buffer is a popper-type buffer, display POP in the modeline,
+         in a doom-modeline friendly way"
+           (if (popper-display-control-p (buffer-name))
+               (add-to-list 'mode-line-misc-info "POP")
+             (setq mode-line-misc-info (remove "POP" mode-line-misc-info))))
+         (add-hook 'buffer-list-update-hook 'add-popper-status-to-modeline))
      #+end_src
 ** Projectile
    - Repo :: https://github.com/bbatsov/projectile
@@ -1128,7 +1136,8 @@
 ** treemacs-mode-hook
    Remove line numbers in treemacs mode
    #+begin_src emacs-lisp
-     (defun disable-line-numbers ()
+     (defun buffer-display-minimal ()
+       (setq mode-line-format nil)
        (nlinum-mode 0))
-     (add-hook 'treemacs-mode-hook 'disable-line-numbers)
+     (add-hook 'treemacs-mode-hook 'buffer-display-minimal)
    #+end_src
