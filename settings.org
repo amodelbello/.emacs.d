@@ -1056,7 +1056,8 @@
            font-latex-fontify-script nil
            auto-save-default nil
            make-backup-files nil
-           create-lockfiles nil)
+           create-lockfiles nil
+           undo-tree-enable-undo-in-region t)
 
      (setq-default indent-tabs-mode nil
                    org-catch-invisible-edits 'show
