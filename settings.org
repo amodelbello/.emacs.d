@@ -565,7 +565,7 @@
   #+begin_src emacs-lisp
     (use-package transpose-frame
       :ensure t
-      :bind (("C-c s"   . transpose-frame)))
+      :bind (("C->"   . transpose-frame)))
   #+end_src
 ** Treemacs
    - Repo :: https://github.com/Alexander-Miller/treemacs
