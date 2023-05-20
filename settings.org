@@ -186,6 +186,17 @@
           (magit-pre-refresh . diff-hl-magit-pre-refresh)
           (magit-post-refresh . diff-hl-magit-post-refresh)))
      #+end_src
+** dotenvel
+- Repo :: https://github.com/amodelbello/dotenvel
+  #+begin_src emacs-lisp
+    (use-package dotenvel
+      :ensure t
+      :quelpa
+      (dotenvel :repo "amodelbello/dotenvel"
+                :fetcher github :upgrade t)
+      :config
+      (dotenvel-load))
+  #+end_src
 ** Drag Stuff
    - Repo :: https://github.com/rejeep/drag-stuff.el
      #+begin_src emacs-lisp
@@ -254,7 +265,7 @@
      #+end_src
 ** Flyspell
    #+begin_src emacs-lisp
-     (setq-default ispell-program-name "/opt/homebrew/opt/ispell/bin/ispell")
+     (setq-default ispell-program-name (dotenvel-get "ISPELL_PATH" "/opt/homebrew/opt/ispell/bin/ispell"))
 
      (dolist (hook '(text-mode-hook))
        (add-hook hook (lambda ()
@@ -964,6 +975,7 @@
      (defun reload-config ()
        "Reload configuration"
        (interactive)
+       (dotenvel-load)
        (load-file "~/.emacs.d/init.el"))
      (define-key z-map (kbd "r") 'reload-config)
    #+end_src
@@ -1034,7 +1046,7 @@
 #+end_src
 * General Configuration
    #+begin_src emacs-lisp
-     (set-frame-font "DejaVu Sans Mono-12" nil t)
+     (set-frame-font (dotenvel-get "FONT" "DejaVu Sans Mono-13") nil t)
      (desktop-save-mode 1)
      (fset 'yes-or-no-p 'y-or-n-p)
      (tool-bar-mode -1)

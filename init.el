@@ -20,6 +20,15 @@
 (use-package use-package-ensure-system-package
   :ensure t)
 
+(use-package quelpa
+  :ensure t)
+
+(quelpa
+ '(quelpa-use-package
+   :fetcher git
+   :url "https://github.com/quelpa/quelpa-use-package.git"))
+(require 'quelpa-use-package)
+
 ;; load our main config
 (org-babel-load-file (expand-file-name "~/.emacs.d/settings.org"))
 

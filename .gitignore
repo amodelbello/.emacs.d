@@ -60,6 +60,8 @@ settings.el
 bookmarks
 emojis/
 .dap-breakpoints
+quelpa/
+.env
 
 # Terminal config
 /terminal/elpa
