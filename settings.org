@@ -295,6 +295,15 @@
        (use-package git-timemachine
          :ensure t)
      #+end_src
+** gptel
+- Repo :: https://github.com/karthink/gptel
+  #+begin_src emacs-lisp
+    (use-package gptel
+     :ensure t
+     :config
+     (setq gptel-api-key (dotenvel-get "GPTEL_API_KEY")
+           gptel-default-mode #'org-mode))
+  #+end_src
 ** ibuffer
    - Docs :: https://www.emacswiki.org/emacs/IbufferMode
      #+begin_src emacs-lisp
