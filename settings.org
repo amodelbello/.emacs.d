@@ -19,12 +19,6 @@
           '(aw-leading-char-face
             ((t (:inherit ace-jump-face-foreground :height 3.0))))))
      #+end_src
-** Ag
-   - Repo :: https://github.com/Wilfred/ag.el
-     #+begin_src emacs-lisp
-       (use-package ag
-         :ensure t)
-     #+end_src
 ** AuTex
    - Docs :: https://www.gnu.org/software/auctex/index.html
      #+begin_src emacs-lisp
@@ -729,7 +723,7 @@
 
        (use-package dap-mode
          :ensure t
-         :bind (("s-l d" . dap-hydra))
+         ;; :bind (("s-l d" . dap-hydra)) ;; this causes an error about the s-l prefix
          :config (setq dap-auto-configure-mode 1
                        dap-python-debugger 'debugpy))
      #+end_src
@@ -914,56 +908,6 @@
             '(lambda ()
               (define-key yaml-mode-map "\C-m" 'newline-and-indent)))
     #+end_src
-* Appearance
-   #+begin_src emacs-lisp
-     (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
-   #+end_src
-** Catppuccin Themes
-   - Repo :: https://github.com/catppuccin/emacs
-     #+begin_src emacs-lisp
-       ;; 'frappe, 'latte, 'macchiato, or 'mocha
-       (setq catppuccin-flavor 'latte)
-       ;; (catppuccin-reload)
-     #+end_src
-** Doom Modeline
-   - Repo :: https://github.com/seagle0128/doom-modeline
-     #+begin_src emacs-lisp
-       (use-package doom-modeline
-         :ensure t
-         :hook (after-init . doom-modeline-mode)
-         :config
-         (setq doom-modeline-minor-modes t
-               doom-modeline-vcs-max-length 40
-               doom-modeline-buffer-encoding nil))
-     #+end_src
-** Doom Themes
-   - Repo :: https://github.com/doomemacs/themes
-     #+begin_src emacs-lisp
-       (use-package doom-themes
-         :ensure t
-         :config
-         ;; Global settings (defaults)
-         (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
-               doom-themes-enable-italic t) ; if nil, italics is universally disabled
-
-         ;; Enable flashing mode-line on errors
-         (doom-themes-visual-bell-config)
-
-         ;; Corrects (and improves) org-mode's native fontification.
-         (doom-themes-org-config))
-     #+end_src
-** Modus Themes
-   - Repo :: https://github.com/protesilaos/modus-themes
-     #+begin_src emacs-lisp
-       (use-package modus-themes
-         :ensure t)
-     #+end_src
-** Spacemacs Themes
-   - Repo :: https://github.com/nashamri/spacemacs-theme
-     #+begin_src emacs-lisp
-       (use-package spacemacs-theme
-         :defer t)
-     #+end_src
 * Custom Bindings
 ** Set prefix key ("C-z")
    #+begin_src emacs-lisp
@@ -1058,14 +1002,12 @@
      (set-frame-font (dotenvel-get "FONT" "DejaVu Sans Mono-13") nil t)
      (desktop-save-mode 1)
      (fset 'yes-or-no-p 'y-or-n-p)
-     (tool-bar-mode -1)
      (blink-cursor-mode 0)
      (electric-pair-mode 1)
      (delete-selection-mode 1)
      (global-hl-line-mode t)
      (recentf-mode 1)
      (whitespace-mode -1)
-     (scroll-bar-mode -1)
 
      (setq scroll-step 1
            recentf-max-menu-items 25
@@ -1091,15 +1033,6 @@
                    visual-line-mode t
                    whitespace-line-column 110)
 
-     ;; Because the line-spacing above messes up calc
-     (add-hook 'calc-mode-hook (lambda () (setq line-spacing 0)))
-     (add-hook 'calc-trail-mode-hook (lambda () (setq line-spacing 0)))
-
-     (defun my-before-save-actions ()
-       (whitespace-cleanup)
-       (delete-trailing-whitespace))
-     (add-hook 'before-save-hook #'my-before-save-actions)
-
      ;; Set the right mode when you create a buffer
      (setq-default major-mode
                    (lambda () (if buffer-file-name
@@ -1116,22 +1049,8 @@
                                     (lambda (fg) (set-face-foreground 'mode-line fg))
                                     orig-fg))))
 
-     ;; disable checkdoc in org-mode source blocks
-     (defun disable-fylcheck-in-org-src-block ()
-       (setq-local flycheck-disabled-checkers '(emacs-lisp emacs-lisp-checkdoc)))
-     (add-hook 'org-src-mode-hook 'disable-fylcheck-in-org-src-block)
-
      ;; Fix bug with missing svg type (should be fixed in emacs 29)
      (add-to-list 'image-types 'svg)
-
-     ;; Copy whole line to kill ring
-     (defadvice kill-ring-save (before slick-copy activate compile)
-       "When called interactively with no active region, copy a single line instead."
-       (interactive
-        (if mark-active
-            (list (region-beginning) (region-end))
-          (message "Copied line")
-          (list (line-beginning-position) (line-beginning-position 2)))))
 
      (custom-set-variables '(ediff-split-window-function (quote split-window-horizontally)))
    #+end_src
@@ -1171,3 +1090,91 @@
        (nlinum-mode 0))
      (add-hook 'treemacs-mode-hook 'buffer-display-minimal)
    #+end_src
+
+** calc-mode
+Because the line-spacing above messes up calc
+#+begin_src emacs-lisp
+(defun set-zero-line-spacing ()
+  (setq line-spacing 0))
+(add-hook 'calc-mode-hook #'set-zero-line-spacing)
+(add-hook 'calc-trail-mode-hook #'set-zero-line-spacing)
+#+end_src
+** before-save-hook
+#+begin_src emacs-lisp
+(defun my-before-save-actions ()
+  (whitespace-cleanup)
+  (delete-trailing-whitespace))
+(add-hook 'before-save-hook #'my-before-save-actions)
+#+end_src
+
+** org-src-mode-hook
+Disable checkdoc in org-mode source blocks
+#+begin_src emacs-lisp
+(defun disable-fylcheck-in-org-src-block ()
+  (setq-local flycheck-disabled-checkers '(emacs-lisp emacs-lisp-checkdoc)))
+(add-hook 'org-src-mode-hook 'disable-fylcheck-in-org-src-block)
+#+end_src
+
+* Advice
+** kill-ring-save
+Copy whole line to kill ring when no active region
+#+begin_src emacs-lisp
+  (defadvice kill-ring-save (before slick-copy activate compile)
+    "When called interactively with no active region, copy a single line instead."
+    (interactive
+     (if mark-active
+         (list (region-beginning) (region-end))
+       (message "Copied line")
+       (list (line-beginning-position) (line-beginning-position 2)))))
+#+end_src
+
+* Appearance
+   #+begin_src emacs-lisp
+     (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
+   #+end_src
+** Catppuccin Themes
+   - Repo :: https://github.com/catppuccin/emacs
+     #+begin_src emacs-lisp
+       ;; 'frappe, 'latte, 'macchiato, or 'mocha
+       (setq catppuccin-flavor 'latte)
+       ;; (catppuccin-reload)
+     #+end_src
+** Doom Modeline
+   - Repo :: https://github.com/seagle0128/doom-modeline
+     #+begin_src emacs-lisp
+       (use-package doom-modeline
+         :ensure t
+         :hook (after-init . doom-modeline-mode)
+         :config
+         (setq doom-modeline-minor-modes t
+               doom-modeline-vcs-max-length 40
+               doom-modeline-buffer-encoding nil))
+     #+end_src
+** Doom Themes
+   - Repo :: https://github.com/doomemacs/themes
+     #+begin_src emacs-lisp
+       (use-package doom-themes
+         :ensure t
+         :config
+         ;; Global settings (defaults)
+         (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
+               doom-themes-enable-italic t) ; if nil, italics is universally disabled
+
+         ;; Enable flashing mode-line on errors
+         (doom-themes-visual-bell-config)
+
+         ;; Corrects (and improves) org-mode's native fontification.
+         (doom-themes-org-config))
+     #+end_src
+** Modus Themes
+   - Repo :: https://github.com/protesilaos/modus-themes
+     #+begin_src emacs-lisp
+       (use-package modus-themes
+         :ensure t)
+     #+end_src
+** Spacemacs Themes
+   - Repo :: https://github.com/nashamri/spacemacs-theme
+     #+begin_src emacs-lisp
+       (use-package spacemacs-theme
+         :defer t)
+     #+end_src
