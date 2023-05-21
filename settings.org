@@ -523,7 +523,13 @@
               "^pop-"
               help-mode
               compilation-mode)
-            popper-mode-line "")
+            popper-mode-line ""
+
+            ;; Make popper buffers 1/2 window height
+            popper-window-height (lambda (win)
+                                   (fit-window-to-buffer
+                                    win
+                                    (floor (frame-height) 2))))
       (popper-mode +1)
       (popper-echo-mode +1)
       (defun add-popper-status-to-modeline ()
