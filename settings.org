@@ -334,7 +334,6 @@
 - Repo :: https://github.com/abo-abo/swiper
 - Docs :: https://oremacs.com/swiper/
 *** Ivy
-- Repo :: https://github.com/abo-abo/swiper
  #+begin_src emacs-lisp
    (use-package ivy
      :ensure t
