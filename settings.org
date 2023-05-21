@@ -909,62 +909,55 @@
               (define-key yaml-mode-map "\C-m" 'newline-and-indent)))
     #+end_src
 * Custom Bindings
-** Set prefix key ("C-z")
    #+begin_src emacs-lisp
-    ;; "C-z" is the custom prefix key
-    (define-prefix-command 'z-map)
-    (global-set-key (kbd "C-z") 'z-map)
-   #+end_src
-** Open settings.org (this file)
-   #+begin_src emacs-lisp
+     ;; Set prefix key ("C-z")
+     ;; "C-z" is the custom prefix key
+     (define-prefix-command 'z-map)
+     (global-set-key (kbd "C-z") 'z-map)
+
+     ;; Open settings.org (this file)
      (defun open-settings-file ()
        "Open settings.org"
        (interactive)
        (find-file "~/.emacs.d/settings.org"))
      (define-key z-map (kbd "s") 'open-settings-file)
-   #+end_src
-** Reload config
-   #+begin_src emacs-lisp
+
+     ;; Reload config
      (defun reload-config ()
        "Reload configuration"
        (interactive)
        (dotenvel-load)
        (load-file "~/.emacs.d/init.el"))
-     (define-key z-map (kbd "r") 'reload-config)
-   #+end_src
-** Open customize-themes
-   #+begin_src emacs-lisp
-     (define-key z-map (kbd "t") 'customize-themes)
-   #+end_src
-** Open centaur-tabs groups
-   #+begin_src emacs-lisp
-     (define-key z-map (kbd "a") 'centaur-tabs-counsel-switch-group)
-   #+end_src
-** Start eshell
-   #+begin_src emacs-lisp
-     (define-key z-map (kbd "e") 'eshell)
-   #+end_src
-** Open Calendar
-   #+begin_src emacs-lisp
-     (define-key z-map (kbd "c") 'calendar)
-   #+end_src
-** Bindings for "IDE-like" tool windows
-   #+begin_src emacs-lisp
-     (global-set-key (kbd "s-1") 'treemacs)
-     (global-set-key (kbd "s-2") 'treemacs-select-window)
-     (global-set-key (kbd "s-7") 'lsp-treemacs-symbols)
-   #+end_src
-** Shrink window vertically
-   #+begin_src emacs-lisp
+     (define-key z-map (kbd "r") #'reload-config)
+
+     ;; Open customize-themes
+     (define-key z-map (kbd "t") #'customize-themes)
+
+     ;; Open centaur-tabs groups
+     (define-key z-map (kbd "a") #'centaur-tabs-counsel-switch-group)
+
+     ;; Start eshell
+     (define-key z-map (kbd "e") #'eshell)
+
+     ;; Open Calendar
+     (define-key z-map (kbd "c") #'calendar)
+
+     ;; Open gptel
+     (define-key z-map (kbd "g") #'gptel)
+
+     ;;  Bindings for "IDE-like" tool windows
+     (global-set-key (kbd "s-1") #'treemacs)
+     (global-set-key (kbd "s-2") #'treemacs-select-window)
+     (global-set-key (kbd "s-7") #'lsp-treemacs-symbols)
+
+     ;; Shrink window vertically
      (global-set-key (kbd "C-x %") (kbd "C-u -1 C-x ^"))
-   #+end_src
-** One line scroll
-   #+begin_src emacs-lisp
-     (global-set-key (kbd "C-s-p") 'scroll-down-line)
-     (global-set-key (kbd "C-s-n") 'scroll-up-line)
-   #+end_src
-** Move point to other window immediately after split
-   #+begin_src emacs-lisp
+
+     ;; One line scroll
+     (global-set-key (kbd "C-s-p") #'scroll-down-line)
+     (global-set-key (kbd "C-s-n") #'scroll-up-line)
+
+     ;; Move point to other window immediately after split
      (defun adb-split-window-below ()
        "Create a new window below and move point to new window."
        (interactive)
@@ -977,26 +970,24 @@
        (split-window-horizontally)
        (other-window 1))
 
-     (global-set-key (kbd "C-x 2") 'adb-split-window-below)
-     (global-set-key (kbd "C-x 3") 'adb-split-window-horizontally)
-   #+end_src
-** Un-highlight region after mark jump
-   #+begin_src emacs-lisp
+     (global-set-key (kbd "C-x 2") #'adb-split-window-below)
+     (global-set-key (kbd "C-x 3") #'adb-split-window-horizontally)
+
+     ;; Un-highlight region after mark jump
      (defun adb-exchange-point-and-mark ()
        "Deactivates mark after exchanging point and mark"
        (interactive)
        (exchange-point-and-mark)
        (deactivate-mark))
-     (global-set-key (kbd "C-x C-x") 'adb-exchange-point-and-mark)
-   #+end_src
-** Kill current buffer and delete current window
-#+begin_src emacs-lisp
-  (global-set-key (kbd "C-x K") 'kill-buffer-and-window)
-#+end_src
-** Comment line
-#+begin_src emacs-lisp
-  (global-set-key (kbd "s-/") 'comment-line)
-#+end_src
+     (global-set-key (kbd "C-x C-x") #'adb-exchange-point-and-mark)
+
+     ;; Kill current buffer and delete current window
+     (global-set-key (kbd "C-x K") #'kill-buffer-and-window)
+
+     ;; Comment line
+     (global-set-key (kbd "s-/") #'comment-line)
+
+  #+end_src
 * General Configuration
    #+begin_src emacs-lisp
      (set-frame-font (dotenvel-get "FONT" "DejaVu Sans Mono-13") nil t)
@@ -1101,10 +1092,10 @@ Because the line-spacing above messes up calc
 #+end_src
 ** before-save-hook
 #+begin_src emacs-lisp
-(defun my-before-save-actions ()
+(defun adb-before-save-actions ()
   (whitespace-cleanup)
   (delete-trailing-whitespace))
-(add-hook 'before-save-hook #'my-before-save-actions)
+(add-hook 'before-save-hook #'adb-before-save-actions)
 #+end_src
 
 ** org-src-mode-hook
