@@ -62,6 +62,7 @@ emojis/
 .dap-breakpoints
 quelpa/
 .env
+backups/
 
 # Terminal config
 /terminal/elpa

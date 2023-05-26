@@ -992,9 +992,16 @@
            inferior-lisp-program "/usr/local/bin/sbcl"
            font-latex-fontify-script nil
            auto-save-default nil
-           make-backup-files nil
            create-lockfiles nil
-           undo-tree-enable-undo-in-region t)
+           undo-tree-enable-undo-in-region t
+
+           ;; Save backups to a central location
+           make-backup-files t
+           backup-directory-alist '(("." . "~/.emacs.d/backups"))
+           delete-old-versions -1
+           version-control t
+           vc-make-backup-files t
+           auto-save-file-name-transforms '((".*" "~/.emacs.d/auto-save-list/" t)))
 
      (setq-default indent-tabs-mode nil
                    org-catch-invisible-edits 'show
@@ -1027,6 +1034,7 @@
      (add-to-list 'image-types 'svg)
 
      (custom-set-variables '(ediff-split-window-function (quote split-window-horizontally)))
+
    #+end_src
 
 * Hooks
