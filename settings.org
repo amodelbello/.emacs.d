@@ -278,6 +278,18 @@
      (setq gptel-api-key (dotenvel-get "GPTEL_API_KEY")
            gptel-default-mode #'org-mode))
   #+end_src
+** grip
+- Repo :: https://github.com/seagle0128/grip-mode
+  #+begin_src bash
+    pip install grip
+  #+end_src
+  #+begin_src emacs-lisp
+    (use-package grip-mode
+      :ensure t
+      :bind (:map markdown-mode-command-map
+             ("g" . grip-mode))
+      :config (setq grip-preview-use-webkit t))
+  #+end_src
 ** ibuffer
 - Docs :: https://www.emacswiki.org/emacs/IbufferMode
   #+begin_src emacs-lisp
