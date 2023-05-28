@@ -288,7 +288,9 @@
       :ensure t
       :bind (:map markdown-mode-command-map
              ("g" . grip-mode))
-      :config (setq grip-preview-use-webkit t))
+      :config (setq grip-preview-use-webkit t
+                    grip-github-user "amodelbello"
+                    grip-github-password (dotenvel-get "GRIP_GITHUB_PASSWORD")))
   #+end_src
 ** ibuffer
 - Docs :: https://www.emacswiki.org/emacs/IbufferMode
@@ -772,25 +774,29 @@
 - Repo :: https://github.com/python-lsp/python-lsp-server
   #+begin_src bash
     pip3 install 'python-lsp-server[all]'
+    pip3 install black
+    pip3 install pylsp-rope
   #+end_src
   #+begin_src emacs-lisp
     (setq lsp-pylsp-plugins-flake8-enabled t
           lsp-pylsp-plugins-flake8-config "~/.flake8"
           lsp-pylsp-plugins-pydocstyle-enabled nil)
+    (use-package dap-python
+      :ensure t)
   #+end_src
 **** conda
 - Repo :: https://github.com/necaris/conda.el
   #+begin_src emacs-lisp
-    (use-package conda
-      :ensure t
-      :init
-      (setq conda-anaconda-home (expand-file-name "~/opt/miniconda3")
-            conda-env-home-directory (expand-file-name "~/opt/miniconda3")
-            conda-env-autoactivate-mode t)
+    ;; (use-package conda
+    ;;   :ensure t
+    ;;   :init
+    ;;   (setq conda-anaconda-home (expand-file-name "~/opt/miniconda3")
+    ;;         conda-env-home-directory (expand-file-name "~/opt/miniconda3")
+    ;;         conda-env-autoactivate-mode t)
 
-      (add-hook 'find-file-hook (lambda () (when (bound-and-true-p conda-project-env-path)
-                                              (conda-env-activate-for-buffer))))
-      (setq-default mode-line-format (cons '(:exec conda-env-current-name) mode-line-format)))
+    ;;   (add-hook 'find-file-hook (lambda () (when (bound-and-true-p conda-project-env-path)
+    ;;                                           (conda-env-activate-for-buffer))))
+    ;;   (setq-default mode-line-format (cons '(:exec conda-env-current-name) mode-line-format)))
   #+end_src
 **** pandoc
 - Repo :: https://github.com/joostkremers/pandoc-mode
