@@ -776,9 +776,11 @@
     pip3 install 'python-lsp-server[all]'
     pip3 install black
     pip3 install pylsp-rope
+    pip3 install flake8
   #+end_src
   #+begin_src emacs-lisp
     (setq lsp-pylsp-plugins-flake8-enabled t
+          ;; config file must exist for syntax error highlighting
           lsp-pylsp-plugins-flake8-config "~/.flake8"
           lsp-pylsp-plugins-pydocstyle-enabled nil)
     (use-package dap-python
