@@ -961,28 +961,28 @@
      (global-set-key (kbd "C-s-n") #'scroll-up-line)
 
      ;; Move point to other window immediately after split
-     (defun adb-split-window-below ()
+     (defun amo/split-window-below ()
        "Create a new window below and move point to new window."
        (interactive)
        (split-window-below)
        (other-window 1))
 
-     (defun adb-split-window-horizontally()
+     (defun amo/split-window-horizontally()
        "Create a new window to the right and move point to new window."
        (interactive)
        (split-window-horizontally)
        (other-window 1))
 
-     (global-set-key (kbd "C-x 2") #'adb-split-window-below)
-     (global-set-key (kbd "C-x 3") #'adb-split-window-horizontally)
+     (global-set-key (kbd "C-x 2") #'amo/split-window-below)
+     (global-set-key (kbd "C-x 3") #'amo/split-window-horizontally)
 
      ;; Un-highlight region after mark jump
-     (defun adb-exchange-point-and-mark ()
+     (defun amo/exchange-point-and-mark ()
        "Deactivates mark after exchanging point and mark"
        (interactive)
        (exchange-point-and-mark)
        (deactivate-mark))
-     (global-set-key (kbd "C-x C-x") #'adb-exchange-point-and-mark)
+     (global-set-key (kbd "C-x C-x") #'amo/exchange-point-and-mark)
 
      ;; Kill current buffer and delete current window
      (global-set-key (kbd "C-x K") #'kill-buffer-and-window)
@@ -1103,10 +1103,10 @@ Because the line-spacing above messes up calc
 #+end_src
 ** before-save-hook
 #+begin_src emacs-lisp
-(defun adb-before-save-actions ()
+(defun amo/before-save-actions ()
   (whitespace-cleanup)
   (delete-trailing-whitespace))
-(add-hook 'before-save-hook #'adb-before-save-actions)
+(add-hook 'before-save-hook #'amo/before-save-actions)
 #+end_src
 
 ** org-src-mode-hook
