@@ -1065,7 +1065,7 @@
      (add-to-list 'image-types 'svg)
 
      (custom-set-variables '(ediff-split-window-function (quote split-window-horizontally)))
-
+     (custom-set-variables '(ediff-window-setup-function (quote ediff-setup-windows-plain)))
    #+end_src
 
 * Hooks
