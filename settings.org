@@ -1000,7 +1000,7 @@
        "Just like transpose-words but goes the other way"
        (interactive)
        (transpose-words -1))
-     (global-set-key (kbd "M-S-t") #'amo/transpose-words-backwards)
+     (global-set-key (kbd "M-T") #'amo/transpose-words-backwards) ;; not sure why "M-S-t" doesn't work here
   #+end_src
 * General Configuration
    #+begin_src emacs-lisp
