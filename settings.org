@@ -990,6 +990,17 @@
      ;; Comment line
      (global-set-key (kbd "s-/") #'comment-line)
 
+     ;; Transpose chars and words backwards
+     (defun amo/transpose-chars-backwards ()
+       "Just like transpose-chars but goes the other way"
+       (interactive)
+       (transpose-chars -1))
+     (global-set-key (kbd "C-S-t") #'amo/transpose-chars-backwards)
+     (defun amo/transpose-words-backwards ()
+       "Just like transpose-words but goes the other way"
+       (interactive)
+       (transpose-words -1))
+     (global-set-key (kbd "M-S-t") #'amo/transpose-words-backwards)
   #+end_src
 * General Configuration
    #+begin_src emacs-lisp
