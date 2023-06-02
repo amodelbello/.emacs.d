@@ -1001,6 +1001,23 @@
        (interactive)
        (transpose-words -1))
      (global-set-key (kbd "M-T") #'amo/transpose-words-backwards) ;; not sure why "M-S-t" doesn't work here
+
+     ;; Move char after point to end of next word
+     (defun amo/transpose-char-to-end-of-next-word ()
+       "Move char at point to the end of the next word.
+     Useful for prentheses when coding
+     TODO: Use regex for word boundary instead of (forward-word)"
+       (interactive)
+       (forward-char)
+       (let ((start (point))
+             (end nil))
+         (save-excursion
+           (forward-word)
+           (setq end (point)))
+         (transpose-subr 'forward-char (- end start)))
+       (backward-char))
+     (global-set-key (kbd "C-S-f") #'amo/transpose-char-to-end-of-next-word)
+
   #+end_src
 * General Configuration
    #+begin_src emacs-lisp
