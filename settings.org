@@ -1005,14 +1005,32 @@
      ;; Move char after point to end of next word
      (defun amo/transpose-char-to-end-of-next-word ()
        "Move char at point to the end of the next word.
-     Useful for prentheses when coding
-     TODO: Use regex for word boundary instead of (forward-word)"
+     Use case is to push closing parentheses out to contain subsequent characters
+     when a function is typed and the closing parenthesis is automatically added.
+     Skips over periods, quotes, and closing parentheses."
        (interactive)
+
+       ;; helpers
+       (defun amo/should-move-forward-one-char (c)
+         (or
+          (char-equal (following-char) ?\")
+          (char-equal (following-char) ?\))))
+       (defun amo/should-move-forward-one-word (c)
+         (char-equal (following-char) ?.))
+       (defun amo/should-move (c)
+         (or
+          (amo/should-move-forward-one-char c)
+          (amo/should-move-forward-one-word c)))
+
        (forward-char)
        (let ((start (point))
              (end nil))
          (save-excursion
            (forward-word)
+           (while (amo/should-move (following-char))
+             (if (amo/should-move-forward-one-char (following-char))
+                 (forward-char)
+               (forward-word)))
            (setq end (point)))
          (transpose-subr 'forward-char (- end start)))
        (backward-char))
