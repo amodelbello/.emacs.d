@@ -1162,49 +1162,57 @@ Copy whole line to kill ring when no active region
    #+begin_src emacs-lisp
      (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
    #+end_src
-** Catppuccin Themes
-   - Repo :: https://github.com/catppuccin/emacs
-     #+begin_src emacs-lisp
-       ;; 'frappe, 'latte, 'macchiato, or 'mocha
-       (setq catppuccin-flavor 'latte)
-       ;; (catppuccin-reload)
-     #+end_src
 ** Doom Modeline
-   - Repo :: https://github.com/seagle0128/doom-modeline
-     #+begin_src emacs-lisp
-       (use-package doom-modeline
-         :ensure t
-         :hook (after-init . doom-modeline-mode)
-         :config
-         (setq doom-modeline-minor-modes t
-               doom-modeline-vcs-max-length 40
-               doom-modeline-buffer-encoding nil))
-     #+end_src
+- Repo :: https://github.com/seagle0128/doom-modeline
+  #+begin_src emacs-lisp
+    (use-package doom-modeline
+      :ensure t
+      :hook (after-init . doom-modeline-mode)
+      :config
+      (setq doom-modeline-minor-modes t
+            doom-modeline-vcs-max-length 40
+            doom-modeline-buffer-encoding nil))
+  #+end_src
 ** Doom Themes
-   - Repo :: https://github.com/doomemacs/themes
-     #+begin_src emacs-lisp
-       (use-package doom-themes
-         :ensure t
-         :config
-         ;; Global settings (defaults)
-         (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
-               doom-themes-enable-italic t) ; if nil, italics is universally disabled
+- Repo :: https://github.com/doomemacs/themes
+  #+begin_src emacs-lisp
+    (use-package doom-themes
+      :ensure t
+      :config
+      ;; Global settings (defaults)
+      (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
+            doom-themes-enable-italic t) ; if nil, italics is universally disabled
 
-         ;; Enable flashing mode-line on errors
-         (doom-themes-visual-bell-config)
+      ;; Enable flashing mode-line on errors
+      (doom-themes-visual-bell-config)
 
-         ;; Corrects (and improves) org-mode's native fontification.
-         (doom-themes-org-config))
-     #+end_src
+      ;; Corrects (and improves) org-mode's native fontification.
+      (doom-themes-org-config))
+  #+end_src
+** Ef Themes
+- Repo :: https://github.com/protesilaos/modus-themes
+  #+begin_src emacs-lisp
+    ;; No Centaur tabs support :(
+    ;; (use-package ef-themes
+    ;;   :ensure t)
+  #+end_src
+** Kaolin Themes
+- Repo :: https://github.com/ogdenwebb/emacs-kaolin-themes
+  #+begin_src emacs-lisp
+    (use-package kaolin-themes
+      :ensure t
+      :config
+      (kaolin-treemacs-theme))
+  #+end_src
 ** Modus Themes
-   - Repo :: https://github.com/protesilaos/modus-themes
-     #+begin_src emacs-lisp
-       (use-package modus-themes
-         :ensure t)
-     #+end_src
+- Repo :: https://github.com/protesilaos/ef-themes
+  #+begin_src emacs-lisp
+    (use-package modus-themes
+      :ensure t)
+  #+end_src
 ** Spacemacs Themes
-   - Repo :: https://github.com/nashamri/spacemacs-theme
-     #+begin_src emacs-lisp
-       (use-package spacemacs-theme
-         :defer t)
-     #+end_src
+- Repo :: https://github.com/nashamri/spacemacs-theme
+  #+begin_src emacs-lisp
+    (use-package spacemacs-theme
+      :defer t)
+  #+end_src
