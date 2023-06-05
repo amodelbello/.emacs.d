@@ -1210,9 +1210,8 @@ Copy whole line to kill ring when no active region
 ** Ef Themes
 - Repo :: https://github.com/protesilaos/modus-themes
   #+begin_src emacs-lisp
-    ;; No Centaur tabs support :(
-    ;; (use-package ef-themes
-    ;;   :ensure t)
+    (use-package ef-themes
+      :ensure t)
   #+end_src
 ** Kaolin Themes
 - Repo :: https://github.com/ogdenwebb/emacs-kaolin-themes
