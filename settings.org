@@ -90,8 +90,8 @@
       ("s-M-<left>" . centaur-tabs-backward)
       ("s-M-<right>" . centaur-tabs-forward))
 
-    (defun centaur-tabs-hide-tab (x)
-      "Do no to show buffer X in tabs."
+    (defun amo/centaur-tabs-hide-tab (x)
+      "Do not show buffer X in tabs."
       (let ((name (format "%s" x)))
         (or
          ;; Current window is not dedicated window.
@@ -546,13 +546,13 @@
                                     (floor (frame-height) 2))))
       (popper-mode +1)
       (popper-echo-mode +1)
-      (defun add-popper-status-to-modeline ()
+      (defun amo/add-popper-status-to-modeline ()
         "If buffer is a popper-type buffer, display POP in the modeline,
       in a doom-modeline friendly way"
         (if (popper-display-control-p (buffer-name))
             (add-to-list 'mode-line-misc-info "POP")
           (setq mode-line-misc-info (remove "POP" mode-line-misc-info))))
-      (add-hook 'buffer-list-update-hook 'add-popper-status-to-modeline))
+      (add-hook 'buffer-list-update-hook 'amo/add-popper-status-to-modeline))
   #+end_src
 ** Projectile
 - Repo :: https://github.com/bbatsov/projectile
@@ -840,7 +840,7 @@
 **** prettier-js
 - Repo :: https://github.com/prettier/prettier-emacs
   #+begin_src emacs-lisp
-    (defun enable-minor-mode (my-pair)
+    (defun amo/enable-minor-mode (my-pair)
       "Enable minor mode if filename match the regexp.  MY-PAIR is a cons cell (regexp . minor-mode)."
       (if (buffer-file-name)
           (if (string-match (car my-pair) buffer-file-name)
@@ -862,9 +862,9 @@
                                "--use-tabs" "false")))
 
     (add-hook 'web-mode-hook #'(lambda ()
-                                 (enable-minor-mode
+                                 (amo/enable-minor-mode
                                   '("\\.jsx?\\'" . prettier-js-mode))
-                                 (enable-minor-mode
+                                 (amo/enable-minor-mode
                                   '("\\.tsx?\\'" . prettier-js-mode))))
   #+end_src
 *** Go
@@ -873,11 +873,11 @@
     (use-package go-mode
       :ensure t
       :hook
-      ((go-mode . lsp-go-install-config))
+      ((go-mode . amo/lsp-go-install-config))
       :config
       (add-to-list 'auto-mode-alist '("\\.go\\'" . go-mode)))
 
-    (defun lsp-go-install-config ()
+    (defun amo/lsp-go-install-config ()
       (add-hook 'before-save-hook #'lsp-format-buffer t t)
       (add-hook 'before-save-hook #'lsp-organize-imports t t)
       (setq-default indent-tabs-mode nil)
@@ -890,14 +890,14 @@
     (use-package haskell-mode
       :ensure t)
 
-    (defun on-haskell-mode ()
+    (defun amo/on-haskell-mode ()
       "Enable lsp & interactive-haskell-mode"
       (lsp)
       (interactive-haskell-mode t))
     (use-package lsp-haskell
       :ensure t
       :hook
-      (haskell-mode . on-haskell-mode)
+      (haskell-mode . amo/on-haskell-mode)
       (before-save . lsp-format-buffer))
   #+end_src
 *** Yaml
@@ -1108,7 +1108,7 @@
    Centaur tabs styling messes up after a theme change.
    This reloads `centaur-tabs-mode` after a theme change.
    #+begin_src emacs-lisp
-     (defun reload-centaur-tabs ()
+     (defun amo/reload-centaur-tabs ()
        (centaur-tabs-mode 0)
        (centaur-tabs-mode 1))
      (defvar after-load-theme-hook nil
@@ -1119,33 +1119,33 @@
        (defadvice custom-theme-save (after run-after-load-theme-hook activate)
          "Run `after-load-theme-hook'."
          (run-hooks 'after-load-theme-hook))
-     (add-hook 'after-load-theme-hook 'reload-centaur-tabs)
+     (add-hook 'after-load-theme-hook 'amo/reload-centaur-tabs)
    #+end_src
 ** org-mode-hook
    For some reason org-mode doesn't respect visual-line-mode when it loads.
    This function reloads visual-line-mode.
    #+begin_src emacs-lisp
-     (defun reload-visual-line-mode ()
+     (defun amo/reload-visual-line-mode ()
        (visual-line-mode 0)
        (visual-line-mode 1))
-     (add-hook 'org-mode-hook 'reload-visual-line-mode)
+     (add-hook 'org-mode-hook 'amo/reload-visual-line-mode)
    #+end_src
 ** treemacs-mode-hook
    Remove line numbers in treemacs mode
    #+begin_src emacs-lisp
-     (defun buffer-display-minimal ()
+     (defun amo/buffer-display-minimal ()
        (setq mode-line-format nil)
        (nlinum-mode 0))
-     (add-hook 'treemacs-mode-hook 'buffer-display-minimal)
+     (add-hook 'treemacs-mode-hook 'amo/buffer-display-minimal)
    #+end_src
 
 ** calc-mode
 Because the line-spacing above messes up calc
 #+begin_src emacs-lisp
-(defun set-zero-line-spacing ()
+(defun amo/set-zero-line-spacing ()
   (setq line-spacing 0))
-(add-hook 'calc-mode-hook #'set-zero-line-spacing)
-(add-hook 'calc-trail-mode-hook #'set-zero-line-spacing)
+(add-hook 'calc-mode-hook #'amo/set-zero-line-spacing)
+(add-hook 'calc-trail-mode-hook #'amo/set-zero-line-spacing)
 #+end_src
 ** before-save-hook
 #+begin_src emacs-lisp
@@ -1158,9 +1158,9 @@ Because the line-spacing above messes up calc
 ** org-src-mode-hook
 Disable checkdoc in org-mode source blocks
 #+begin_src emacs-lisp
-(defun disable-fylcheck-in-org-src-block ()
+(defun amo/disable-fylcheck-in-org-src-block ()
   (setq-local flycheck-disabled-checkers '(emacs-lisp emacs-lisp-checkdoc)))
-(add-hook 'org-src-mode-hook 'disable-fylcheck-in-org-src-block)
+(add-hook 'org-src-mode-hook 'amo/disable-fylcheck-in-org-src-block)
 #+end_src
 
 * Advice
