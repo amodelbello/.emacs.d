@@ -189,7 +189,7 @@
       :ensure t
       :hook (after-init . global-emojify-mode))
   #+end_src
-** emacs-sqllite3
+** emacs-sqlite3
 - Repo :: https://github.com/pekingduck/emacs-sqlite3-api
   #+begin_src emacs-lisp
     (use-package sqlite3
