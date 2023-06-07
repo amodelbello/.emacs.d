@@ -587,7 +587,7 @@
       :ensure t
       :defer t
       :config
-      (treemacs-resize-icons 16)
+      (treemacs-resize-icons 14)
       (define-key treemacs-mode-map [mouse-1] #'treemacs-single-click-expand-action))
 
     (use-package
@@ -1217,9 +1217,7 @@ Copy whole line to kill ring when no active region
 - Repo :: https://github.com/ogdenwebb/emacs-kaolin-themes
   #+begin_src emacs-lisp
     (use-package kaolin-themes
-      :ensure t
-      :config
-      (kaolin-treemacs-theme))
+      :ensure t)
   #+end_src
 ** Modus Themes
 - Repo :: https://github.com/protesilaos/ef-themes
