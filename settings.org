@@ -19,6 +19,15 @@
        '(aw-leading-char-face
          ((t (:inherit ace-jump-face-foreground :height 3.0))))))
   #+end_src
+** aggressive-indent-mode
+- Repo :: https://github.com/Malabarba/aggressive-indent-mode
+  #+begin_src emacs-lisp
+    (use-package aggressive-indent
+      :ensure t
+      :config
+      (global-aggressive-indent-mode 1)
+      (add-to-list 'aggressive-indent-excluded-modes 'html-mode))
+  #+end_src
 ** AuTex
 - Docs :: https://www.gnu.org/software/auctex/index.html
   #+begin_src emacs-lisp
