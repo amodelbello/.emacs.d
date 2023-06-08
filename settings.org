@@ -278,6 +278,14 @@
     (use-package git-timemachine
       :ensure t)
   #+end_src
+** goto-line-preview
+- Repo :: https://github.com/emacs-vs/goto-line-preview
+  #+begin_src emacs-lisp
+    (use-package goto-line-preview
+      :ensure t
+      :config
+      (global-set-key [remap goto-line] 'goto-line-preview))
+  #+end_src
 ** gptel
 - Repo :: https://github.com/karthink/gptel
   #+begin_src emacs-lisp
