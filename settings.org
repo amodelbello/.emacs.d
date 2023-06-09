@@ -738,8 +738,12 @@
     (use-package dap-mode
       :ensure t
       ;; :bind (("s-l d" . dap-hydra)) ;; this causes an error about the s-l prefix
-      :config (setq dap-auto-configure-mode 1
-                    dap-python-debugger 'debugpy))
+      :config
+      (setq dap-auto-configure-mode 1
+            dap-python-debugger 'debugpy
+            dap-python-executable "python3"
+            python-shell-interpreter "python3")
+      (require 'dap-python))
   #+end_src
 ** format-all
 - Repo :: https://github.com/lassik/emacs-format-all-the-code
