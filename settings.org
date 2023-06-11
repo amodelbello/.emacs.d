@@ -804,8 +804,6 @@
           ;; config file must exist for syntax error highlighting
           lsp-pylsp-plugins-flake8-config "~/.flake8"
           lsp-pylsp-plugins-pydocstyle-enabled nil)
-    (use-package dap-python
-      :ensure t)
   #+end_src
 **** conda
 - Repo :: https://github.com/necaris/conda.el
@@ -1117,9 +1115,6 @@
                                     (lambda (fg) (set-face-foreground 'mode-line fg))
                                     orig-fg))))
 
-     ;; Fix bug with missing svg type (should be fixed in emacs 29)
-     (add-to-list 'image-types 'svg)
-
      (custom-set-variables '(ediff-split-window-function (quote split-window-horizontally)))
      (custom-set-variables '(ediff-window-setup-function (quote ediff-setup-windows-plain)))
    #+end_src
@@ -1175,7 +1170,6 @@ Because the line-spacing above messes up calc
   (delete-trailing-whitespace))
 (add-hook 'before-save-hook #'amo/before-save-actions)
 #+end_src
-
 ** org-src-mode-hook
 Disable checkdoc in org-mode source blocks
 #+begin_src emacs-lisp
