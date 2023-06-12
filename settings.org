@@ -99,7 +99,7 @@
       ("s-M-<left>" . centaur-tabs-backward)
       ("s-M-<right>" . centaur-tabs-forward))
 
-    (defun amo/centaur-tabs-hide-tab (x)
+    (defun centaur-tabs-hide-tab (x)
       "Do not show buffer X in tabs."
       (let ((name (format "%s" x)))
         (or
