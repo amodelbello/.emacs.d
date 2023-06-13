@@ -97,7 +97,9 @@
       (centaur-tabs-headline-match)
       :bind
       ("s-M-<left>" . centaur-tabs-backward)
-      ("s-M-<right>" . centaur-tabs-forward))
+      ("s-M-<right>" . centaur-tabs-forward)
+      :hook
+      (popper-mode . centaur-tabs-local-mode))
 
     (defun centaur-tabs-hide-tab (x)
       "Do not show buffer X in tabs."
