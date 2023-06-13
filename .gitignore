@@ -63,6 +63,7 @@ emojis/
 quelpa/
 .env
 backups/
+projects
 
 # Terminal config
 /terminal/elpa
