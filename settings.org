@@ -98,6 +98,9 @@
       :bind
       ("s-M-<left>" . centaur-tabs-backward)
       ("s-M-<right>" . centaur-tabs-forward)
+      ("s-S-<left>" . centaur-tabs-move-current-tab-to-left)
+      ("s-S-<right>" . centaur-tabs-move-current-tab-to-right)
+      ("s-W" . centaur-tabs-kill-all-buffers-in-current-group)
       :hook
       (popper-mode . centaur-tabs-local-mode))
 
