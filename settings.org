@@ -1155,7 +1155,7 @@
    Remove line numbers in treemacs mode
    #+begin_src emacs-lisp
      (defun amo/buffer-display-minimal ()
-       (setq mode-line-format nil)
+       ;; (setq mode-line-format nil)
        (nlinum-mode 0))
      (add-hook 'treemacs-mode-hook 'amo/buffer-display-minimal)
    #+end_src
