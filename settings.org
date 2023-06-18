@@ -174,16 +174,16 @@
        (magit-pre-refresh . diff-hl-magit-pre-refresh)
        (magit-post-refresh . diff-hl-magit-post-refresh)))
   #+end_src
-** dotenvel
-- Repo :: https://github.com/amodelbello/dotenvel
+** dotenv.el
+- Repo :: https://github.com/amodelbello/dotenv.el
   #+begin_src emacs-lisp
-    (use-package dotenvel
+    (use-package dotenv
       :ensure t
       :quelpa
-      (dotenvel :repo "amodelbello/dotenvel"
+      (dotenv :repo "amodelbello/dotenv.el"
                 :fetcher github :upgrade t)
       :config
-      (dotenvel-load))
+      (dotenv-load))
   #+end_src
 ** Drag Stuff
 - Repo :: https://github.com/rejeep/drag-stuff.el
@@ -253,7 +253,7 @@
   #+end_src
 ** Flyspell
   #+begin_src emacs-lisp
-    (setq-default ispell-program-name (dotenvel-get "ISPELL_PATH" "/opt/homebrew/opt/ispell/bin/ispell"))
+    (setq-default ispell-program-name (dotenv-get "ISPELL_PATH" "/opt/homebrew/opt/ispell/bin/ispell"))
 
     (dolist (hook '(text-mode-hook))
       (add-hook hook (lambda ()
@@ -297,7 +297,7 @@
     (use-package gptel
      :ensure t
      :config
-     (setq gptel-api-key (dotenvel-get "GPTEL_API_KEY")
+     (setq gptel-api-key (dotenv-get "GPTEL_API_KEY")
            gptel-default-mode #'org-mode))
   #+end_src
 ** grip
@@ -312,7 +312,7 @@
              ("g" . grip-mode))
       :config (setq grip-preview-use-webkit t
                     grip-github-user "amodelbello"
-                    grip-github-password (dotenvel-get "GRIP_GITHUB_PASSWORD")))
+                    grip-github-password (dotenv-get "GRIP_GITHUB_PASSWORD")))
   #+end_src
 ** ibuffer
 - Docs :: https://www.emacswiki.org/emacs/IbufferMode
@@ -743,12 +743,14 @@
     (use-package dap-mode
       :ensure t
       ;; :bind (("s-l d" . dap-hydra)) ;; this causes an error about the s-l prefix
+      :custom
+      (python-shell-interpreter "python3")
+      (dap-python-executable "python3")
       :config
-      (setq dap-auto-configure-mode 1
-            dap-python-debugger 'debugpy
-            dap-python-executable "python3"
-            python-shell-interpreter "python3")
+      (setq dap-python-debugger 'debugpy)
+      (dap-auto-configure-mode 1)
       (require 'dap-python))
+
   #+end_src
 ** format-all
 - Repo :: https://github.com/lassik/emacs-format-all-the-code
@@ -830,7 +832,7 @@
   #+begin_src emacs-lisp
     (use-package pandoc-mode
       :ensure t
-      :config (setq markdown-command "/opt/homebrew/bin/pandoc")
+      :config (setq markdown-command (dotenv-get "PANDOC_PATH" "/opt/homebrew/bin/pandoc"))
       :hook ((markdown-mode . pandoc-mode)
              (pandoc-mode . pandoc-load-default-settings)))
   #+end_src
@@ -953,7 +955,7 @@
      (defun amo/reload-config ()
        "Reload configuration"
        (interactive)
-       (dotenvel-load)
+       (dotenv-load)
        (load-file "~/.emacs.d/init.el"))
      (define-key z-map (kbd "r") #'amo/reload-config)
 
@@ -1063,7 +1065,7 @@
   #+end_src
 * General Configuration
    #+begin_src emacs-lisp
-     (set-frame-font (dotenvel-get "FONT" "DejaVu Sans Mono-13") nil t)
+     (set-frame-font (dotenv-get "FONT" "DejaVu Sans Mono-13") nil t)
      (desktop-save-mode 1)
      (fset 'yes-or-no-p 'y-or-n-p)
      (blink-cursor-mode 0)
