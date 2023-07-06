@@ -42,8 +42,8 @@
   #+begin_src emacs-lisp
     (use-package avy
       :ensure t
-      :bind (("C-;" . avy-goto-char)
-             ("C-'" . avy-goto-char-2)
+      :bind (("C-'" . avy-goto-char)
+             ("C-;" . avy-goto-char-2)
              :map org-mode-map
              ("C-'" . nil)))
   #+end_src
