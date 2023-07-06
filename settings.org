@@ -1138,6 +1138,7 @@
    This reloads `centaur-tabs-mode` after a theme change.
    #+begin_src emacs-lisp
      (defun amo/reload-centaur-tabs ()
+       (interactive)
        (centaur-tabs-mode 0)
        (centaur-tabs-mode 1))
      (defvar after-load-theme-hook nil
