@@ -10,8 +10,7 @@
     (use-package ace-window
       :ensure t
       :bind
-      (("C-x o" . ace-window)
-       ("M-z" . ace-window))
+      (("C-x o" . ace-window))
       :config
       (defvar aw-dispatch-always nil)
       (setq aw-scope 'frame)
@@ -1021,6 +1020,10 @@
 
      ;; Comment line
      (global-set-key (kbd "s-/") #'comment-line)
+
+     ;; Jump Char
+     (global-set-key (kbd "M-n") #'jump-char-forward)
+     (global-set-key (kbd "M-N") #'jump-char-backward)
 
      ;; Transpose chars and words backwards
      (defun amo/transpose-chars-backwards ()
