@@ -10,7 +10,8 @@
     (use-package ace-window
       :ensure t
       :bind
-      (("C-x o" . ace-window))
+      (("C-o" . ace-window)
+       ("C-x o" . ace-window))
       :config
       (defvar aw-dispatch-always nil)
       (setq aw-scope 'frame)
