@@ -730,6 +730,7 @@
       :config
       (setq lsp-ui-sideline-show-hover t
             lsp-ui-imenu-auto-refresh t
+            lsp-ui-doc-enable nil
             imenu-auto-rescan t)
       :commands lsp-ui-mode)
 
