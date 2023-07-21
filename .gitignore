@@ -69,3 +69,4 @@ projects
 /terminal/elpa
 /terminal/.emacs.desktop
 !/terminal/settings.el
+session.*
