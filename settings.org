@@ -506,7 +506,7 @@
 ** Org Mode
 - Docs :: https://orgmode.org/
   #+begin_src emacs-lisp
-    (setq org-directory "~/pCloud Drive"
+    (setq org-directory (dot-env-get "ORG_DIRECTORY_PATH" "~/.emacs.d/org-directory")
           org-default-notes-file (concat org-directory "/notes.org"))
   #+end_src
 ** Org Bullets
@@ -822,16 +822,16 @@
 **** conda
 - Repo :: https://github.com/necaris/conda.el
   #+begin_src emacs-lisp
-    ;; (use-package conda
-    ;;   :ensure t
-    ;;   :init
-    ;;   (setq conda-anaconda-home (expand-file-name "~/opt/miniconda3")
-    ;;         conda-env-home-directory (expand-file-name "~/opt/miniconda3")
-    ;;         conda-env-autoactivate-mode t)
+    (use-package conda
+      :ensure t
+      :init
+      (setq conda-anaconda-home (expand-file-name "~/opt/miniconda3")
+            conda-env-home-directory (expand-file-name "~/opt/miniconda3")
+            conda-env-autoactivate-mode t)
 
-    ;;   (add-hook 'find-file-hook (lambda () (when (bound-and-true-p conda-project-env-path)
-    ;;                                           (conda-env-activate-for-buffer))))
-    ;;   (setq-default mode-line-format (cons '(:exec conda-env-current-name) mode-line-format)))
+      (add-hook 'find-file-hook (lambda () (when (bound-and-true-p conda-project-env-path)
+                                             (conda-env-activate-for-buffer))))
+      (setq-default mode-line-format (cons '(:exec conda-env-current-name) mode-line-format)))
   #+end_src
 **** pandoc
 - Repo :: https://github.com/joostkremers/pandoc-mode

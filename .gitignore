@@ -70,3 +70,4 @@ projects
 /terminal/.emacs.desktop
 !/terminal/settings.el
 session.*
+org-directory
