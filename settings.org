@@ -506,8 +506,28 @@
 ** Org Mode
 - Docs :: https://orgmode.org/
   #+begin_src emacs-lisp
+    (global-set-key (kbd "C-c c") 'org-capture)
     (setq org-directory (dot-env-get "ORG_DIRECTORY_PATH" "~/.emacs.d/org-directory")
-          org-default-notes-file (concat org-directory "/notes.org"))
+          org-default-notes-file (concat org-directory "/notes.org")
+          org-work-file (concat org-directory "/work-notes.org"))
+
+
+    (setq org-capture-templates '(("s"
+                                   "Standup Note"
+                                   entry
+                                   (file+headline org-work-file "Standup Items")
+                                   "* %?\n %T\n %i\n" :empty-lines-after 1)
+                                  ("m"
+                                   "Meeting Note"
+                                   entry
+                                   (file+headline org-work-file "Meeting Items")
+                                   "* %?\n %T\n %i\n" :empty-lines-after 1)
+                                  ("i"
+                                   "Issue Note"
+                                   entry
+                                   (file+headline org-work-file "Issue Items")
+                                   "** %? %^g\n %T\n %l\n %i\n" :empty-lines-after 1)
+                                  ))
   #+end_src
 ** Org Bullets
 - Repo :: https://github.com/sabof/org-bullets
