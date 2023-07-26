@@ -981,7 +981,7 @@
        "Open settings.org"
        (interactive)
        (find-file "~/.emacs.d/settings.org"))
-     (define-key z-map (kbd "s") 'amo/open-settings-file)
+     (define-key z-map (kbd "s") #'amo/open-settings-file)
 
      ;; Reload config
      (defun amo/reload-config ()
@@ -1007,7 +1007,11 @@
      (define-key z-map (kbd "g") #'gptel)
 
      ;; Open notes directory
-     (define-key z-map (kbd "n") (find-file org-directory))
+     (defun amo/open-notes-file ()
+       "Open notes file"
+       (interactive)
+       (find-file org-directory))
+     (define-key z-map (kbd "n") #'amo/open-notes-file)
 
      ;;  Bindings for "IDE-like" tool windows
      (global-set-key (kbd "s-1") #'treemacs)
