@@ -529,7 +529,7 @@
                                    "Issue Note"
                                    entry
                                    (file+headline org-issue-file "Issue Items")
-                                   "** %?%^g\n%T\n%l\n%i\n" :empty-lines-after 1)
+                                   "** %? %^g \n%T \n%l \n%i \n" :empty-lines 1)
                                   ("u"
                                    "Union Note"
                                    entry
