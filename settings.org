@@ -1127,6 +1127,7 @@
      (global-hl-line-mode t)
      (recentf-mode 1)
      (whitespace-mode -1)
+     (emojify-mode 0)
 
      (setq scroll-step 1
            recentf-max-menu-items 25
