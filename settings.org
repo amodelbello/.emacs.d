@@ -512,29 +512,36 @@
           org-standup-file (concat org-directory "/standup-notes.org")
           org-issue-file (concat org-directory "/issue-notes.org")
           org-meeting-file (concat org-directory "/meeting-notes.org")
-          org-union-file (concat org-directory "/union-notes.org"))
+          org-union-file (concat org-directory "/union-notes.org")
+          org-emacs-ideas-file (concat org-directory "/emacs-ideas.org"))
 
 
-    (setq org-capture-templates '(("s"
-                                   "Standup Note"
-                                   entry
-                                   (file+headline org-standup-file "Standup Items")
-                                   "** Notes: %T\n%?\n%i\n" :empty-lines-after 1 :prepend t)
-                                  ("m"
-                                   "Meeting Note"
-                                   entry
-                                   (file+headline org-meeting-file "Meeting Items")
-                                   "** %?\n%T\n%i\n" :empty-lines-after 1 :prepend t)
-                                  ("i"
-                                   "Issue Note"
-                                   entry
-                                   (file+headline org-issue-file "Issue Items")
-                                   "** %? %^g \n%T \n%l \n%i \n" :empty-lines 1)
-                                  ("u"
-                                   "Union Note"
-                                   entry
-                                   (file+headline org-union-file "Meeting Items")
-                                   "** %?\n%T\n%i\n" :empty-lines-after 1)))
+    (setq org-capture-templates
+          '(("s"
+             "Standup Note"
+             entry
+             (file+headline org-standup-file "Standup Items")
+             "** Notes: %T\n%?\n%i\n" :empty-lines-after 1 :prepend t)
+            ("m"
+             "Meeting Note"
+             entry
+             (file+headline org-meeting-file "Meeting Items")
+             "** %?\n%T\n%i\n" :empty-lines-after 1 :prepend t)
+            ("i"
+             "Issue Note"
+             entry
+             (file+headline org-issue-file "Issue Items")
+             "** %? %^g \n%T \n%l \n%i \n" :empty-lines 1)
+            ("u"
+             "Union Note"
+             entry
+             (file+headline org-union-file "Meeting Items")
+             "** %?\n%T\n%i\n" :empty-lines-after 1)
+            ("e"
+             "Emacs Idea"
+             checkitem
+             (file+headline org-emacs-ideas-file "Emacs Ideas")
+             "[ ] %?\n")))
   #+end_src
 ** Org Bullets
 - Repo :: https://github.com/sabof/org-bullets
