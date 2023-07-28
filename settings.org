@@ -541,7 +541,7 @@
              "Emacs Idea"
              checkitem
              (file+headline org-emacs-ideas-file "Emacs Ideas")
-             "[ ] %?\n")))
+             "[ ] %?\n" :prepend t)))
   #+end_src
 ** Org Bullets
 - Repo :: https://github.com/sabof/org-bullets
