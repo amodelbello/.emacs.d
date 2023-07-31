@@ -531,7 +531,7 @@
              "Issue Note"
              entry
              (file+headline org-issue-file "Issue Items")
-             "** %? %^g \n%T \n%l \n%i \n" :empty-lines 1)
+             "** %? %^g \n%T \n%l \n%i \n" :empty-lines 1 :prepend t)
             ("u"
              "Union Note"
              entry
@@ -541,7 +541,7 @@
              "Emacs Idea"
              checkitem
              (file+headline org-emacs-ideas-file "Emacs Ideas")
-             "[ ] %?\n" :prepend t)))
+             "[ ] %?" :prepend t)))
   #+end_src
 ** Org Bullets
 - Repo :: https://github.com/sabof/org-bullets
