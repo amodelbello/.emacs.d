@@ -541,6 +541,11 @@
              "Emacs Idea"
              checkitem
              (file+headline org-emacs-ideas-file "Emacs Ideas")
+             "[ ] %?" :prepend t)
+            ("k"
+             "Keyboard Idea"
+             checkitem
+             (file+headline org-emacs-ideas-file "Keyboard Ideas")
              "[ ] %?" :prepend t)))
   #+end_src
 ** Org Bullets
