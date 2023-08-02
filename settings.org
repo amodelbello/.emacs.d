@@ -513,7 +513,8 @@
           org-issue-file (concat org-directory "/issue-notes.org")
           org-meeting-file (concat org-directory "/meeting-notes.org")
           org-union-file (concat org-directory "/union-notes.org")
-          org-emacs-ideas-file (concat org-directory "/emacs-ideas.org"))
+          org-emacs-ideas-file (concat org-directory "/emacs-ideas.org")
+          org-albums-file (concat org-directory "/albums.org"))
 
 
     (setq org-capture-templates
@@ -546,7 +547,12 @@
              "Keyboard Idea"
              checkitem
              (file+headline org-emacs-ideas-file "Keyboard Ideas")
-             "[ ] %?" :prepend t)))
+             "[ ] %?" :prepend t)
+            ("r"
+             "Record to buy?"
+             item
+             (file+headline org-albums-file "Interesting Albums")
+             "%?")))
   #+end_src
 ** Org Bullets
 - Repo :: https://github.com/sabof/org-bullets
