@@ -508,12 +508,12 @@
   #+begin_src emacs-lisp
     (global-set-key (kbd "C-c c") 'org-capture)
     (setq org-directory (dot-env-get "ORG_DIRECTORY_PATH" "~/.emacs.d/org-directory")
-          org-default-notes-file (concat org-directory "/notes.org")
           org-standup-file (concat org-directory "/standup-notes.org")
           org-issue-file (concat org-directory "/issue-notes.org")
           org-meeting-file (concat org-directory "/meeting-notes.org")
           org-union-file (concat org-directory "/union-notes.org")
-          org-lists-file (concat org-directory "/lists.org"))
+          org-lists-file (concat org-directory "/lists.org")
+          org-archive-location (concat org-directory "/_archive/%s_archive::"))
 
 
     (setq org-capture-templates
