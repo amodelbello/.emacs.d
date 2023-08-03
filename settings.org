@@ -513,8 +513,7 @@
           org-issue-file (concat org-directory "/issue-notes.org")
           org-meeting-file (concat org-directory "/meeting-notes.org")
           org-union-file (concat org-directory "/union-notes.org")
-          org-emacs-ideas-file (concat org-directory "/emacs-ideas.org")
-          org-albums-file (concat org-directory "/albums.org"))
+          org-lists-file (concat org-directory "/lists.org"))
 
 
     (setq org-capture-templates
@@ -541,17 +540,17 @@
             ("e"
              "Emacs Idea"
              checkitem
-             (file+headline org-emacs-ideas-file "Emacs Ideas")
+             (file+headline org-lists-file "Emacs Ideas")
              "[ ] %?" :prepend t)
             ("k"
              "Keyboard Idea"
              checkitem
-             (file+headline org-emacs-ideas-file "Keyboard Ideas")
+             (file+headline org-lists-file "Keyboard Ideas")
              "[ ] %?" :prepend t)
             ("r"
-             "Record to buy?"
+             "Interesting Albums"
              item
-             (file+headline org-albums-file "Interesting Albums")
+             (file+headline org-lists-file "Interesting Albums")
              "%?")))
   #+end_src
 ** Org Bullets
