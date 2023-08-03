@@ -185,17 +185,6 @@
       :config
       (dot-env-load))
   #+end_src
-** Drag Stuff
-- Repo :: https://github.com/rejeep/drag-stuff.el
-  #+begin_src emacs-lisp
-    (use-package drag-stuff
-      :ensure t
-      :bind (("<S-M-up>" . drag-stuff-up)
-           ("<S-M-down>" . drag-stuff-down))
-      :config
-      (drag-stuff-global-mode +1)
-      (drag-stuff-define-keys))
-  #+end_src
 ** emacs-emojify
 - Repo :: https://github.com/iqbalansari/emacs-emojify
   #+begin_src emacs-lisp
