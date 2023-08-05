@@ -496,7 +496,11 @@
 - Docs :: https://orgmode.org/
   #+begin_src emacs-lisp
     (global-set-key (kbd "C-c c") 'org-capture)
-    (setq org-directory (dot-env-get "ORG_DIRECTORY_PATH" "~/.emacs.d/org-directory")
+    (setq org-list-demote-modify-bullet
+          '(("-" . "+") ("+" . "*") ("*" . "-"))
+          org-list-allow-alphabetical t
+          org-M-RET-may-split-line '((default . nil))
+          org-directory (dot-env-get "ORG_DIRECTORY_PATH" "~/.emacs.d/org-directory")
           org-standup-file (concat org-directory "/standup-notes.org")
           org-issue-file (concat org-directory "/issue-notes.org")
           org-meeting-file (concat org-directory "/meeting-notes.org")
