@@ -181,9 +181,9 @@
       :ensure t
       :quelpa
       (dot-env :repo "amodelbello/dot-env.el"
-              :fetcher github :upgrade t)
+               :fetcher github :upgrade t)
       :config
-      (dot-env-load))
+      (dot-env-config))
   #+end_src
 ** emacs-emojify
 - Repo :: https://github.com/iqbalansari/emacs-emojify
@@ -242,7 +242,7 @@
   #+end_src
 ** Flyspell
   #+begin_src emacs-lisp
-    (setq-default ispell-program-name (dot-env-get "ISPELL_PATH" "/opt/homebrew/opt/ispell/bin/ispell"))
+    (setq-default ispell-program-name (dot-env-get 'ISPELL_PATH "/opt/homebrew/opt/ispell/bin/ispell"))
 
     (dolist (hook '(text-mode-hook))
       (add-hook hook (lambda ()
@@ -286,7 +286,7 @@
     (use-package gptel
       :ensure t
       :config
-      (setq gptel-api-key (dot-env-get "GPTEL_API_KEY")
+      (setq gptel-api-key (dot-env-get 'GPTEL_API_KEY)
             gptel-default-mode #'org-mode))
   #+end_src
 ** grip
@@ -301,7 +301,7 @@
                   ("g" . grip-mode))
       :config (setq grip-preview-use-webkit t
                     grip-github-user "amodelbello"
-                    grip-github-password (dot-env-get "GRIP_GITHUB_PASSWORD")))
+                    grip-github-password (dot-env-get 'GRIP_GITHUB_PASSWORD)))
   #+end_src
 ** ibuffer
 - Docs :: https://www.emacswiki.org/emacs/IbufferMode
@@ -500,7 +500,7 @@
           '(("-" . "+") ("+" . "*") ("*" . "-"))
           org-list-allow-alphabetical t
           org-M-RET-may-split-line '((default . nil))
-          org-directory (dot-env-get "ORG_DIRECTORY_PATH" "~/.emacs.d/org-directory")
+          org-directory (dot-env-get 'ORG_DIRECTORY_PATH "~/.emacs.d/org-directory")
           org-standup-file (concat org-directory "/standup-notes.org")
           org-issue-file (concat org-directory "/issue-notes.org")
           org-meeting-file (concat org-directory "/meeting-notes.org")
@@ -875,7 +875,7 @@
   #+begin_src emacs-lisp
     (use-package pandoc-mode
       :ensure t
-      :config (setq markdown-command (dot-env-get "PANDOC_PATH" "/opt/homebrew/bin/pandoc"))
+      :config (setq markdown-command (dot-env-get 'PANDOC_PATH "/opt/homebrew/bin/pandoc"))
       :hook ((markdown-mode . pandoc-mode)
              (pandoc-mode . pandoc-load-default-settings)))
   #+end_src
@@ -1121,7 +1121,7 @@
   #+end_src
 * General Configuration
    #+begin_src emacs-lisp
-     (set-frame-font (dot-env-get "FONT" "DejaVu Sans Mono-13") nil t)
+     (set-frame-font (dot-env-get 'FONT "DejaVu Sans Mono-13") nil t)
      (desktop-save-mode 1)
      (fset 'yes-or-no-p 'y-or-n-p)
      (blink-cursor-mode 0)
