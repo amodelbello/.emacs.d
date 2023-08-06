@@ -1271,7 +1271,7 @@ Copy whole line to kill ring when no active region
       :config
       (setq doom-modeline-minor-modes t
             doom-modeline-vcs-max-length 40
-            doom-modeline-buffer-encoding nil))
+            doom-modeline-buffer-encoding t))
   #+end_src
 ** Doom Themes
 - Repo :: https://github.com/doomemacs/themes
