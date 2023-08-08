@@ -1145,6 +1145,7 @@
            undo-tree-enable-undo-in-region t
            delete-by-moving-to-trash t
            dired-kill-when-opening-new-dired-buffer t
+           comment-column 64
 
            ;; Save backups to a central location
            make-backup-files t
@@ -1273,32 +1274,10 @@ Copy whole line to kill ring when no active region
             doom-modeline-vcs-max-length 40
             doom-modeline-buffer-encoding t))
   #+end_src
-** Doom Themes
-- Repo :: https://github.com/doomemacs/themes
-  #+begin_src emacs-lisp
-    (use-package doom-themes
-      :ensure t
-      :config
-      ;; Global settings (defaults)
-      (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
-            doom-themes-enable-italic t) ; if nil, italics is universally disabled
-
-      ;; Enable flashing mode-line on errors
-      (doom-themes-visual-bell-config)
-
-      ;; Corrects (and improves) org-mode's native fontification.
-      (doom-themes-org-config))
-  #+end_src
 ** Ef Themes
 - Repo :: https://github.com/protesilaos/modus-themes
   #+begin_src emacs-lisp
     (use-package ef-themes
-      :ensure t)
-  #+end_src
-** Kaolin Themes
-- Repo :: https://github.com/ogdenwebb/emacs-kaolin-themes
-  #+begin_src emacs-lisp
-    (use-package kaolin-themes
       :ensure t)
   #+end_src
 ** Modus Themes
