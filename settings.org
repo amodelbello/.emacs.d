@@ -501,6 +501,7 @@
           '(("-" . "+") ("+" . "*") ("*" . "-"))
           org-list-allow-alphabetical t
           org-M-RET-may-split-line '((default . nil))
+          org-use-tag-inheritance nil
           org-directory (dot-env-get 'ORG_DIRECTORY_PATH "~/.emacs.d/org-directory")
           org-agenda-files (list org-directory)
           org-sprint-file (concat org-directory "/sprints.org")
