@@ -501,8 +501,9 @@
           org-list-allow-alphabetical t
           org-M-RET-may-split-line '((default . nil))
           org-directory (dot-env-get 'ORG_DIRECTORY_PATH "~/.emacs.d/org-directory")
-          org-standup-file (concat org-directory "/standup-notes.org")
-          org-issue-file (concat org-directory "/issue-notes.org")
+          org-sprint-file (concat org-directory "/sprints.org")
+          org-standup-file (concat org-directory "/standups.org")
+          org-issue-file (concat org-directory "/issues.org")
           org-meeting-file (concat org-directory "/meeting-notes.org")
           org-union-file (concat org-directory "/union-notes.org")
           org-lists-file (concat org-directory "/lists.org")
@@ -511,6 +512,11 @@
 
     (setq org-capture-templates
           '(("s"
+             "Sprint Note"
+             entry
+             (file org-sprint-file)
+             "* %?\nSCHEDULED: %^t\n|Tickets|Story Points|Originally Scoped| Completed|\n|-%^{SPRINT}p%^{STORY_POINTS}p" :empty-lines-after 1 :prepend t)
+            ("t"
              "Standup Note"
              entry
              (file+headline org-standup-file "Standup Items")
