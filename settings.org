@@ -517,7 +517,7 @@
              "Sprint Note"
              entry
              (file org-sprint-file)
-             "* %?\nSCHEDULED: %^t\n|Tickets|Story Points|Originally Scoped| Completed|\n|-%^{SPRINT}p%^{STORY_POINTS}p" :empty-lines-after 1 :prepend t)
+             "* %?\nDEADLINE: %^t SCHEDULED: %^t\n|Tickets|Story Points|Originally Scoped| Completed|\n|-%^{STORY_POINTS}p" :empty-lines-after 1 :prepend t)
             ("t"
              "Standup Note"
              entry
