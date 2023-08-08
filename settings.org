@@ -1028,8 +1028,15 @@
      ;; Open gptel
      (define-key z-map (kbd "g") #'gptel)
 
+     ;; Open notes directory
+     (defun amo/open-notes-file ()
+       "Open notes file"
+       (interactive)
+       (find-file org-directory))
+     (define-key z-map (kbd "n") #'amo/open-notes-file)
+
      ;; Choose an org file
-     (define-key z-map (kbd "n") #'org-switchb)
+     (define-key z-map (kbd "m") #'org-switchb)
 
      ;; Bindings for "IDE-like" tool windows
      (global-set-key (kbd "s-1") #'treemacs)
