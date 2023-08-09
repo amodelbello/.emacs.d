@@ -231,14 +231,6 @@
                        (flyspell-mode 1)
                        (define-key flyspell-mode-map (kbd "C-;") nil))))
   #+end_src
-** Forge
-- Repo :: https://github.com/magit/forge
-- Docs :: https://magit.vc/manual/forge/
-  #+begin_src emacs-lisp
-    (use-package forge
-      :ensure t
-      :after magit)
-  #+end_src
 ** git-messenger
 - Repo :: https://github.com/emacsorphanage/git-messenger
   #+begin_src emacs-lisp
