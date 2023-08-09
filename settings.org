@@ -519,10 +519,20 @@
 
     (setq org-capture-templates
           '(("s"
-             "Sprint Note"
+             "Sprint"
              entry
              (file org-sprint-file)
-             "* %?\nDEADLINE: %^t SCHEDULED: %^t\n|Tickets|Story Points|Originally Scoped| Completed|\n|-%^{STORY_POINTS}p" :empty-lines-after 1 :prepend t)
+             "* %? %^G \nDEADLINE: %^t SCHEDULED: %^t %^{SCOPED_STORY_POINTS}p\n\n** Issues\n" :empty-lines-after 1 :prepend t)
+            ("e"
+             "Sprint Issue"
+             entry
+             (file org-sprint-file)
+             "*** %? %^G \n %^{STORY_POINTS}p %^{ORIGINALLY_SCOPED}p %^{COMPLETED}p" :empty-lines 1 :prepend t)
+            ("i"
+             "Issue Note"
+             entry
+             (file+headline org-issue-file "Issue Items")
+             "** %? %^G \n%T \n%i \n" :empty-lines 1 :prepend t)
             ("t"
              "Standup Note"
              entry
@@ -533,11 +543,6 @@
              entry
              (file+headline org-meeting-file "Meeting Items")
              "** %?\n%T\n%i\n" :empty-lines-after 1 :prepend t)
-            ("i"
-             "Issue Note"
-             entry
-             (file+headline org-issue-file "Issue Items")
-             "** %? %^g \n%T \n%l \n%i \n" :empty-lines 1 :prepend t)
             ("u"
              "Union Note"
              entry
