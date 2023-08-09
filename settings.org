@@ -448,9 +448,9 @@
       :ensure t
       :quelpa
       (dot-env :repo "lewang/jump-char"
-	       :fetcher github :upgrade t)
+               :fetcher github :upgrade t)
       :bind (("M-n" . jump-char-forward)
-	     ("M-N" . jump-char-backward)))
+             ("M-N" . jump-char-backward)))
   #+end_src
 ** minions
 - Repo :: https://github.com/tarsius/minions
@@ -1275,10 +1275,4 @@ Copy whole line to kill ring when no active region
   #+begin_src emacs-lisp
     (use-package modus-themes
       :ensure t)
-  #+end_src
-** Spacemacs Themes
-- Repo :: https://github.com/nashamri/spacemacs-theme
-  #+begin_src emacs-lisp
-    (use-package spacemacs-theme
-      :defer t)
   #+end_src
