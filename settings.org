@@ -441,6 +441,17 @@
     (use-package json-mode
       :ensure t)
   #+end_src
+** jump-char
+- Repo :: ...
+  #+begin_src emacs-lisp
+    (use-package jump-char
+      :ensure t
+      :quelpa
+      (dot-env :repo "lewang/jump-char"
+	       :fetcher github :upgrade t)
+      :bind (("M-n" . jump-char-forward)
+	     ("M-N" . jump-char-backward)))
+  #+end_src
 ** minions
 - Repo :: https://github.com/tarsius/minions
   #+begin_src emacs-lisp
@@ -1064,10 +1075,6 @@
 
      ;; Comment line
      (global-set-key (kbd "s-/") #'comment-line)
-
-     ;; Jump Char
-     (global-set-key (kbd "M-n") #'jump-char-forward)
-     (global-set-key (kbd "M-N") #'jump-char-backward)
 
      ;; Transpose chars and words backwards
      (defun amo/transpose-chars-backwards ()
