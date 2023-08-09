@@ -85,6 +85,11 @@
    ("s-k" . crux-kill-whole-line)
    ("<C-backspace>" . crux-kill-line-backwards)))
 
+(use-package expand-region
+  :ensure t
+  :bind (("C-=" . er/expand-region)
+         ("C--" . er/contract-region)))
+
 (use-package ivy
   :ensure t
   :diminish (ivy-mode)
