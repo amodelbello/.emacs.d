@@ -48,6 +48,12 @@
   :config
   (dot-env-config))
 
+;; Set font variables
+(setq amo/font-family (dot-env-get 'FONT "DejaVu Sans Mono")
+      amo/font-size (dot-env-get 'FONT_SIZE "13")
+      amo/base-font-size (* (string-to-number amo/font-size) 10)
+      amo/font (concat amo/font-family " " amo/font-size))
+
 ;; load our main config
 (org-babel-load-file (expand-file-name "~/.emacs.d/settings.org"))
 

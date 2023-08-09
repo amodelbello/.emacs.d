@@ -1122,7 +1122,10 @@
   #+end_src
 * General Configuration
    #+begin_src emacs-lisp
-     (set-frame-font (dot-env-get 'FONT "DejaVu Sans Mono-13") nil t)
+     (set-frame-font amo/font nil t)
+     (set-face-attribute 'fixed-pitch nil :font amo/font)
+     (set-face-attribute 'variable-pitch nil :font amo/font)
+     (set-face-attribute 'default nil :height amo/base-font-size)
      (desktop-save-mode 1)
      (fset 'yes-or-no-p 'y-or-n-p)
      (blink-cursor-mode 0)
