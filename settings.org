@@ -174,17 +174,6 @@
        (magit-pre-refresh . diff-hl-magit-pre-refresh)
        (magit-post-refresh . diff-hl-magit-post-refresh)))
   #+end_src
-** dot-env.el
-- Repo :: https://github.com/amodelbello/dot-env.el
-  #+begin_src emacs-lisp
-    (use-package dot-env
-      :ensure t
-      :quelpa
-      (dot-env :repo "amodelbello/dot-env.el"
-               :fetcher github :upgrade t)
-      :config
-      (dot-env-config))
-  #+end_src
 ** emacs-emojify
 - Repo :: https://github.com/iqbalansari/emacs-emojify
   #+begin_src emacs-lisp

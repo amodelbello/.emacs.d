@@ -39,6 +39,15 @@
    :url "https://github.com/quelpa/quelpa-use-package.git"))
 (require 'quelpa-use-package)
 
+;; load environment variables
+(use-package dot-env
+  :ensure t
+  :quelpa
+  (dot-env :repo "amodelbello/dot-env.el"
+           :fetcher github :upgrade t)
+  :config
+  (dot-env-config))
+
 ;; load our main config
 (org-babel-load-file (expand-file-name "~/.emacs.d/settings.org"))
 
