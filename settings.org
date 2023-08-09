@@ -466,14 +466,6 @@
       :bind
       (("C-x g" . magit)))
   #+end_src
-** nlinum
-- Repo :: https://github.com/hlissner/emacs-nlinum-hl
-  #+begin_src emacs-lisp
-    (use-package nlinum
-      :ensure t
-      :config
-      (global-nlinum-mode))
-  #+end_src
 ** Org Mode
 - Docs :: https://orgmode.org/
   #+begin_src emacs-lisp
@@ -1146,6 +1138,7 @@
      (global-hl-line-mode t)
      (recentf-mode 1)
      (whitespace-mode -1)
+     (global-display-line-numbers-mode 1)
 
      (setq scroll-step 1
            recentf-max-menu-items 25
