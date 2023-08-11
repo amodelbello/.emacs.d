@@ -769,7 +769,7 @@
                    ([remap xref-find-definitions] . lsp-ui-peek-find-definitions)
                    ([remap xref-find-references] . lsp-ui-peek-find-references)))
       :config
-      (setq lsp-ui-sideline-show-hover t
+      (setq lsp-ui-sideline-enable nil
             lsp-ui-imenu-auto-refresh t
             lsp-ui-doc-enable nil
             imenu-auto-rescan t)
