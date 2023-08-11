@@ -1122,6 +1122,28 @@
        (backward-char))
      (global-set-key (kbd "C-S-f") #'amo/transpose-char-to-end-of-next-word)
 
+     ;; Move lines up and down
+     (defmacro amo/save-column (&rest body)
+       `(let ((column (current-column)))
+          (unwind-protect
+              (progn ,@body)
+            (move-to-column column))))
+     (put 'save-column 'lisp-indent-function 0)
+
+     (defun amo/move-line-up ()
+       (interactive)
+       (amo/save-column
+        (transpose-lines 1)
+        (forward-line -2)))
+
+     (defun amo/move-line-down ()
+       (interactive)
+       (amo/save-column
+        (forward-line 1)
+        (transpose-lines 1)
+        (forward-line -1)))
+     (global-set-key (kbd "M-<down>") #'amo/move-line-down)
+     (global-set-key (kbd "M-<up>") #'amo/move-line-up)
   #+end_src
 * General Configuration
    #+begin_src emacs-lisp
