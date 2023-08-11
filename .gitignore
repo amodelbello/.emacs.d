@@ -71,3 +71,4 @@ projects
 !/terminal/settings.el
 session.*
 org-directory
+.DS_Store
