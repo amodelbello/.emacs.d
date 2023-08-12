@@ -1287,13 +1287,13 @@ Copy whole line to kill ring when no active region
             doom-modeline-buffer-encoding t))
   #+end_src
 ** Ef Themes
-- Repo :: https://github.com/protesilaos/modus-themes
   #+begin_src emacs-lisp
+- Repo :: https://github.com/protesilaos/ef-themes
     (use-package ef-themes
       :ensure t)
   #+end_src
 ** Modus Themes
-- Repo :: https://github.com/protesilaos/ef-themes
+- Repo :: https://github.com/protesilaos/modus-themes
   #+begin_src emacs-lisp
     (use-package modus-themes
       :ensure t)
