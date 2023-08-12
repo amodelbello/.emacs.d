@@ -1288,8 +1288,8 @@ Copy whole line to kill ring when no active region
             doom-modeline-buffer-encoding t))
   #+end_src
 ** Ef Themes
-  #+begin_src emacs-lisp
 - Repo :: https://github.com/protesilaos/ef-themes
+  #+begin_src emacs-lisp
     (use-package ef-themes
       :ensure t)
   #+end_src
