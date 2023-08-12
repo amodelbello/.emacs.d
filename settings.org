@@ -1010,6 +1010,9 @@
        (load-file "~/.emacs.d/init.el"))
      (define-key z-map (kbd "r") #'amo/reload-config)
 
+     ;; Restart Emacs
+     (define-key z-map (kbd "C-z r") #'restart-emacs)
+
      ;; Open customize-themes
      (define-key z-map (kbd "t") #'customize-themes)
 
