@@ -39,7 +39,7 @@
    :url "https://github.com/quelpa/quelpa-use-package.git"))
 (require 'quelpa-use-package)
 
-(custom-set-variables '(epg-gpg-program  "/opt/homebrew/opt/gnupg@2.2/bin/gpg"))
+;; (custom-set-variables '(epg-gpg-program  "/usr/local/opt/gnupg@2.2/bin/gpg"))
 (epa-file-enable)
 
 ;; load environment variables
