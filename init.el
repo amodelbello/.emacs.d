@@ -1,6 +1,6 @@
 ;; Turn off mouse interface early in startup to avoid momentary display
 (if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
-(if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
+;; (if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
 (setq inhibit-startup-message t)
 
 ;; Fix bug with missing svg type (should be fixed in emacs 29)

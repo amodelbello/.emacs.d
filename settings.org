@@ -726,12 +726,13 @@
 ** yascroll
 - Repo :: https://github.com/emacsorphanage/yascroll
   #+begin_src emacs-lisp
-    (use-package yascroll
-      :ensure t
-      :config
-      (global-yascroll-bar-mode 1)
-      (setq yascroll:delay-to-hide nil
-            yascroll:disabled-modes '(package-menu-mode image-mode)))
+    ;; Slows down Emacs a lot. Disabling until there's a fix
+    ;; (use-package yascroll
+    ;;   :ensure t
+    ;;   :config
+    ;;   (global-yascroll-bar-mode 1)
+    ;;   (setq yascroll:delay-to-hide nil
+    ;;         yascroll:disabled-modes '(package-menu-mode image-mode)))
   #+end_src
 * Programming
 ** lsp-mode
