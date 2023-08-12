@@ -511,7 +511,7 @@
              entry
              (file org-sprint-file)
              "* %? %^G \nDEADLINE: %^t SCHEDULED: %^t %^{SCOPED_STORY_POINTS}p\n\n** Issues\n" :empty-lines-after 1 :prepend t)
-            ("e"
+            ("p"
              "Sprint Issue"
              entry
              (file org-sprint-file)
