@@ -54,6 +54,7 @@
 
 ;; load configuration files
 (org-babel-load-file (expand-file-name "~/.emacs.d/lisp/packages.org"))
+(org-babel-load-file (expand-file-name "~/.emacs.d/lisp/programming.org"))
 (org-babel-load-file (expand-file-name "~/.emacs.d/lisp/bindings.org"))
 (org-babel-load-file (expand-file-name "~/.emacs.d/lisp/configuration.org"))
 (org-babel-load-file (expand-file-name "~/.emacs.d/lisp/appearance.org"))

@@ -1,6 +1,7 @@
 # -*- mode: gitignore; -*-
 *~
 \#*\#
+/lisp/*.el
 /.emacs.desktop
 /.emacs.desktop.lock
 *.elc
