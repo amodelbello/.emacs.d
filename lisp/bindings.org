@@ -13,7 +13,7 @@
 (defun amo/open-settings-dir ()
   "Open lisp directory"
   (interactive)
-  (dired "~/.emacs.d/lisp"))
+  (dired "~/.emacs.d/org"))
 (define-key z-map (kbd "s") #'amo/open-settings-dir)
 
 ;; Reload config

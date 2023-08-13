@@ -56,12 +56,12 @@
       amo/font (concat amo/font-family " " amo/font-size))
 
 ;; load configuration files
-(org-babel-load-file (expand-file-name "~/.emacs.d/lisp/packages.org"))
-(org-babel-load-file (expand-file-name "~/.emacs.d/lisp/programming.org"))
-(org-babel-load-file (expand-file-name "~/.emacs.d/lisp/bindings.org"))
-(org-babel-load-file (expand-file-name "~/.emacs.d/lisp/configuration.org"))
-(org-babel-load-file (expand-file-name "~/.emacs.d/lisp/appearance.org"))
-(org-babel-load-file (expand-file-name "~/.emacs.d/lisp/miscellaneous.org"))
+(org-babel-load-file (expand-file-name "~/.emacs.d/lisp/packages.org") t)
+(org-babel-load-file (expand-file-name "~/.emacs.d/lisp/programming.org") t)
+(org-babel-load-file (expand-file-name "~/.emacs.d/lisp/bindings.org") t)
+(org-babel-load-file (expand-file-name "~/.emacs.d/lisp/configuration.org") t)
+(org-babel-load-file (expand-file-name "~/.emacs.d/lisp/appearance.org") t)
+(org-babel-load-file (expand-file-name "~/.emacs.d/lisp/miscellaneous.org") t)
 
 ;; load customize settings
 (setq custom-file "~/.emacs.d/customize.el")
