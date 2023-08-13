@@ -1,1 +1,1 @@
-../settings.org
+../README.org
