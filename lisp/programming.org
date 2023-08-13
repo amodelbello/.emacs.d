@@ -1,0 +1,259 @@
+#+title: Programming
+#+author: Amo DelBello
+#+description: "NO! The beard stays. You go."
+#+startup: content
+
+* Programming
+** lsp-mode
+- Repo :: https://github.com/emacs-lsp/lsp-mode
+- Docs :: https://emacs-lsp.github.io/lsp-mode
+  #+begin_src emacs-lisp
+    (setq gc-cons-threshold 100000000
+          read-process-output-max (* 1024 1024)
+          lsp-use-plists t)
+
+    ;; This disables the default lsp checker
+    ;; and falls back to normal flycheck
+    ;; (setq lsp-diagnostics-provider :none)
+
+    (use-package lsp-mode
+      :ensure t
+      :hook ((python-mode . lsp-deferred)
+             (web-mode . lsp-deferred)
+             (go-mode . lsp-deferred)
+             (haskell-mode . lsp-deferred)
+             (lsp-mode . lsp-enable-which-key-integration))
+      :config
+      (setq lsp-keymap-prefix "C-c l"
+            lsp-modeline-diagnostics-enable t
+            lsp-modeline-code-actions-mode t
+            lsp-headerline-breadcrumb-enable t
+            lsp-signature-render-documentation nil
+            lsp-modeline-diagnostics-scope :workspace)
+      :commands lsp-deferred)
+
+    (use-package lsp-ui
+      :ensure t
+      :bind ((:map lsp-ui-mode-map
+                   ("<C-return>" . lsp-ui-peek-find-references)
+                   ([remap xref-find-definitions] . lsp-ui-peek-find-definitions)
+                   ([remap xref-find-references] . lsp-ui-peek-find-references)))
+      :config
+      (setq lsp-ui-sideline-enable nil
+            lsp-ui-imenu-auto-refresh t
+            lsp-ui-doc-enable nil
+            imenu-auto-rescan t)
+      :commands lsp-ui-mode)
+
+    (use-package lsp-ivy
+      :ensure t
+      :commands lsp-ivy-workspace-symbol)
+
+    (use-package lsp-treemacs
+      :ensure t
+      :config
+      (lsp-treemacs-sync-mode 1)
+      :commands (lsp-treemacs-symbols
+                 lsp-treemacs-call-hierarchy
+                 lsp-treemacs-type-hierarchy
+                 lsp-treemacs-deps-list))
+
+    (use-package dap-mode
+      :ensure t
+      ;; :bind (("s-l d" . dap-hydra)) ;; this causes an error about the s-l prefix
+      :custom
+      (python-shell-interpreter "python3")
+      (dap-python-executable "python3")
+      :config
+      (setq dap-python-debugger 'debugpy)
+      (dap-auto-configure-mode 1)
+      (require 'dap-python))
+
+  #+end_src
+** format-all
+- Repo :: https://github.com/lassik/emacs-format-all-the-code
+  #+begin_src emacs-lisp
+    (use-package format-all
+      :ensure t
+      :bind
+      (("C-c C-f" . format-all-buffer))
+      :hook
+      ((python-mode . format-all-mode)
+       (emacs-lisp-mode . format-all-mode)
+       (format-all-mode-hook . format-all-ensure-formatter))
+      :config
+      (custom-set-variables
+       '(format-all-formatters
+         (quote (("Emacs Lisp" emacs-lisp)
+                 ("Python" black))))))
+  #+end_src
+** Languages
+*** Clojure
+**** cider
+- Repo :: https://github.com/clojure-emacs/cider
+- Docs :: https://docs.cider.mx/
+  #+begin_src emacs-lisp
+    (use-package cider
+      :ensure t
+      :hook
+      (cider-mode . (lambda ()
+                      (add-hook 'before-save-hook 'cider-format-buffer nil 'make-it-local))))
+  #+end_src
+**** clj-refactor
+- Repo :: https://github.com/clojure-emacs/clj-refactor.el
+  #+begin_src emacs-lisp
+    (use-package clj-refactor
+      :ensure t
+      :config
+      (clj-refactor-mode 1)
+      (cljr-add-keybindings-with-prefix "C-c C-m"))
+  #+end_src
+**** flycheck-clj-kondo
+- Prerequisite  :: https://github.com/clj-kondo/clj-kondo/blob/master/doc/install.md
+- Repo :: https://github.com/borkdude/flycheck-clj-kondo
+  #+begin_src emacs-lisp
+    (use-package flycheck-clj-kondo
+      :ensure t)
+  #+end_src
+*** Python
+**** lsp-server
+- Repo :: https://github.com/python-lsp/python-lsp-server
+  #+begin_src bash
+    pip3 install 'python-lsp-server[all]'
+    pip3 install black
+    pip3 install pylsp-rope
+    pip3 install flake8
+  #+end_src
+  #+begin_src emacs-lisp
+    (setq lsp-pylsp-plugins-flake8-enabled t
+          ;; config file must exist for syntax error highlighting
+          lsp-pylsp-plugins-flake8-config "~/.flake8"
+          lsp-pylsp-plugins-pydocstyle-enabled nil)
+  #+end_src
+**** conda
+- Repo :: https://github.com/necaris/conda.el
+  #+begin_src emacs-lisp
+    (use-package conda
+      :ensure t
+      :init
+      (setq conda-anaconda-home (expand-file-name "~/opt/miniconda3")
+            conda-env-home-directory (expand-file-name "~/opt/miniconda3")
+            conda-env-autoactivate-mode t)
+
+      (add-hook 'find-file-hook (lambda () (when (bound-and-true-p conda-project-env-path)
+                                             (conda-env-activate-for-buffer))))
+      (setq-default mode-line-format (cons '(:exec conda-env-current-name) mode-line-format)))
+  #+end_src
+**** pandoc
+- Repo :: https://github.com/joostkremers/pandoc-mode
+- Docs: :: https://joostkremers.github.io/pandoc-mode/
+  #+begin_src emacs-lisp
+    (use-package pandoc-mode
+      :ensure t
+      :config (setq markdown-command (dot-env-get 'PANDOC_PATH "/opt/homebrew/bin/pandoc"))
+      :hook ((markdown-mode . pandoc-mode)
+             (pandoc-mode . pandoc-load-default-settings)))
+  #+end_src
+**** pyvenv
+- Repo :: https://github.com/jorgenschaefer/pyvenv
+  #+begin_src emacs-lisp
+    (use-package pyvenv
+      :ensure t
+      :diminish
+      :config
+      (setq pyvenv-mode-line-indicator
+            '(pyvenv-virtual-env-name ("[venv:" pyvenv-virtual-env-name "] ")))
+      (pyvenv-mode +1))
+  #+end_src
+**** interpreter
+#+begin_src emacs-lisp
+  (when (executable-find "ipython")
+    (setq python-shell-interpreter "ipython"))
+#+end_src
+*** JavaScript/Typescript
+**** lsp-server
+- Repo :: https://github.com/typescript-language-server/typescript-language-server
+  #+begin_src bash
+    npm i -g typescript-language-server; npm i -g typescript
+  #+end_src
+**** Config
+ #+begin_src emacs-lisp
+   ;; (setq js-indent-level 2)
+   ;; (setq typescript-indent-level 2)
+ #+end_src
+**** prettier-js
+- Repo :: https://github.com/prettier/prettier-emacs
+  #+begin_src emacs-lisp
+    (defun amo/enable-minor-mode (my-pair)
+      "Enable minor mode if filename match the regexp.  MY-PAIR is a cons cell (regexp . minor-mode)."
+      (if (buffer-file-name)
+          (if (string-match (car my-pair) buffer-file-name)
+              (funcall (cdr my-pair)))))
+
+    (use-package prettier-js
+      :ensure-system-package prettier
+      :ensure t
+      :hook (web-mode . prettier-js-mode)
+      :config
+      (setq prettier-js-args '(
+                               "--single-quote" "true"
+                               "--trailing-comma" "all"
+                               "--semi" "false"
+                               "--arrow-parens" "avoid"
+                               "--tab-width" "2"
+                               "--html-whitespace-sensitivity" "ignore"
+                               "--prose-wrap" "always"
+                               "--use-tabs" "false")))
+
+    (add-hook 'web-mode-hook #'(lambda ()
+                                 (amo/enable-minor-mode
+                                  '("\\.jsx?\\'" . prettier-js-mode))
+                                 (amo/enable-minor-mode
+                                  '("\\.tsx?\\'" . prettier-js-mode))))
+  #+end_src
+*** Go
+- Repo :: https://github.com/dominikh/go-mode.el
+  #+begin_src emacs-lisp
+    (use-package go-mode
+      :ensure t
+      :hook
+      ((go-mode . amo/lsp-go-install-config))
+      :config
+      (add-to-list 'auto-mode-alist '("\\.go\\'" . go-mode)))
+
+    (defun amo/lsp-go-install-config ()
+      (add-hook 'before-save-hook #'lsp-format-buffer t t)
+      (add-hook 'before-save-hook #'lsp-organize-imports t t)
+      (setq-default indent-tabs-mode nil)
+      (electric-indent-mode 0)
+      (aggressive-indent-mode 0)
+      (setq-default tab-width 2)
+      (setq indent-line-function 'insert-tab))
+  #+end_src
+*** Haskell
+- Repo :: https://github.com/haskell/haskell-mode
+  #+begin_src emacs-lisp
+    (use-package haskell-mode
+      :ensure t)
+
+    (defun amo/on-haskell-mode ()
+      "Enable lsp & interactive-haskell-mode"
+      (lsp)
+      (interactive-haskell-mode t))
+    (use-package lsp-haskell
+      :ensure t
+      :hook
+      (haskell-mode . amo/on-haskell-mode)
+      (before-save . lsp-format-buffer))
+  #+end_src
+*** Yaml
+- Repo :: https://github.com/yoshiki/yaml-mode
+  #+begin_src emacs-lisp
+    (use-package yaml-mode
+      :ensure t)
+
+    (add-to-list 'auto-mode-alist '("\\.yml\\'" . yaml-mode))
+    (add-hook 'yaml-mode-hook
+          '(lambda ()
+            (define-key yaml-mode-map "\C-m" 'newline-and-indent)))
+  #+end_src

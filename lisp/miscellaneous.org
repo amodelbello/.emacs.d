@@ -1,0 +1,61 @@
+#+title: Miscellaneous settings and functionality
+#+author: Amo DelBello
+#+description: "NO! The beard stays. You go."
+#+startup: everything
+
+* Hooks
+** after-load-theme-hook
+   Centaur tabs styling messes up after a theme change.
+   This reloads `centaur-tabs-mode` after a theme change.
+   #+begin_src emacs-lisp
+     (defun amo/reload-centaur-tabs ()
+       (interactive)
+       (centaur-tabs-mode 0)
+       (centaur-tabs-mode 1))
+     (defvar after-load-theme-hook nil
+         "Hook run after a color theme is loaded using `load-theme'.")
+       (defadvice load-theme (after run-after-load-theme-hook activate)
+         "Run `after-load-theme-hook'."
+         (run-hooks 'after-load-theme-hook))
+       (defadvice custom-theme-save (after run-after-load-theme-hook activate)
+         "Run `after-load-theme-hook'."
+         (run-hooks 'after-load-theme-hook))
+     (add-hook 'after-load-theme-hook 'amo/reload-centaur-tabs)
+   #+end_src
+** treemacs-mode-hook
+   Remove line numbers in treemacs mode
+   #+begin_src emacs-lisp
+     (defun amo/buffer-display-minimal ()
+       ;; (setq mode-line-format nil)
+       (nlinum-mode 0))
+     (add-hook 'treemacs-mode-hook 'amo/buffer-display-minimal)
+   #+end_src
+
+** calc-mode
+Because the line-spacing above messes up calc
+#+begin_src emacs-lisp
+(defun amo/set-zero-line-spacing ()
+  (setq line-spacing 0))
+(add-hook 'calc-mode-hook #'amo/set-zero-line-spacing)
+(add-hook 'calc-trail-mode-hook #'amo/set-zero-line-spacing)
+#+end_src
+** before-save-hook
+#+begin_src emacs-lisp
+(defun amo/before-save-actions ()
+  (whitespace-cleanup)
+  (delete-trailing-whitespace))
+(add-hook 'before-save-hook #'amo/before-save-actions)
+#+end_src
+
+* Advice
+** kill-ring-save
+Copy whole line to kill ring when no active region
+#+begin_src emacs-lisp
+  (defadvice kill-ring-save (before slick-copy activate compile)
+    "When called interactively with no active region, copy a single line instead."
+    (interactive
+     (if mark-active
+         (list (region-beginning) (region-end))
+       (message "Copied line")
+       (list (line-beginning-position) (line-beginning-position 2)))))
+#+end_src

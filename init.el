@@ -3,15 +3,11 @@
 ;; (if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
 (setq inhibit-startup-message t)
 
-;; Fix bug with missing svg type (should be fixed in emacs 29)
-(setq image-types (cons 'svg image-types))
-
 (eval-when-compile
   (require 'package)
   ;;  (require 'diminish)
   ;;  (require 'bind-key)
   )
-
 
 (setq package-enable-at-startup nil)
 (add-to-list 'package-archives
@@ -39,7 +35,6 @@
    :url "https://github.com/quelpa/quelpa-use-package.git"))
 (require 'quelpa-use-package)
 
-;; (custom-set-variables '(epg-gpg-program  "/usr/local/opt/gnupg@2.2/bin/gpg"))
 (epa-file-enable)
 
 ;; load environment variables
@@ -57,8 +52,12 @@
       amo/base-font-size (* (string-to-number amo/font-size) 10)
       amo/font (concat amo/font-family " " amo/font-size))
 
-;; load our main config
-(org-babel-load-file (expand-file-name "~/.emacs.d/settings.org"))
+;; load configuration files
+(org-babel-load-file (expand-file-name "~/.emacs.d/lisp/packages.org"))
+(org-babel-load-file (expand-file-name "~/.emacs.d/lisp/bindings.org"))
+(org-babel-load-file (expand-file-name "~/.emacs.d/lisp/configuration.org"))
+(org-babel-load-file (expand-file-name "~/.emacs.d/lisp/appearance.org"))
+(org-babel-load-file (expand-file-name "~/.emacs.d/lisp/miscellaneous.org"))
 
 ;; load customize settings
 (setq custom-file "~/.emacs.d/customize.el")
