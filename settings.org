@@ -329,111 +329,17 @@
       :ensure t
       :bind ("C-\"" . iedit-mode))
   #+end_src
-** Ivy & friends
-- Repo :: https://github.com/abo-abo/swiper
-- Docs :: https://oremacs.com/swiper/
-*** Ivy
- #+begin_src emacs-lisp
-   (use-package ivy
-     :ensure t
-     :diminish (ivy-mode)
-     :bind
-     (("C-x b" . ivy-switch-buffer)
-      ("C-c C-r" . ivy-resume)
-      :map ivy-minibuffer-map
-      ("M-y" . ivy-next-line)
-      :map org-mode-map
-      ("C-c C-r" . nil))
-     :config
-     (ivy-mode)
-     (setq enable-recursive-minibuffers t
-           ivy-use-virtual-buffers t
-           ivy-count-format "%d/%d "
-           ivy-display-style 'fancy
-           ivy-re-builders-alist '((counsel-M-x . ivy--regex-fuzzy)
-                                   (counsel-describe-variable . ivy--regex-fuzzy)
-                                   (counsel-describe-function . ivy--regex-fuzzy)
-                                   (swiper-isearch . ivy--regex-plus)
-                                   (t . ivy--regex-plus)))
-     (use-package ivy-hydra
-       :ensure t))
-  #+end_src
-*** Counsel
-#+begin_src emacs-lisp
-  (use-package counsel
-    :ensure t
-    :bind
-    (("M-y" . counsel-yank-pop)
-     ("M-x" . counsel-M-x)
-     ("C-x C-f" . counsel-find-file)
-     ("<f1> f" . counsel-describe-function)
-     ("<f1> v" . counsel-describe-variable)
-     ("<f1> l" . counsel-find-library)
-     ("<f2> i" . counsel-info-lookup-symbol)
-     ("<f2> u" . counsel-unicode-char)
-     ("C-c g" . counsel-git) ; will override the keybinding for `magit-file-dispatch'
-     ("C-c j" . counsel-git-grep)
-     ("C-c a" . counsel-ag)
-     ("C-c t" . counsel-load-theme)
-     ("C-c m" . counsel-mark-ring)
-     ("C-x l" . counsel-locate)
-     ("M-y" . counsel-yank-pop)
-     ("M-x" . counsel-M-x)
-     ("s-r" . counsel-recentf)
-     :map minibuffer-local-map
-       ("C-r" . counsl-minibuffer-history)))
- #+end_src
-*** Swiper
-#+begin_src emacs-lisp
-  (use-package swiper
-    :ensure t
-    :bind
-    (("C-s" . swiper-isearch)
-     ("C-r" . swiper-isearch)
-     :map read-expression-map
-     ("C-r" . counsel-expression-history)))
- #+end_src
-*** ivy-rich
-- Repo :: https://github.com/Yevgnen/ivy-rich
-  #+begin_src emacs-lisp
-    (use-package ivy-rich
-      :ensure t
-      :config
-      (ivy-rich-mode 1))
-  #+end_src
-*** All the icons ivy-rich
-- Repo :: https://github.com/seagle0128/all-the-icons-ivy-rich
-  #+begin_src emacs-lisp
-    (use-package all-the-icons-ivy-rich
-      :ensure t
-      :config
-      (all-the-icons-ivy-rich-mode 1)
-      (setq all-the-icons-ivy-rich-color-icon t))
-  #+end_src
-*** flx
-- Repo :: https://github.com/lewang/flx
-  #+begin_src emacs-lisp
-    (use-package flx
-      :ensure t)
-  #+end_src
-*** orderless
+
+
+
+** orderless
 - Repo :: https://github.com/oantolin/orderless
   #+begin_src emacs-lisp
     (use-package orderless
       :ensure t
-      :config
-      (setq ivy-re-builders-alist '((t . orderless-ivy-re-builder)))
-      (add-to-list 'ivy-highlight-functions-alist '(orderless-ivy-re-builder . orderless-ivy-highlight))
       :custom
       (completion-styles '(orderless basic))
       (completion-category-overrides '((file (styles basic partial-completion)))))
-  #+end_src
-*** ivy-prescient
-- Repo :: https://github.com/radian-software/prescient.el
-  #+begin_src emacs-lisp
-    (use-package ivy-prescient
-      :ensure t
-      :config (ivy-prescient-mode 1))
   #+end_src
 ** json-mode
 - Repo :: https://github.com/joshwnj/json-mode
@@ -735,59 +641,7 @@
     ;;         yascroll:disabled-modes '(package-menu-mode image-mode)))
   #+end_src
 * Programming
-** lsp-mode
-- Repo :: https://github.com/emacs-lsp/lsp-mode
-- Docs :: https://emacs-lsp.github.io/lsp-mode
-  #+begin_src emacs-lisp
-    (setq gc-cons-threshold 100000000
-          read-process-output-max (* 1024 1024)
-          lsp-use-plists t)
-
-    ;; This disables the default lsp checker
-    ;; and falls back to normal flycheck
-    ;; (setq lsp-diagnostics-provider :none)
-
-    (use-package lsp-mode
-      :ensure t
-      :hook ((python-mode . lsp-deferred)
-             (web-mode . lsp-deferred)
-             (go-mode . lsp-deferred)
-             (haskell-mode . lsp-deferred)
-             (lsp-mode . lsp-enable-which-key-integration))
-      :config
-      (setq lsp-keymap-prefix "C-c l"
-            lsp-modeline-diagnostics-enable t
-            lsp-modeline-code-actions-mode t
-            lsp-headerline-breadcrumb-enable t
-            lsp-signature-render-documentation nil
-            lsp-modeline-diagnostics-scope :workspace)
-      :commands lsp-deferred)
-
-    (use-package lsp-ui
-      :ensure t
-      :bind ((:map lsp-ui-mode-map
-                   ("<C-return>" . lsp-ui-peek-find-references)
-                   ([remap xref-find-definitions] . lsp-ui-peek-find-definitions)
-                   ([remap xref-find-references] . lsp-ui-peek-find-references)))
-      :config
-      (setq lsp-ui-sideline-enable nil
-            lsp-ui-imenu-auto-refresh t
-            lsp-ui-doc-enable nil
-            imenu-auto-rescan t)
-      :commands lsp-ui-mode)
-
-    (use-package lsp-ivy
-      :ensure t
-      :commands lsp-ivy-workspace-symbol)
-
-    (use-package lsp-treemacs
-      :ensure t
-      :config
-      (lsp-treemacs-sync-mode 1)
-      :commands (lsp-treemacs-symbols
-                 lsp-treemacs-call-hierarchy
-                 lsp-treemacs-type-hierarchy
-                 lsp-treemacs-deps-list))
+#+begin_src emacs-lisp                 lsp-treemacs-deps-list))
 
     (use-package dap-mode
       :ensure t
@@ -819,33 +673,6 @@
                  ("Python" black))))))
   #+end_src
 ** Languages
-*** Clojure
-**** cider
-- Repo :: https://github.com/clojure-emacs/cider
-- Docs :: https://docs.cider.mx/
-  #+begin_src emacs-lisp
-    (use-package cider
-      :ensure t
-      :hook
-      (cider-mode . (lambda ()
-                      (add-hook 'before-save-hook 'cider-format-buffer nil 'make-it-local))))
-  #+end_src
-**** clj-refactor
-- Repo :: https://github.com/clojure-emacs/clj-refactor.el
-  #+begin_src emacs-lisp
-    (use-package clj-refactor
-      :ensure t
-      :config
-      (clj-refactor-mode 1)
-      (cljr-add-keybindings-with-prefix "C-c C-m"))
-  #+end_src
-**** flycheck-clj-kondo
-- Prerequisite  :: https://github.com/clj-kondo/clj-kondo/blob/master/doc/install.md
-- Repo :: https://github.com/borkdude/flycheck-clj-kondo
-  #+begin_src emacs-lisp
-    (use-package flycheck-clj-kondo
-      :ensure t)
-  #+end_src
 *** Python
 **** lsp-server
 - Repo :: https://github.com/python-lsp/python-lsp-server
@@ -854,12 +681,6 @@
     pip3 install black
     pip3 install pylsp-rope
     pip3 install flake8
-  #+end_src
-  #+begin_src emacs-lisp
-    (setq lsp-pylsp-plugins-flake8-enabled t
-          ;; config file must exist for syntax error highlighting
-          lsp-pylsp-plugins-flake8-config "~/.flake8"
-          lsp-pylsp-plugins-pydocstyle-enabled nil)
   #+end_src
 **** conda
 - Repo :: https://github.com/necaris/conda.el
@@ -901,65 +722,14 @@
   (when (executable-find "ipython")
     (setq python-shell-interpreter "ipython"))
 #+end_src
-*** JavaScript/Typescript
-**** lsp-server
-- Repo :: https://github.com/typescript-language-server/typescript-language-server
-  #+begin_src bash
-    npm i -g typescript-language-server; npm i -g typescript
-  #+end_src
-**** Config
- #+begin_src emacs-lisp
-   ;; (setq js-indent-level 2)
-   ;; (setq typescript-indent-level 2)
- #+end_src
-**** prettier-js
-- Repo :: https://github.com/prettier/prettier-emacs
-  #+begin_src emacs-lisp
-    (defun amo/enable-minor-mode (my-pair)
-      "Enable minor mode if filename match the regexp.  MY-PAIR is a cons cell (regexp . minor-mode)."
-      (if (buffer-file-name)
-          (if (string-match (car my-pair) buffer-file-name)
-              (funcall (cdr my-pair)))))
 
-    (use-package prettier-js
-      :ensure-system-package prettier
-      :ensure t
-      :hook (web-mode . prettier-js-mode)
-      :config
-      (setq prettier-js-args '(
-                               "--single-quote" "true"
-                               "--trailing-comma" "all"
-                               "--semi" "false"
-                               "--arrow-parens" "avoid"
-                               "--tab-width" "2"
-                               "--html-whitespace-sensitivity" "ignore"
-                               "--prose-wrap" "always"
-                               "--use-tabs" "false")))
-
-    (add-hook 'web-mode-hook #'(lambda ()
-                                 (amo/enable-minor-mode
-                                  '("\\.jsx?\\'" . prettier-js-mode))
-                                 (amo/enable-minor-mode
-                                  '("\\.tsx?\\'" . prettier-js-mode))))
-  #+end_src
 *** Go
 - Repo :: https://github.com/dominikh/go-mode.el
   #+begin_src emacs-lisp
     (use-package go-mode
       :ensure t
-      :hook
-      ((go-mode . amo/lsp-go-install-config))
       :config
       (add-to-list 'auto-mode-alist '("\\.go\\'" . go-mode)))
-
-    (defun amo/lsp-go-install-config ()
-      (add-hook 'before-save-hook #'lsp-format-buffer t t)
-      (add-hook 'before-save-hook #'lsp-organize-imports t t)
-      (setq-default indent-tabs-mode nil)
-      (electric-indent-mode 0)
-      (aggressive-indent-mode 0)
-      (setq-default tab-width 2)
-      (setq indent-line-function 'insert-tab))
   #+end_src
 *** Haskell
 - Repo :: https://github.com/haskell/haskell-mode
