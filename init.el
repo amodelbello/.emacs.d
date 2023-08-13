@@ -3,6 +3,9 @@
 (if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
 (setq inhibit-startup-message t)
 
+;; Fix bug with missing svg type (should be fixed in emacs 29)
+(setq image-types (cons 'svg image-types))
+
 (eval-when-compile
   (require 'package)
   ;;  (require 'diminish)
