@@ -21,6 +21,7 @@
          "Run `after-load-theme-hook'."
          (run-hooks 'after-load-theme-hook))
      (add-hook 'after-load-theme-hook 'amo/reload-centaur-tabs)
+     (amo/reload-centaur-tabs)
    #+end_src
 ** treemacs-mode-hook
    Remove line numbers in treemacs mode
