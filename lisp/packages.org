@@ -3,8 +3,7 @@
 #+description: "NO! The beard stays. You go."
 #+startup: content
 
-* Packages
-** Ace Window
+* Ace Window
 - Repo :: [[https://github.com/abo-abo/ace-window]]
   #+begin_src emacs-lisp
     (use-package ace-window
@@ -19,7 +18,7 @@
        '(aw-leading-char-face
          ((t (:inherit ace-jump-face-foreground :height 3.0))))))
   #+end_src
-** aggressive-indent-mode
+* aggressive-indent-mode
 - Repo :: https://github.com/Malabarba/aggressive-indent-mode
   #+begin_src emacs-lisp
     (use-package aggressive-indent
@@ -28,7 +27,7 @@
       (global-aggressive-indent-mode 1)
       (add-to-list 'aggressive-indent-excluded-modes 'html-mode))
   #+end_src
-** AuTex
+* AuTex
 - Docs :: https://www.gnu.org/software/auctex/index.html
   #+begin_src emacs-lisp
     (use-package tex
@@ -37,7 +36,7 @@
                     TeX-parse-self t)
               (setq-default TeX-master nil))
   #+end_src
-** Avy
+* Avy
 - Repo :: [[https://github.com/abo-abo/avy]]
   #+begin_src emacs-lisp
     (use-package avy
@@ -47,7 +46,7 @@
              :map org-mode-map
              ("C-'" . nil)))
   #+end_src
-** Beacon
+* Beacon
 - Repo :: [[https://github.com/Malabarba/beacon]]
   #+begin_src emacs-lisp
     (use-package beacon
@@ -57,7 +56,7 @@
       (setq beacon-blink-duration 0.5
             beacon-blink-delay 0.1))
   #+end_src
-** buffer-move
+* buffer-move
 - Repo :: https://github.com/lukhas/buffer-move
   #+begin_src emacs-lisp
     (use-package buffer-move
@@ -73,7 +72,7 @@
        ("<C-S-left>" . buf-move-left)
        ("<C-S-right>" . buf-move-right)))
   #+end_src
-** centaur-tabs
+* centaur-tabs
 - Repo :: https://github.com/ema2159/centaur-tabs
   #+begin_src emacs-lisp
     (use-package centaur-tabs
@@ -119,7 +118,7 @@
               (not (file-name-extension name)))
          )))
   #+end_src
-** Company
+* Company
 - Repo :: https://github.com/company-mode/company-mode
 - Docs :: https://company-mode.github.io/
   #+begin_src emacs-lisp
@@ -140,7 +139,7 @@
         :hook
         (company-mode . company-box-mode)))
   #+end_src
-** Crux
+* Crux
 - Repo :: https://github.com/bbatsov/crux
 - Docs :: [[https://emacsredux.com/blog/2016/01/30/crux/]]
   #+begin_src emacs-lisp
@@ -162,7 +161,7 @@
        ("s-k" . crux-kill-whole-line)
        ("<C-backspace>" . crux-kill-line-backwards)))
   #+end_src
-** diff-hl
+* diff-hl
 - Repo :: https://github.com/dgutov/diff-hl
   #+begin_src emacs-lisp
     (use-package diff-hl
@@ -174,13 +173,13 @@
        (magit-pre-refresh . diff-hl-magit-pre-refresh)
        (magit-post-refresh . diff-hl-magit-post-refresh)))
   #+end_src
-** emacs-sqlite3
+* emacs-sqlite3
 - Repo :: https://github.com/pekingduck/emacs-sqlite3-api
   #+begin_src emacs-lisp
     (use-package sqlite3
       :ensure t)
   #+end_src
-** exec-path-from-shell
+* exec-path-from-shell
 - Repo :: https://github.com/purcell/exec-path-from-shell
   #+begin_src emacs-lisp
     (when (memq window-system '(mac ns)) ;; MacOS
@@ -195,7 +194,7 @@
                :config
                (exec-path-from-shell-initialize)))
   #+end_src
-** expand-region
+* expand-region
 - Repo :: https://github.com/magnars/expand-region.el
   #+begin_src emacs-lisp
     (use-package expand-region
@@ -203,7 +202,7 @@
       :bind (("C-=" . er/expand-region)
              ("C--" . er/contract-region)))
   #+end_src
-** Eyebrowse
+* Eyebrowse
 - Repo :: https://depp.brause.cc/eyebrowse/
   #+begin_src emacs-lisp
     (use-package eyebrowse
@@ -211,7 +210,7 @@
       :config
       (eyebrowse-mode))
   #+end_src
-** Flycheck
+* Flycheck
 - Repo :: https://github.com/flycheck/flycheck
 - Docs :: https://www.flycheck.org/en/latest/
   #+begin_src emacs-lisp
@@ -222,7 +221,7 @@
       (use-package flycheck-pos-tip
         :ensure t))
   #+end_src
-** Flyspell
+* Flyspell
   #+begin_src emacs-lisp
     (setq-default ispell-program-name (dot-env-get 'ISPELL_PATH "/opt/homebrew/opt/ispell/bin/ispell"))
 
@@ -231,7 +230,7 @@
                        (flyspell-mode 1)
                        (define-key flyspell-mode-map (kbd "C-;") nil))))
   #+end_src
-** git-messenger
+* git-messenger
 - Repo :: https://github.com/emacsorphanage/git-messenger
   #+begin_src emacs-lisp
     (use-package git-messenger
@@ -240,13 +239,13 @@
                     git-messenger:use-magit-popup t)
       :bind ("C-x m" . git-messenger:popup-message))
   #+end_src
-** Git time machine
+* Git time machine
 - Repo :: https://github.com/emacsmirror/git-timemachine
   #+begin_src emacs-lisp
     (use-package git-timemachine
       :ensure t)
   #+end_src
-** goto-line-preview
+* goto-line-preview
 - Repo :: https://github.com/emacs-vs/goto-line-preview
   #+begin_src emacs-lisp
     (use-package goto-line-preview
@@ -254,7 +253,7 @@
       :config
       (global-set-key [remap goto-line] 'goto-line-preview))
   #+end_src
-** gptel
+* gptel
 - Repo :: https://github.com/karthink/gptel
   #+begin_src emacs-lisp
     (use-package gptel
@@ -263,7 +262,7 @@
       (setq gptel-api-key (dot-env-get 'GPTEL_API_KEY)
             gptel-default-mode #'org-mode))
   #+end_src
-** grip
+* grip
 - Repo :: https://github.com/seagle0128/grip-mode
   #+begin_src bash
     pip install grip
@@ -277,7 +276,7 @@
                     grip-github-user "amodelbello"
                     grip-github-password (dot-env-get 'GRIP_GITHUB_PASSWORD)))
   #+end_src
-** ibuffer
+* ibuffer
 - Docs :: https://www.emacswiki.org/emacs/IbufferMode
   #+begin_src emacs-lisp
     (global-set-key (kbd "C-x C-b") 'ibuffer)
@@ -310,7 +309,7 @@
     ;; Don't show filter groups if there are no buffers in that group
     (setq ibuffer-show-empty-filter-groups nil)
   #+end_src
-** Idle Highlight Mode
+* Idle Highlight Mode
 - Repo :: https://codeberg.org/ideasman42/emacs-idle-highlight-mode
   #+begin_src emacs-lisp
     (use-package idle-highlight-mode
@@ -322,17 +321,17 @@
       ((prog-mode text-mode) . idle-highlight-mode))
 
   #+end_src
-** iedit
+* iedit
 - Repo :: https://github.com/victorhge/iedit
   #+begin_src emacs-lisp
     (use-package iedit
       :ensure t
       :bind ("C-\"" . iedit-mode))
   #+end_src
-** Ivy & friends
+* Ivy & friends
 - Repo :: https://github.com/abo-abo/swiper
 - Docs :: https://oremacs.com/swiper/
-*** Ivy
+** Ivy
  #+begin_src emacs-lisp
    (use-package ivy
      :ensure t
@@ -358,7 +357,7 @@
      (use-package ivy-hydra
        :ensure t))
   #+end_src
-*** Counsel
+** Counsel
 #+begin_src emacs-lisp
   (use-package counsel
     :ensure t
@@ -383,7 +382,7 @@
      :map minibuffer-local-map
        ("C-r" . counsl-minibuffer-history)))
  #+end_src
-*** Swiper
+** Swiper
 #+begin_src emacs-lisp
   (use-package swiper
     :ensure t
@@ -393,7 +392,7 @@
      :map read-expression-map
      ("C-r" . counsel-expression-history)))
  #+end_src
-*** ivy-rich
+** ivy-rich
 - Repo :: https://github.com/Yevgnen/ivy-rich
   #+begin_src emacs-lisp
     (use-package ivy-rich
@@ -401,7 +400,7 @@
       :config
       (ivy-rich-mode 1))
   #+end_src
-*** All the icons ivy-rich
+** All the icons ivy-rich
 - Repo :: https://github.com/seagle0128/all-the-icons-ivy-rich
   #+begin_src emacs-lisp
     (use-package all-the-icons-ivy-rich
@@ -410,13 +409,13 @@
       (all-the-icons-ivy-rich-mode 1)
       (setq all-the-icons-ivy-rich-color-icon t))
   #+end_src
-*** flx
+** flx
 - Repo :: https://github.com/lewang/flx
   #+begin_src emacs-lisp
     (use-package flx
       :ensure t)
   #+end_src
-*** orderless
+** orderless
 - Repo :: https://github.com/oantolin/orderless
   #+begin_src emacs-lisp
     (use-package orderless
@@ -428,20 +427,20 @@
       (completion-styles '(orderless basic))
       (completion-category-overrides '((file (styles basic partial-completion)))))
   #+end_src
-*** ivy-prescient
+** ivy-prescient
 - Repo :: https://github.com/radian-software/prescient.el
   #+begin_src emacs-lisp
     (use-package ivy-prescient
       :ensure t
       :config (ivy-prescient-mode 1))
   #+end_src
-** json-mode
+* json-mode
 - Repo :: https://github.com/joshwnj/json-mode
   #+begin_src emacs-lisp
     (use-package json-mode
       :ensure t)
   #+end_src
-** jump-char
+* jump-char
 - Repo :: ...
   #+begin_src emacs-lisp
     (use-package jump-char
@@ -452,7 +451,7 @@
       :bind (("M-n" . jump-char-forward)
              ("M-N" . jump-char-backward)))
   #+end_src
-** minions
+* minions
 - Repo :: https://github.com/tarsius/minions
   #+begin_src emacs-lisp
     (use-package minions
@@ -460,7 +459,7 @@
       :config
       (minions-mode 1))
   #+end_src
-** Magit
+* Magit
 - Repo :: https://github.com/magit/magit
 - Docs :: https://magit.vc/
   #+begin_src emacs-lisp
@@ -469,7 +468,7 @@
       :bind
       (("C-x g" . magit)))
   #+end_src
-** Org Mode
+* Org Mode
 - Docs :: https://orgmode.org/
   #+begin_src emacs-lisp
     (defun amo/org-mode-hook ()
@@ -552,7 +551,7 @@
              (file+headline org-lists-file "Interesting Albums")
              "%?")))
   #+end_src
-*** org-superstar-mode
+** org-superstar-mode
 - Repo :: https://github.com/integral-dw/org-superstar-mode
   #+begin_src emacs-lisp
     (use-package org-superstar
@@ -560,13 +559,13 @@
       :hook
       (org-mode . org-superstar-mode))
   #+end_src
-** package-lint
+* package-lint
 - Repo :: https://github.com/purcell/package-lint
   #+begin_src emacs-lisp
     (use-package package-lint
       :ensure t)
   #+end_src
-** Paredit
+* Paredit
 - Repo :: https://github.com/emacsmirror/paredit/blob/master/paredit.el
 - Docs :: https://www.emacswiki.org/emacs/ParEdit
 - Docs :: https://wikemacs.org/wiki/Paredit-mode
@@ -581,7 +580,7 @@
        (clojurec-mode . paredit-mode)
        (cider-repl-mode . paredit-mode)))
   #+end_src
-** Popper
+* Popper
 - Repo :: https://github.com/karthink/popper
   #+begin_src emacs-lisp
     (use-package popper
@@ -624,7 +623,7 @@
           (setq mode-line-misc-info (remove "POP" mode-line-misc-info))))
       (add-hook 'buffer-list-update-hook 'amo/add-popper-status-to-modeline))
   #+end_src
-** Projectile
+* Projectile
 - Repo :: https://github.com/bbatsov/projectile
 - Docs :: https://docs.projectile.mx/projectile/index.html
   #+begin_src emacs-lisp
@@ -636,21 +635,21 @@
       :bind (("s-p" . projectile-command-map)
              ("C-c p" . projectile-command-map)))
   #+end_src
-** rainbow-delimiters
+* rainbow-delimiters
 - Repo :: https://github.com/Fanael/rainbow-delimiters
   #+begin_src emacs-lisp
     (use-package rainbow-delimiters
       :ensure t
       :hook (prog-mode . rainbow-delimiters-mode))
   #+end_src
-** Transpose Frame
+* Transpose Frame
 - Docs :: https://www.emacswiki.org/emacs/TransposeFrame
   #+begin_src emacs-lisp
     (use-package transpose-frame
       :ensure t
       :bind (("C->" . transpose-frame)))
   #+end_src
-** Treemacs
+* Treemacs
 - Repo :: https://github.com/Alexander-Miller/treemacs
   #+begin_src emacs-lisp
     (use-package treemacs
@@ -673,7 +672,7 @@
       :after (treemacs magit)
       :ensure t)
   #+end_src
-** undo-tree
+* undo-tree
 - Repo :: https://github.com/apchamberlain/undo-tree.el
 - Docs :: https://www.emacswiki.org/emacs/UndoTree
   #+begin_src emacs-lisp
@@ -686,7 +685,7 @@
       :diminish
       (undo-tree-mode))
   #+end_src
-** web-mode
+* web-mode
 - Repo :: https://github.com/fxbois/web-mode
 - Docs :: https://web-mode.org/
   #+begin_src emacs-lisp
@@ -703,7 +702,7 @@
              ("\\.html\\'" . web-mode))
       :commands web-mode)
   #+end_src
-** which-key
+* which-key
 - Repo :: https://github.com/justbur/emacs-which-key
   #+begin_src emacs-lisp
     (use-package which-key
@@ -711,7 +710,7 @@
       :config
       (which-key-mode))
   #+end_src
-** YASnippet
+* YASnippet
 - Repo :: https://github.com/joaotavora/yasnippet
   #+begin_src emacs-lisp
     (use-package yasnippet
@@ -723,7 +722,7 @@
       (use-package yasnippet-snippets
         :ensure t))
   #+end_src
-** yascroll
+* yascroll
 - Repo :: https://github.com/emacsorphanage/yascroll
   #+begin_src emacs-lisp
 

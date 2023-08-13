@@ -3,11 +3,11 @@
 #+description: "NO! The beard stays. You go."
 #+startup: everything
 
-* Appearance
-   #+begin_src emacs-lisp
-     (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
-   #+end_src
-** Doom Modeline
+#+begin_src emacs-lisp
+(add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
+#+end_src
+
+* Doom Modeline
 - Repo :: https://github.com/seagle0128/doom-modeline
   #+begin_src emacs-lisp
     (use-package doom-modeline
@@ -18,13 +18,15 @@
             doom-modeline-vcs-max-length 40
             doom-modeline-buffer-encoding t))
   #+end_src
-** Ef Themes
+
+* Ef Themes
 - Repo :: https://github.com/protesilaos/ef-themes
   #+begin_src emacs-lisp
     (use-package ef-themes
       :ensure t)
   #+end_src
-** Modus Themes
+
+* Modus Themes
 - Repo :: https://github.com/protesilaos/modus-themes
   #+begin_src emacs-lisp
     (use-package modus-themes

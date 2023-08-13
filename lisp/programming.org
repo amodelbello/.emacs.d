@@ -3,8 +3,7 @@
 #+description: "NO! The beard stays. You go."
 #+startup: content
 
-* Programming
-** lsp-mode
+* lsp-mode
 - Repo :: https://github.com/emacs-lsp/lsp-mode
 - Docs :: https://emacs-lsp.github.io/lsp-mode
   #+begin_src emacs-lisp
@@ -70,7 +69,7 @@
       (require 'dap-python))
 
   #+end_src
-** format-all
+* format-all
 - Repo :: https://github.com/lassik/emacs-format-all-the-code
   #+begin_src emacs-lisp
     (use-package format-all
@@ -87,9 +86,9 @@
          (quote (("Emacs Lisp" emacs-lisp)
                  ("Python" black))))))
   #+end_src
-** Languages
-*** Clojure
-**** cider
+* Languages
+** Clojure
+*** cider
 - Repo :: https://github.com/clojure-emacs/cider
 - Docs :: https://docs.cider.mx/
   #+begin_src emacs-lisp
@@ -99,7 +98,7 @@
       (cider-mode . (lambda ()
                       (add-hook 'before-save-hook 'cider-format-buffer nil 'make-it-local))))
   #+end_src
-**** clj-refactor
+*** clj-refactor
 - Repo :: https://github.com/clojure-emacs/clj-refactor.el
   #+begin_src emacs-lisp
     (use-package clj-refactor
@@ -108,15 +107,15 @@
       (clj-refactor-mode 1)
       (cljr-add-keybindings-with-prefix "C-c C-m"))
   #+end_src
-**** flycheck-clj-kondo
+*** flycheck-clj-kondo
 - Prerequisite  :: https://github.com/clj-kondo/clj-kondo/blob/master/doc/install.md
 - Repo :: https://github.com/borkdude/flycheck-clj-kondo
   #+begin_src emacs-lisp
     (use-package flycheck-clj-kondo
       :ensure t)
   #+end_src
-*** Python
-**** lsp-server
+** Python
+*** lsp-server
 - Repo :: https://github.com/python-lsp/python-lsp-server
   #+begin_src bash
     pip3 install 'python-lsp-server[all]'
@@ -130,7 +129,7 @@
           lsp-pylsp-plugins-flake8-config "~/.flake8"
           lsp-pylsp-plugins-pydocstyle-enabled nil)
   #+end_src
-**** conda
+*** conda
 - Repo :: https://github.com/necaris/conda.el
   #+begin_src emacs-lisp
     (use-package conda
@@ -144,7 +143,7 @@
                                              (conda-env-activate-for-buffer))))
       (setq-default mode-line-format (cons '(:exec conda-env-current-name) mode-line-format)))
   #+end_src
-**** pandoc
+*** pandoc
 - Repo :: https://github.com/joostkremers/pandoc-mode
 - Docs: :: https://joostkremers.github.io/pandoc-mode/
   #+begin_src emacs-lisp
@@ -154,7 +153,7 @@
       :hook ((markdown-mode . pandoc-mode)
              (pandoc-mode . pandoc-load-default-settings)))
   #+end_src
-**** pyvenv
+*** pyvenv
 - Repo :: https://github.com/jorgenschaefer/pyvenv
   #+begin_src emacs-lisp
     (use-package pyvenv
@@ -165,23 +164,23 @@
             '(pyvenv-virtual-env-name ("[venv:" pyvenv-virtual-env-name "] ")))
       (pyvenv-mode +1))
   #+end_src
-**** interpreter
+*** interpreter
 #+begin_src emacs-lisp
   (when (executable-find "ipython")
     (setq python-shell-interpreter "ipython"))
 #+end_src
-*** JavaScript/Typescript
-**** lsp-server
+** JavaScript/Typescript
+*** lsp-server
 - Repo :: https://github.com/typescript-language-server/typescript-language-server
   #+begin_src bash
     npm i -g typescript-language-server; npm i -g typescript
   #+end_src
-**** Config
+*** Config
  #+begin_src emacs-lisp
    ;; (setq js-indent-level 2)
    ;; (setq typescript-indent-level 2)
  #+end_src
-**** prettier-js
+*** prettier-js
 - Repo :: https://github.com/prettier/prettier-emacs
   #+begin_src emacs-lisp
     (defun amo/enable-minor-mode (my-pair)
@@ -211,7 +210,7 @@
                                  (amo/enable-minor-mode
                                   '("\\.tsx?\\'" . prettier-js-mode))))
   #+end_src
-*** Go
+** Go
 - Repo :: https://github.com/dominikh/go-mode.el
   #+begin_src emacs-lisp
     (use-package go-mode
@@ -230,7 +229,7 @@
       (setq-default tab-width 2)
       (setq indent-line-function 'insert-tab))
   #+end_src
-*** Haskell
+** Haskell
 - Repo :: https://github.com/haskell/haskell-mode
   #+begin_src emacs-lisp
     (use-package haskell-mode
@@ -246,7 +245,7 @@
       (haskell-mode . amo/on-haskell-mode)
       (before-save . lsp-format-buffer))
   #+end_src
-*** Yaml
+** Yaml
 - Repo :: https://github.com/yoshiki/yaml-mode
   #+begin_src emacs-lisp
     (use-package yaml-mode
