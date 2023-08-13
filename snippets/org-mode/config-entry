@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: config entry
+# key: cn>
+# --
+* $0
+- item
+#+begin_src emacs-lisp
+
+#+end_src
