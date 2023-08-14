@@ -11,7 +11,7 @@
 :END:
   #+begin_src emacs-lisp
     (use-package ace-window
-      :ensure t
+      :straight t
       :bind
       (("C-o" . ace-window)
        ("C-x o" . ace-window))
@@ -27,7 +27,7 @@
 :END:
   #+begin_src emacs-lisp
     (use-package company
-      :ensure t
+      :straight t
       :config
       (global-company-mode))
   #+end_src
@@ -39,6 +39,8 @@
   #+begin_src emacs-lisp
     ;; Example configuration for Consult
     (use-package consult
+      :straight t
+
       ;; Replace bindings. Lazily loaded due by `use-package'.
       :bind (;; C-c bindings in `mode-specific-map'
              ("C-s" . consult-line)
@@ -135,7 +137,7 @@
 :END:
   #+begin_src emacs-lisp
     (use-package crux
-      :ensure t
+      :straight t
       :bind
       (("s-o" . crux-smart-open-line-above)
        ("M-o" . crux-smart-open-line)
@@ -157,7 +159,7 @@
 :END:
   #+begin_src emacs-lisp
     (use-package magit
-      :ensure t
+      :straight t
       :bind
       (("C-x g" . magit)))
   #+end_src
@@ -168,7 +170,7 @@
 :END:
   #+begin_src emacs-lisp
     (use-package marginalia
-      :ensure t
+      :straight t
       :init
       (marginalia-mode))
   #+end_src
@@ -180,7 +182,7 @@
 :END:
   #+begin_src emacs-lisp
     (use-package orderless
-      :ensure t
+      :straight t
       :custom
       (completion-styles '(orderless basic))
       (completion-category-overrides '((file (styles basic partial-completion)))))
@@ -193,7 +195,7 @@
 :END:
   #+begin_src emacs-lisp
     (use-package vertico
-      :ensure t
+      :straight t
       :bind (:map vertico-map
                   ("C-j" . vertico-directory-enter)
                   ("DEL" . vertico-directory-delete-char)
@@ -208,13 +210,13 @@
 :END:
   #+begin_src emacs-lisp
     (use-package yasnippet
-      :ensure t
+      :straight t
       :config
       (yas-global-mode)
       (setq yas-snippet-dirs
             '("~/.emacs.d/snippets"))
       (use-package yasnippet-snippets
-        :ensure t))
+        :straight t))
   #+end_src
 
 * Programming
@@ -241,7 +243,7 @@
 :END:
   #+begin_src emacs-lisp
     (use-package treesit-auto
-      :ensure t
+      :straight t
       :config
       (setq treesit-auto-install 'prompt)
       (global-treesit-auto-mode))
@@ -253,7 +255,7 @@
 :END:
   #+begin_src emacs-lisp
     (use-package eglot
-      :ensure t
+      :straight t
       :defer t
       :hook ((python-ts-mode . eglot-ensure)))
   #+end_src
@@ -505,5 +507,5 @@ Copy whole line to kill ring when no active region
 - Repo :: https://github.com/protesilaos/modus-themes
   #+begin_src emacs-lisp
     (use-package modus-themes
-      :ensure t)
+      :straight t)
   #+end_src
