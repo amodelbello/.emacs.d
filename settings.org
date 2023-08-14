@@ -5,7 +5,10 @@
 
 * Packages
 ** Ace Window
-- Repo :: [[https://github.com/abo-abo/ace-window]]
+:PROPERTIES:
+:REPO:     [[https://github.com/abo-abo/ace-window]]
+:DESCRIPTION: Quickly switch windows in Emacs
+:END:
   #+begin_src emacs-lisp
     (use-package ace-window
       :ensure t
@@ -14,146 +17,129 @@
        ("C-x o" . ace-window))
       :config
       (defvar aw-dispatch-always nil)
-      (setq aw-scope 'frame)
-      (custom-set-faces
-       '(aw-leading-char-face
-         ((t (:inherit ace-jump-face-foreground :height 3.0))))))
-  #+end_src
-** aggressive-indent-mode
-- Repo :: https://github.com/Malabarba/aggressive-indent-mode
-  #+begin_src emacs-lisp
-    (use-package aggressive-indent
-      :ensure t
-      :config
-      (global-aggressive-indent-mode 1)
-      (add-to-list 'aggressive-indent-excluded-modes 'html-mode))
-  #+end_src
-** AuTex
-- Docs :: https://www.gnu.org/software/auctex/index.html
-  #+begin_src emacs-lisp
-    (use-package tex
-      :ensure auctex
-      :config (setq TeX-auto-save t
-                    TeX-parse-self t)
-              (setq-default TeX-master nil))
-  #+end_src
-** Avy
-- Repo :: [[https://github.com/abo-abo/avy]]
-  #+begin_src emacs-lisp
-    (use-package avy
-      :ensure t
-      :bind (("C-'" . avy-goto-char)
-             ("C-;" . avy-goto-char-2)
-             :map org-mode-map
-             ("C-'" . nil)))
-  #+end_src
-** Beacon
-- Repo :: [[https://github.com/Malabarba/beacon]]
-  #+begin_src emacs-lisp
-    (use-package beacon
-      :ensure t
-      :config
-      (beacon-mode 1)
-      (setq beacon-blink-duration 0.5
-            beacon-blink-delay 0.1))
-  #+end_src
-** buffer-move
-- Repo :: https://github.com/lukhas/buffer-move
-  #+begin_src emacs-lisp
-    (use-package buffer-move
-      :ensure t
-      :bind
-      (("<C-S-up>" . buf-move-up)
-       ("<C-S-down>" . buf-move-down)
-       ("<C-S-left>" . buf-move-left)
-       ("<C-S-right>" .  buf-move-right)
-       :map org-mode-map
-       ("<C-S-up>" . buf-move-up)
-       ("<C-S-down>" . buf-move-down)
-       ("<C-S-left>" . buf-move-left)
-       ("<C-S-right>" . buf-move-right)))
-  #+end_src
-** centaur-tabs
-- Repo :: https://github.com/ema2159/centaur-tabs
-  #+begin_src emacs-lisp
-    (use-package centaur-tabs
-      :ensure t
-      :init
-      (centaur-tabs-mode t)
-      :config
-      (setq centaur-tabs-style "bar"
-            centaur-tabs-height 32
-            centaur-tabs-set-icons t
-            centaur-tabs-cycle-scope 'tabs
-            centaur-tabs-set-modified-marker t
-            centaur-tabs-set-bar 'under
-            centaur-tabs-show-count nil
-            x-underline-at-descent-line t
-            uniquify-separator "/"
-            uniquify-buffer-name-style 'forward
-            centaur-tabs-left-edge-margin nil)
-      (centaur-tabs-change-fonts (face-attribute 'default :font) 110)
-      (centaur-tabs-group-by-projectile-project)
-      (centaur-tabs-headline-match)
-      :bind
-      ("s-M-<left>" . centaur-tabs-backward)
-      ("s-M-<right>" . centaur-tabs-forward)
-      ("s-S-<left>" . centaur-tabs-move-current-tab-to-left)
-      ("s-S-<right>" . centaur-tabs-move-current-tab-to-right)
-      ("s-W" . centaur-tabs-kill-all-buffers-in-current-group)
-      :hook
-      (popper-mode . centaur-tabs-local-mode))
-
-    (defun centaur-tabs-hide-tab (x)
-      "Do not show buffer X in tabs."
-      (let ((name (format "%s" x)))
-        (or
-         ;; Current window is not dedicated window.
-         (window-dedicated-p (selected-window))
-
-         ;; Buffer name not match below blacklist.
-         (string-match "\\`\*.*'\*" name)
-
-         ;; Is not magit buffer.
-         (and (string-prefix-p "magit" name)
-              (not (file-name-extension name)))
-         )))
+      (setq aw-scope 'frame))
   #+end_src
 ** Company
-- Repo :: https://github.com/company-mode/company-mode
-- Docs :: https://company-mode.github.io/
+:PROPERTIES:
+:REPO:     https://github.com/company-mode/company-mode
+:DOCS:     https://company-mode.github.io/
+:DESCRIPTION: Modular in-buffer completion framework for Emacs
+:END:
   #+begin_src emacs-lisp
     (use-package company
       :ensure t
       :config
-      (global-company-mode)
-      (setq company-idle-delay 0.4
-            company-show-numbers t
-            company-tooltip-limit 10
-            company-minimum-prefix-length 2
-            company-tooltip-align-annotations t
-            company-tooltip-flip-when-above nil)
-      (custom-set-variables
-       '(company-quick-access-modifier 'super))
-      (use-package company-box
-        :ensure t
-        :hook
-        (company-mode . company-box-mode)))
+      (global-company-mode))
   #+end_src
+** Consult
+:PROPERTIES:
+:REPO:     https://github.com/minad/consult
+:DESCRIPTION: Search and navigation commands based on the Emacs completion function completing-read
+:END:
+  #+begin_src emacs-lisp
+    ;; Example configuration for Consult
+    (use-package consult
+      ;; Replace bindings. Lazily loaded due by `use-package'.
+      :bind (;; C-c bindings in `mode-specific-map'
+             ("C-s" . consult-line)
+             ("C-c M-x" . consult-mode-command)
+             ("C-c h" . consult-history)
+             ("C-c k" . consult-kmacro)
+             ("C-c m" . consult-man)
+             ("C-c i" . consult-info)
+             ([remap Info-search] . consult-info)
+             ;; C-x bindings in `ctl-x-map'
+             ("C-x M-:" . consult-complex-command)     ;; orig. repeat-complex-command
+             ("C-x b" . consult-buffer)                ;; orig. switch-to-buffer
+             ("C-x 4 b" . consult-buffer-other-window) ;; orig. switch-to-buffer-other-window
+             ("C-x 5 b" . consult-buffer-other-frame)  ;; orig. switch-to-buffer-other-frame
+             ("C-x r b" . consult-bookmark)            ;; orig. bookmark-jump
+             ("C-x p b" . consult-project-buffer)      ;; orig. project-switch-to-buffer
+             ;; Custom M-# bindings for fast register access
+             ("M-#" . consult-register-load)
+             ("M-'" . consult-register-store)          ;; orig. abbrev-prefix-mark (unrelated)
+             ("C-M-#" . consult-register)
+             ;; Other custom bindings
+             ("M-y" . consult-yank-pop)                ;; orig. yank-pop
+             ;; M-g bindings in `goto-map'
+             ("M-g e" . consult-compile-error)
+             ("M-g f" . consult-flymake)               ;; Alternative: consult-flycheck
+             ("M-g g" . consult-goto-line)             ;; orig. goto-line
+             ("M-g M-g" . consult-goto-line)           ;; orig. goto-line
+             ("M-g o" . consult-outline)               ;; Alternative: consult-org-heading
+             ("M-g m" . consult-mark)
+             ("M-g k" . consult-global-mark)
+             ("M-g i" . consult-imenu)
+             ("M-g I" . consult-imenu-multi)
+             ;; M-s bindings in `search-map'
+             ("M-s d" . consult-find)
+             ("M-s D" . consult-locate)
+             ("M-s g" . consult-grep)
+             ("M-s G" . consult-git-grep)
+             ("M-s r" . consult-ripgrep)
+             ("M-s l" . consult-line)
+             ("M-s L" . consult-line-multi)
+             ("M-s k" . consult-keep-lines)
+             ("M-s u" . consult-focus-lines)
+             ;; Isearch integration
+             ("M-s e" . consult-isearch-history)
+             :map isearch-mode-map
+             ("M-e" . consult-isearch-history)         ;; orig. isearch-edit-string
+             ("M-s e" . consult-isearch-history)       ;; orig. isearch-edit-string
+             ("M-s l" . consult-line)                  ;; needed by consult-line to detect isearch
+             ("M-s L" . consult-line-multi)            ;; needed by consult-line to detect isearch
+             ;; Minibuffer history
+             :map minibuffer-local-map
+             ("M-s" . consult-history)                 ;; orig. next-matching-history-element
+             ("M-r" . consult-history))                ;; orig. previous-matching-history-element
+
+      ;; Enable automatic preview at point in the *Completions* buffer. This is
+      ;; relevant when you use the default completion UI.
+      :hook (completion-list-mode . consult-preview-at-point-mode)
+
+      ;; The :init configuration is always executed (Not lazy)
+      :init
+
+      ;; Optionally configure the register formatting. This improves the register
+      ;; preview for `consult-register', `consult-register-load',
+      ;; `consult-register-store' and the Emacs built-ins.
+      (setq register-preview-delay 0.5
+            register-preview-function #'consult-register-format)
+
+      ;; Optionally tweak the register preview window.
+      ;; This adds thin lines, sorting and hides the mode line of the window.
+      (advice-add #'register-preview :override #'consult-register-window)
+
+      ;; Use Consult to select xref locations with preview
+      (setq xref-show-xrefs-function #'consult-xref
+            xref-show-definitions-function #'consult-xref)
+
+      ;; Configure other variables and modes in the :config section,
+      ;; after lazily loading the package.
+      :config
+      (consult-customize
+       consult-theme :preview-key '(:debounce 0.2 any)
+       consult-ripgrep consult-git-grep consult-grep
+       consult-bookmark consult-recent-file consult-xref
+       consult--source-bookmark consult--source-file-register
+       consult--source-recent-file consult--source-project-recent-file
+       ;; :preview-key "M-."
+       :preview-key '(:debounce 0.4 any)))
+  #+end_src
+
 ** Crux
-- Repo :: https://github.com/bbatsov/crux
-- Docs :: [[https://emacsredux.com/blog/2016/01/30/crux/]]
+:PROPERTIES:
+:REPO:     https://github.com/bbatsov/crux
+:DOCS:     [[https://emacsredux.com/blog/2016/01/30/crux/]]
+:DESCRIPTION: A Collection of Ridiculously Useful eXtensions for Emacs
+:END:
   #+begin_src emacs-lisp
     (use-package crux
       :ensure t
       :bind
       (("s-o" . crux-smart-open-line-above)
        ("M-o" . crux-smart-open-line)
-
-       ; this all of a sudden stopped working
-       ; switching to coucel-recentf for now
-       ; ("s-r" . crux-recentf-find-file)
-
+       ("s-r" . crux-recentf-find-file)
        ("C-c D" . crux-delete-file-and-buffer)
        ("C-c d" . crux-duplicate-current-line-or-region)
        ("C-c M-d" . crux-duplicate-and-comment-current-line-or-region)
@@ -162,178 +148,36 @@
        ("s-k" . crux-kill-whole-line)
        ("<C-backspace>" . crux-kill-line-backwards)))
   #+end_src
-** diff-hl
-- Repo :: https://github.com/dgutov/diff-hl
-  #+begin_src emacs-lisp
-    (use-package diff-hl
-      :ensure t
-      :config
-      (global-diff-hl-mode)
-      :hook
-      ((dired-mode . diff-hl-dired-mode)
-       (magit-pre-refresh . diff-hl-magit-pre-refresh)
-       (magit-post-refresh . diff-hl-magit-post-refresh)))
-  #+end_src
-** emacs-sqlite3
-- Repo :: https://github.com/pekingduck/emacs-sqlite3-api
-  #+begin_src emacs-lisp
-    (use-package sqlite3
-      :ensure t)
-  #+end_src
-** exec-path-from-shell
-- Repo :: https://github.com/purcell/exec-path-from-shell
-  #+begin_src emacs-lisp
-    (when (memq window-system '(mac ns)) ;; MacOS
-             (use-package exec-path-from-shell
-               :ensure t
-               :config
-               (setq exec-path-from-shell-arguments nil) ; non-interactive, i.e. .zshenv not .zshrc
-               (exec-path-from-shell-initialize)))
-    (when (memq window-system '(x)) ;; Linux
-             (use-package exec-path-from-shell
-               :ensure t
-               :config
-               (exec-path-from-shell-initialize)))
-  #+end_src
-** expand-region
-- Repo :: https://github.com/magnars/expand-region.el
-  #+begin_src emacs-lisp
-    (use-package expand-region
-      :ensure t
-      :bind (("C-=" . er/expand-region)
-             ("C--" . er/contract-region)))
-  #+end_src
-** Eyebrowse
-- Repo :: https://depp.brause.cc/eyebrowse/
-  #+begin_src emacs-lisp
-    (use-package eyebrowse
-      :ensure t
-      :config
-      (eyebrowse-mode))
-  #+end_src
-** Flycheck
-- Repo :: https://github.com/flycheck/flycheck
-- Docs :: https://www.flycheck.org/en/latest/
-  #+begin_src emacs-lisp
-    (use-package flycheck
-      :ensure t
-      :init (global-flycheck-mode)
-      :config
-      (use-package flycheck-pos-tip
-        :ensure t))
-  #+end_src
-** Flyspell
-  #+begin_src emacs-lisp
-    (setq-default ispell-program-name (dot-env-get 'ISPELL_PATH "/opt/homebrew/opt/ispell/bin/ispell"))
 
-    (dolist (hook '(text-mode-hook))
-      (add-hook hook (lambda ()
-                       (flyspell-mode 1)
-                       (define-key flyspell-mode-map (kbd "C-;") nil))))
-  #+end_src
-** git-messenger
-- Repo :: https://github.com/emacsorphanage/git-messenger
+** Magit
+:PROPERTIES:
+:REPO:     https://github.com/magit/magit
+:DOCS:     https://magit.vc/
+:DESCRIPTION: It's Magit! A Git Porcelain inside Emacs.
+:END:
   #+begin_src emacs-lisp
-    (use-package git-messenger
+    (use-package magit
       :ensure t
-      :config (setq git-messenger:show-detail t
-                    git-messenger:use-magit-popup t)
-      :bind ("C-x m" . git-messenger:popup-message))
+      :bind
+      (("C-x g" . magit)))
   #+end_src
-** Git time machine
-- Repo :: https://github.com/emacsmirror/git-timemachine
+** Marginalia
+:PROPERTIES:
+:DESCRIPTION: Enable rich annotations in the minibuffer
+:REPO:     https://github.com/minad/marginalia
+:END:
   #+begin_src emacs-lisp
-    (use-package git-timemachine
-      :ensure t)
-  #+end_src
-** goto-line-preview
-- Repo :: https://github.com/emacs-vs/goto-line-preview
-  #+begin_src emacs-lisp
-    (use-package goto-line-preview
+    (use-package marginalia
       :ensure t
-      :config
-      (global-set-key [remap goto-line] 'goto-line-preview))
+      :init
+      (marginalia-mode))
   #+end_src
-** gptel
-- Repo :: https://github.com/karthink/gptel
-  #+begin_src emacs-lisp
-    (use-package gptel
-      :ensure t
-      :config
-      (setq gptel-api-key (dot-env-get 'GPTEL_API_KEY)
-            gptel-default-mode #'org-mode))
-  #+end_src
-** grip
-- Repo :: https://github.com/seagle0128/grip-mode
-  #+begin_src bash
-    pip install grip
-  #+end_src
-  #+begin_src emacs-lisp
-    (use-package grip-mode
-      :ensure t
-      :bind (:map markdown-mode-command-map
-                  ("g" . grip-mode))
-      :config (setq grip-preview-use-webkit t
-                    grip-github-user "amodelbello"
-                    grip-github-password (dot-env-get 'GRIP_GITHUB_PASSWORD)))
-  #+end_src
-** ibuffer
-- Docs :: https://www.emacswiki.org/emacs/IbufferMode
-  #+begin_src emacs-lisp
-    (global-set-key (kbd "C-x C-b") 'ibuffer)
-    (setq ibuffer-saved-filter-groups
-          (quote (("default"
-                ("org" (mode . org-mode))
-                ("web" (or (mode . web-mode) (mode . js2-mode)))
-                ("shell" (or (mode . eshell-mode) (mode . shell-mode)))
-                ("programming" (or
-                                (mode . emacs-lisp-mode)
-                                (mode . lisp-mode)
-                                (mode . clojure-mode)
-                                (mode . clojurescript-mode)
-                                (mode . python-mode)
-                                (mode . c-mode)
-                                (mode . c++-mode)))
-                ("text" (mode . text-mode))
-                ("LaTeX" (mode . latex-mode))
-                ("magit" (mode . magit-mode))
-                ("dired" (mode . dired-mode))
-                ("emacs" (or
-                          (name . "^\\*scratch\\*$")
-                          (name . "^\\*Warnings\\*$")
-                          (name . "^\\*Messages\\*$")))))))
-    (add-hook 'ibuffer-mode-hook
-            (lambda ()
-              (ibuffer-auto-mode 1)
-              (ibuffer-switch-to-saved-filter-groups "default")))
-
-    ;; Don't show filter groups if there are no buffers in that group
-    (setq ibuffer-show-empty-filter-groups nil)
-  #+end_src
-** Idle Highlight Mode
-- Repo :: https://codeberg.org/ideasman42/emacs-idle-highlight-mode
-  #+begin_src emacs-lisp
-    (use-package idle-highlight-mode
-      :ensure t
-      :config
-      (setq idle-highlight-idle-time 0.2
-            idle-highlight-exclude-point t)
-      :hook
-      ((prog-mode text-mode) . idle-highlight-mode))
-
-  #+end_src
-** iedit
-- Repo :: https://github.com/victorhge/iedit
-  #+begin_src emacs-lisp
-    (use-package iedit
-      :ensure t
-      :bind ("C-\"" . iedit-mode))
-  #+end_src
-
-
 
 ** orderless
-- Repo :: https://github.com/oantolin/orderless
+:PROPERTIES:
+:DESCRIPTION: Emacs completion style that matches multiple regexps in any order
+:REPO:     https://github.com/oantolin/orderless
+:END:
   #+begin_src emacs-lisp
     (use-package orderless
       :ensure t
@@ -341,284 +185,27 @@
       (completion-styles '(orderless basic))
       (completion-category-overrides '((file (styles basic partial-completion)))))
   #+end_src
-** json-mode
-- Repo :: https://github.com/joshwnj/json-mode
-  #+begin_src emacs-lisp
-    (use-package json-mode
-      :ensure t)
-  #+end_src
-** jump-char
-- Repo :: ...
-  #+begin_src emacs-lisp
-    (use-package jump-char
-      :ensure t
-      :quelpa
-      (dot-env :repo "lewang/jump-char"
-               :fetcher github :upgrade t)
-      :bind (("M-n" . jump-char-forward)
-             ("M-N" . jump-char-backward)))
-  #+end_src
-** minions
-- Repo :: https://github.com/tarsius/minions
-  #+begin_src emacs-lisp
-    (use-package minions
-      :ensure t
-      :config
-      (minions-mode 1))
-  #+end_src
-** Magit
-- Repo :: https://github.com/magit/magit
-- Docs :: https://magit.vc/
-  #+begin_src emacs-lisp
-    (use-package magit
-      :ensure t
-      :bind
-      (("C-x g" . magit)))
-  #+end_src
-** Org Mode
-- Docs :: https://orgmode.org/
-  #+begin_src emacs-lisp
-    (defun amo/org-mode-hook ()
-      (org-indent-mode 1)
 
-      ;; For some reason org-mode doesn't respect visual-line-mode when it loads.
-      (visual-line-mode 0)
-      (visual-line-mode 1))
-    (add-hook 'org-mode-hook 'amo/org-mode-hook)
-
-    ;; Disable checkdoc in org-mode source blocks
-    (defun amo/disable-fylcheck-in-org-src-block ()
-      (setq-local flycheck-disabled-checkers '(emacs-lisp emacs-lisp-checkdoc)))
-    (add-hook 'org-src-mode-hook 'amo/disable-fylcheck-in-org-src-block)
-
-    (global-set-key (kbd "C-c c") 'org-capture)
-    (global-set-key (kbd "C-c a") 'org-agenda)
-    (define-key org-mode-map (kbd "C-c m") 'counsel-org-goto)
-
-    (setq org-list-demote-modify-bullet
-          '(("-" . "+") ("+" . "*") ("*" . "-"))
-          org-list-allow-alphabetical t
-          org-M-RET-may-split-line '((default . nil))
-          org-use-tag-inheritance nil
-          org-hide-emphasis-markers t
-          org-directory (dot-env-get 'ORG_DIRECTORY_PATH "~/.emacs.d/org-directory")
-          org-agenda-files (list org-directory)
-          org-sprint-file (concat org-directory "/sprints.org")
-          org-standup-file (concat org-directory "/standups.org")
-          org-issue-file (concat org-directory "/issues.org")
-          org-meeting-file (concat org-directory "/meeting-notes.org")
-          org-union-file (concat org-directory "/union-notes.org")
-          org-lists-file (concat org-directory "/lists.org")
-          org-archive-location (concat org-directory "/_archive/%s_archive::"))
-
-    (setq org-capture-templates
-          '(("s"
-             "Sprint"
-             entry
-             (file org-sprint-file)
-             "* %? %^G \nDEADLINE: %^t SCHEDULED: %^t %^{SCOPED_STORY_POINTS}p\n\n** Issues\n" :empty-lines-after 1 :prepend t)
-            ("p"
-             "Sprint Issue"
-             entry
-             (file org-sprint-file)
-             "*** %? %^G \n %^{STORY_POINTS}p %^{ORIGINALLY_SCOPED}p %^{COMPLETED}p" :empty-lines 1 :prepend t)
-            ("i"
-             "Issue Note"
-             entry
-             (file+headline org-issue-file "Issue Items")
-             "** %? %^G \n%T \n%i \n" :empty-lines 1 :prepend t)
-            ("t"
-             "Standup Note"
-             entry
-             (file+headline org-standup-file "Standup Items")
-             "** %T Notes:\n%?\n%i\n" :empty-lines-after 1 :prepend t)
-            ("m"
-             "Meeting Note"
-             entry
-             (file+headline org-meeting-file "Meeting Items")
-             "** %?\n%T\n%i\n" :empty-lines-after 1 :prepend t)
-            ("u"
-             "Union Note"
-             entry
-             (file+headline org-union-file "Meeting Items")
-             "** %T %?\n%i\n" :empty-lines-after 1)
-            ("e"
-             "Emacs Idea"
-             checkitem
-             (file+headline org-lists-file "Emacs Ideas")
-             "[ ] %?" :prepend t)
-            ("k"
-             "Keyboard Idea"
-             checkitem
-             (file+headline org-lists-file "Keyboard Ideas")
-             "[ ] %?" :prepend t)
-            ("r"
-             "Interesting Albums"
-             item
-             (file+headline org-lists-file "Interesting Albums")
-             "%?")))
-  #+end_src
-*** org-superstar-mode
-- Repo :: https://github.com/integral-dw/org-superstar-mode
+** Vertico
+:PROPERTIES:
+:REPO:     https://github.com/minad/vertico
+:DESCRIPTION: Performant and minimalistic vertical completion UI based on the default completion system.
+:END:
   #+begin_src emacs-lisp
-    (use-package org-superstar
+    (use-package vertico
       :ensure t
-      :hook
-      (org-mode . org-superstar-mode))
-  #+end_src
-** package-lint
-- Repo :: https://github.com/purcell/package-lint
-  #+begin_src emacs-lisp
-    (use-package package-lint
-      :ensure t)
-  #+end_src
-** Paredit
-- Repo :: https://github.com/emacsmirror/paredit/blob/master/paredit.el
-- Docs :: https://www.emacswiki.org/emacs/ParEdit
-- Docs :: https://wikemacs.org/wiki/Paredit-mode
-  #+begin_src emacs-lisp
-    (use-package paredit
-      :ensure t
-      :hook
-      ((lisp-mode . paredit-mode)
-       (emacs-lisp-mode . paredit-mode)
-       (clojure-mode . paredit-mode)
-       (clojurescript-mode . paredit-mode)
-       (clojurec-mode . paredit-mode)
-       (cider-repl-mode . paredit-mode)))
-  #+end_src
-** Popper
-- Repo :: https://github.com/karthink/popper
-  #+begin_src emacs-lisp
-    (use-package popper
-      :ensure t ; or :straight t
-      :bind (("s-3"   . popper-toggle-latest)
-             ("s-4"   . popper-cycle)
-             ("s-5" . popper-toggle-type))
+      :bind (:map vertico-map
+                  ("C-j" . vertico-directory-enter)
+                  ("DEL" . vertico-directory-delete-char)
+                  ("M-DEL" . vertico-directory-delete-word))
       :init
-      (setq popper-reference-buffers
-            '("\\*format-all-errors\\*"
-              "\\*lsp-log\\*"
-              "\\*flycheck errors\\*"
-              "\\*cider-error\\*"
-              "\\*cider-scratch\\*"
-              "\\*Messages\\*"
-              "\\*Warnings\\*"
-              "\\*Compile-Log\\*"
-              "\\*Completions\\*"
-              "\\*Backtrace\\*"
-              "\\*TeX Help\\*"
-              "Output\\*$"
-              "\\*Async Shell Command\\*"
-              "^pop-"
-              help-mode
-              compilation-mode)
-            popper-mode-line ""
-
-            ;; Make popper buffers 1/2 window height
-            popper-window-height (lambda (win)
-                                   (fit-window-to-buffer
-                                    win
-                                    (floor (frame-height) 2))))
-      (popper-mode +1)
-      (popper-echo-mode +1)
-      (defun amo/add-popper-status-to-modeline ()
-        "If buffer is a popper-type buffer, display POP in the modeline,
-      in a doom-modeline friendly way"
-        (if (popper-display-control-p (buffer-name))
-            (add-to-list 'mode-line-misc-info "POP")
-          (setq mode-line-misc-info (remove "POP" mode-line-misc-info))))
-      (add-hook 'buffer-list-update-hook 'amo/add-popper-status-to-modeline))
-  #+end_src
-** Projectile
-- Repo :: https://github.com/bbatsov/projectile
-- Docs :: https://docs.projectile.mx/projectile/index.html
-  #+begin_src emacs-lisp
-    (use-package projectile
-      :ensure t
-      :config
-      (projectile-global-mode)
-      (setq projectile-completion-system 'ivy)
-      :bind (("s-p" . projectile-command-map)
-             ("C-c p" . projectile-command-map)))
-  #+end_src
-** rainbow-delimiters
-- Repo :: https://github.com/Fanael/rainbow-delimiters
-  #+begin_src emacs-lisp
-    (use-package rainbow-delimiters
-      :ensure t
-      :hook (prog-mode . rainbow-delimiters-mode))
-  #+end_src
-** Transpose Frame
-- Docs :: https://www.emacswiki.org/emacs/TransposeFrame
-  #+begin_src emacs-lisp
-    (use-package transpose-frame
-      :ensure t
-      :bind (("C->" . transpose-frame)))
-  #+end_src
-** Treemacs
-- Repo :: https://github.com/Alexander-Miller/treemacs
-  #+begin_src emacs-lisp
-    (use-package treemacs
-      :ensure t
-      :defer t
-      :config
-      (treemacs-resize-icons 14)
-      (define-key treemacs-mode-map [mouse-1] #'treemacs-single-click-expand-action))
-
-    (use-package
-      treemacs-projectile
-      :after (treemacs projectile)
-      :ensure t)
-
-    (use-package treemacs-icons-dired
-      :hook (dired-mode . treemacs-icons-dired-enable-once)
-      :ensure t)
-
-    (use-package treemacs-magit
-      :after (treemacs magit)
-      :ensure t)
-  #+end_src
-** undo-tree
-- Repo :: https://github.com/apchamberlain/undo-tree.el
-- Docs :: https://www.emacswiki.org/emacs/UndoTree
-  #+begin_src emacs-lisp
-    (use-package undo-tree
-      :ensure t
-      :config
-      (global-undo-tree-mode)
-      (setq undo-tree-history-directory-alist `((".*" . ,temporary-file-directory))
-            undo-tree-auto-save-history t)
-      :diminish
-      (undo-tree-mode))
-  #+end_src
-** web-mode
-- Repo :: https://github.com/fxbois/web-mode
-- Docs :: https://web-mode.org/
-  #+begin_src emacs-lisp
-    (use-package web-mode
-      :ensure t
-      :custom
-      (setq web-mode-markup-indent-offset 2
-            web-mode-code-indent-offset 2
-            web-mode-css-indent-offset 2)
-      :mode (("\\.js\\'" . web-mode)
-             ("\\.jsx\\'" .  web-mode)
-             ("\\.ts\\'" . web-mode)
-             ("\\.tsx\\'" . web-mode)
-             ("\\.html\\'" . web-mode))
-      :commands web-mode)
-  #+end_src
-** which-key
-- Repo :: https://github.com/justbur/emacs-which-key
-  #+begin_src emacs-lisp
-    (use-package which-key
-      :ensure t
-      :config
-      (which-key-mode))
+      (vertico-mode))
   #+end_src
 ** YASnippet
-- Repo :: https://github.com/joaotavora/yasnippet
+:PROPERTIES:
+:REPO:     https://github.com/joaotavora/yasnippet
+:DESCRIPTION: A template system for Emacs
+:END:
   #+begin_src emacs-lisp
     (use-package yasnippet
       :ensure t
@@ -629,135 +216,48 @@
       (use-package yasnippet-snippets
         :ensure t))
   #+end_src
-** yascroll
-- Repo :: https://github.com/emacsorphanage/yascroll
-  #+begin_src emacs-lisp
-    ;; Slows down Emacs a lot. Disabling until there's a fix
-    ;; (use-package yascroll
-    ;;   :ensure t
-    ;;   :config
-    ;;   (global-yascroll-bar-mode 1)
-    ;;   (setq yascroll:delay-to-hide nil
-    ;;         yascroll:disabled-modes '(package-menu-mode image-mode)))
-  #+end_src
+
 * Programming
-#+begin_src emacs-lisp                 lsp-treemacs-deps-list))
+** Tree-sitter
+:PROPERTIES:
+:INFO:     https://www.masteringemacs.org/article/how-to-get-started-tree-sitter
+:DOCS:     https://emacs-tree-sitter.github.io/getting-started/
+:END:
+  #+begin_src emacs-lisp
+    (setq treesit-language-source-alist
+     '((python "https://github.com/tree-sitter/tree-sitter-python")))
 
-    (use-package dap-mode
-      :ensure t
-      ;; :bind (("s-l d" . dap-hydra)) ;; this causes an error about the s-l prefix
-      :custom
-      (python-shell-interpreter "python3")
-      (dap-python-executable "python3")
-      :config
-      (setq dap-python-debugger 'debugpy)
-      (dap-auto-configure-mode 1)
-      (require 'dap-python))
+    ;; (setq major-mode-remap-alist
+    ;;  '((python-mode . python-ts-mode)))
+  #+end_src
 
-  #+end_src
-** format-all
-- Repo :: https://github.com/lassik/emacs-format-all-the-code
-  #+begin_src emacs-lisp
-    (use-package format-all
-      :ensure t
-      :bind
-      (("C-c C-f" . format-all-buffer))
-      :hook
-      ((python-mode . format-all-mode)
-       (emacs-lisp-mode . format-all-mode)
-       (format-all-mode-hook . format-all-ensure-formatter))
-      :config
-      (custom-set-variables
-       '(format-all-formatters
-         (quote (("Emacs Lisp" emacs-lisp)
-                 ("Python" black))))))
-  #+end_src
-** Languages
-*** Python
-**** lsp-server
-- Repo :: https://github.com/python-lsp/python-lsp-server
-  #+begin_src bash
-    pip3 install 'python-lsp-server[all]'
-    pip3 install black
-    pip3 install pylsp-rope
-    pip3 install flake8
-  #+end_src
-**** conda
-- Repo :: https://github.com/necaris/conda.el
-  #+begin_src emacs-lisp
-    (use-package conda
-      :ensure t
-      :init
-      (setq conda-anaconda-home (expand-file-name "~/opt/miniconda3")
-            conda-env-home-directory (expand-file-name "~/opt/miniconda3")
-            conda-env-autoactivate-mode t)
+  #+RESULTS:
+  : ((emacs-lisp-mode . elisp-ts-mode) (python-mode . python-ts-mode))
 
-      (add-hook 'find-file-hook (lambda () (when (bound-and-true-p conda-project-env-path)
-                                             (conda-env-activate-for-buffer))))
-      (setq-default mode-line-format (cons '(:exec conda-env-current-name) mode-line-format)))
-  #+end_src
-**** pandoc
-- Repo :: https://github.com/joostkremers/pandoc-mode
-- Docs: :: https://joostkremers.github.io/pandoc-mode/
+** treesit-auto
+:PROPERTIES:
+:REPO:     https://github.com/renzmann/treesit-auto
+:DESCRIPTION: Automatic installation, usage, and fallback for tree-sitter major modes in Emacs 29
+:END:
   #+begin_src emacs-lisp
-    (use-package pandoc-mode
-      :ensure t
-      :config (setq markdown-command (dot-env-get 'PANDOC_PATH "/opt/homebrew/bin/pandoc"))
-      :hook ((markdown-mode . pandoc-mode)
-             (pandoc-mode . pandoc-load-default-settings)))
-  #+end_src
-**** pyvenv
-- Repo :: https://github.com/jorgenschaefer/pyvenv
-  #+begin_src emacs-lisp
-    (use-package pyvenv
-      :ensure t
-      :diminish
-      :config
-      (setq pyvenv-mode-line-indicator
-            '(pyvenv-virtual-env-name ("[venv:" pyvenv-virtual-env-name "] ")))
-      (pyvenv-mode +1))
-  #+end_src
-**** interpreter
-#+begin_src emacs-lisp
-  (when (executable-find "ipython")
-    (setq python-shell-interpreter "ipython"))
-#+end_src
-
-*** Go
-- Repo :: https://github.com/dominikh/go-mode.el
-  #+begin_src emacs-lisp
-    (use-package go-mode
+    (use-package treesit-auto
       :ensure t
       :config
-      (add-to-list 'auto-mode-alist '("\\.go\\'" . go-mode)))
+      (setq treesit-auto-install 'prompt)
+      (global-treesit-auto-mode))
   #+end_src
-*** Haskell
-- Repo :: https://github.com/haskell/haskell-mode
+** Eglot
+:PROPERTIES:
+:REPO:     https://github.com/joaotavora/eglot
+:DESCRIPTION: A client for Language Server Protocol servers
+:END:
   #+begin_src emacs-lisp
-    (use-package haskell-mode
-      :ensure t)
-
-    (defun amo/on-haskell-mode ()
-      "Enable lsp & interactive-haskell-mode"
-      (lsp)
-      (interactive-haskell-mode t))
-    (use-package lsp-haskell
+    (use-package eglot
       :ensure t
-      :hook
-      (haskell-mode . amo/on-haskell-mode)
-      (before-save . lsp-format-buffer))
+      :defer t
+      :hook ((python-ts-mode . eglot-ensure)))
   #+end_src
-*** Yaml
-- Repo :: https://github.com/yoshiki/yaml-mode
-  #+begin_src emacs-lisp
-    (use-package yaml-mode
-      :ensure t)
 
-    (add-to-list 'auto-mode-alist '("\\.yml\\'" . yaml-mode))
-    (add-hook 'yaml-mode-hook
-          '(lambda ()
-            (define-key yaml-mode-map "\C-m" 'newline-and-indent)))
-  #+end_src
 * Custom Bindings
    #+begin_src emacs-lisp
      ;; Set prefix key ("C-z")
@@ -786,17 +286,11 @@
      ;; Open customize-themes
      (define-key z-map (kbd "t") #'customize-themes)
 
-     ;; Open centaur-tabs groups
-     (define-key z-map (kbd "a") #'centaur-tabs-counsel-switch-group)
-
      ;; Start eshell
      (define-key z-map (kbd "e") #'eshell)
 
      ;; Open Calendar
      (define-key z-map (kbd "c") #'calendar)
-
-     ;; Open gptel
-     (define-key z-map (kbd "g") #'gptel)
 
      ;; Open notes directory
      (defun amo/open-notes-file ()
@@ -804,14 +298,6 @@
        (interactive)
        (find-file org-directory))
      (define-key z-map (kbd "n") #'amo/open-notes-file)
-
-     ;; Choose an org file
-     (define-key z-map (kbd "m") #'org-switchb)
-
-     ;; Bindings for "IDE-like" tool windows
-     (global-set-key (kbd "s-1") #'treemacs)
-     (global-set-key (kbd "s-2") #'treemacs-select-window)
-     (global-set-key (kbd "s-7") #'lsp-treemacs-symbols)
 
      ;; Shrink window vertically
      (global-set-key (kbd "C-x %") (kbd "C-u -1 C-x ^"))
@@ -919,6 +405,7 @@
      (global-set-key (kbd "M-<down>") #'amo/move-line-down)
      (global-set-key (kbd "M-<up>") #'amo/move-line-up)
   #+end_src
+
 * General Configuration
    #+begin_src emacs-lisp
      (set-frame-font amo/font nil t)
@@ -989,41 +476,6 @@
      (custom-set-variables '(ediff-window-setup-function (quote ediff-setup-windows-plain)))
    #+end_src
 * Hooks
-** after-load-theme-hook
-   Centaur tabs styling messes up after a theme change.
-   This reloads `centaur-tabs-mode` after a theme change.
-   #+begin_src emacs-lisp
-     (defun amo/reload-centaur-tabs ()
-       (interactive)
-       (centaur-tabs-mode 0)
-       (centaur-tabs-mode 1))
-     (defvar after-load-theme-hook nil
-         "Hook run after a color theme is loaded using `load-theme'.")
-       (defadvice load-theme (after run-after-load-theme-hook activate)
-         "Run `after-load-theme-hook'."
-         (run-hooks 'after-load-theme-hook))
-       (defadvice custom-theme-save (after run-after-load-theme-hook activate)
-         "Run `after-load-theme-hook'."
-         (run-hooks 'after-load-theme-hook))
-     (add-hook 'after-load-theme-hook 'amo/reload-centaur-tabs)
-   #+end_src
-** treemacs-mode-hook
-   Remove line numbers in treemacs mode
-   #+begin_src emacs-lisp
-     (defun amo/buffer-display-minimal ()
-       ;; (setq mode-line-format nil)
-       (nlinum-mode 0))
-     (add-hook 'treemacs-mode-hook 'amo/buffer-display-minimal)
-   #+end_src
-
-** calc-mode
-Because the line-spacing above messes up calc
-#+begin_src emacs-lisp
-(defun amo/set-zero-line-spacing ()
-  (setq line-spacing 0))
-(add-hook 'calc-mode-hook #'amo/set-zero-line-spacing)
-(add-hook 'calc-trail-mode-hook #'amo/set-zero-line-spacing)
-#+end_src
 ** before-save-hook
 #+begin_src emacs-lisp
 (defun amo/before-save-actions ()
@@ -1049,23 +501,6 @@ Copy whole line to kill ring when no active region
    #+begin_src emacs-lisp
      (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
    #+end_src
-** Doom Modeline
-- Repo :: https://github.com/seagle0128/doom-modeline
-  #+begin_src emacs-lisp
-    (use-package doom-modeline
-      :ensure t
-      :hook (after-init . doom-modeline-mode)
-      :config
-      (setq doom-modeline-minor-modes t
-            doom-modeline-vcs-max-length 40
-            doom-modeline-buffer-encoding t))
-  #+end_src
-** Ef Themes
-- Repo :: https://github.com/protesilaos/ef-themes
-  #+begin_src emacs-lisp
-    (use-package ef-themes
-      :ensure t)
-  #+end_src
 ** Modus Themes
 - Repo :: https://github.com/protesilaos/modus-themes
   #+begin_src emacs-lisp

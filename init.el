@@ -62,6 +62,3 @@
   (write-region "" "" custom-file))
 (load-file custom-file)
 (put 'narrow-to-region 'disabled nil)
-
-;; the selected tab highlighting doesn't work otherwise...
-(amo/reload-centaur-tabs)
