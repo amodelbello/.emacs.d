@@ -630,23 +630,8 @@
 
 
 * Programming
-** Tree-sitter
-:PROPERTIES:
-:INFO:     https://www.masteringemacs.org/article/how-to-get-started-tree-sitter
-:DOCS:     https://emacs-tree-sitter.github.io/getting-started/
-:END:
-  #+begin_src emacs-lisp
-    (setq treesit-language-source-alist
-     '((python "https://github.com/tree-sitter/tree-sitter-python")))
-
-    ;; (setq major-mode-remap-alist
-    ;;  '((python-mode . python-ts-mode)))
-  #+end_src
-
-  #+RESULTS:
-  : ((emacs-lisp-mode . elisp-ts-mode) (python-mode . python-ts-mode))
-
-** treesit-auto
+** Packages
+*** treesit-auto
 :PROPERTIES:
 :REPO:     https://github.com/renzmann/treesit-auto
 :DESCRIPTION: Automatic installation, usage, and fallback for tree-sitter major modes in Emacs 29
@@ -658,7 +643,7 @@
       (setq treesit-auto-install 'prompt)
       (global-treesit-auto-mode))
   #+end_src
-** Eglot
+*** Eglot
 :PROPERTIES:
 :REPO:     https://github.com/joaotavora/eglot
 :DESCRIPTION: A client for Language Server Protocol servers
@@ -670,7 +655,7 @@
       :hook ((python-ts-mode . eglot-ensure)))
   #+end_src
 
-** Flycheck
+*** Flycheck
 :PROPERTIES:
 :REPO:     https://github.com/flycheck/flycheck
 :DOCS:     https://www.flycheck.org/en/latest/
@@ -681,6 +666,47 @@
     :straight t
     :init (global-flycheck-mode))
 #+end_src
+
+** Languages
+*** Python
+**** interpreter
+#+begin_src emacs-lisp
+  (when (executable-find "ipython")
+    (setq python-shell-interpreter "ipython"))
+#+end_src
+
+**** conda
+:PROPERTIES:
+:REPO:     https://github.com/necaris/conda.el
+:DESCRIPTION: Emacs helper library (and minor mode) to work with conda environments
+:END:
+  #+begin_src emacs-lisp
+    (use-package conda
+      :straight t
+      :init
+      (setq conda-anaconda-home (expand-file-name "~/opt/miniconda3")
+            conda-env-home-directory (expand-file-name "~/opt/miniconda3")
+            conda-env-autoactivate-mode t)
+
+      (add-hook 'find-file-hook (lambda () (when (bound-and-true-p conda-project-env-path)
+                                             (conda-env-activate-for-buffer))))
+      (setq-default mode-line-format (cons '(:exec conda-env-current-name) mode-line-format)))
+  #+end_src
+**** pyvenv
+:PROPERTIES:
+:REPO:     https://github.com/jorgenschaefer/pyvenv
+:DESCRIPTION: Python virtual environment interface for Emacs
+:END:
+  #+begin_src emacs-lisp
+    (use-package pyvenv
+      :straight t
+      :diminish
+      :config
+      (setq pyvenv-mode-line-indicator
+            '(pyvenv-virtual-env-name ("[venv:" pyvenv-virtual-env-name "] ")))
+      (pyvenv-mode +1))
+  #+end_src
+
 * Custom Bindings
    #+begin_src emacs-lisp
      ;; Set prefix key ("C-z")
@@ -974,6 +1000,7 @@ Copy whole line to kill ring when no active region
    #+begin_src emacs-lisp
      (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
    #+end_src
+
 ** Nerd Icons
 :PROPERTIES:
 :REPO:     https://github.com/rainstormstudio/nerd-icons.el
