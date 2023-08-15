@@ -22,6 +22,7 @@
 ** Avy
 :PROPERTIES:
 :REPO:     [[https://github.com/abo-abo/avy]]
+:DESCRIPTION: Jumping to visible text using a char-based decision tree
 :END:
   #+begin_src emacs-lisp
     (use-package avy
@@ -30,6 +31,25 @@
              ("C-;" . avy-goto-char-2)
              :map org-mode-map
              ("C-'" . nil)))
+  #+end_src
+** buffer-move
+:PROPERTIES:
+:REPO:     https://github.com/lukhas/buffer-move
+:DESCRIPTION: Easily swap buffers
+:END:
+  #+begin_src emacs-lisp
+    (use-package buffer-move
+      :straight t
+      :bind
+      (("<C-S-up>" . buf-move-up)
+       ("<C-S-down>" . buf-move-down)
+       ("<C-S-left>" . buf-move-left)
+       ("<C-S-right>" .  buf-move-right)
+       :map org-mode-map
+       ("<C-S-up>" . buf-move-up)
+       ("<C-S-down>" . buf-move-down)
+       ("<C-S-left>" . buf-move-left)
+       ("<C-S-right>" . buf-move-right)))
   #+end_src
 ** Company
 :PROPERTIES:
@@ -163,6 +183,62 @@
        ("<C-backspace>" . crux-kill-line-backwards)))
   #+end_src
 
+** exec-path-from-shell
+:PROPERTIES:
+:REPO:     https://github.com/purcell/exec-path-from-shell
+:DESCRIPTION: Make Emacs use the $PATH set up by the user's shell
+:END:
+  #+begin_src emacs-lisp
+    (when (memq window-system '(mac ns)) ;; MacOS
+             (use-package exec-path-from-shell
+               :straight t
+               :config
+               (setq exec-path-from-shell-arguments nil) ; non-interactive, i.e. .zshenv not .zshrc
+               (exec-path-from-shell-initialize)))
+    (when (memq window-system '(x)) ;; Linux
+             (use-package exec-path-from-shell
+               :straight t
+               :config
+               (exec-path-from-shell-initialize)))
+  #+end_src
+** expand-region
+:PROPERTIES:
+:REPO:     https://github.com/magnars/expand-region.el
+:DESCRIPTION: Emacs extension to increase selected region by semantic units.
+:END:
+  #+begin_src emacs-lisp
+    (use-package expand-region
+      :straight t
+      :bind (("C-=" . er/expand-region)
+             ("C--" . er/contract-region)))
+  #+end_src
+** Eyebrowse
+:PROPERTIES:
+:REPO:     https://depp.brause.cc/eyebrowse/
+:DESCRIPTION: A simple-minded way of managing window configs in Emacs
+:END:
+  #+begin_src emacs-lisp
+    (use-package eyebrowse
+      :straight t
+      :config
+      (eyebrowse-mode))
+  #+end_src
+** Idle Highlight Mode
+:PROPERTIES:
+:REPO:     https://codeberg.org/ideasman42/emacs-idle-highlight-mode
+:DESCRIPTION: Simple symbol highlighting package for Emacs
+:END:
+  #+begin_src emacs-lisp
+    (use-package idle-highlight-mode
+      :straight t
+      :config
+      (setq idle-highlight-idle-time 0.2
+            idle-highlight-exclude-point t)
+      :hook
+      ((prog-mode text-mode) . idle-highlight-mode))
+
+  #+end_src
+
 ** Magit
 :PROPERTIES:
 :REPO:     https://github.com/magit/magit
@@ -187,6 +263,18 @@
       (marginalia-mode))
   #+end_src
 
+** minions
+:PROPERTIES:
+:REPO:     https://github.com/tarsius/minions
+:DESCRIPTION: A minor-mode menu for the mode line
+:END:
+- Repo :: https://github.com/tarsius/minions
+  #+begin_src emacs-lisp
+    (use-package minions
+      :straight t
+      :config
+      (minions-mode 1))
+  #+end_src
 ** orderless
 :PROPERTIES:
 :DESCRIPTION: Emacs completion style that matches multiple regexps in any order
@@ -288,6 +376,7 @@
 ** org-superstar-mode
 :PROPERTIES:
 :REPO:     https://github.com/integral-dw/org-superstar-mode
+:DESCRIPTION: Make org-mode stars a little more super
 :END:
   #+begin_src emacs-lisp
     (use-package org-superstar
@@ -295,9 +384,36 @@
       :hook
       (org-mode . org-superstar-mode))
   #+end_src
+** package-lint
+:PROPERTIES:
+:REPO:     https://github.com/purcell/package-lint
+:DESCRIPTION: A linting library for elisp package metadata
+:END:
+  #+begin_src emacs-lisp
+    (use-package package-lint
+      :straight t)
+  #+end_src
+** Paredit
+:PROPERTIES:
+:REPO:     https://github.com/emacsmirror/paredit/blob/master/paredit.el
+:DOCS:     https://www.emacswiki.org/emacs/ParEdit, https://wikemacs.org/wiki/Paredit-mode
+:DESCRIPTION: A minor mode for performing structured editing of S-expression data
+:END:
+  #+begin_src emacs-lisp
+    (use-package paredit
+      :straight t
+      :hook
+      ((lisp-mode . paredit-mode)
+       (emacs-lisp-mode . paredit-mode)
+       (clojure-mode . paredit-mode)
+       (clojurescript-mode . paredit-mode)
+       (clojurec-mode . paredit-mode)
+       (cider-repl-mode . paredit-mode)))
+  #+end_src
 ** Popper
 :PROPERTIES:
 :REPO:     https://github.com/karthink/popper
+:DESCRIPTION: Emacs minor-mode to summon and dismiss buffers easily
 :END:
   #+begin_src emacs-lisp
     (use-package popper
@@ -343,6 +459,7 @@
 :PROPERTIES:
 :REPO:     https://github.com/bbatsov/projectile
 :DOCS:     https://docs.projectile.mx/projectile/index.html
+:DESCRIPTION: Project navigation and management library for Emacs
 :END:
   #+begin_src emacs-lisp
     (use-package projectile
@@ -353,6 +470,26 @@
       :bind (("s-p" . projectile-command-map)
              ("C-c p" . projectile-command-map)))
   #+end_src
+** rainbow-delimiters
+:PROPERTIES:
+:REPO:     https://github.com/Fanael/rainbow-delimiters
+:DESCRIPTION: A "rainbow parentheses"-like mode which highlights delimiters
+:END:
+  #+begin_src emacs-lisp
+    (use-package rainbow-delimiters
+      :straight t
+      :hook (prog-mode . rainbow-delimiters-mode))
+  #+end_src
+** Transpose Frame
+:PROPERTIES:
+:DOCS:     https://www.emacswiki.org/emacs/TransposeFrame
+:DESCRIPTION: Interactive functions to transpose window arrangement in current frame
+:END:
+  #+begin_src emacs-lisp
+    (use-package transpose-frame
+      :straight t
+      :bind (("C->" . transpose-frame)))
+  #+end_src
 ** Vertico
 :PROPERTIES:
 :REPO:     https://github.com/minad/vertico
@@ -360,29 +497,35 @@
 :END:
   #+begin_src emacs-lisp
     (use-package vertico
-      :straight t
-      :init
-      (vertico-mode))
-  #+end_src
-** vertico-directory
-:PROPERTIES:
-:REPO:     https://github.com/minad/vertico/blob/main/extensions/vertico-directory.el
-:DESCRIPTION: Commands for Ido-like directory navigation.
-:END:
-  #+begin_src emacs-lisp
-    (use-package vertico-directory
-      :straight t
-      :after vertico
+      :straight (:files (:defaults "extensions/*"))
       :bind (:map vertico-map
                   ("C-j" . vertico-directory-enter)
                   ("DEL" . vertico-directory-delete-char)
                   ("M-DEL" . vertico-directory-delete-word))
-      ;; Tidy shadowed file names
-      :hook (rfn-eshadow-update-overlay . vertico-directory-tidy))
+      :hook (rfn-eshadow-update-overlay . vertico-directory-tidy)
+      :init
+      (vertico-mode))
+  #+end_src
+** undo-tree
+:PROPERTIES:
+:REPO:     https://github.com/apchamberlain/undo-tree.el
+:DOCS:     https://www.emacswiki.org/emacs/UndoTree
+:DESCRIPTION: Visualize Emacs undo information as a graphical tree and navigate to previous states
+:END:
+  #+begin_src emacs-lisp
+    (use-package undo-tree
+      :straight t
+      :config
+      (global-undo-tree-mode)
+      (setq undo-tree-history-directory-alist `((".*" . ,temporary-file-directory))
+            undo-tree-auto-save-history t)
+      :diminish
+      (undo-tree-mode))
   #+end_src
 ** which-key
 :PROPERTIES:
 :REPO:     https://github.com/justbur/emacs-which-key
+:DESCRIPTION: Emacs package that displays available keybindings in popup
 :END:
   #+begin_src emacs-lisp
     (use-package which-key
@@ -646,6 +789,14 @@
                    visual-line-mode t
                    whitespace-line-column 110)
 
+
+     ;; Set up flyspell
+     (setq-default ispell-program-name (dot-env-get 'ISPELL_PATH "/opt/homebrew/opt/ispell/bin/ispell"))
+     (dolist (hook '(text-mode-hook))
+       (add-hook hook (lambda ()
+                        (flyspell-mode 1)
+                        (define-key flyspell-mode-map (kbd "C-;") nil))))
+
      ;; Set the right mode when you create a buffer
      (setq-default major-mode
                    (lambda () (if buffer-file-name
@@ -665,6 +816,45 @@
      (custom-set-variables '(ediff-split-window-function (quote split-window-horizontally)))
      (custom-set-variables '(ediff-window-setup-function (quote ediff-setup-windows-plain)))
    #+end_src
+
+** ibuffer
+:PROPERTIES:
+:DOCS:     https://www.emacswiki.org/emacs/IbufferMode
+:DESCRIPTION: Ibuffer is an advanced replacement for BufferMenu
+:END:
+- Docs :: https://www.emacswiki.org/emacs/IbufferMode
+  #+begin_src emacs-lisp
+    (global-set-key (kbd "C-x C-b") 'ibuffer)
+    (setq ibuffer-saved-filter-groups
+          (quote (("default"
+                ("org" (mode . org-mode))
+                ("web" (or (mode . web-mode) (mode . js2-mode)))
+                ("shell" (or (mode . eshell-mode) (mode . shell-mode)))
+                ("programming" (or
+                                (mode . emacs-lisp-mode)
+                                (mode . lisp-mode)
+                                (mode . clojure-mode)
+                                (mode . clojurescript-mode)
+                                (mode . python-mode)
+                                (mode . c-mode)
+                                (mode . c++-mode)))
+                ("text" (mode . text-mode))
+                ("LaTeX" (mode . latex-mode))
+                ("magit" (mode . magit-mode))
+                ("dired" (mode . dired-mode))
+                ("emacs" (or
+                          (name . "^\\*scratch\\*$")
+                          (name . "^\\*Warnings\\*$")
+                          (name . "^\\*Messages\\*$")))))))
+    (add-hook 'ibuffer-mode-hook
+            (lambda ()
+              (ibuffer-auto-mode 1)
+              (ibuffer-switch-to-saved-filter-groups "default")))
+
+    ;; Don't show filter groups if there are no buffers in that group
+    (setq ibuffer-show-empty-filter-groups nil)
+  #+end_src
+
 * Hooks
 ** before-save-hook
 #+begin_src emacs-lisp
