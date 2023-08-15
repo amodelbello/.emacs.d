@@ -667,6 +667,26 @@
     :init (global-flycheck-mode))
 #+end_src
 
+*** format-all
+:PROPERTIES:
+:REPO:     https://github.com/lassik/emacs-format-all-the-code
+:DESCRIPTION: Auto-format source code in many languages with one command
+:END:
+  #+begin_src emacs-lisp
+    (use-package format-all
+      :straight t
+      :bind
+      (("C-c C-f" . format-all-buffer))
+      :hook
+      ((python-ts-mode . format-all-mode)
+       (emacs-lisp-mode . format-all-mode)
+       (format-all-mode-hook . format-all-ensure-formatter))
+      :config
+      (custom-set-variables
+       '(format-all-formatters
+         (quote (("Emacs Lisp" emacs-lisp)
+                 ("Python" black))))))
+  #+end_src
 ** Languages
 *** Python
 **** interpreter
@@ -706,6 +726,7 @@
             '(pyvenv-virtual-env-name ("[venv:" pyvenv-virtual-env-name "] ")))
       (pyvenv-mode +1))
   #+end_src
+
 
 * Custom Bindings
    #+begin_src emacs-lisp
