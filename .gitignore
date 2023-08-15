@@ -19,8 +19,10 @@ tramp
 /eshell/history
 /eshell/lastdir
 
-# elpa packages
+# packages, etc
 /elpa/
+/straight/
+/tree-sitter/
 
 # reftex files
 *.rel
