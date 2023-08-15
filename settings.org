@@ -19,6 +19,18 @@
       (defvar aw-dispatch-always nil)
       (setq aw-scope 'frame))
   #+end_src
+** Avy
+:PROPERTIES:
+:REPO:     [[https://github.com/abo-abo/avy]]
+:END:
+  #+begin_src emacs-lisp
+    (use-package avy
+      :straight t
+      :bind (("C-'" . avy-goto-char)
+             ("C-;" . avy-goto-char-2)
+             :map org-mode-map
+             ("C-'" . nil)))
+  #+end_src
 ** Company
 :PROPERTIES:
 :REPO:     https://github.com/company-mode/company-mode
@@ -188,6 +200,159 @@
       (completion-category-overrides '((file (styles basic partial-completion)))))
   #+end_src
 
+** Org Mode
+:PROPERTIES:
+:DOCS:     https://orgmode.org/
+:END:
+  #+begin_src emacs-lisp
+    (defun amo/org-mode-hook ()
+      (org-indent-mode 1)
+
+      ;; For some reason org-mode doesn't respect visual-line-mode when it loads.
+      (visual-line-mode 0)
+      (visual-line-mode 1))
+    (add-hook 'org-mode-hook 'amo/org-mode-hook)
+
+    ;; Disable checkdoc in org-mode source blocks
+    (defun amo/disable-fylcheck-in-org-src-block ()
+      (setq-local flycheck-disabled-checkers '(emacs-lisp emacs-lisp-checkdoc)))
+    (add-hook 'org-src-mode-hook 'amo/disable-fylcheck-in-org-src-block)
+
+    (global-set-key (kbd "C-c c") 'org-capture)
+    (global-set-key (kbd "C-c a") 'org-agenda)
+    (define-key org-mode-map (kbd "C-c m") 'counsel-org-goto)
+
+    (setq org-list-demote-modify-bullet
+          '(("-" . "+") ("+" . "*") ("*" . "-"))
+          org-list-allow-alphabetical t
+          org-M-RET-may-split-line '((default . nil))
+          org-use-tag-inheritance nil
+          org-hide-emphasis-markers t
+          org-directory (dot-env-get 'ORG_DIRECTORY_PATH "~/.emacs.d/org-directory")
+          org-agenda-files (list org-directory)
+          org-sprint-file (concat org-directory "/sprints.org")
+          org-standup-file (concat org-directory "/standups.org")
+          org-issue-file (concat org-directory "/issues.org")
+          org-meeting-file (concat org-directory "/meeting-notes.org")
+          org-union-file (concat org-directory "/union-notes.org")
+          org-lists-file (concat org-directory "/lists.org")
+          org-archive-location (concat org-directory "/_archive/%s_archive::"))
+
+    (setq org-capture-templates
+          '(("s"
+             "Sprint"
+             entry
+             (file org-sprint-file)
+             "* %? %^G \nDEADLINE: %^t SCHEDULED: %^t %^{SCOPED_STORY_POINTS}p\n\n** Issues\n" :empty-lines-after 1 :prepend t)
+            ("p"
+             "Sprint Issue"
+             entry
+             (file org-sprint-file)
+             "*** %? %^G \n %^{STORY_POINTS}p %^{ORIGINALLY_SCOPED}p %^{COMPLETED}p" :empty-lines 1 :prepend t)
+            ("i"
+             "Issue Note"
+             entry
+             (file+headline org-issue-file "Issue Items")
+             "** %? %^G \n%T \n%i \n" :empty-lines 1 :prepend t)
+            ("t"
+             "Standup Note"
+             entry
+             (file+headline org-standup-file "Standup Items")
+             "** %T Notes:\n%?\n%i\n" :empty-lines-after 1 :prepend t)
+            ("m"
+             "Meeting Note"
+             entry
+             (file+headline org-meeting-file "Meeting Items")
+             "** %?\n%T\n%i\n" :empty-lines-after 1 :prepend t)
+            ("u"
+             "Union Note"
+             entry
+             (file+headline org-union-file "Meeting Items")
+             "** %T %?\n%i\n" :empty-lines-after 1)
+            ("e"
+             "Emacs Idea"
+             checkitem
+             (file+headline org-lists-file "Emacs Ideas")
+             "[ ] %?" :prepend t)
+            ("k"
+             "Keyboard Idea"
+             checkitem
+             (file+headline org-lists-file "Keyboard Ideas")
+             "[ ] %?" :prepend t)
+            ("r"
+             "Interesting Albums"
+             item
+             (file+headline org-lists-file "Interesting Albums")
+             "%?")))
+  #+end_src
+** org-superstar-mode
+:PROPERTIES:
+:REPO:     https://github.com/integral-dw/org-superstar-mode
+:END:
+  #+begin_src emacs-lisp
+    (use-package org-superstar
+      :straight t
+      :hook
+      (org-mode . org-superstar-mode))
+  #+end_src
+** Popper
+:PROPERTIES:
+:REPO:     https://github.com/karthink/popper
+:END:
+  #+begin_src emacs-lisp
+    (use-package popper
+      :straight t
+      :bind (("s-3"   . popper-toggle-latest)
+             ("s-4"   . popper-cycle)
+             ("s-5" . popper-toggle-type))
+      :init
+      (setq popper-reference-buffers
+            '("\\*format-all-errors\\*"
+              "\\*flycheck errors\\*"
+              "\\*cider-error\\*"
+              "\\*cider-scratch\\*"
+              "\\*Messages\\*"
+              "\\*Warnings\\*"
+              "\\*Compile-Log\\*"
+              "\\*Completions\\*"
+              "\\*Backtrace\\*"
+              "\\*TeX Help\\*"
+              "Output\\*$"
+              "\\*Async Shell Command\\*"
+              "^pop-"
+              help-mode
+              compilation-mode)
+            popper-mode-line ""
+
+            ;; Make popper buffers 1/2 window height
+            popper-window-height (lambda (win)
+                                   (fit-window-to-buffer
+                                    win
+                                    (floor (frame-height) 2))))
+      (popper-mode +1)
+      (popper-echo-mode +1)
+      (defun amo/add-popper-status-to-modeline ()
+        "If buffer is a popper-type buffer, display POP in the modeline,
+      in a doom-modeline friendly way"
+        (if (popper-display-control-p (buffer-name))
+            (add-to-list 'mode-line-misc-info "POP")
+          (setq mode-line-misc-info (remove "POP" mode-line-misc-info))))
+      (add-hook 'buffer-list-update-hook 'amo/add-popper-status-to-modeline))
+  #+end_src
+** Projectile
+:PROPERTIES:
+:REPO:     https://github.com/bbatsov/projectile
+:DOCS:     https://docs.projectile.mx/projectile/index.html
+:END:
+  #+begin_src emacs-lisp
+    (use-package projectile
+      :straight t
+      :config
+      (projectile-global-mode)
+      (setq projectile-completion-system 'ivy)
+      :bind (("s-p" . projectile-command-map)
+             ("C-c p" . projectile-command-map)))
+  #+end_src
 ** Vertico
 :PROPERTIES:
 :REPO:     https://github.com/minad/vertico
@@ -196,13 +361,36 @@
   #+begin_src emacs-lisp
     (use-package vertico
       :straight t
+      :init
+      (vertico-mode))
+  #+end_src
+** vertico-directory
+:PROPERTIES:
+:REPO:     https://github.com/minad/vertico/blob/main/extensions/vertico-directory.el
+:DESCRIPTION: Commands for Ido-like directory navigation.
+:END:
+  #+begin_src emacs-lisp
+    (use-package vertico-directory
+      :straight t
+      :after vertico
       :bind (:map vertico-map
                   ("C-j" . vertico-directory-enter)
                   ("DEL" . vertico-directory-delete-char)
                   ("M-DEL" . vertico-directory-delete-word))
-      :init
-      (vertico-mode))
+      ;; Tidy shadowed file names
+      :hook (rfn-eshadow-update-overlay . vertico-directory-tidy))
   #+end_src
+** which-key
+:PROPERTIES:
+:REPO:     https://github.com/justbur/emacs-which-key
+:END:
+  #+begin_src emacs-lisp
+    (use-package which-key
+      :straight t
+      :config
+      (which-key-mode))
+  #+end_src
+
 ** YASnippet
 :PROPERTIES:
 :REPO:     https://github.com/joaotavora/yasnippet
