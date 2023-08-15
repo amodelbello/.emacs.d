@@ -3,7 +3,389 @@
 #+description: "NO! The beard stays. You go."
 #+startup: content
 
-* Packages
+* Programming
+** Packages
+*** treesit-auto
+:PROPERTIES:
+:REPO:     https://github.com/renzmann/treesit-auto
+:DESCRIPTION: Automatic installation, usage, and fallback for tree-sitter major modes in Emacs 29
+:END:
+  #+begin_src emacs-lisp
+    (use-package treesit-auto
+      :straight t
+      :config
+      (setq treesit-auto-install 'prompt)
+      (global-treesit-auto-mode))
+  #+end_src
+*** Eglot
+:PROPERTIES:
+:REPO:     https://github.com/joaotavora/eglot
+:DESCRIPTION: A client for Language Server Protocol servers
+:END:
+  #+begin_src emacs-lisp
+    (use-package eglot
+      :straight t
+      :defer t
+      :hook ((python-ts-mode . eglot-ensure)))
+  #+end_src
+
+*** Flycheck
+:PROPERTIES:
+:REPO:     https://github.com/flycheck/flycheck
+:DOCS:     https://www.flycheck.org/en/latest/
+:DESCRIPTION: On the fly syntax checking for GNU Emacs
+:END:
+#+begin_src emacs-lisp
+  (use-package flycheck
+    :straight t
+    :init (global-flycheck-mode))
+#+end_src
+
+*** format-all
+:PROPERTIES:
+:REPO:     https://github.com/lassik/emacs-format-all-the-code
+:DESCRIPTION: Auto-format source code in many languages with one command
+:END:
+  #+begin_src emacs-lisp
+    (use-package format-all
+      :straight t
+      :bind
+      (("C-c C-f" . format-all-buffer))
+      :hook
+      ((python-ts-mode . format-all-mode)
+       (emacs-lisp-mode . format-all-mode)
+       (format-all-mode-hook . format-all-ensure-formatter))
+      :config
+      (custom-set-variables
+       '(format-all-formatters
+         (quote (("Emacs Lisp" emacs-lisp)
+                 ("Python" black))))))
+  #+end_src
+** Languages
+*** Python
+**** interpreter
+#+begin_src emacs-lisp
+  (when (executable-find "ipython")
+    (setq python-shell-interpreter "ipython"))
+#+end_src
+
+**** conda
+:PROPERTIES:
+:REPO:     https://github.com/necaris/conda.el
+:DESCRIPTION: Emacs helper library (and minor mode) to work with conda environments
+:END:
+  #+begin_src emacs-lisp
+    (use-package conda
+      :straight t
+      :init
+      (setq conda-anaconda-home (expand-file-name "~/opt/miniconda3")
+            conda-env-home-directory (expand-file-name "~/opt/miniconda3")
+            conda-env-autoactivate-mode t)
+
+      (add-hook 'find-file-hook (lambda () (when (bound-and-true-p conda-project-env-path)
+                                             (conda-env-activate-for-buffer))))
+      (setq-default mode-line-format (cons '(:exec conda-env-current-name) mode-line-format)))
+  #+end_src
+**** pyvenv
+:PROPERTIES:
+:REPO:     https://github.com/jorgenschaefer/pyvenv
+:DESCRIPTION: Python virtual environment interface for Emacs
+:END:
+  #+begin_src emacs-lisp
+    (use-package pyvenv
+      :straight t
+      :diminish
+      :config
+      (setq pyvenv-mode-line-indicator
+            '(pyvenv-virtual-env-name ("[venv:" pyvenv-virtual-env-name "] ")))
+      (pyvenv-mode +1))
+  #+end_src
+
+* Version Control
+** Magit
+:PROPERTIES:
+:REPO:     https://github.com/magit/magit
+:DOCS:     https://magit.vc/
+:DESCRIPTION: It's Magit! A Git Porcelain inside Emacs.
+:END:
+  #+begin_src emacs-lisp
+    (use-package magit
+      :straight t
+      :bind
+      (("C-x g" . magit)))
+  #+end_src
+** git-messenger
+:PROPERTIES:
+:REPO:     https://github.com/emacsorphanage/git-messenger
+:DESCRIPTION: Emacs Port of git-messenger.vim
+:END:
+  #+begin_src emacs-lisp
+    (use-package git-messenger
+      :straight t
+      :config (setq git-messenger:show-detail t
+                    git-messenger:use-magit-popup t)
+      :bind ("C-x m" . git-messenger:popup-message))
+  #+end_src
+** Git time machine
+:PROPERTIES:
+:REPO:     https://github.com/emacsmirror/git-timemachine
+:DESCRIPTION: Walk through git revisions of a file
+:END:
+  #+begin_src emacs-lisp
+    (use-package git-timemachine
+      :straight t)
+  #+end_src
+** gptel
+:PROPERTIES:
+:REPO:     https://github.com/karthink/gptel
+:DESCRIPTION: A no-frills ChatGPT client for Emacs
+:END:
+  #+begin_src emacs-lisp
+    (use-package gptel
+      :straight t
+      :config
+      (setq gptel-api-key (dot-env-get 'GPTEL_API_KEY)
+            gptel-default-mode #'org-mode))
+  #+end_src
+
+* Minibuffer & Completion
+** Vertico
+:PROPERTIES:
+:REPO:     https://github.com/minad/vertico
+:DESCRIPTION: Performant and minimalistic vertical completion UI based on the default completion system.
+:END:
+  #+begin_src emacs-lisp
+    (use-package vertico
+      :straight (:files (:defaults "extensions/*"))
+      :bind (:map vertico-map
+                  ("C-j" . vertico-directory-enter)
+                  ("DEL" . vertico-directory-delete-char)
+                  ("M-DEL" . vertico-directory-delete-word))
+      :hook (rfn-eshadow-update-overlay . vertico-directory-tidy)
+      :init
+      (vertico-mode))
+  #+end_src
+** Marginalia
+:PROPERTIES:
+:DESCRIPTION: Enable rich annotations in the minibuffer
+:REPO:     https://github.com/minad/marginalia
+:END:
+  #+begin_src emacs-lisp
+    (use-package marginalia
+      :straight t
+      :init
+      (marginalia-mode))
+  #+end_src
+
+** Consult
+:PROPERTIES:
+:REPO:     https://github.com/minad/consult
+:DESCRIPTION: Search and navigation commands based on the Emacs completion function completing-read
+:END:
+  #+begin_src emacs-lisp
+    ;; Example configuration for Consult
+    (use-package consult
+      :straight t
+
+      ;; Replace bindings. Lazily loaded due by `use-package'.
+      :bind (;; C-c bindings in `mode-specific-map'
+             ("C-s" . consult-line)
+             ("C-c M-x" . consult-mode-command)
+             ("C-c h" . consult-history)
+             ("C-c k" . consult-kmacro)
+             ("C-c m" . consult-man)
+             ("C-c i" . consult-info)
+             ([remap Info-search] . consult-info)
+             ;; C-x bindings in `ctl-x-map'
+             ("C-x M-:" . consult-complex-command)     ;; orig. repeat-complex-command
+             ("C-x b" . consult-buffer)                ;; orig. switch-to-buffer
+             ("C-x 4 b" . consult-buffer-other-window) ;; orig. switch-to-buffer-other-window
+             ("C-x 5 b" . consult-buffer-other-frame)  ;; orig. switch-to-buffer-other-frame
+             ("C-x r b" . consult-bookmark)            ;; orig. bookmark-jump
+             ("C-x p b" . consult-project-buffer)      ;; orig. project-switch-to-buffer
+             ;; Custom M-# bindings for fast register access
+             ("M-#" . consult-register-load)
+             ("M-'" . consult-register-store)          ;; orig. abbrev-prefix-mark (unrelated)
+             ("C-M-#" . consult-register)
+             ;; Other custom bindings
+             ("M-y" . consult-yank-pop)                ;; orig. yank-pop
+             ;; M-g bindings in `goto-map'
+             ("M-g e" . consult-compile-error)
+             ("M-g f" . consult-flymake)               ;; Alternative: consult-flycheck
+             ("M-g g" . consult-goto-line)             ;; orig. goto-line
+             ("M-g M-g" . consult-goto-line)           ;; orig. goto-line
+             ("M-g o" . consult-outline)               ;; Alternative: consult-org-heading
+             ("M-g m" . consult-mark)
+             ("M-g k" . consult-global-mark)
+             ("M-g i" . consult-imenu)
+             ("M-g I" . consult-imenu-multi)
+             ;; M-s bindings in `search-map'
+             ("M-s d" . consult-find)
+             ("M-s D" . consult-locate)
+             ("M-s g" . consult-grep)
+             ("M-s G" . consult-git-grep)
+             ("M-s r" . consult-ripgrep)
+             ("M-s l" . consult-line)
+             ("M-s L" . consult-line-multi)
+             ("M-s k" . consult-keep-lines)
+             ("M-s u" . consult-focus-lines)
+             ;; Isearch integration
+             ("M-s e" . consult-isearch-history)
+             :map isearch-mode-map
+             ("M-e" . consult-isearch-history)         ;; orig. isearch-edit-string
+             ("M-s e" . consult-isearch-history)       ;; orig. isearch-edit-string
+             ("M-s l" . consult-line)                  ;; needed by consult-line to detect isearch
+             ("M-s L" . consult-line-multi)            ;; needed by consult-line to detect isearch
+             ;; Minibuffer history
+             :map minibuffer-local-map
+             ("M-s" . consult-history)                 ;; orig. next-matching-history-element
+             ("M-r" . consult-history))                ;; orig. previous-matching-history-element
+
+      ;; Enable automatic preview at point in the *Completions* buffer. This is
+      ;; relevant when you use the default completion UI.
+      :hook (completion-list-mode . consult-preview-at-point-mode)
+
+      ;; The :init configuration is always executed (Not lazy)
+      :init
+
+      ;; Optionally configure the register formatting. This improves the register
+      ;; preview for `consult-register', `consult-register-load',
+      ;; `consult-register-store' and the Emacs built-ins.
+      (setq register-preview-delay 0.5
+            register-preview-function #'consult-register-format)
+
+      ;; Optionally tweak the register preview window.
+      ;; This adds thin lines, sorting and hides the mode line of the window.
+      (advice-add #'register-preview :override #'consult-register-window)
+
+      ;; Use Consult to select xref locations with preview
+      (setq xref-show-xrefs-function #'consult-xref
+            xref-show-definitions-function #'consult-xref)
+
+      ;; Configure other variables and modes in the :config section,
+      ;; after lazily loading the package.
+      :config
+      (consult-customize
+       consult-theme :preview-key '(:debounce 0.2 any)
+       consult-ripgrep consult-git-grep consult-grep
+       consult-bookmark consult-recent-file consult-xref
+       consult--source-bookmark consult--source-file-register
+       consult--source-recent-file consult--source-project-recent-file
+       ;; :preview-key "M-."
+       :preview-key '(:debounce 0.4 any)))
+  #+end_src
+
+** orderless
+:PROPERTIES:
+:DESCRIPTION: Emacs completion style that matches multiple regexps in any order
+:REPO:     https://github.com/oantolin/orderless
+:END:
+  #+begin_src emacs-lisp
+    (use-package orderless
+      :straight t
+      :custom
+      (completion-styles '(orderless basic))
+      (completion-category-overrides '((file (styles basic partial-completion)))))
+  #+end_src
+
+** which-key
+:PROPERTIES:
+:REPO:     https://github.com/justbur/emacs-which-key
+:DESCRIPTION: Emacs package that displays available keybindings in popup
+:END:
+  #+begin_src emacs-lisp
+    (use-package which-key
+      :straight t
+      :config
+      (which-key-mode))
+  #+end_src
+
+* Org Mode
+:PROPERTIES:
+:DOCS:     https://orgmode.org/
+:END:
+  #+begin_src emacs-lisp
+    (defun amo/org-mode-hook ()
+      (org-indent-mode 1)
+
+      ;; For some reason org-mode doesn't respect visual-line-mode when it loads.
+      (visual-line-mode 0)
+      (visual-line-mode 1))
+    (add-hook 'org-mode-hook 'amo/org-mode-hook)
+
+    ;; Disable checkdoc in org-mode source blocks
+    (defun amo/disable-fylcheck-in-org-src-block ()
+      (setq-local flycheck-disabled-checkers '(emacs-lisp emacs-lisp-checkdoc)))
+    (add-hook 'org-src-mode-hook 'amo/disable-fylcheck-in-org-src-block)
+
+    (global-set-key (kbd "C-c c") 'org-capture)
+    (global-set-key (kbd "C-c a") 'org-agenda)
+
+    (setq org-list-demote-modify-bullet
+          '(("-" . "+") ("+" . "*") ("*" . "-"))
+          org-list-allow-alphabetical t
+          org-M-RET-may-split-line '((default . nil))
+          org-use-tag-inheritance nil
+          org-hide-emphasis-markers t
+          org-directory (dot-env-get 'ORG_DIRECTORY_PATH "~/.emacs.d/org-directory")
+          org-agenda-files (list org-directory)
+          org-sprint-file (concat org-directory "/sprints.org")
+          org-standup-file (concat org-directory "/standups.org")
+          org-issue-file (concat org-directory "/issues.org")
+          org-meeting-file (concat org-directory "/meeting-notes.org")
+          org-union-file (concat org-directory "/union-notes.org")
+          org-lists-file (concat org-directory "/lists.org")
+          org-archive-location (concat org-directory "/_archive/%s_archive::"))
+
+    (setq org-capture-templates
+          '(("s"
+             "Sprint"
+             entry
+             (file org-sprint-file)
+             "* %? %^G \nDEADLINE: %^t SCHEDULED: %^t %^{SCOPED_STORY_POINTS}p\n\n** Issues\n" :empty-lines-after 1 :prepend t)
+            ("p"
+             "Sprint Issue"
+             entry
+             (file org-sprint-file)
+             "*** %? %^G \n %^{STORY_POINTS}p %^{ORIGINALLY_SCOPED}p %^{COMPLETED}p" :empty-lines 1 :prepend t)
+            ("i"
+             "Issue Note"
+             entry
+             (file+headline org-issue-file "Issue Items")
+             "** %? %^G \n%T \n%i \n" :empty-lines 1 :prepend t)
+            ("t"
+             "Standup Note"
+             entry
+             (file+headline org-standup-file "Standup Items")
+             "** %T Notes:\n%?\n%i\n" :empty-lines-after 1 :prepend t)
+            ("m"
+             "Meeting Note"
+             entry
+             (file+headline org-meeting-file "Meeting Items")
+             "** %?\n%T\n%i\n" :empty-lines-after 1 :prepend t)
+            ("u"
+             "Union Note"
+             entry
+             (file+headline org-union-file "Meeting Items")
+             "** %T %?\n%i\n" :empty-lines-after 1)
+            ("e"
+             "Emacs Idea"
+             checkitem
+             (file+headline org-lists-file "Emacs Ideas")
+             "[ ] %?" :prepend t)
+            ("k"
+             "Keyboard Idea"
+             checkitem
+             (file+headline org-lists-file "Keyboard Ideas")
+             "[ ] %?" :prepend t)
+            ("r"
+             "Interesting Albums"
+             item
+             (file+headline org-lists-file "Interesting Albums")
+             "%?")))
+  #+end_src
+
+* Other Useful Packages
 ** Ace Window
 :PROPERTIES:
 :REPO:     [[https://github.com/abo-abo/ace-window]]
@@ -339,392 +721,6 @@
             '("~/.emacs.d/snippets"))
       (use-package yasnippet-snippets
         :straight t))
-  #+end_src
-
-
-* Minibuffer & Completion
-** Vertico
-:PROPERTIES:
-:REPO:     https://github.com/minad/vertico
-:DESCRIPTION: Performant and minimalistic vertical completion UI based on the default completion system.
-:END:
-  #+begin_src emacs-lisp
-    (use-package vertico
-      :straight (:files (:defaults "extensions/*"))
-      :bind (:map vertico-map
-                  ("C-j" . vertico-directory-enter)
-                  ("DEL" . vertico-directory-delete-char)
-                  ("M-DEL" . vertico-directory-delete-word))
-      :hook (rfn-eshadow-update-overlay . vertico-directory-tidy)
-      :init
-      (vertico-mode))
-  #+end_src
-** Marginalia
-:PROPERTIES:
-:DESCRIPTION: Enable rich annotations in the minibuffer
-:REPO:     https://github.com/minad/marginalia
-:END:
-  #+begin_src emacs-lisp
-    (use-package marginalia
-      :straight t
-      :init
-      (marginalia-mode))
-  #+end_src
-
-** Consult
-:PROPERTIES:
-:REPO:     https://github.com/minad/consult
-:DESCRIPTION: Search and navigation commands based on the Emacs completion function completing-read
-:END:
-  #+begin_src emacs-lisp
-    ;; Example configuration for Consult
-    (use-package consult
-      :straight t
-
-      ;; Replace bindings. Lazily loaded due by `use-package'.
-      :bind (;; C-c bindings in `mode-specific-map'
-             ("C-s" . consult-line)
-             ("C-c M-x" . consult-mode-command)
-             ("C-c h" . consult-history)
-             ("C-c k" . consult-kmacro)
-             ("C-c m" . consult-man)
-             ("C-c i" . consult-info)
-             ([remap Info-search] . consult-info)
-             ;; C-x bindings in `ctl-x-map'
-             ("C-x M-:" . consult-complex-command)     ;; orig. repeat-complex-command
-             ("C-x b" . consult-buffer)                ;; orig. switch-to-buffer
-             ("C-x 4 b" . consult-buffer-other-window) ;; orig. switch-to-buffer-other-window
-             ("C-x 5 b" . consult-buffer-other-frame)  ;; orig. switch-to-buffer-other-frame
-             ("C-x r b" . consult-bookmark)            ;; orig. bookmark-jump
-             ("C-x p b" . consult-project-buffer)      ;; orig. project-switch-to-buffer
-             ;; Custom M-# bindings for fast register access
-             ("M-#" . consult-register-load)
-             ("M-'" . consult-register-store)          ;; orig. abbrev-prefix-mark (unrelated)
-             ("C-M-#" . consult-register)
-             ;; Other custom bindings
-             ("M-y" . consult-yank-pop)                ;; orig. yank-pop
-             ;; M-g bindings in `goto-map'
-             ("M-g e" . consult-compile-error)
-             ("M-g f" . consult-flymake)               ;; Alternative: consult-flycheck
-             ("M-g g" . consult-goto-line)             ;; orig. goto-line
-             ("M-g M-g" . consult-goto-line)           ;; orig. goto-line
-             ("M-g o" . consult-outline)               ;; Alternative: consult-org-heading
-             ("M-g m" . consult-mark)
-             ("M-g k" . consult-global-mark)
-             ("M-g i" . consult-imenu)
-             ("M-g I" . consult-imenu-multi)
-             ;; M-s bindings in `search-map'
-             ("M-s d" . consult-find)
-             ("M-s D" . consult-locate)
-             ("M-s g" . consult-grep)
-             ("M-s G" . consult-git-grep)
-             ("M-s r" . consult-ripgrep)
-             ("M-s l" . consult-line)
-             ("M-s L" . consult-line-multi)
-             ("M-s k" . consult-keep-lines)
-             ("M-s u" . consult-focus-lines)
-             ;; Isearch integration
-             ("M-s e" . consult-isearch-history)
-             :map isearch-mode-map
-             ("M-e" . consult-isearch-history)         ;; orig. isearch-edit-string
-             ("M-s e" . consult-isearch-history)       ;; orig. isearch-edit-string
-             ("M-s l" . consult-line)                  ;; needed by consult-line to detect isearch
-             ("M-s L" . consult-line-multi)            ;; needed by consult-line to detect isearch
-             ;; Minibuffer history
-             :map minibuffer-local-map
-             ("M-s" . consult-history)                 ;; orig. next-matching-history-element
-             ("M-r" . consult-history))                ;; orig. previous-matching-history-element
-
-      ;; Enable automatic preview at point in the *Completions* buffer. This is
-      ;; relevant when you use the default completion UI.
-      :hook (completion-list-mode . consult-preview-at-point-mode)
-
-      ;; The :init configuration is always executed (Not lazy)
-      :init
-
-      ;; Optionally configure the register formatting. This improves the register
-      ;; preview for `consult-register', `consult-register-load',
-      ;; `consult-register-store' and the Emacs built-ins.
-      (setq register-preview-delay 0.5
-            register-preview-function #'consult-register-format)
-
-      ;; Optionally tweak the register preview window.
-      ;; This adds thin lines, sorting and hides the mode line of the window.
-      (advice-add #'register-preview :override #'consult-register-window)
-
-      ;; Use Consult to select xref locations with preview
-      (setq xref-show-xrefs-function #'consult-xref
-            xref-show-definitions-function #'consult-xref)
-
-      ;; Configure other variables and modes in the :config section,
-      ;; after lazily loading the package.
-      :config
-      (consult-customize
-       consult-theme :preview-key '(:debounce 0.2 any)
-       consult-ripgrep consult-git-grep consult-grep
-       consult-bookmark consult-recent-file consult-xref
-       consult--source-bookmark consult--source-file-register
-       consult--source-recent-file consult--source-project-recent-file
-       ;; :preview-key "M-."
-       :preview-key '(:debounce 0.4 any)))
-  #+end_src
-
-** orderless
-:PROPERTIES:
-:DESCRIPTION: Emacs completion style that matches multiple regexps in any order
-:REPO:     https://github.com/oantolin/orderless
-:END:
-  #+begin_src emacs-lisp
-    (use-package orderless
-      :straight t
-      :custom
-      (completion-styles '(orderless basic))
-      (completion-category-overrides '((file (styles basic partial-completion)))))
-  #+end_src
-
-** which-key
-:PROPERTIES:
-:REPO:     https://github.com/justbur/emacs-which-key
-:DESCRIPTION: Emacs package that displays available keybindings in popup
-:END:
-  #+begin_src emacs-lisp
-    (use-package which-key
-      :straight t
-      :config
-      (which-key-mode))
-  #+end_src
-
-
-* Org Mode
-:PROPERTIES:
-:DOCS:     https://orgmode.org/
-:END:
-  #+begin_src emacs-lisp
-    (defun amo/org-mode-hook ()
-      (org-indent-mode 1)
-
-      ;; For some reason org-mode doesn't respect visual-line-mode when it loads.
-      (visual-line-mode 0)
-      (visual-line-mode 1))
-    (add-hook 'org-mode-hook 'amo/org-mode-hook)
-
-    ;; Disable checkdoc in org-mode source blocks
-    (defun amo/disable-fylcheck-in-org-src-block ()
-      (setq-local flycheck-disabled-checkers '(emacs-lisp emacs-lisp-checkdoc)))
-    (add-hook 'org-src-mode-hook 'amo/disable-fylcheck-in-org-src-block)
-
-    (global-set-key (kbd "C-c c") 'org-capture)
-    (global-set-key (kbd "C-c a") 'org-agenda)
-
-    (setq org-list-demote-modify-bullet
-          '(("-" . "+") ("+" . "*") ("*" . "-"))
-          org-list-allow-alphabetical t
-          org-M-RET-may-split-line '((default . nil))
-          org-use-tag-inheritance nil
-          org-hide-emphasis-markers t
-          org-directory (dot-env-get 'ORG_DIRECTORY_PATH "~/.emacs.d/org-directory")
-          org-agenda-files (list org-directory)
-          org-sprint-file (concat org-directory "/sprints.org")
-          org-standup-file (concat org-directory "/standups.org")
-          org-issue-file (concat org-directory "/issues.org")
-          org-meeting-file (concat org-directory "/meeting-notes.org")
-          org-union-file (concat org-directory "/union-notes.org")
-          org-lists-file (concat org-directory "/lists.org")
-          org-archive-location (concat org-directory "/_archive/%s_archive::"))
-
-    (setq org-capture-templates
-          '(("s"
-             "Sprint"
-             entry
-             (file org-sprint-file)
-             "* %? %^G \nDEADLINE: %^t SCHEDULED: %^t %^{SCOPED_STORY_POINTS}p\n\n** Issues\n" :empty-lines-after 1 :prepend t)
-            ("p"
-             "Sprint Issue"
-             entry
-             (file org-sprint-file)
-             "*** %? %^G \n %^{STORY_POINTS}p %^{ORIGINALLY_SCOPED}p %^{COMPLETED}p" :empty-lines 1 :prepend t)
-            ("i"
-             "Issue Note"
-             entry
-             (file+headline org-issue-file "Issue Items")
-             "** %? %^G \n%T \n%i \n" :empty-lines 1 :prepend t)
-            ("t"
-             "Standup Note"
-             entry
-             (file+headline org-standup-file "Standup Items")
-             "** %T Notes:\n%?\n%i\n" :empty-lines-after 1 :prepend t)
-            ("m"
-             "Meeting Note"
-             entry
-             (file+headline org-meeting-file "Meeting Items")
-             "** %?\n%T\n%i\n" :empty-lines-after 1 :prepend t)
-            ("u"
-             "Union Note"
-             entry
-             (file+headline org-union-file "Meeting Items")
-             "** %T %?\n%i\n" :empty-lines-after 1)
-            ("e"
-             "Emacs Idea"
-             checkitem
-             (file+headline org-lists-file "Emacs Ideas")
-             "[ ] %?" :prepend t)
-            ("k"
-             "Keyboard Idea"
-             checkitem
-             (file+headline org-lists-file "Keyboard Ideas")
-             "[ ] %?" :prepend t)
-            ("r"
-             "Interesting Albums"
-             item
-             (file+headline org-lists-file "Interesting Albums")
-             "%?")))
-  #+end_src
-
-
-* Version Control
-** Magit
-:PROPERTIES:
-:REPO:     https://github.com/magit/magit
-:DOCS:     https://magit.vc/
-:DESCRIPTION: It's Magit! A Git Porcelain inside Emacs.
-:END:
-  #+begin_src emacs-lisp
-    (use-package magit
-      :straight t
-      :bind
-      (("C-x g" . magit)))
-  #+end_src
-** git-messenger
-:PROPERTIES:
-:REPO:     https://github.com/emacsorphanage/git-messenger
-:DESCRIPTION: Emacs Port of git-messenger.vim
-:END:
-  #+begin_src emacs-lisp
-    (use-package git-messenger
-      :straight t
-      :config (setq git-messenger:show-detail t
-                    git-messenger:use-magit-popup t)
-      :bind ("C-x m" . git-messenger:popup-message))
-  #+end_src
-** Git time machine
-:PROPERTIES:
-:REPO:     https://github.com/emacsmirror/git-timemachine
-:DESCRIPTION: Walk through git revisions of a file
-:END:
-  #+begin_src emacs-lisp
-    (use-package git-timemachine
-      :straight t)
-  #+end_src
-** gptel
-:PROPERTIES:
-:REPO:     https://github.com/karthink/gptel
-:DESCRIPTION: A no-frills ChatGPT client for Emacs
-:END:
-  #+begin_src emacs-lisp
-    (use-package gptel
-      :straight t
-      :config
-      (setq gptel-api-key (dot-env-get 'GPTEL_API_KEY)
-            gptel-default-mode #'org-mode))
-  #+end_src
-
-
-* Programming
-** Packages
-*** treesit-auto
-:PROPERTIES:
-:REPO:     https://github.com/renzmann/treesit-auto
-:DESCRIPTION: Automatic installation, usage, and fallback for tree-sitter major modes in Emacs 29
-:END:
-  #+begin_src emacs-lisp
-    (use-package treesit-auto
-      :straight t
-      :config
-      (setq treesit-auto-install 'prompt)
-      (global-treesit-auto-mode))
-  #+end_src
-*** Eglot
-:PROPERTIES:
-:REPO:     https://github.com/joaotavora/eglot
-:DESCRIPTION: A client for Language Server Protocol servers
-:END:
-  #+begin_src emacs-lisp
-    (use-package eglot
-      :straight t
-      :defer t
-      :hook ((python-ts-mode . eglot-ensure)))
-  #+end_src
-
-*** Flycheck
-:PROPERTIES:
-:REPO:     https://github.com/flycheck/flycheck
-:DOCS:     https://www.flycheck.org/en/latest/
-:DESCRIPTION: On the fly syntax checking for GNU Emacs
-:END:
-#+begin_src emacs-lisp
-  (use-package flycheck
-    :straight t
-    :init (global-flycheck-mode))
-#+end_src
-
-*** format-all
-:PROPERTIES:
-:REPO:     https://github.com/lassik/emacs-format-all-the-code
-:DESCRIPTION: Auto-format source code in many languages with one command
-:END:
-  #+begin_src emacs-lisp
-    (use-package format-all
-      :straight t
-      :bind
-      (("C-c C-f" . format-all-buffer))
-      :hook
-      ((python-ts-mode . format-all-mode)
-       (emacs-lisp-mode . format-all-mode)
-       (format-all-mode-hook . format-all-ensure-formatter))
-      :config
-      (custom-set-variables
-       '(format-all-formatters
-         (quote (("Emacs Lisp" emacs-lisp)
-                 ("Python" black))))))
-  #+end_src
-** Languages
-*** Python
-**** interpreter
-#+begin_src emacs-lisp
-  (when (executable-find "ipython")
-    (setq python-shell-interpreter "ipython"))
-#+end_src
-
-**** conda
-:PROPERTIES:
-:REPO:     https://github.com/necaris/conda.el
-:DESCRIPTION: Emacs helper library (and minor mode) to work with conda environments
-:END:
-  #+begin_src emacs-lisp
-    (use-package conda
-      :straight t
-      :init
-      (setq conda-anaconda-home (expand-file-name "~/opt/miniconda3")
-            conda-env-home-directory (expand-file-name "~/opt/miniconda3")
-            conda-env-autoactivate-mode t)
-
-      (add-hook 'find-file-hook (lambda () (when (bound-and-true-p conda-project-env-path)
-                                             (conda-env-activate-for-buffer))))
-      (setq-default mode-line-format (cons '(:exec conda-env-current-name) mode-line-format)))
-  #+end_src
-**** pyvenv
-:PROPERTIES:
-:REPO:     https://github.com/jorgenschaefer/pyvenv
-:DESCRIPTION: Python virtual environment interface for Emacs
-:END:
-  #+begin_src emacs-lisp
-    (use-package pyvenv
-      :straight t
-      :diminish
-      :config
-      (setq pyvenv-mode-line-indicator
-            '(pyvenv-virtual-env-name ("[venv:" pyvenv-virtual-env-name "] ")))
-      (pyvenv-mode +1))
   #+end_src
 
 
