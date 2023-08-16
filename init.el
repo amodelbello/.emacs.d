@@ -30,7 +30,9 @@
 
 (use-package dot-env
   :straight (:host github :repo "amodelbello/dot-env.el"
-                   :branch "main"))
+                   :branch "main")
+  :config
+  (dot-env-config))
 
 ;; Set font variables
 (setq amo/font-family (dot-env-get 'FONT "DejaVu Sans Mono")
