@@ -26,7 +26,12 @@
     (use-package eglot
       :straight t
       :defer t
-      :hook ((python-ts-mode . eglot-ensure)))
+      :hook ((python-ts-mode . eglot-ensure))
+      :bind (:map eglot-mode-map
+                  ("C-c e f n" . flymake-goto-next-error)
+                  ("C-c e f p" . flymake-goto-prev-error)
+                  ("C-c e r" . eglot-rename)
+                  ("C-c e w r" . eglot-reconnect)))
   #+end_src
 
 *** Flycheck
