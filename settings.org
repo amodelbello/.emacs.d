@@ -23,11 +23,17 @@
 :DESCRIPTION: A client for Language Server Protocol servers
 :END:
   #+begin_src emacs-lisp
+    (defun amo/eglot-format-on-save ()
+      (when (bound-and-true-p eglot--managed-mode)
+        (eglot-format)))
+
     (use-package eglot
       :straight t
       :defer t
-      :hook ((python-ts-mode . eglot-ensure))
+      :hook ((after-save . amo/eglot-format-on-save)
+             (python-ts-mode . eglot-ensure))
       :bind (:map eglot-mode-map
+                  ("<C-return>" . xref-find-references)
                   ("C-c e f n" . flymake-goto-next-error)
                   ("C-c e f p" . flymake-goto-prev-error)
                   ("C-c e r" . eglot-rename)
@@ -384,7 +390,8 @@
       :straight t
       :config
       (global-aggressive-indent-mode 1)
-      (add-to-list 'aggressive-indent-excluded-modes 'html-mode))
+      (add-to-list 'aggressive-indent-excluded-modes 'html-mode)
+      (add-to-list 'aggressive-indent-excluded-modes 'python-ts-mode))
   #+end_src
 ** Avy
 :PROPERTIES:
@@ -609,6 +616,7 @@
               "\\*TeX Help\\*"
               "Output\\*$"
               "\\*Async Shell Command\\*"
+              "\\*eldoc\\*"
               "^pop-"
               help-mode
               compilation-mode)
@@ -687,6 +695,7 @@
   #+begin_src emacs-lisp
     (use-package yasnippet
       :straight t
+      :hook ((python-ts-mode . (lambda () (yas-activate-extra-mode 'python-mode))))
       :config
       (yas-global-mode)
       (setq yas-snippet-dirs
