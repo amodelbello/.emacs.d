@@ -266,6 +266,19 @@
       (completion-styles '(orderless basic))
       (completion-category-overrides '((file (styles basic partial-completion)))))
   #+end_src
+** nerd-icons-completion
+:PROPERTIES:
+:REPO:     https://github.com/rainstormstudio/nerd-icons-completion
+:DESCRIPTION: Icons for candidates in minibuffer
+:END:
+#+begin_src emacs-lisp
+  (use-package nerd-icons-completion
+    :straight t
+    :after marginalia
+    :hook ((marginalia-mode . nerd-icons-completion-marginalia-setup))
+    :init
+    (nerd-icons-completion-mode 1))
+#+end_src
 
 ** which-key
 :PROPERTIES:
