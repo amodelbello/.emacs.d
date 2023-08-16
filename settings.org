@@ -34,38 +34,6 @@
                   ("C-c e w r" . eglot-reconnect)))
   #+end_src
 
-*** Flycheck
-:PROPERTIES:
-:REPO:     https://github.com/flycheck/flycheck
-:DOCS:     https://www.flycheck.org/en/latest/
-:DESCRIPTION: On the fly syntax checking for GNU Emacs
-:END:
-#+begin_src emacs-lisp
-  (use-package flycheck
-    :straight t
-    :init (global-flycheck-mode))
-#+end_src
-
-*** format-all
-:PROPERTIES:
-:REPO:     https://github.com/lassik/emacs-format-all-the-code
-:DESCRIPTION: Auto-format source code in many languages with one command
-:END:
-  #+begin_src emacs-lisp
-    (use-package format-all
-      :straight t
-      :bind
-      (("C-c C-f" . format-all-buffer))
-      :hook
-      ((python-ts-mode . format-all-mode)
-       (emacs-lisp-mode . format-all-mode)
-       (format-all-mode-hook . format-all-ensure-formatter))
-      :config
-      (custom-set-variables
-       '(format-all-formatters
-         (quote (("Emacs Lisp" emacs-lisp)
-                 ("Python" black))))))
-  #+end_src
 ** Languages
 *** Python
 **** interpreter
