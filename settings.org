@@ -40,6 +40,18 @@
                   ("C-c e w r" . eglot-reconnect)))
   #+end_src
 
+*** Company
+:PROPERTIES:
+:REPO:     https://github.com/company-mode/company-mode
+:DOCS:     https://company-mode.github.io/
+:DESCRIPTION: Modular in-buffer completion framework for Emacs
+:END:
+  #+begin_src emacs-lisp
+    (use-package company
+      :straight t
+      :config
+      (global-company-mode))
+  #+end_src
 ** Languages
 *** Python
 **** interpreter
@@ -114,19 +126,21 @@
     (use-package git-timemachine
       :straight t)
   #+end_src
-** gptel
+** diff-hl
 :PROPERTIES:
-:REPO:     https://github.com/karthink/gptel
-:DESCRIPTION: A no-frills ChatGPT client for Emacs
+:REPO:     https://github.com/dgutov/diff-hl
+:DESCRIPTION: Emacs package for highlighting uncommitted changes
 :END:
   #+begin_src emacs-lisp
-    (use-package gptel
+    (use-package diff-hl
       :straight t
       :config
-      (setq gptel-api-key (dot-env-get 'GPTEL_API_KEY)
-            gptel-default-mode #'org-mode))
+      (global-diff-hl-mode)
+      :hook
+      ((dired-mode . diff-hl-dired-mode)
+       (magit-pre-refresh . diff-hl-magit-pre-refresh)
+       (magit-post-refresh . diff-hl-magit-post-refresh)))
   #+end_src
-
 * Minibuffer & Completion
 ** Vertico
 :PROPERTIES:
@@ -296,86 +310,99 @@
 :PROPERTIES:
 :DOCS:     https://orgmode.org/
 :END:
+** org-superstar-mode
+:PROPERTIES:
+:REPO:     https://github.com/integral-dw/org-superstar-mode
+:DESCRIPTION: Make org-mode stars a little more super
+:END:
   #+begin_src emacs-lisp
-    (defun amo/org-mode-hook ()
-      (org-indent-mode 1)
-
-      ;; For some reason org-mode doesn't respect visual-line-mode when it loads.
-      (visual-line-mode 0)
-      (visual-line-mode 1))
-    (add-hook 'org-mode-hook 'amo/org-mode-hook)
-
-    ;; Disable checkdoc in org-mode source blocks
-    (defun amo/disable-fylcheck-in-org-src-block ()
-      (setq-local flycheck-disabled-checkers '(emacs-lisp emacs-lisp-checkdoc)))
-    (add-hook 'org-src-mode-hook 'amo/disable-fylcheck-in-org-src-block)
-
-    (global-set-key (kbd "C-c c") 'org-capture)
-    (global-set-key (kbd "C-c a") 'org-agenda)
-
-    (setq org-list-demote-modify-bullet
-          '(("-" . "+") ("+" . "*") ("*" . "-"))
-          org-list-allow-alphabetical t
-          org-M-RET-may-split-line '((default . nil))
-          org-use-tag-inheritance nil
-          org-hide-emphasis-markers t
-          org-directory (dot-env-get 'ORG_DIRECTORY_PATH "~/.emacs.d/org-directory")
-          org-agenda-files (list org-directory)
-          org-sprint-file (concat org-directory "/sprints.org")
-          org-standup-file (concat org-directory "/standups.org")
-          org-issue-file (concat org-directory "/issues.org")
-          org-meeting-file (concat org-directory "/meeting-notes.org")
-          org-union-file (concat org-directory "/union-notes.org")
-          org-lists-file (concat org-directory "/lists.org")
-          org-archive-location (concat org-directory "/_archive/%s_archive::"))
-
-    (setq org-capture-templates
-          '(("s"
-             "Sprint"
-             entry
-             (file org-sprint-file)
-             "* %? %^G \nDEADLINE: %^t SCHEDULED: %^t %^{SCOPED_STORY_POINTS}p\n\n** Issues\n" :empty-lines-after 1 :prepend t)
-            ("p"
-             "Sprint Issue"
-             entry
-             (file org-sprint-file)
-             "*** %? %^G \n %^{STORY_POINTS}p %^{ORIGINALLY_SCOPED}p %^{COMPLETED}p" :empty-lines 1 :prepend t)
-            ("i"
-             "Issue Note"
-             entry
-             (file+headline org-issue-file "Issue Items")
-             "** %? %^G \n%T \n%i \n" :empty-lines 1 :prepend t)
-            ("t"
-             "Standup Note"
-             entry
-             (file+headline org-standup-file "Standup Items")
-             "** %T Notes:\n%?\n%i\n" :empty-lines-after 1 :prepend t)
-            ("m"
-             "Meeting Note"
-             entry
-             (file+headline org-meeting-file "Meeting Items")
-             "** %?\n%T\n%i\n" :empty-lines-after 1 :prepend t)
-            ("u"
-             "Union Note"
-             entry
-             (file+headline org-union-file "Meeting Items")
-             "** %T %?\n%i\n" :empty-lines-after 1)
-            ("e"
-             "Emacs Idea"
-             checkitem
-             (file+headline org-lists-file "Emacs Ideas")
-             "[ ] %?" :prepend t)
-            ("k"
-             "Keyboard Idea"
-             checkitem
-             (file+headline org-lists-file "Keyboard Ideas")
-             "[ ] %?" :prepend t)
-            ("r"
-             "Interesting Albums"
-             item
-             (file+headline org-lists-file "Interesting Albums")
-             "%?")))
+    (use-package org-superstar
+      :straight t
+      :hook
+      (org-mode . org-superstar-mode))
   #+end_src
+
+** Org configuration
+#+begin_src emacs-lisp
+(defun amo/org-mode-hook ()
+  (org-indent-mode 1)
+
+  ;; For some reason org-mode doesn't respect visual-line-mode when it loads.
+  (visual-line-mode 0)
+  (visual-line-mode 1))
+(add-hook 'org-mode-hook 'amo/org-mode-hook)
+
+;; Disable checkdoc in org-mode source blocks
+(defun amo/disable-fylcheck-in-org-src-block ()
+  (setq-local flycheck-disabled-checkers '(emacs-lisp emacs-lisp-checkdoc)))
+(add-hook 'org-src-mode-hook 'amo/disable-fylcheck-in-org-src-block)
+
+(global-set-key (kbd "C-c c") 'org-capture)
+(global-set-key (kbd "C-c a") 'org-agenda)
+
+(setq org-list-demote-modify-bullet
+      '(("-" . "+") ("+" . "*") ("*" . "-"))
+      org-list-allow-alphabetical t
+      org-M-RET-may-split-line '((default . nil))
+      org-use-tag-inheritance nil
+      org-hide-emphasis-markers t
+      org-directory (dot-env-get 'ORG_DIRECTORY_PATH "~/.emacs.d/org-directory")
+      org-agenda-files (list org-directory)
+      org-sprint-file (concat org-directory "/sprints.org")
+      org-standup-file (concat org-directory "/standups.org")
+      org-issue-file (concat org-directory "/issues.org")
+      org-meeting-file (concat org-directory "/meeting-notes.org")
+      org-union-file (concat org-directory "/union-notes.org")
+      org-lists-file (concat org-directory "/lists.org")
+      org-archive-location (concat org-directory "/_archive/%s_archive::"))
+
+(setq org-capture-templates
+      '(("s"
+         "Sprint"
+         entry
+         (file org-sprint-file)
+         "* %? %^G \nDEADLINE: %^t SCHEDULED: %^t %^{SCOPED_STORY_POINTS}p\n\n** Issues\n" :empty-lines-after 1 :prepend t)
+        ("p"
+         "Sprint Issue"
+         entry
+         (file org-sprint-file)
+         "*** %? %^G \n %^{STORY_POINTS}p %^{ORIGINALLY_SCOPED}p %^{COMPLETED}p" :empty-lines 1 :prepend t)
+        ("i"
+         "Issue Note"
+         entry
+         (file+headline org-issue-file "Issue Items")
+         "** %? %^G \n%T \n%i \n" :empty-lines 1 :prepend t)
+        ("t"
+         "Standup Note"
+         entry
+         (file+headline org-standup-file "Standup Items")
+         "** %T Notes:\n%?\n%i\n" :empty-lines-after 1 :prepend t)
+        ("m"
+         "Meeting Note"
+         entry
+         (file+headline org-meeting-file "Meeting Items")
+         "** %?\n%T\n%i\n" :empty-lines-after 1 :prepend t)
+        ("u"
+         "Union Note"
+         entry
+         (file+headline org-union-file "Meeting Items")
+         "** %T %?\n%i\n" :empty-lines-after 1)
+        ("e"
+         "Emacs Idea"
+         checkitem
+         (file+headline org-lists-file "Emacs Ideas")
+         "[ ] %?" :prepend t)
+        ("k"
+         "Keyboard Idea"
+         checkitem
+         (file+headline org-lists-file "Keyboard Ideas")
+         "[ ] %?" :prepend t)
+        ("r"
+         "Interesting Albums"
+         item
+         (file+headline org-lists-file "Interesting Albums")
+         "%?")))
+#+end_src
 
 * Other Useful Packages
 ** Ace Window
@@ -438,18 +465,6 @@
        ("<C-S-left>" . buf-move-left)
        ("<C-S-right>" . buf-move-right)))
   #+end_src
-** Company
-:PROPERTIES:
-:REPO:     https://github.com/company-mode/company-mode
-:DOCS:     https://company-mode.github.io/
-:DESCRIPTION: Modular in-buffer completion framework for Emacs
-:END:
-  #+begin_src emacs-lisp
-    (use-package company
-      :straight t
-      :config
-      (global-company-mode))
-  #+end_src
 ** Crux
 :PROPERTIES:
 :REPO:     https://github.com/bbatsov/crux
@@ -472,21 +487,6 @@
        ("<C-backspace>" . crux-kill-line-backwards)))
   #+end_src
 
-** diff-hl
-:PROPERTIES:
-:REPO:     https://github.com/dgutov/diff-hl
-:DESCRIPTION: Emacs package for highlighting uncommitted changes
-:END:
-  #+begin_src emacs-lisp
-    (use-package diff-hl
-      :straight t
-      :config
-      (global-diff-hl-mode)
-      :hook
-      ((dired-mode . diff-hl-dired-mode)
-       (magit-pre-refresh . diff-hl-magit-pre-refresh)
-       (magit-post-refresh . diff-hl-magit-post-refresh)))
-  #+end_src
 ** exec-path-from-shell
 :PROPERTIES:
 :REPO:     https://github.com/purcell/exec-path-from-shell
@@ -527,6 +527,19 @@
       :config
       (eyebrowse-mode))
   #+end_src
+** gptel
+:PROPERTIES:
+:REPO:     https://github.com/karthink/gptel
+:DESCRIPTION: A no-frills ChatGPT client for Emacs
+:END:
+  #+begin_src emacs-lisp
+    (use-package gptel
+      :straight t
+      :config
+      (setq gptel-api-key (dot-env-get 'GPTEL_API_KEY)
+            gptel-default-mode #'org-mode))
+  #+end_src
+
 ** Idle Highlight Mode
 :PROPERTIES:
 :REPO:     https://codeberg.org/ideasman42/emacs-idle-highlight-mode
@@ -566,17 +579,6 @@
       :straight t
       :config
       (minions-mode 1))
-  #+end_src
-** org-superstar-mode
-:PROPERTIES:
-:REPO:     https://github.com/integral-dw/org-superstar-mode
-:DESCRIPTION: Make org-mode stars a little more super
-:END:
-  #+begin_src emacs-lisp
-    (use-package org-superstar
-      :straight t
-      :hook
-      (org-mode . org-superstar-mode))
   #+end_src
 ** package-lint
 :PROPERTIES:
