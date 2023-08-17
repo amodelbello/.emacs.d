@@ -10,35 +10,35 @@
 :REPO:     https://github.com/renzmann/treesit-auto
 :DESCRIPTION: Automatic installation, usage, and fallback for tree-sitter major modes in Emacs 29
 :END:
-  #+begin_src emacs-lisp
-    (use-package treesit-auto
-      :straight t
-      :config
-      (setq treesit-auto-install 'prompt)
-      (global-treesit-auto-mode))
-  #+end_src
+#+begin_src emacs-lisp
+  (use-package treesit-auto
+    :straight t
+    :config
+    (setq treesit-auto-install 'prompt)
+    (global-treesit-auto-mode))
+#+end_src
 *** Eglot
 :PROPERTIES:
 :REPO:     https://github.com/joaotavora/eglot
 :DESCRIPTION: A client for Language Server Protocol servers
 :END:
-  #+begin_src emacs-lisp
-    (defun amo/eglot-format-on-save ()
-      (when (bound-and-true-p eglot--managed-mode)
-        (eglot-format)))
+#+begin_src emacs-lisp
+  (defun amo/eglot-format-on-save ()
+    (when (bound-and-true-p eglot--managed-mode)
+      (eglot-format)))
 
-    (use-package eglot
-      :straight t
-      :defer t
-      :hook ((after-save . amo/eglot-format-on-save)
-             (python-ts-mode . eglot-ensure))
-      :bind (:map eglot-mode-map
-                  ("<C-return>" . xref-find-references)
-                  ("C-c e f n" . flymake-goto-next-error)
-                  ("C-c e f p" . flymake-goto-prev-error)
-                  ("C-c e r" . eglot-rename)
-                  ("C-c e w r" . eglot-reconnect)))
-  #+end_src
+  (use-package eglot
+    :straight t
+    :defer t
+    :hook ((after-save . amo/eglot-format-on-save)
+           (python-ts-mode . eglot-ensure))
+    :bind (:map eglot-mode-map
+                ("<C-return>" . xref-find-references)
+                ("C-c e f n" . flymake-goto-next-error)
+                ("C-c e f p" . flymake-goto-prev-error)
+                ("C-c e r" . eglot-rename)
+                ("C-c e w r" . eglot-reconnect)))
+#+end_src
 
 *** Company
 :PROPERTIES:
@@ -46,12 +46,12 @@
 :DOCS:     https://company-mode.github.io/
 :DESCRIPTION: Modular in-buffer completion framework for Emacs
 :END:
-  #+begin_src emacs-lisp
-    (use-package company
-      :straight t
-      :config
-      (global-company-mode))
-  #+end_src
+#+begin_src emacs-lisp
+  (use-package company
+    :straight t
+    :config
+    (global-company-mode))
+#+end_src
 ** Languages
 *** Python
 **** interpreter
@@ -65,32 +65,32 @@
 :REPO:     https://github.com/necaris/conda.el
 :DESCRIPTION: Emacs helper library (and minor mode) to work with conda environments
 :END:
-  #+begin_src emacs-lisp
-    (use-package conda
-      :straight t
-      :init
-      (setq conda-anaconda-home (expand-file-name "~/opt/miniconda3")
-            conda-env-home-directory (expand-file-name "~/opt/miniconda3")
-            conda-env-autoactivate-mode t)
+#+begin_src emacs-lisp
+  (use-package conda
+    :straight t
+    :init
+    (setq conda-anaconda-home (expand-file-name "~/opt/miniconda3")
+          conda-env-home-directory (expand-file-name "~/opt/miniconda3")
+          conda-env-autoactivate-mode t)
 
-      (add-hook 'find-file-hook (lambda () (when (bound-and-true-p conda-project-env-path)
-                                             (conda-env-activate-for-buffer))))
-      (setq-default mode-line-format (cons '(:exec conda-env-current-name) mode-line-format)))
-  #+end_src
+    (add-hook 'find-file-hook (lambda () (when (bound-and-true-p conda-project-env-path)
+                                           (conda-env-activate-for-buffer))))
+    (setq-default mode-line-format (cons '(:exec conda-env-current-name) mode-line-format)))
+#+end_src
 **** pyvenv
 :PROPERTIES:
 :REPO:     https://github.com/jorgenschaefer/pyvenv
 :DESCRIPTION: Python virtual environment interface for Emacs
 :END:
-  #+begin_src emacs-lisp
-    (use-package pyvenv
-      :straight t
-      :diminish
-      :config
-      (setq pyvenv-mode-line-indicator
-            '(pyvenv-virtual-env-name ("[venv:" pyvenv-virtual-env-name "] ")))
-      (pyvenv-mode +1))
-  #+end_src
+#+begin_src emacs-lisp
+  (use-package pyvenv
+    :straight t
+    :diminish
+    :config
+    (setq pyvenv-mode-line-indicator
+          '(pyvenv-virtual-env-name ("[venv:" pyvenv-virtual-env-name "] ")))
+    (pyvenv-mode +1))
+#+end_src
 
 * Version Control
 ** Magit
@@ -99,187 +99,187 @@
 :DOCS:     https://magit.vc/
 :DESCRIPTION: It's Magit! A Git Porcelain inside Emacs.
 :END:
-  #+begin_src emacs-lisp
-    (use-package magit
-      :straight t
-      :bind
-      (("C-x g" . magit)))
-  #+end_src
+#+begin_src emacs-lisp
+  (use-package magit
+    :straight t
+    :bind
+    (("C-x g" . magit)))
+#+end_src
 ** git-messenger
 :PROPERTIES:
 :REPO:     https://github.com/emacsorphanage/git-messenger
 :DESCRIPTION: Emacs Port of git-messenger.vim
 :END:
-  #+begin_src emacs-lisp
-    (use-package git-messenger
-      :straight t
-      :config (setq git-messenger:show-detail t
-                    git-messenger:use-magit-popup t)
-      :bind ("C-x m" . git-messenger:popup-message))
-  #+end_src
+#+begin_src emacs-lisp
+  (use-package git-messenger
+    :straight t
+    :config (setq git-messenger:show-detail t
+                  git-messenger:use-magit-popup t)
+    :bind ("C-x m" . git-messenger:popup-message))
+#+end_src
 ** Git time machine
 :PROPERTIES:
 :REPO:     https://github.com/emacsmirror/git-timemachine
 :DESCRIPTION: Walk through git revisions of a file
 :END:
-  #+begin_src emacs-lisp
-    (use-package git-timemachine
-      :straight t)
-  #+end_src
+#+begin_src emacs-lisp
+  (use-package git-timemachine
+    :straight t)
+#+end_src
 ** diff-hl
 :PROPERTIES:
 :REPO:     https://github.com/dgutov/diff-hl
 :DESCRIPTION: Emacs package for highlighting uncommitted changes
 :END:
-  #+begin_src emacs-lisp
-    (use-package diff-hl
-      :straight t
-      :config
-      (global-diff-hl-mode)
-      :hook
-      ((dired-mode . diff-hl-dired-mode)
-       (magit-pre-refresh . diff-hl-magit-pre-refresh)
-       (magit-post-refresh . diff-hl-magit-post-refresh)))
-  #+end_src
+#+begin_src emacs-lisp
+  (use-package diff-hl
+    :straight t
+    :config
+    (global-diff-hl-mode)
+    :hook
+    ((dired-mode . diff-hl-dired-mode)
+     (magit-pre-refresh . diff-hl-magit-pre-refresh)
+     (magit-post-refresh . diff-hl-magit-post-refresh)))
+#+end_src
 * Minibuffer & Completion
 ** Vertico
 :PROPERTIES:
 :REPO:     https://github.com/minad/vertico
 :DESCRIPTION: Performant and minimalistic vertical completion UI based on the default completion system.
 :END:
-  #+begin_src emacs-lisp
-    (use-package vertico
-      :straight (:files (:defaults "extensions/*"))
-      :bind (:map vertico-map
-                  ("C-j" . vertico-directory-enter)
-                  ("DEL" . vertico-directory-delete-char)
-                  ("M-DEL" . vertico-directory-delete-word))
-      :hook (rfn-eshadow-update-overlay . vertico-directory-tidy)
-      :init
-      (vertico-mode))
-  #+end_src
+#+begin_src emacs-lisp
+  (use-package vertico
+    :straight (:files (:defaults "extensions/*"))
+    :bind (:map vertico-map
+                ("C-j" . vertico-directory-enter)
+                ("DEL" . vertico-directory-delete-char)
+                ("M-DEL" . vertico-directory-delete-word))
+    :hook (rfn-eshadow-update-overlay . vertico-directory-tidy)
+    :init
+    (vertico-mode))
+#+end_src
 ** Marginalia
 :PROPERTIES:
 :DESCRIPTION: Enable rich annotations in the minibuffer
 :REPO:     https://github.com/minad/marginalia
 :END:
-  #+begin_src emacs-lisp
-    (use-package marginalia
-      :straight t
-      :init
-      (marginalia-mode))
-  #+end_src
+#+begin_src emacs-lisp
+  (use-package marginalia
+    :straight t
+    :init
+    (marginalia-mode))
+#+end_src
 
 ** Consult
 :PROPERTIES:
 :REPO:     https://github.com/minad/consult
 :DESCRIPTION: Search and navigation commands based on the Emacs completion function completing-read
 :END:
-  #+begin_src emacs-lisp
-    ;; Example configuration for Consult
-    (use-package consult
-      :straight t
+#+begin_src emacs-lisp
+  ;; Example configuration for Consult
+  (use-package consult
+    :straight t
 
-      ;; Replace bindings. Lazily loaded due by `use-package'.
-      :bind (;; C-c bindings in `mode-specific-map'
-             ("C-s" . consult-line)
-             ("C-c M-x" . consult-mode-command)
-             ("C-c h" . consult-history)
-             ("C-c k" . consult-kmacro)
-             ("C-c m" . consult-man)
-             ("C-c i" . consult-info)
-             ([remap Info-search] . consult-info)
-             ;; C-x bindings in `ctl-x-map'
-             ("C-x M-:" . consult-complex-command)     ;; orig. repeat-complex-command
-             ("C-x b" . consult-buffer)                ;; orig. switch-to-buffer
-             ("C-x 4 b" . consult-buffer-other-window) ;; orig. switch-to-buffer-other-window
-             ("C-x 5 b" . consult-buffer-other-frame)  ;; orig. switch-to-buffer-other-frame
-             ("C-x r b" . consult-bookmark)            ;; orig. bookmark-jump
-             ("C-x p b" . consult-project-buffer)      ;; orig. project-switch-to-buffer
-             ;; Custom M-# bindings for fast register access
-             ("M-#" . consult-register-load)
-             ("M-'" . consult-register-store)          ;; orig. abbrev-prefix-mark (unrelated)
-             ("C-M-#" . consult-register)
-             ;; Other custom bindings
-             ("M-y" . consult-yank-pop)                ;; orig. yank-pop
-             ;; M-g bindings in `goto-map'
-             ("M-g e" . consult-compile-error)
-             ("M-g f" . consult-flymake)               ;; Alternative: consult-flycheck
-             ("M-g g" . consult-goto-line)             ;; orig. goto-line
-             ("M-g M-g" . consult-goto-line)           ;; orig. goto-line
-             ("M-g o" . consult-outline)               ;; Alternative: consult-org-heading
-             ("M-g m" . consult-mark)
-             ("M-g k" . consult-global-mark)
-             ("M-g i" . consult-imenu)
-             ("M-g I" . consult-imenu-multi)
-             ;; M-s bindings in `search-map'
-             ("M-s d" . consult-find)
-             ("M-s D" . consult-locate)
-             ("M-s g" . consult-grep)
-             ("M-s G" . consult-git-grep)
-             ("M-s r" . consult-ripgrep)
-             ("M-s l" . consult-line)
-             ("M-s L" . consult-line-multi)
-             ("M-s k" . consult-keep-lines)
-             ("M-s u" . consult-focus-lines)
-             ;; Isearch integration
-             ("M-s e" . consult-isearch-history)
-             :map isearch-mode-map
-             ("M-e" . consult-isearch-history)         ;; orig. isearch-edit-string
-             ("M-s e" . consult-isearch-history)       ;; orig. isearch-edit-string
-             ("M-s l" . consult-line)                  ;; needed by consult-line to detect isearch
-             ("M-s L" . consult-line-multi)            ;; needed by consult-line to detect isearch
-             ;; Minibuffer history
-             :map minibuffer-local-map
-             ("M-s" . consult-history)                 ;; orig. next-matching-history-element
-             ("M-r" . consult-history))                ;; orig. previous-matching-history-element
+    ;; Replace bindings. Lazily loaded due by `use-package'.
+    :bind (;; C-c bindings in `mode-specific-map'
+           ("C-s" . consult-line)
+           ("C-c M-x" . consult-mode-command)
+           ("C-c h" . consult-history)
+           ("C-c k" . consult-kmacro)
+           ("C-c m" . consult-man)
+           ("C-c i" . consult-info)
+           ([remap Info-search] . consult-info)
+           ;; C-x bindings in `ctl-x-map'
+           ("C-x M-:" . consult-complex-command)     ;; orig. repeat-complex-command
+           ("C-x b" . consult-buffer)                ;; orig. switch-to-buffer
+           ("C-x 4 b" . consult-buffer-other-window) ;; orig. switch-to-buffer-other-window
+           ("C-x 5 b" . consult-buffer-other-frame)  ;; orig. switch-to-buffer-other-frame
+           ("C-x r b" . consult-bookmark)            ;; orig. bookmark-jump
+           ("C-x p b" . consult-project-buffer)      ;; orig. project-switch-to-buffer
+           ;; Custom M-# bindings for fast register access
+           ("M-#" . consult-register-load)
+           ("M-'" . consult-register-store)          ;; orig. abbrev-prefix-mark (unrelated)
+           ("C-M-#" . consult-register)
+           ;; Other custom bindings
+           ("M-y" . consult-yank-pop)                ;; orig. yank-pop
+           ;; M-g bindings in `goto-map'
+           ("M-g e" . consult-compile-error)
+           ("M-g f" . consult-flymake)               ;; Alternative: consult-flycheck
+           ("M-g g" . consult-goto-line)             ;; orig. goto-line
+           ("M-g M-g" . consult-goto-line)           ;; orig. goto-line
+           ("M-g o" . consult-outline)               ;; Alternative: consult-org-heading
+           ("M-g m" . consult-mark)
+           ("M-g k" . consult-global-mark)
+           ("M-g i" . consult-imenu)
+           ("M-g I" . consult-imenu-multi)
+           ;; M-s bindings in `search-map'
+           ("M-s d" . consult-find)
+           ("M-s D" . consult-locate)
+           ("M-s g" . consult-grep)
+           ("M-s G" . consult-git-grep)
+           ("M-s r" . consult-ripgrep)
+           ("M-s l" . consult-line)
+           ("M-s L" . consult-line-multi)
+           ("M-s k" . consult-keep-lines)
+           ("M-s u" . consult-focus-lines)
+           ;; Isearch integration
+           ("M-s e" . consult-isearch-history)
+           :map isearch-mode-map
+           ("M-e" . consult-isearch-history)         ;; orig. isearch-edit-string
+           ("M-s e" . consult-isearch-history)       ;; orig. isearch-edit-string
+           ("M-s l" . consult-line)                  ;; needed by consult-line to detect isearch
+           ("M-s L" . consult-line-multi)            ;; needed by consult-line to detect isearch
+           ;; Minibuffer history
+           :map minibuffer-local-map
+           ("M-s" . consult-history)                 ;; orig. next-matching-history-element
+           ("M-r" . consult-history))                ;; orig. previous-matching-history-element
 
-      ;; Enable automatic preview at point in the *Completions* buffer. This is
-      ;; relevant when you use the default completion UI.
-      :hook (completion-list-mode . consult-preview-at-point-mode)
+    ;; Enable automatic preview at point in the *Completions* buffer. This is
+    ;; relevant when you use the default completion UI.
+    :hook (completion-list-mode . consult-preview-at-point-mode)
 
-      ;; The :init configuration is always executed (Not lazy)
-      :init
+    ;; The :init configuration is always executed (Not lazy)
+    :init
 
-      ;; Optionally configure the register formatting. This improves the register
-      ;; preview for `consult-register', `consult-register-load',
-      ;; `consult-register-store' and the Emacs built-ins.
-      (setq register-preview-delay 0.5
-            register-preview-function #'consult-register-format)
+    ;; Optionally configure the register formatting. This improves the register
+    ;; preview for `consult-register', `consult-register-load',
+    ;; `consult-register-store' and the Emacs built-ins.
+    (setq register-preview-delay 0.5
+          register-preview-function #'consult-register-format)
 
-      ;; Optionally tweak the register preview window.
-      ;; This adds thin lines, sorting and hides the mode line of the window.
-      (advice-add #'register-preview :override #'consult-register-window)
+    ;; Optionally tweak the register preview window.
+    ;; This adds thin lines, sorting and hides the mode line of the window.
+    (advice-add #'register-preview :override #'consult-register-window)
 
-      ;; Use Consult to select xref locations with preview
-      (setq xref-show-xrefs-function #'consult-xref
-            xref-show-definitions-function #'consult-xref)
+    ;; Use Consult to select xref locations with preview
+    (setq xref-show-xrefs-function #'consult-xref
+          xref-show-definitions-function #'consult-xref)
 
-      ;; Configure other variables and modes in the :config section,
-      ;; after lazily loading the package.
-      :config
-      (consult-customize
-       consult-theme :preview-key '(:debounce 0.2 any)
-       consult-ripgrep consult-git-grep consult-grep
-       consult-bookmark consult-recent-file consult-xref
-       consult--source-bookmark consult--source-file-register
-       consult--source-recent-file consult--source-project-recent-file
-       ;; :preview-key "M-."
-       :preview-key '(:debounce 0.4 any)))
-  #+end_src
+    ;; Configure other variables and modes in the :config section,
+    ;; after lazily loading the package.
+    :config
+    (consult-customize
+     consult-theme :preview-key '(:debounce 0.2 any)
+     consult-ripgrep consult-git-grep consult-grep
+     consult-bookmark consult-recent-file consult-xref
+     consult--source-bookmark consult--source-file-register
+     consult--source-recent-file consult--source-project-recent-file
+     ;; :preview-key "M-."
+     :preview-key '(:debounce 0.4 any)))
+#+end_src
 
 ** orderless
 :PROPERTIES:
 :DESCRIPTION: Emacs completion style that matches multiple regexps in any order
 :REPO:     https://github.com/oantolin/orderless
 :END:
-  #+begin_src emacs-lisp
-    (use-package orderless
-      :straight t
-      :custom
-      (completion-styles '(orderless basic))
-      (completion-category-overrides '((file (styles basic partial-completion)))))
-  #+end_src
+#+begin_src emacs-lisp
+  (use-package orderless
+    :straight t
+    :custom
+    (completion-styles '(orderless basic))
+    (completion-category-overrides '((file (styles basic partial-completion)))))
+#+end_src
 ** nerd-icons-completion
 :PROPERTIES:
 :REPO:     https://github.com/rainstormstudio/nerd-icons-completion
@@ -299,12 +299,12 @@
 :REPO:     https://github.com/justbur/emacs-which-key
 :DESCRIPTION: Emacs package that displays available keybindings in popup
 :END:
-  #+begin_src emacs-lisp
-    (use-package which-key
-      :straight t
-      :config
-      (which-key-mode))
-  #+end_src
+#+begin_src emacs-lisp
+  (use-package which-key
+    :straight t
+    :config
+    (which-key-mode))
+#+end_src
 
 * Org Mode
 :PROPERTIES:
@@ -315,93 +315,93 @@
 :REPO:     https://github.com/integral-dw/org-superstar-mode
 :DESCRIPTION: Make org-mode stars a little more super
 :END:
-  #+begin_src emacs-lisp
-    (use-package org-superstar
-      :straight t
-      :hook
-      (org-mode . org-superstar-mode))
-  #+end_src
+#+begin_src emacs-lisp
+  (use-package org-superstar
+    :straight t
+    :hook
+    (org-mode . org-superstar-mode))
+#+end_src
 
 ** Org configuration
 #+begin_src emacs-lisp
-(defun amo/org-mode-hook ()
-  (org-indent-mode 1)
+  (defun amo/org-mode-hook ()
+    (org-indent-mode 1)
 
-  ;; For some reason org-mode doesn't respect visual-line-mode when it loads.
-  (visual-line-mode 0)
-  (visual-line-mode 1))
-(add-hook 'org-mode-hook 'amo/org-mode-hook)
+    ;; For some reason org-mode doesn't respect visual-line-mode when it loads.
+    (visual-line-mode 0)
+    (visual-line-mode 1))
+  (add-hook 'org-mode-hook 'amo/org-mode-hook)
 
-;; Disable checkdoc in org-mode source blocks
-(defun amo/disable-fylcheck-in-org-src-block ()
-  (setq-local flycheck-disabled-checkers '(emacs-lisp emacs-lisp-checkdoc)))
-(add-hook 'org-src-mode-hook 'amo/disable-fylcheck-in-org-src-block)
+  ;; Disable checkdoc in org-mode source blocks
+  (defun amo/disable-fylcheck-in-org-src-block ()
+    (setq-local flycheck-disabled-checkers '(emacs-lisp emacs-lisp-checkdoc)))
+  (add-hook 'org-src-mode-hook 'amo/disable-fylcheck-in-org-src-block)
 
-(global-set-key (kbd "C-c c") 'org-capture)
-(global-set-key (kbd "C-c a") 'org-agenda)
+  (global-set-key (kbd "C-c c") 'org-capture)
+  (global-set-key (kbd "C-c a") 'org-agenda)
 
-(setq org-list-demote-modify-bullet
-      '(("-" . "+") ("+" . "*") ("*" . "-"))
-      org-list-allow-alphabetical t
-      org-M-RET-may-split-line '((default . nil))
-      org-use-tag-inheritance nil
-      org-hide-emphasis-markers t
-      org-directory (dot-env-get 'ORG_DIRECTORY_PATH "~/.emacs.d/org-directory")
-      org-agenda-files (list org-directory)
-      org-sprint-file (concat org-directory "/sprints.org")
-      org-standup-file (concat org-directory "/standups.org")
-      org-issue-file (concat org-directory "/issues.org")
-      org-meeting-file (concat org-directory "/meeting-notes.org")
-      org-union-file (concat org-directory "/union-notes.org")
-      org-lists-file (concat org-directory "/lists.org")
-      org-archive-location (concat org-directory "/_archive/%s_archive::"))
+  (setq org-list-demote-modify-bullet
+        '(("-" . "+") ("+" . "*") ("*" . "-"))
+        org-list-allow-alphabetical t
+        org-M-RET-may-split-line '((default . nil))
+        org-use-tag-inheritance nil
+        org-hide-emphasis-markers t
+        org-directory (dot-env-get 'ORG_DIRECTORY_PATH "~/.emacs.d/org-directory")
+        org-agenda-files (list org-directory)
+        org-sprint-file (concat org-directory "/sprints.org")
+        org-standup-file (concat org-directory "/standups.org")
+        org-issue-file (concat org-directory "/issues.org")
+        org-meeting-file (concat org-directory "/meeting-notes.org")
+        org-union-file (concat org-directory "/union-notes.org")
+        org-lists-file (concat org-directory "/lists.org")
+        org-archive-location (concat org-directory "/_archive/%s_archive::"))
 
-(setq org-capture-templates
-      '(("s"
-         "Sprint"
-         entry
-         (file org-sprint-file)
-         "* %? %^G \nDEADLINE: %^t SCHEDULED: %^t %^{SCOPED_STORY_POINTS}p\n\n** Issues\n" :empty-lines-after 1 :prepend t)
-        ("p"
-         "Sprint Issue"
-         entry
-         (file org-sprint-file)
-         "*** %? %^G \n %^{STORY_POINTS}p %^{ORIGINALLY_SCOPED}p %^{COMPLETED}p" :empty-lines 1 :prepend t)
-        ("i"
-         "Issue Note"
-         entry
-         (file+headline org-issue-file "Issue Items")
-         "** %? %^G \n%T \n%i \n" :empty-lines 1 :prepend t)
-        ("t"
-         "Standup Note"
-         entry
-         (file+headline org-standup-file "Standup Items")
-         "** %T Notes:\n%?\n%i\n" :empty-lines-after 1 :prepend t)
-        ("m"
-         "Meeting Note"
-         entry
-         (file+headline org-meeting-file "Meeting Items")
-         "** %?\n%T\n%i\n" :empty-lines-after 1 :prepend t)
-        ("u"
-         "Union Note"
-         entry
-         (file+headline org-union-file "Meeting Items")
-         "** %T %?\n%i\n" :empty-lines-after 1)
-        ("e"
-         "Emacs Idea"
-         checkitem
-         (file+headline org-lists-file "Emacs Ideas")
-         "[ ] %?" :prepend t)
-        ("k"
-         "Keyboard Idea"
-         checkitem
-         (file+headline org-lists-file "Keyboard Ideas")
-         "[ ] %?" :prepend t)
-        ("r"
-         "Interesting Albums"
-         item
-         (file+headline org-lists-file "Interesting Albums")
-         "%?")))
+  (setq org-capture-templates
+        '(("s"
+           "Sprint"
+           entry
+           (file org-sprint-file)
+           "* %? %^G \nDEADLINE: %^t SCHEDULED: %^t %^{SCOPED_STORY_POINTS}p\n\n** Issues\n" :empty-lines-after 1 :prepend t)
+          ("p"
+           "Sprint Issue"
+           entry
+           (file org-sprint-file)
+           "*** %? %^G \n %^{STORY_POINTS}p %^{ORIGINALLY_SCOPED}p %^{COMPLETED}p" :empty-lines 1 :prepend t)
+          ("i"
+           "Issue Note"
+           entry
+           (file+headline org-issue-file "Issue Items")
+           "** %? %^G \n%T \n%i \n" :empty-lines 1 :prepend t)
+          ("t"
+           "Standup Note"
+           entry
+           (file+headline org-standup-file "Standup Items")
+           "** %T Notes:\n%?\n%i\n" :empty-lines-after 1 :prepend t)
+          ("m"
+           "Meeting Note"
+           entry
+           (file+headline org-meeting-file "Meeting Items")
+           "** %?\n%T\n%i\n" :empty-lines-after 1 :prepend t)
+          ("u"
+           "Union Note"
+           entry
+           (file+headline org-union-file "Meeting Items")
+           "** %T %?\n%i\n" :empty-lines-after 1)
+          ("e"
+           "Emacs Idea"
+           checkitem
+           (file+headline org-lists-file "Emacs Ideas")
+           "[ ] %?" :prepend t)
+          ("k"
+           "Keyboard Idea"
+           checkitem
+           (file+headline org-lists-file "Keyboard Ideas")
+           "[ ] %?" :prepend t)
+          ("r"
+           "Interesting Albums"
+           item
+           (file+headline org-lists-file "Interesting Albums")
+           "%?")))
 #+end_src
 
 * Other Useful Packages
@@ -410,573 +410,569 @@
 :REPO:     [[https://github.com/abo-abo/ace-window]]
 :DESCRIPTION: Quickly switch windows in Emacs
 :END:
-  #+begin_src emacs-lisp
-    (use-package ace-window
-      :straight t
-      :bind
-      (("C-o" . ace-window)
-       ("C-x o" . ace-window))
-      :config
-      (defvar aw-dispatch-always nil)
-      (setq aw-scope 'frame))
-  #+end_src
+#+begin_src emacs-lisp
+  (use-package ace-window
+    :straight t
+    :bind
+    (("C-o" . ace-window)
+     ("C-x o" . ace-window))
+    :config
+    (defvar aw-dispatch-always nil)
+    (setq aw-scope 'frame))
+#+end_src
 ** aggressive-indent-mode
 :PROPERTIES:
 :REPO:     https://github.com/Malabarba/aggressive-indent-mode
 :DESCRIPTION: Emacs minor mode that keeps your code always indented
 :END:
-  #+begin_src emacs-lisp
-    (use-package aggressive-indent
-      :straight t
-      :config
-      (global-aggressive-indent-mode 1)
-      (add-to-list 'aggressive-indent-excluded-modes 'html-mode)
-      (add-to-list 'aggressive-indent-excluded-modes 'python-ts-mode))
-  #+end_src
+#+begin_src emacs-lisp
+  (use-package aggressive-indent
+    :straight t
+    :config
+    (global-aggressive-indent-mode 1)
+    (add-to-list 'aggressive-indent-excluded-modes 'html-mode)
+    (add-to-list 'aggressive-indent-excluded-modes 'python-ts-mode))
+#+end_src
 ** Avy
 :PROPERTIES:
 :REPO:     [[https://github.com/abo-abo/avy]]
 :DESCRIPTION: Jumping to visible text using a char-based decision tree
 :END:
-  #+begin_src emacs-lisp
-    (use-package avy
-      :straight t
-      :bind (("C-'" . avy-goto-char)
-             ("C-;" . avy-goto-char-2)
-             :map org-mode-map
-             ("C-'" . nil)))
-  #+end_src
+#+begin_src emacs-lisp
+  (use-package avy
+    :straight t
+    :bind (("C-'" . avy-goto-char)
+           ("C-;" . avy-goto-char-2)
+           :map org-mode-map
+           ("C-'" . nil)))
+#+end_src
 ** buffer-move
 :PROPERTIES:
 :REPO:     https://github.com/lukhas/buffer-move
 :DESCRIPTION: Easily swap buffers
 :END:
-  #+begin_src emacs-lisp
-    (use-package buffer-move
-      :straight t
-      :bind
-      (("<C-S-up>" . buf-move-up)
-       ("<C-S-down>" . buf-move-down)
-       ("<C-S-left>" . buf-move-left)
-       ("<C-S-right>" .  buf-move-right)
-       :map org-mode-map
-       ("<C-S-up>" . buf-move-up)
-       ("<C-S-down>" . buf-move-down)
-       ("<C-S-left>" . buf-move-left)
-       ("<C-S-right>" . buf-move-right)))
-  #+end_src
+#+begin_src emacs-lisp
+  (use-package buffer-move
+    :straight t
+    :bind
+    (("<C-S-up>" . buf-move-up)
+     ("<C-S-down>" . buf-move-down)
+     ("<C-S-left>" . buf-move-left)
+     ("<C-S-right>" .  buf-move-right)
+     :map org-mode-map
+     ("<C-S-up>" . buf-move-up)
+     ("<C-S-down>" . buf-move-down)
+     ("<C-S-left>" . buf-move-left)
+     ("<C-S-right>" . buf-move-right)))
+#+end_src
 ** Crux
 :PROPERTIES:
 :REPO:     https://github.com/bbatsov/crux
 :DOCS:     [[https://emacsredux.com/blog/2016/01/30/crux/]]
 :DESCRIPTION: A Collection of Ridiculously Useful eXtensions for Emacs
 :END:
-  #+begin_src emacs-lisp
-    (use-package crux
-      :straight t
-      :bind
-      (("s-o" . crux-smart-open-line-above)
-       ("M-o" . crux-smart-open-line)
-       ("s-r" . crux-recentf-find-file)
-       ("C-c D" . crux-delete-file-and-buffer)
-       ("C-c d" . crux-duplicate-current-line-or-region)
-       ("C-c M-d" . crux-duplicate-and-comment-current-line-or-region)
-       ("C-c r" . crux-rename-file-and-buffer)
-       ("s-j" . crux-top-join-line)
-       ("s-k" . crux-kill-whole-line)
-       ("<C-backspace>" . crux-kill-line-backwards)))
-  #+end_src
+#+begin_src emacs-lisp
+  (use-package crux
+    :straight t
+    :bind
+    (("s-o" . crux-smart-open-line-above)
+     ("M-o" . crux-smart-open-line)
+     ("s-r" . crux-recentf-find-file)
+     ("C-c D" . crux-delete-file-and-buffer)
+     ("C-c d" . crux-duplicate-current-line-or-region)
+     ("C-c M-d" . crux-duplicate-and-comment-current-line-or-region)
+     ("C-c r" . crux-rename-file-and-buffer)
+     ("s-j" . crux-top-join-line)
+     ("s-k" . crux-kill-whole-line)
+     ("<C-backspace>" . crux-kill-line-backwards)))
+#+end_src
 
 ** exec-path-from-shell
 :PROPERTIES:
 :REPO:     https://github.com/purcell/exec-path-from-shell
 :DESCRIPTION: Make Emacs use the $PATH set up by the user's shell
 :END:
-  #+begin_src emacs-lisp
-    (when (memq window-system '(mac ns)) ;; MacOS
-             (use-package exec-path-from-shell
-               :straight t
-               :config
-               (setq exec-path-from-shell-arguments nil) ; non-interactive, i.e. .zshenv not .zshrc
-               (exec-path-from-shell-initialize)))
-    (when (memq window-system '(x)) ;; Linux
-             (use-package exec-path-from-shell
-               :straight t
-               :config
-               (exec-path-from-shell-initialize)))
-  #+end_src
+#+begin_src emacs-lisp
+  (when (memq window-system '(mac ns)) ;; MacOS
+           (use-package exec-path-from-shell
+             :straight t
+             :config
+             (setq exec-path-from-shell-arguments nil) ; non-interactive, i.e. .zshenv not .zshrc
+             (exec-path-from-shell-initialize)))
+  (when (memq window-system '(x)) ;; Linux
+           (use-package exec-path-from-shell
+             :straight t
+             :config
+             (exec-path-from-shell-initialize)))
+#+end_src
 ** expand-region
 :PROPERTIES:
 :REPO:     https://github.com/magnars/expand-region.el
 :DESCRIPTION: Emacs extension to increase selected region by semantic units.
 :END:
-  #+begin_src emacs-lisp
-    (use-package expand-region
-      :straight t
-      :bind (("C-=" . er/expand-region)
-             ("C--" . er/contract-region)))
-  #+end_src
+#+begin_src emacs-lisp
+  (use-package expand-region
+    :straight t
+    :bind (("C-=" . er/expand-region)
+           ("C--" . er/contract-region)))
+#+end_src
 ** Eyebrowse
 :PROPERTIES:
 :REPO:     https://depp.brause.cc/eyebrowse/
 :DESCRIPTION: A simple-minded way of managing window configs in Emacs
 :END:
-  #+begin_src emacs-lisp
-    (use-package eyebrowse
-      :straight t
-      :config
-      (eyebrowse-mode))
-  #+end_src
+#+begin_src emacs-lisp
+  (use-package eyebrowse
+    :straight t
+    :config
+    (eyebrowse-mode))
+#+end_src
 ** gptel
 :PROPERTIES:
 :REPO:     https://github.com/karthink/gptel
 :DESCRIPTION: A no-frills ChatGPT client for Emacs
 :END:
-  #+begin_src emacs-lisp
-    (use-package gptel
-      :straight t
-      :config
-      (setq gptel-api-key (dot-env-get 'GPTEL_API_KEY)
-            gptel-default-mode #'org-mode))
-  #+end_src
+#+begin_src emacs-lisp
+  (use-package gptel
+    :straight t
+    :config
+    (setq gptel-api-key (dot-env-get 'GPTEL_API_KEY)
+          gptel-default-mode #'org-mode))
+#+end_src
 
 ** Idle Highlight Mode
 :PROPERTIES:
 :REPO:     https://codeberg.org/ideasman42/emacs-idle-highlight-mode
 :DESCRIPTION: Simple symbol highlighting package for Emacs
 :END:
-  #+begin_src emacs-lisp
-    (use-package idle-highlight-mode
-      :straight t
-      :config
-      (setq idle-highlight-idle-time 0.2
-            idle-highlight-exclude-point t)
-      :hook
-      ((prog-mode text-mode) . idle-highlight-mode))
+#+begin_src emacs-lisp
+  (use-package idle-highlight-mode
+    :straight t
+    :config
+    (setq idle-highlight-idle-time 0.2
+          idle-highlight-exclude-point t)
+    :hook
+    ((prog-mode text-mode) . idle-highlight-mode))
 
-  #+end_src
+#+end_src
 
 ** jump-char
 :PROPERTIES:
 :REPO:     https://github.com/lewang/jump-char
 :DESCRIPTION: Navigation by character occurrence
 :END:
-  #+begin_src emacs-lisp
-    (use-package jump-char
-      :straight (:host github :repo "lewang/jump-char"
-                   :branch "master")
-      :bind (("M-n" . jump-char-forward)
-             ("M-N" . jump-char-backward)))
-  #+end_src
+#+begin_src emacs-lisp
+  (use-package jump-char
+    :straight (:host github :repo "lewang/jump-char"
+                 :branch "master")
+    :bind (("M-n" . jump-char-forward)
+           ("M-N" . jump-char-backward)))
+#+end_src
 ** minions
 :PROPERTIES:
 :REPO:     https://github.com/tarsius/minions
 :DESCRIPTION: A minor-mode menu for the mode line
 :END:
-- Repo :: https://github.com/tarsius/minions
-  #+begin_src emacs-lisp
-    (use-package minions
-      :straight t
-      :config
-      (minions-mode 1))
-  #+end_src
+#+begin_src emacs-lisp
+  (use-package minions
+    :straight t
+    :config
+    (minions-mode 1))
+#+end_src
 ** package-lint
 :PROPERTIES:
 :REPO:     https://github.com/purcell/package-lint
 :DESCRIPTION: A linting library for elisp package metadata
 :END:
-  #+begin_src emacs-lisp
-    (use-package package-lint
-      :straight t)
-  #+end_src
+#+begin_src emacs-lisp
+  (use-package package-lint
+    :straight t)
+#+end_src
 ** Paredit
 :PROPERTIES:
 :REPO:     https://github.com/emacsmirror/paredit/blob/master/paredit.el
 :DOCS:     https://www.emacswiki.org/emacs/ParEdit, https://wikemacs.org/wiki/Paredit-mode
 :DESCRIPTION: A minor mode for performing structured editing of S-expression data
 :END:
-  #+begin_src emacs-lisp
-    (use-package paredit
-      :straight t
-      :hook
-      ((lisp-mode . paredit-mode)
-       (emacs-lisp-mode . paredit-mode)
-       (clojure-mode . paredit-mode)
-       (clojurescript-mode . paredit-mode)
-       (clojurec-mode . paredit-mode)
-       (cider-repl-mode . paredit-mode)))
-  #+end_src
+#+begin_src emacs-lisp
+  (use-package paredit
+    :straight t
+    :hook
+    ((lisp-mode . paredit-mode)
+     (emacs-lisp-mode . paredit-mode)
+     (clojure-mode . paredit-mode)
+     (clojurescript-mode . paredit-mode)
+     (clojurec-mode . paredit-mode)
+     (cider-repl-mode . paredit-mode)))
+#+end_src
 ** Popper
 :PROPERTIES:
 :REPO:     https://github.com/karthink/popper
 :DESCRIPTION: Emacs minor-mode to summon and dismiss buffers easily
 :END:
-  #+begin_src emacs-lisp
-    (use-package popper
-      :straight t
-      :bind (("s-3"   . popper-toggle-latest)
-             ("s-4"   . popper-cycle)
-             ("s-5" . popper-toggle-type))
-      :init
-      (setq popper-reference-buffers
-            '("\\*format-all-errors\\*"
-              "\\*flycheck errors\\*"
-              "\\*cider-error\\*"
-              "\\*cider-scratch\\*"
-              "\\*Messages\\*"
-              "\\*Warnings\\*"
-              "\\*Compile-Log\\*"
-              "\\*Completions\\*"
-              "\\*Backtrace\\*"
-              "\\*TeX Help\\*"
-              "Output\\*$"
-              "\\*Async Shell Command\\*"
-              "\\*eldoc\\*"
-              "^pop-"
-              help-mode
-              compilation-mode)
-            popper-mode-line ""
+#+begin_src emacs-lisp
+  (use-package popper
+    :straight t
+    :bind (("s-3"   . popper-toggle-latest)
+           ("s-4"   . popper-cycle)
+           ("s-5" . popper-toggle-type))
+    :init
+    (setq popper-reference-buffers
+          '("\\*format-all-errors\\*"
+            "\\*flycheck errors\\*"
+            "\\*cider-error\\*"
+            "\\*cider-scratch\\*"
+            "\\*Messages\\*"
+            "\\*Warnings\\*"
+            "\\*Compile-Log\\*"
+            "\\*Completions\\*"
+            "\\*Backtrace\\*"
+            "\\*TeX Help\\*"
+            "Output\\*$"
+            "\\*Async Shell Command\\*"
+            "\\*eldoc\\*"
+            "^pop-"
+            help-mode
+            compilation-mode)
+          popper-mode-line ""
 
-            ;; Make popper buffers 1/2 window height
-            popper-window-height (lambda (win)
-                                   (fit-window-to-buffer
-                                    win
-                                    (floor (frame-height) 2))))
-      (popper-mode +1)
-      (popper-echo-mode +1)
-      (defun amo/add-popper-status-to-modeline ()
-        "If buffer is a popper-type buffer, display POP in the modeline,
-      in a doom-modeline friendly way"
-        (if (popper-display-control-p (buffer-name))
-            (add-to-list 'mode-line-misc-info "POP")
-          (setq mode-line-misc-info (remove "POP" mode-line-misc-info))))
-      (add-hook 'buffer-list-update-hook 'amo/add-popper-status-to-modeline))
-  #+end_src
+          ;; Make popper buffers 1/2 window height
+          popper-window-height (lambda (win)
+                                 (fit-window-to-buffer
+                                  win
+                                  (floor (frame-height) 2))))
+    (popper-mode +1)
+    (popper-echo-mode +1)
+    (defun amo/add-popper-status-to-modeline ()
+      "If buffer is a popper-type buffer, display POP in the modeline,
+    in a doom-modeline friendly way"
+      (if (popper-display-control-p (buffer-name))
+          (add-to-list 'mode-line-misc-info "POP")
+        (setq mode-line-misc-info (remove "POP" mode-line-misc-info))))
+    (add-hook 'buffer-list-update-hook 'amo/add-popper-status-to-modeline))
+#+end_src
 ** Projectile
 :PROPERTIES:
 :REPO:     https://github.com/bbatsov/projectile
 :DOCS:     https://docs.projectile.mx/projectile/index.html
 :DESCRIPTION: Project navigation and management library for Emacs
 :END:
-  #+begin_src emacs-lisp
-    (use-package projectile
-      :straight t
-      :config
-      (projectile-global-mode)
-      :bind (("s-p" . projectile-command-map)
-             ("C-c p" . projectile-command-map)))
-  #+end_src
+#+begin_src emacs-lisp
+  (use-package projectile
+    :straight t
+    :config
+    (projectile-global-mode)
+    :bind (("s-p" . projectile-command-map)
+           ("C-c p" . projectile-command-map)))
+#+end_src
 ** rainbow-delimiters
 :PROPERTIES:
 :REPO:     https://github.com/Fanael/rainbow-delimiters
 :DESCRIPTION: A "rainbow parentheses"-like mode which highlights delimiters
 :END:
-  #+begin_src emacs-lisp
-    (use-package rainbow-delimiters
-      :straight t
-      :hook (prog-mode . rainbow-delimiters-mode))
-  #+end_src
+#+begin_src emacs-lisp
+  (use-package rainbow-delimiters
+    :straight t
+    :hook (prog-mode . rainbow-delimiters-mode))
+#+end_src
 ** Transpose Frame
 :PROPERTIES:
 :DOCS:     https://www.emacswiki.org/emacs/TransposeFrame
 :DESCRIPTION: Interactive functions to transpose window arrangement in current frame
 :END:
-  #+begin_src emacs-lisp
-    (use-package transpose-frame
-      :straight t
-      :bind (("C->" . transpose-frame)))
-  #+end_src
+#+begin_src emacs-lisp
+  (use-package transpose-frame
+    :straight t
+    :bind (("C->" . transpose-frame)))
+#+end_src
 ** undo-tree
 :PROPERTIES:
 :REPO:     https://github.com/apchamberlain/undo-tree.el
 :DOCS:     https://www.emacswiki.org/emacs/UndoTree
 :DESCRIPTION: Visualize Emacs undo information as a graphical tree and navigate to previous states
 :END:
-  #+begin_src emacs-lisp
-    (use-package undo-tree
-      :straight t
-      :config
-      (global-undo-tree-mode)
-      (setq undo-tree-history-directory-alist `((".*" . ,temporary-file-directory))
-            undo-tree-enable-undo-in-region t
-            undo-tree-auto-save-history t)
-      :diminish
-      (undo-tree-mode))
-  #+end_src
+#+begin_src emacs-lisp
+  (use-package undo-tree
+    :straight t
+    :config
+    (global-undo-tree-mode)
+    (setq undo-tree-history-directory-alist `((".*" . ,temporary-file-directory))
+          undo-tree-enable-undo-in-region t
+          undo-tree-auto-save-history t)
+    :diminish
+    (undo-tree-mode))
+#+end_src
 ** YASnippet
 :PROPERTIES:
 :REPO:     https://github.com/joaotavora/yasnippet
 :DESCRIPTION: A template system for Emacs
 :END:
-  #+begin_src emacs-lisp
-    (use-package yasnippet
-      :straight t
-      :hook ((python-ts-mode . (lambda () (yas-activate-extra-mode 'python-mode))))
-      :config
-      (yas-global-mode)
-      (setq yas-snippet-dirs
-            '("~/.emacs.d/snippets"))
-      (use-package yasnippet-snippets
-        :straight t))
-  #+end_src
-
+#+begin_src emacs-lisp
+  (use-package yasnippet
+    :straight t
+    :hook ((python-ts-mode . (lambda () (yas-activate-extra-mode 'python-mode))))
+    :config
+    (yas-global-mode)
+    (setq yas-snippet-dirs
+          '("~/.emacs.d/snippets"))
+    (use-package yasnippet-snippets
+      :straight t))
+#+end_src
 
 * Custom Bindings
-   #+begin_src emacs-lisp
-     ;; Set prefix key ("C-z")
-     ;; "C-z" is the custom prefix key
-     (define-prefix-command 'z-map)
-     (global-set-key (kbd "C-z") 'z-map)
+#+begin_src emacs-lisp
+  ;; Set prefix key ("C-z")
+  ;; "C-z" is the custom prefix key
+  (define-prefix-command 'z-map)
+  (global-set-key (kbd "C-z") 'z-map)
 
-     ;; Open settings.org (this file)
-     (defun amo/open-settings-file ()
-       "Open settings.org"
-       (interactive)
-       (find-file "~/.emacs.d/settings.org"))
-     (define-key z-map (kbd "s") #'amo/open-settings-file)
+  ;; Open settings.org (this file)
+  (defun amo/open-settings-file ()
+    "Open settings.org"
+    (interactive)
+    (find-file "~/.emacs.d/settings.org"))
+  (define-key z-map (kbd "s") #'amo/open-settings-file)
 
-     ;; Reload config
-     (defun amo/reload-config ()
-       "Reload configuration"
-       (interactive)
-       ;; (dot-env-load)
-       (load-file "~/.emacs.d/init.el"))
-     (define-key z-map (kbd "r") #'amo/reload-config)
+  ;; Reload config
+  (defun amo/reload-config ()
+    "Reload configuration"
+    (interactive)
+    ;; (dot-env-load)
+    (load-file "~/.emacs.d/init.el"))
+  (define-key z-map (kbd "r") #'amo/reload-config)
 
-     ;; Restart Emacs
-     (define-key z-map (kbd "C-z r") #'restart-emacs)
+  ;; Restart Emacs
+  (define-key z-map (kbd "C-z r") #'restart-emacs)
 
-     ;; Open customize-themes
-     (define-key z-map (kbd "t") #'customize-themes)
+  ;; Open customize-themes
+  (define-key z-map (kbd "t") #'customize-themes)
 
-     ;; Start eshell
-     (define-key z-map (kbd "e") #'eshell)
+  ;; Start eshell
+  (define-key z-map (kbd "e") #'eshell)
 
-     ;; Open gptel
-     (define-key z-map (kbd "g") #'gptel)
+  ;; Open gptel
+  (define-key z-map (kbd "g") #'gptel)
 
-     ;; Open notes directory
-     (defun amo/open-notes-file ()
-       "Open notes file"
-       (interactive)
-       (find-file org-directory))
-     (define-key z-map (kbd "n") #'amo/open-notes-file)
+  ;; Open notes directory
+  (defun amo/open-notes-file ()
+    "Open notes file"
+    (interactive)
+    (find-file org-directory))
+  (define-key z-map (kbd "n") #'amo/open-notes-file)
 
-     ;; One line scroll
-     (global-set-key (kbd "C-s-p") #'scroll-down-line)
-     (global-set-key (kbd "C-s-n") #'scroll-up-line)
+  ;; One line scroll
+  (global-set-key (kbd "C-s-p") #'scroll-down-line)
+  (global-set-key (kbd "C-s-n") #'scroll-up-line)
 
-     ;; Move point to other window immediately after split
-     (defun amo/split-window-below ()
-       "Create a new window below and move point to new window."
-       (interactive)
-       (split-window-below)
-       (other-window 1))
+  ;; Move point to other window immediately after split
+  (defun amo/split-window-below ()
+    "Create a new window below and move point to new window."
+    (interactive)
+    (split-window-below)
+    (other-window 1))
 
-     (defun amo/split-window-horizontally()
-       "Create a new window to the right and move point to new window."
-       (interactive)
-       (split-window-horizontally)
-       (other-window 1))
+  (defun amo/split-window-horizontally()
+    "Create a new window to the right and move point to new window."
+    (interactive)
+    (split-window-horizontally)
+    (other-window 1))
 
-     (global-set-key (kbd "C-x 2") #'amo/split-window-below)
-     (global-set-key (kbd "C-x 3") #'amo/split-window-horizontally)
+  (global-set-key (kbd "C-x 2") #'amo/split-window-below)
+  (global-set-key (kbd "C-x 3") #'amo/split-window-horizontally)
 
-     ;; Un-highlight region after mark jump
-     (defun amo/exchange-point-and-mark ()
-       "Deactivates mark after exchanging point and mark"
-       (interactive)
-       (exchange-point-and-mark)
-       (deactivate-mark))
-     (global-set-key (kbd "C-x C-x") #'amo/exchange-point-and-mark)
+  ;; Un-highlight region after mark jump
+  (defun amo/exchange-point-and-mark ()
+    "Deactivates mark after exchanging point and mark"
+    (interactive)
+    (exchange-point-and-mark)
+    (deactivate-mark))
+  (global-set-key (kbd "C-x C-x") #'amo/exchange-point-and-mark)
 
-     ;; Kill current buffer and delete current window
-     (global-set-key (kbd "C-x K") #'kill-buffer-and-window)
+  ;; Kill current buffer and delete current window
+  (global-set-key (kbd "C-x K") #'kill-buffer-and-window)
 
-     ;; Transpose chars and words backwards
-     (defun amo/transpose-chars-backwards ()
-       "Just like transpose-chars but goes the other way"
-       (interactive)
-       (transpose-chars -1))
-     (global-set-key (kbd "C-S-t") #'amo/transpose-chars-backwards)
-     (defun amo/transpose-words-backwards ()
-       "Just like transpose-words but goes the other way"
-       (interactive)
-       (transpose-words -1))
-     (global-set-key (kbd "M-T") #'amo/transpose-words-backwards) ;; not sure why "M-S-t" doesn't work here
+  ;; Transpose chars and words backwards
+  (defun amo/transpose-chars-backwards ()
+    "Just like transpose-chars but goes the other way"
+    (interactive)
+    (transpose-chars -1))
+  (global-set-key (kbd "C-S-t") #'amo/transpose-chars-backwards)
+  (defun amo/transpose-words-backwards ()
+    "Just like transpose-words but goes the other way"
+    (interactive)
+    (transpose-words -1))
+  (global-set-key (kbd "M-T") #'amo/transpose-words-backwards) ;; not sure why "M-S-t" doesn't work here
 
-     ;; Move char after point to end of next word
-     (defun amo/transpose-char-to-end-of-next-word ()
-       "Move char at point to the end of the next word.
-     Use case is to push closing parentheses out to contain subsequent characters
-     when a function is typed and the closing parenthesis is automatically added.
-     Skips over periods, quotes, and closing parentheses."
-       (interactive)
+  ;; Move char after point to end of next word
+  (defun amo/transpose-char-to-end-of-next-word ()
+    "Move char at point to the end of the next word.
+  Use case is to push closing parentheses out to contain subsequent characters
+  when a function is typed and the closing parenthesis is automatically added.
+  Skips over periods, quotes, and closing parentheses."
+    (interactive)
 
-       ;; helpers
-       (defun amo/should-move-forward-one-char (c)
-         (or
-          (char-equal (following-char) ?\")
-          (char-equal (following-char) ?\))))
-       (defun amo/should-move-forward-one-word (c)
-         (char-equal (following-char) ?.))
-       (defun amo/should-move (c)
-         (or
-          (amo/should-move-forward-one-char c)
-          (amo/should-move-forward-one-word c)))
+    ;; helpers
+    (defun amo/should-move-forward-one-char (c)
+      (or
+       (char-equal (following-char) ?\")
+       (char-equal (following-char) ?\))))
+    (defun amo/should-move-forward-one-word (c)
+      (char-equal (following-char) ?.))
+    (defun amo/should-move (c)
+      (or
+       (amo/should-move-forward-one-char c)
+       (amo/should-move-forward-one-word c)))
 
-       (forward-char)
-       (let ((start (point))
-             (end nil))
-         (save-excursion
-           (forward-word)
-           (while (amo/should-move (following-char))
-             (if (amo/should-move-forward-one-char (following-char))
-                 (forward-char)
-               (forward-word)))
-           (setq end (point)))
-         (transpose-subr 'forward-char (- end start)))
-       (backward-char))
-     (global-set-key (kbd "C-S-f") #'amo/transpose-char-to-end-of-next-word)
+    (forward-char)
+    (let ((start (point))
+          (end nil))
+      (save-excursion
+        (forward-word)
+        (while (amo/should-move (following-char))
+          (if (amo/should-move-forward-one-char (following-char))
+              (forward-char)
+            (forward-word)))
+        (setq end (point)))
+      (transpose-subr 'forward-char (- end start)))
+    (backward-char))
+  (global-set-key (kbd "C-S-f") #'amo/transpose-char-to-end-of-next-word)
 
-     ;; Move lines up and down
-     (defmacro amo/save-column (&rest body)
-       `(let ((column (current-column)))
-          (unwind-protect
-              (progn ,@body)
-            (move-to-column column))))
-     (put 'save-column 'lisp-indent-function 0)
+  ;; Move lines up and down
+  (defmacro amo/save-column (&rest body)
+    `(let ((column (current-column)))
+       (unwind-protect
+           (progn ,@body)
+         (move-to-column column))))
+  (put 'save-column 'lisp-indent-function 0)
 
-     (defun amo/move-line-up ()
-       (interactive)
-       (amo/save-column
-        (transpose-lines 1)
-        (forward-line -2)))
+  (defun amo/move-line-up ()
+    (interactive)
+    (amo/save-column
+     (transpose-lines 1)
+     (forward-line -2)))
 
-     (defun amo/move-line-down ()
-       (interactive)
-       (amo/save-column
-        (forward-line 1)
-        (transpose-lines 1)
-        (forward-line -1)))
-     (global-set-key (kbd "M-<down>") #'amo/move-line-down)
-     (global-set-key (kbd "M-<up>") #'amo/move-line-up)
-  #+end_src
+  (defun amo/move-line-down ()
+    (interactive)
+    (amo/save-column
+     (forward-line 1)
+     (transpose-lines 1)
+     (forward-line -1)))
+  (global-set-key (kbd "M-<down>") #'amo/move-line-down)
+  (global-set-key (kbd "M-<up>") #'amo/move-line-up)
+#+end_src
 
 * General Configuration
-   #+begin_src emacs-lisp
-     (set-frame-font amo/font nil t)
-     (set-face-attribute 'fixed-pitch nil :font amo/font)
-     (set-face-attribute 'variable-pitch nil :font amo/font)
-     (set-face-attribute 'default nil :height amo/base-font-size)
-     (desktop-save-mode 1)
-     (fset 'yes-or-no-p 'y-or-n-p)
-     (blink-cursor-mode 0)
-     (electric-pair-mode 1)
-     (delete-selection-mode 1)
-     (global-hl-line-mode t)
-     (recentf-mode 1)
-     (whitespace-mode -1)
-     (global-display-line-numbers-mode 1)
+#+begin_src emacs-lisp
+  (set-frame-font amo/font nil t)
+  (set-face-attribute 'fixed-pitch nil :font amo/font)
+  (set-face-attribute 'variable-pitch nil :font amo/font)
+  (set-face-attribute 'default nil :height amo/base-font-size)
+  (desktop-save-mode 1)
+  (fset 'yes-or-no-p 'y-or-n-p)
+  (blink-cursor-mode 0)
+  (electric-pair-mode 1)
+  (delete-selection-mode 1)
+  (global-hl-line-mode t)
+  (recentf-mode 1)
+  (whitespace-mode -1)
+  (global-display-line-numbers-mode 1)
 
-     (setq scroll-step 1
-           recentf-max-menu-items 25
-           recentf-max-saved-items 25
-           save-interprogram-paste-before-kill t
-           auto-mode-alist (append '(("\\.cl$" . lisp-mode))
-                                   auto-mode-alist)
-           inferior-lisp-program "/usr/local/bin/sbcl"
-           font-latex-fontify-script nil
-           auto-save-default nil
-           create-lockfiles nil
-           delete-by-moving-to-trash t
-           dired-kill-when-opening-new-dired-buffer t
-           comment-column 64
+  (setq scroll-step 1
+        recentf-max-menu-items 25
+        recentf-max-saved-items 25
+        save-interprogram-paste-before-kill t
+        auto-mode-alist (append '(("\\.cl$" . lisp-mode))
+                                auto-mode-alist)
+        inferior-lisp-program "/usr/local/bin/sbcl"
+        font-latex-fontify-script nil
+        auto-save-default nil
+        create-lockfiles nil
+        delete-by-moving-to-trash t
+        dired-kill-when-opening-new-dired-buffer t
+        comment-column 64
 
-           ;; Save backups to a central location
-           make-backup-files t
-           backup-directory-alist '(("." . "~/.emacs.d/backups"))
-           delete-old-versions -1
-           version-control t
-           vc-make-backup-files t
-           auto-save-file-name-transforms '((".*" "~/.emacs.d/auto-save-list/" t)))
+        ;; Save backups to a central location
+        make-backup-files t
+        backup-directory-alist '(("." . "~/.emacs.d/backups"))
+        delete-old-versions -1
+        version-control t
+        vc-make-backup-files t
+        auto-save-file-name-transforms '((".*" "~/.emacs.d/auto-save-list/" t)))
 
-     (setq-default indent-tabs-mode nil
-                   org-catch-invisible-edits 'show
-                   global-tab-line-mode nil
-                   tab-line-mode nil
-                   tab-bar-mode nil
-                   line-spacing 0.3
-                   fill-column 100
-                   sentence-end-double-space nil
-                   visual-line-mode t
-                   whitespace-line-column 110)
+  (setq-default indent-tabs-mode nil
+                org-catch-invisible-edits 'show
+                global-tab-line-mode nil
+                tab-line-mode nil
+                tab-bar-mode nil
+                line-spacing 0.3
+                fill-column 100
+                sentence-end-double-space nil
+                visual-line-mode t
+                whitespace-line-column 110)
 
 
-     ;; Set up flyspell
-     (dolist (hook '(text-mode-hook))
-       (add-hook hook (lambda ()
-                        (flyspell-mode 1)
-                        (define-key flyspell-mode-map (kbd "C-;") nil))))
+  ;; Set up flyspell
+  (dolist (hook '(text-mode-hook))
+    (add-hook hook (lambda ()
+                     (flyspell-mode 1)
+                     (define-key flyspell-mode-map (kbd "C-;") nil))))
 
-     ;; Set the right mode when you create a buffer
-     (setq-default major-mode
-                   (lambda () (if buffer-file-name
-                                  (fundamental-mode)
-                                (let ((buffer-file-name (buffer-name)))
-                                  (set-auto-mode)))))
+  ;; Set the right mode when you create a buffer
+  (setq-default major-mode
+                (lambda () (if buffer-file-name
+                               (fundamental-mode)
+                             (let ((buffer-file-name (buffer-name)))
+                               (set-auto-mode)))))
 
-     ;; Blink modeline instead of ring bell
-     (setq ring-bell-function
-           (lambda ()
-             (let ((orig-fg (face-foreground 'mode-line)))
-               (set-face-foreground 'mode-line "Magenta")
-               (run-with-idle-timer 0.1 nil
-                                    (lambda (fg) (set-face-foreground 'mode-line fg))
-                                    orig-fg))))
+  ;; Blink modeline instead of ring bell
+  (setq ring-bell-function
+        (lambda ()
+          (let ((orig-fg (face-foreground 'mode-line)))
+            (set-face-foreground 'mode-line "Magenta")
+            (run-with-idle-timer 0.1 nil
+                                 (lambda (fg) (set-face-foreground 'mode-line fg))
+                                 orig-fg))))
 
-     (custom-set-variables '(ediff-split-window-function (quote split-window-horizontally)))
-     (custom-set-variables '(ediff-window-setup-function (quote ediff-setup-windows-plain)))
-   #+end_src
+  (custom-set-variables '(ediff-split-window-function (quote split-window-horizontally)))
+  (custom-set-variables '(ediff-window-setup-function (quote ediff-setup-windows-plain)))
+#+end_src
 
 ** ibuffer
 :PROPERTIES:
 :DOCS:     https://www.emacswiki.org/emacs/IbufferMode
 :DESCRIPTION: Ibuffer is an advanced replacement for BufferMenu
 :END:
-- Docs :: deshttps://www.emacswiki.org/emacs/IbufferMode
-  #+begin_src emacs-lisp
-    (global-set-key (kbd "C-x C-b") 'ibuffer)
-    (setq ibuffer-saved-filter-groups
-          (quote (("default"
-                ("org" (mode . org-mode))
-                ("web" (or (mode . web-mode) (mode . js2-mode)))
-                ("shell" (or (mode . eshell-mode) (mode . shell-mode)))
-                ("programming" (or
-                                (mode . emacs-lisp-mode)
-                                (mode . lisp-mode)
-                                (mode . clojure-mode)
-                                (mode . clojurescript-mode)
-                                (mode . python-mode)
-                                (mode . c-mode)
-                                (mode . c++-mode)))
-                ("text" (mode . text-mode))
-                ("LaTeX" (mode . latex-mode))
-                ("magit" (mode . magit-mode))
-                ("dired" (mode . dired-mode))
-                ("emacs" (or
-                          (name . "^\\*scratch\\*$")
-                          (name . "^\\*Warnings\\*$")
-                          (name . "^\\*Messages\\*$")))))))
-    (add-hook 'ibuffer-mode-hook
-            (lambda ()
-              (ibuffer-auto-mode 1)
-              (ibuffer-switch-to-saved-filter-groups "default")))
+#+begin_src emacs-lisp
+  (global-set-key (kbd "C-x C-b") 'ibuffer)
+  (setq ibuffer-saved-filter-groups
+        (quote (("default"
+              ("org" (mode . org-mode))
+              ("web" (or (mode . web-mode) (mode . js2-mode)))
+              ("shell" (or (mode . eshell-mode) (mode . shell-mode)))
+              ("programming" (or
+                              (mode . emacs-lisp-mode)
+                              (mode . lisp-mode)
+                              (mode . clojure-mode)
+                              (mode . clojurescript-mode)
+                              (mode . python-mode)
+                              (mode . c-mode)
+                              (mode . c++-mode)))
+              ("text" (mode . text-mode))
+              ("LaTeX" (mode . latex-mode))
+              ("magit" (mode . magit-mode))
+              ("dired" (mode . dired-mode))
+              ("emacs" (or
+                        (name . "^\\*scratch\\*$")
+                        (name . "^\\*Warnings\\*$")
+                        (name . "^\\*Messages\\*$")))))))
+  (add-hook 'ibuffer-mode-hook
+          (lambda ()
+            (ibuffer-auto-mode 1)
+            (ibuffer-switch-to-saved-filter-groups "default")))
 
-    ;; Don't show filter groups if there are no buffers in that group
-    (setq ibuffer-show-empty-filter-groups nil)
-  #+end_src
-
+  ;; Don't show filter groups if there are no buffers in that group
+  (setq ibuffer-show-empty-filter-groups nil)
+#+end_src
 
 * Hooks & Advice
 ** before-save-hook
@@ -1000,9 +996,9 @@ Copy whole line to kill ring when no active region
 #+end_src
 
 * Appearance
-   #+begin_src emacs-lisp
-     (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
-   #+end_src
+#+begin_src emacs-lisp
+  (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
+#+end_src
 
 ** Nerd Icons
 :PROPERTIES:
@@ -1012,11 +1008,6 @@ Copy whole line to kill ring when no active region
 #+begin_src emacs-lisp
   (straight-use-package
    '(nerd-icons :type git :host github :repo "rainstormstudio/nerd-icons.el"))
-
-  ;; (straight-use-package 'nerd-icons)
-  ;; (use-package nerd-icons
-  ;;   :straight (:host github :repo "rainstormstudio/nerd-icons.el"
-  ;;              :branch "main"))
 #+end_src
 
 ** Doom Modeline
@@ -1024,34 +1015,34 @@ Copy whole line to kill ring when no active region
 :REPO:     https://github.com/seagle0128/doom-modeline
 :DESCRIPTION: A fancy and fast mode-line inspired by minimalism design
 :END:
-  #+begin_src emacs-lisp
-    (straight-use-package '(f :type git :host github :repo "rejeep/f.el"))
-    (use-package doom-modeline
-      :straight t
-      :after f
-      :init (doom-modeline-mode 1)
-      :config
-      (setq doom-modeline-minor-modes t
-            doom-modeline-vcs-max-length 40
-            doom-modeline-buffer-encoding t))
-  #+end_src
+#+begin_src emacs-lisp
+  (straight-use-package '(f :type git :host github :repo "rejeep/f.el"))
+  (use-package doom-modeline
+    :straight t
+    :after f
+    :init (doom-modeline-mode 1)
+    :config
+    (setq doom-modeline-minor-modes t
+          doom-modeline-vcs-max-length 40
+          doom-modeline-buffer-encoding t))
+#+end_src
 
 ** Ef Themes
 :PROPERTIES:
 :REPO:     https://github.com/protesilaos/ef-themes
 :DESCRIPTION: Colourful and legible themes for GNU Emacs
 :END:
-  #+begin_src emacs-lisp
-    (use-package ef-themes
-      :straight t)
-  #+end_src
+#+begin_src emacs-lisp
+  (use-package ef-themes
+    :straight t)
+#+end_src
 
 ** Modus Themes
 :PROPERTIES:
 :REPO:     https://github.com/protesilaos/modus-themes
 :DESCRIPTION: Highly accessible themes for GNU Emacs
 :END:
-  #+begin_src emacs-lisp
-    (use-package modus-themes
-      :straight t)
-  #+end_src
+#+begin_src emacs-lisp
+  (use-package modus-themes
+    :straight t)
+#+end_src
