@@ -696,6 +696,7 @@
       :config
       (global-undo-tree-mode)
       (setq undo-tree-history-directory-alist `((".*" . ,temporary-file-directory))
+            undo-tree-enable-undo-in-region t
             undo-tree-auto-save-history t)
       :diminish
       (undo-tree-mode))
@@ -749,9 +750,6 @@
      ;; Start eshell
      (define-key z-map (kbd "e") #'eshell)
 
-     ;; Open Calendar
-     (define-key z-map (kbd "c") #'calendar)
-
      ;; Open gptel
      (define-key z-map (kbd "g") #'gptel)
 
@@ -761,9 +759,6 @@
        (interactive)
        (find-file org-directory))
      (define-key z-map (kbd "n") #'amo/open-notes-file)
-
-     ;; Shrink window vertically
-     (global-set-key (kbd "C-x %") (kbd "C-u -1 C-x ^"))
 
      ;; One line scroll
      (global-set-key (kbd "C-s-p") #'scroll-down-line)
@@ -866,7 +861,6 @@
      (global-set-key (kbd "M-<up>") #'amo/move-line-up)
   #+end_src
 
-
 * General Configuration
    #+begin_src emacs-lisp
      (set-frame-font amo/font nil t)
@@ -893,7 +887,6 @@
            font-latex-fontify-script nil
            auto-save-default nil
            create-lockfiles nil
-           undo-tree-enable-undo-in-region t
            delete-by-moving-to-trash t
            dired-kill-when-opening-new-dired-buffer t
            comment-column 64
@@ -919,7 +912,6 @@
 
 
      ;; Set up flyspell
-     (setq-default ispell-program-name (dot-env-get 'ISPELL_PATH "/opt/homebrew/opt/ispell/bin/ispell"))
      (dolist (hook '(text-mode-hook))
        (add-hook hook (lambda ()
                         (flyspell-mode 1)
@@ -984,7 +976,7 @@
   #+end_src
 
 
-* Hooks
+* Hooks & Advice
 ** before-save-hook
 #+begin_src emacs-lisp
 (defun amo/before-save-actions ()
@@ -993,8 +985,6 @@
 (add-hook 'before-save-hook #'amo/before-save-actions)
 #+end_src
 
-
-* Advice
 ** kill-ring-save
 Copy whole line to kill ring when no active region
 #+begin_src emacs-lisp
