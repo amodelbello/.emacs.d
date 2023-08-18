@@ -881,6 +881,7 @@
   (delete-selection-mode 1)
   (global-hl-line-mode t)
   (recentf-mode 1)
+  (savehist-mode 1)
   (whitespace-mode -1)
   (global-display-line-numbers-mode 1)
 

@@ -66,11 +66,12 @@ quelpa/
 .env.gpg
 backups/
 projects
+.DS_Store
+history
 
 # Terminal config
-/terminal/elpa
+/terminal/straight
 /terminal/.emacs.desktop
 !/terminal/settings.el
 session.*
 org-directory
-.DS_Store
