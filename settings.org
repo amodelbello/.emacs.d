@@ -672,6 +672,7 @@
     :straight t
     :config
     (projectile-global-mode)
+    (setq projectile-indexing-method 'alien)
     :bind (("s-p" . projectile-command-map)
            ("C-c p" . projectile-command-map)))
 #+end_src
