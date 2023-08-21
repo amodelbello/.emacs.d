@@ -926,32 +926,40 @@
 :DESCRIPTION: Ibuffer is an advanced replacement for BufferMenu
 :END:
 #+begin_src emacs-lisp
+  (use-package ibuffer-projectile
+    :straight t)
+
+  (add-hook 'ibuffer-hook
+            (lambda ()
+              (ibuffer-projectile-set-filter-groups)
+              (unless (eq ibuffer-sorting-mode 'alphabetic)
+                (ibuffer-do-sort-by-alphabetic))))
   (global-set-key (kbd "C-x C-b") 'ibuffer)
   (setq ibuffer-saved-filter-groups
         (quote (("default"
-              ("org" (mode . org-mode))
-              ("web" (or (mode . web-mode) (mode . js2-mode)))
-              ("shell" (or (mode . eshell-mode) (mode . shell-mode)))
-              ("programming" (or
-                              (mode . emacs-lisp-mode)
-                              (mode . lisp-mode)
-                              (mode . clojure-mode)
-                              (mode . clojurescript-mode)
-                              (mode . python-mode)
-                              (mode . c-mode)
-                              (mode . c++-mode)))
-              ("text" (mode . text-mode))
-              ("LaTeX" (mode . latex-mode))
-              ("magit" (mode . magit-mode))
-              ("dired" (mode . dired-mode))
-              ("emacs" (or
-                        (name . "^\\*scratch\\*$")
-                        (name . "^\\*Warnings\\*$")
-                        (name . "^\\*Messages\\*$")))))))
+                 ("org" (mode . org-mode))
+                 ("web" (or (mode . web-mode) (mode . js2-mode)))
+                 ("shell" (or (mode . eshell-mode) (mode . shell-mode)))
+                 ("programming" (or
+                                 (mode . emacs-lisp-mode)
+                                 (mode . lisp-mode)
+                                 (mode . clojure-mode)
+                                 (mode . clojurescript-mode)
+                                 (mode . python-mode)
+                                 (mode . c-mode)
+                                 (mode . c++-mode)))
+                 ("text" (mode . text-mode))
+                 ("LaTeX" (mode . latex-mode))
+                 ("magit" (mode . magit-mode))
+                 ("dired" (mode . dired-mode))
+                 ("emacs" (or
+                           (name . "^\\*scratch\\*$")
+                           (name . "^\\*Warnings\\*$")
+                           (name . "^\\*Messages\\*$")))))))
   (add-hook 'ibuffer-mode-hook
-          (lambda ()
-            (ibuffer-auto-mode 1)
-            (ibuffer-switch-to-saved-filter-groups "default")))
+            (lambda ()
+              (ibuffer-auto-mode 1)
+              (ibuffer-switch-to-saved-filter-groups "default")))
 
   ;; Don't show filter groups if there are no buffers in that group
   (setq ibuffer-show-empty-filter-groups nil)
