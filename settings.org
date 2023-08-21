@@ -40,18 +40,6 @@
                 ("C-c e w r" . eglot-reconnect)))
 #+end_src
 
-*** Company
-:PROPERTIES:
-:REPO:     https://github.com/company-mode/company-mode
-:DOCS:     https://company-mode.github.io/
-:DESCRIPTION: Modular in-buffer completion framework for Emacs
-:END:
-#+begin_src emacs-lisp
-  (use-package company
-    :straight t
-    :config
-    (global-company-mode))
-#+end_src
 ** Languages
 *** Python
 **** interpreter
@@ -258,9 +246,35 @@
 #+begin_src emacs-lisp
   (use-package orderless
     :straight t
-    :custom
-    (completion-styles '(orderless basic))
-    (completion-category-overrides '((file (styles basic partial-completion)))))
+    :config
+    (setq completion-styles '(orderless basic)
+          completion-category-overrides '((file (styles basic partial-completion)))))
+#+end_src
+** Corfu
+:PROPERTIES:
+:REPO:     https://github.com/minad/corfu
+:END:
+#+begin_src emacs-lisp
+  (use-package corfu
+    :straight (:files (:defaults "extensions/*"))
+    :init
+    (global-corfu-mode)
+    (corfu-popupinfo-mode)
+    :custom (setq corfu-quit-at-boundary t)
+    :config (setq corfu-auto t
+                  corfu-auto-prefix 1
+                  corfu-quit-no-match t
+                  corfu-popupinfo-delay '(1.0 . 0.5)))
+
+  ;; A few more useful configurations...
+  (use-package emacs
+    :init
+    ;; TAB cycle if there are only few candidates
+    (setq completion-cycle-threshold 3)
+
+    ;; Enable indentation+completion using the TAB key.
+    ;; `completion-at-point' is often bound to M-TAB.
+    (setq tab-always-indent 'complete))
 #+end_src
 ** nerd-icons-completion
 :PROPERTIES:
