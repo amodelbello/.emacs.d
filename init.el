@@ -29,8 +29,7 @@
   :straight t)
 
 (use-package dot-env
-  :straight (:host github :repo "amodelbello/dot-env.el"
-                   :branch "main")
+  :straight t
   :config
   (dot-env-config))
 
