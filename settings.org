@@ -236,6 +236,20 @@
      :preview-key '(:debounce 0.4 any)))
 #+end_src
 
+** consult-projectile
+:PROPERTIES:
+:REPO:     https://github.com/emacsmirror/consult-projectile
+:END:
+#+begin_src emacs-lisp
+  (use-package consult-projectile
+    :straight t
+    :config
+    (define-key projectile-command-map (kbd "h") #'consult-projectile)
+    (define-key projectile-command-map (kbd "f") #'consult-projectile-find-file)
+    (define-key projectile-command-map (kbd "d") #'consult-projectile-find-dir)
+    (define-key projectile-command-map (kbd "p") #'consult-projectile-switch-project)
+    (define-key projectile-command-map (kbd "b") #'consult-projectile-switch-to-buffer))
+#+end_src
 ** orderless
 :PROPERTIES:
 :DESCRIPTION: Emacs completion style that matches multiple regexps in any order
