@@ -259,7 +259,8 @@
     :straight (:files (:defaults "extensions/*"))
     :init
     (global-corfu-mode)
-    (corfu-popupinfo-mode)
+    (corfu-popupinfo-mode 1)
+    (corfu-echo-mode 1)
     :custom (setq corfu-quit-at-boundary t)
     :config (setq corfu-auto t
                   corfu-auto-prefix 1
