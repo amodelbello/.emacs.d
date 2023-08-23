@@ -40,6 +40,14 @@
                 ("C-c e w r" . eglot-reconnect)))
 #+end_src
 
+*** RealGUD
+:PROPERTIES:
+:REPO:     https://github.com/realgud/realgud
+:END:
+#+begin_src emacs-lisp
+  (use-package realgud
+    :straight t)
+#+end_src
 ** Languages
 *** Python
 **** interpreter
@@ -995,6 +1003,14 @@
 #+end_src
 
 * Hooks & Advice
+** comint-mode
+#+begin_src emacs-lisp
+  ;; Don't auto-complete when we are debugging
+  (defun amo/comint-mode-actions ()
+    (setq-local corfu-auto nil) [])
+  (add-hook 'comint-mode-hook #'amo/comint-mode-actions)
+#+end_src
+
 ** before-save-hook
 #+begin_src emacs-lisp
 (defun amo/before-save-actions ()
