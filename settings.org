@@ -919,10 +919,10 @@
         delete-old-versions -1
         version-control t
         vc-make-backup-files t
+        indent-tabs-mode nil
         auto-save-file-name-transforms '((".*" "~/.emacs.d/auto-save-list/" t)))
 
-  (setq-default indent-tabs-mode nil
-                org-catch-invisible-edits 'show
+  (setq-default org-catch-invisible-edits 'show
                 global-tab-line-mode nil
                 tab-line-mode nil
                 tab-bar-mode nil
