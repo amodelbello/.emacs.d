@@ -625,6 +625,13 @@
     :bind (("M-n" . jump-char-forward)
            ("M-N" . jump-char-backward)))
 #+end_src
+** markdown-mode
+#+begin_src emacs-lisp
+  (use-package markdown-mode
+    :straight t
+    :mode ("README\\.md\\'" . gfm-mode)
+    :init (setq markdown-command "multimarkdown"))
+#+end_src
 ** minions
 :PROPERTIES:
 :REPO:     https://github.com/tarsius/minions
