@@ -186,7 +186,6 @@
            ("C-z C-z r" . restart-emacs)
            ("C-z t" . customize-themes)
            ("C-z e" . eshell)
-           ("C-z g" . gptel)
 
            ;; Other bindings
            ("C-x 2" . amo/split-window-below)
@@ -823,7 +822,8 @@
     :straight t
     :config
     (setq gptel-api-key (dot-env-get 'GPTEL_API_KEY)
-          gptel-default-mode #'org-mode))
+          gptel-default-mode #'org-mode)
+    :bind (("C-c g" . gptel)))
 #+end_src
 
 ** ibuffer-projectile
