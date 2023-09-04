@@ -269,6 +269,7 @@
 *** RealGUD
 :PROPERTIES:
 :REPO:     https://github.com/realgud/realgud
+:DESCRIPTION: The Grand "Cathedral" Debugger rewrite
 :END:
 #+begin_src emacs-lisp
   (use-package realgud
@@ -383,6 +384,7 @@
 ** Embark
 :PROPERTIES:
 :REPO:     https://github.com/oantolin/embark
+:DESCRIPTION: Emacs Mini-Buffer Actions Rooted in Keymaps
 :END:
 #+begin_src emacs-lisp
   (use-package embark
@@ -498,6 +500,7 @@
 ** consult-projectile
 :PROPERTIES:
 :REPO:     https://github.com/emacsmirror/consult-projectile
+:DESCRIPTION: Consult integration for projectile
 :END:
 #+begin_src emacs-lisp
   (use-package consult-projectile
@@ -524,6 +527,7 @@
 ** Corfu
 :PROPERTIES:
 :REPO:     https://github.com/minad/corfu
+:DESCRIPTION: corfu.el - COmpletion in Region FUnction
 :END:
 #+begin_src emacs-lisp
   (use-package corfu
@@ -565,6 +569,7 @@
 ** kind-icon
 :PROPERTIES:
 :REPO:     https://github.com/jdtsmith/kind-icon
+:DESCRIPTION: Completion kind text/icon prefix labelling for emacs in-region completion
 :END:
 #+begin_src emacs-lisp
   (use-package kind-icon
@@ -591,6 +596,7 @@
 ** Org configuration
 :PROPERTIES:
 :DOCS:     https://orgmode.org/
+:DESCRIPTION: A GNU Emacs major mode for keeping notes, authoring documents, computational notebooks, literate programming, maintaining to-do lists, planning projects, and more — in a fast and effective plain text system.
 :END:
 #+begin_src emacs-lisp
   (use-package org
@@ -877,6 +883,10 @@
            ("M-N" . jump-char-backward)))
 #+end_src
 ** markdown-mode
+:PROPERTIES:
+:REPO:     https://github.com/jrblevin/markdown-mode
+:DESCRIPTION: Emacs Markdown Mode
+:END:
 #+begin_src emacs-lisp
   (use-package markdown-mode
     :straight t
