@@ -858,6 +858,25 @@
                                    (lambda (fg) (set-face-foreground 'mode-line fg))
                                    orig-fg))))
 
+
+    ;; functions for :hook
+    :config
+    ;; Don't auto-complete when we are debugging
+    (defun amo/comint-mode-actions ()
+      (setq-local corfu-auto nil) [])
+
+    (defun amo/before-save-actions ()
+      (whitespace-cleanup)
+      (delete-trailing-whitespace))
+
+    :hook
+    ((comint-mode . amo/comint-mode-actions)
+     (before-save-hook . amo/before-save-actions))
+
+
+
+    ;; functions for :bind
+    :config
     ;; Open settings.org (this file)
     (defun amo/open-settings-file ()
       "Open settings.org"
@@ -984,6 +1003,15 @@
            ("C-s-p" . scroll-down-line)
            ("C-s-n" . scroll-up-line)
            ("C-x K" . kill-buffer-and-window)))
+
+
+  (defadvice kill-ring-save (before slick-copy activate compile)
+    "When called interactively with no active region, copy a single line instead."
+    (interactive
+     (if mark-active
+         (list (region-beginning) (region-end))
+       (message "Copied line")
+       (list (line-beginning-position) (line-beginning-position 2)))))
 #+end_src
 
 ** ibuffer
@@ -1030,36 +1058,6 @@
   ;; Don't show filter groups if there are no buffers in that group
   (setq ibuffer-show-empty-filter-groups nil)
 #+end_src
-
-* Hooks & Advice
-** comint-mode
-#+begin_src emacs-lisp
-  ;; Don't auto-complete when we are debugging
-  (defun amo/comint-mode-actions ()
-    (setq-local corfu-auto nil) [])
-  (add-hook 'comint-mode-hook #'amo/comint-mode-actions)
-#+end_src
-
-** before-save-hook
-#+begin_src emacs-lisp
-(defun amo/before-save-actions ()
-  (whitespace-cleanup)
-  (delete-trailing-whitespace))
-(add-hook 'before-save-hook #'amo/before-save-actions)
-#+end_src
-
-** kill-ring-save
-Copy whole line to kill ring when no active region
-#+begin_src emacs-lisp
-  (defadvice kill-ring-save (before slick-copy activate compile)
-    "When called interactively with no active region, copy a single line instead."
-    (interactive
-     (if mark-active
-         (list (region-beginning) (region-end))
-       (message "Copied line")
-       (list (line-beginning-position) (line-beginning-position 2)))))
-#+end_src
-
 
 * Appearance
 #+begin_src emacs-lisp
