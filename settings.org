@@ -364,9 +364,95 @@
 #+end_src
 
 * Org Mode
+** Org configuration
 :PROPERTIES:
 :DOCS:     https://orgmode.org/
 :END:
+#+begin_src emacs-lisp
+  (use-package org
+    :config
+    (setq org-directory (dot-env-get 'ORG_DIRECTORY_PATH "~/.emacs.d/org-directory")
+          org-agenda-files (list org-directory)
+          org-sprint-file (concat org-directory "/sprints.org")
+          org-standup-file (concat org-directory "/standups.org")
+          org-issue-file (concat org-directory "/issues.org")
+          org-meeting-file (concat org-directory "/meeting-notes.org")
+          org-union-file (concat org-directory "/union-notes.org")
+          org-lists-file (concat org-directory "/lists.org")
+          org-archive-location (concat org-directory "/_archive/%s_archive::"))
+
+    (defun amo/org-mode-hook ()
+      (org-indent-mode 1)
+      (visual-line-mode 1))
+
+    ;; Disable checkdoc in org-mode source blocks
+    (defun amo/disable-fylcheck-in-org-src-block ()
+      (setq-local flycheck-disabled-checkers '(emacs-lisp emacs-lisp-checkdoc)))
+
+    :hook
+    (org-mode . amo/org-mode-hook)
+    (org-src-mode . amo/disable-fylcheck-in-org-src-block)
+
+    :bind
+    (("C-c c" . org-capture)
+     ("C-c a" . org-agenda))
+
+    :custom
+    (org-hide-emphasis-markers t)
+    (org-use-tag-inheritance nil)
+    (org-list-demote-modify-bullet
+     '(("-" . "+") ("+" . "*") ("*" . "-")))
+    (org-list-allow-alphabetical t)
+    (org-M-RET-may-split-line '((default . nil)))
+    (org-capture-templates
+     '(("s"
+        "Sprint"
+        entry
+        (file org-sprint-file)
+        "* %? %^G \nDEADLINE: %^t SCHEDULED: %^t %^{SCOPED_STORY_POINTS}p\n\n** Issues\n" :empty-lines-after 1 :prepend t)
+       ("p"
+        "Sprint Issue"
+        entry
+        (file org-sprint-file)
+        "*** %? %^G \n %^{STORY_POINTS}p %^{ORIGINALLY_SCOPED}p %^{COMPLETED}p" :empty-lines 1 :prepend t)
+       ("i"
+        "Issue Note"
+        entry
+        (file+headline org-issue-file "Issue Items")
+        "** %? %^G \n%T \n%i \n" :empty-lines 1 :prepend t)
+       ("t"
+        "Standup Note"
+        entry
+        (file+headline org-standup-file "Standup Items")
+        "** %T Notes:\n%?\n%i\n" :empty-lines-after 1 :prepend t)
+       ("m"
+        "Meeting Note"
+        entry
+        (file+headline org-meeting-file "Meeting Items")
+        "** %?\n%T\n%i\n" :empty-lines-after 1 :prepend t)
+       ("u"
+        "Union Note"
+        entry
+        (file+headline org-union-file "Meeting Items")
+        "** %T %?\n%i\n" :empty-lines-after 1)
+       ("e"
+        "Emacs Idea"
+        checkitem
+        (file+headline org-lists-file "Emacs Ideas")
+        "[ ] %?" :prepend t)
+       ("k"
+        "Keyboard Idea"
+        checkitem
+        (file+headline org-lists-file "Keyboard Ideas")
+        "[ ] %?" :prepend t)
+       ("r"
+        "Interesting Albums"
+        item
+        (file+headline org-lists-file "Interesting Albums")
+        "%?")))
+    )
+#+end_src
+
 ** org-superstar-mode
 :PROPERTIES:
 :REPO:     https://github.com/integral-dw/org-superstar-mode
@@ -379,87 +465,7 @@
     (org-mode . org-superstar-mode))
 #+end_src
 
-** Org configuration
-#+begin_src emacs-lisp
-  (defun amo/org-mode-hook ()
-    (org-indent-mode 1)
-
-    ;; For some reason org-mode doesn't respect visual-line-mode when it loads.
-    (visual-line-mode 0)
-    (visual-line-mode 1))
-  (add-hook 'org-mode-hook 'amo/org-mode-hook)
-
-  ;; Disable checkdoc in org-mode source blocks
-  (defun amo/disable-fylcheck-in-org-src-block ()
-    (setq-local flycheck-disabled-checkers '(emacs-lisp emacs-lisp-checkdoc)))
-  (add-hook 'org-src-mode-hook 'amo/disable-fylcheck-in-org-src-block)
-
-  (global-set-key (kbd "C-c c") 'org-capture)
-  (global-set-key (kbd "C-c a") 'org-agenda)
-
-  (setq org-list-demote-modify-bullet
-        '(("-" . "+") ("+" . "*") ("*" . "-"))
-        org-list-allow-alphabetical t
-        org-M-RET-may-split-line '((default . nil))
-        org-use-tag-inheritance nil
-        org-hide-emphasis-markers t
-        org-directory (dot-env-get 'ORG_DIRECTORY_PATH "~/.emacs.d/org-directory")
-        org-agenda-files (list org-directory)
-        org-sprint-file (concat org-directory "/sprints.org")
-        org-standup-file (concat org-directory "/standups.org")
-        org-issue-file (concat org-directory "/issues.org")
-        org-meeting-file (concat org-directory "/meeting-notes.org")
-        org-union-file (concat org-directory "/union-notes.org")
-        org-lists-file (concat org-directory "/lists.org")
-        org-archive-location (concat org-directory "/_archive/%s_archive::"))
-
-  (setq org-capture-templates
-        '(("s"
-           "Sprint"
-           entry
-           (file org-sprint-file)
-           "* %? %^G \nDEADLINE: %^t SCHEDULED: %^t %^{SCOPED_STORY_POINTS}p\n\n** Issues\n" :empty-lines-after 1 :prepend t)
-          ("p"
-           "Sprint Issue"
-           entry
-           (file org-sprint-file)
-           "*** %? %^G \n %^{STORY_POINTS}p %^{ORIGINALLY_SCOPED}p %^{COMPLETED}p" :empty-lines 1 :prepend t)
-          ("i"
-           "Issue Note"
-           entry
-           (file+headline org-issue-file "Issue Items")
-           "** %? %^G \n%T \n%i \n" :empty-lines 1 :prepend t)
-          ("t"
-           "Standup Note"
-           entry
-           (file+headline org-standup-file "Standup Items")
-           "** %T\n%?\n%i\n" :empty-lines-after 1 :prepend t)
-          ("m"
-           "Meeting Note"
-           entry
-           (file+headline org-meeting-file "Meeting Items")
-           "** %?\n%T\n%i\n" :empty-lines-after 1 :prepend t)
-          ("u"
-           "Union Note"
-           entry
-           (file+headline org-union-file "Meeting Items")
-           "** %T %?\n%i\n" :empty-lines-after 1)
-          ("e"
-           "Emacs Idea"
-           checkitem
-           (file+headline org-lists-file "Emacs Ideas")
-           "[ ] %?" :prepend t)
-          ("k"
-           "Keyboard Idea"
-           checkitem
-           (file+headline org-lists-file "Keyboard Ideas")
-           "[ ] %?" :prepend t)
-          ("r"
-           "Interesting Albums"
-           item
-           (file+headline org-lists-file "Interesting Albums")
-           "%?")))
-#+end_src
+<<<<<<< HEAD
 
 * Other Useful Packages
 ** Ace Window
