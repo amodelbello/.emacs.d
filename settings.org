@@ -3,6 +3,231 @@
 #+description: "NO! The beard stays. You go."
 #+startup: content
 
+* General Configuration
+#+begin_src emacs-lisp
+  (use-package emacs
+    :custom
+    (ediff-split-window-function (quote split-window-horizontally))
+    (ediff-window-setup-function (quote ediff-setup-windows-plain))
+
+    :config
+    ;; Set custom prefix key ("C-z")
+    (define-prefix-command 'z-map)
+    (global-set-key (kbd "C-z") 'z-map)
+
+    (set-frame-font amo/font nil t)
+    (set-face-attribute 'fixed-pitch nil :font amo/font)
+    (set-face-attribute 'variable-pitch nil :font amo/font)
+    (set-face-attribute 'default nil :height amo/base-font-size)
+    (desktop-save-mode 1)
+    (fset 'yes-or-no-p 'y-or-n-p)
+    (blink-cursor-mode 0)
+    (electric-pair-mode 1)
+    (delete-selection-mode 1)
+    (global-hl-line-mode t)
+    (recentf-mode 1)
+    (savehist-mode 1)
+    (whitespace-mode -1)
+    (global-display-line-numbers-mode 1)
+
+    (setq scroll-step 1
+          recentf-max-menu-items 25
+          recentf-max-saved-items 25
+          save-interprogram-paste-before-kill t
+          auto-mode-alist (append '(("\\.cl$" . lisp-mode))
+                                  auto-mode-alist)
+          inferior-lisp-program "/usr/local/bin/sbcl"
+          font-latex-fontify-script nil
+          auto-save-default nil
+          create-lockfiles nil
+          delete-by-moving-to-trash t
+          dired-kill-when-opening-new-dired-buffer t
+          comment-column 64
+
+          ;; Save backups to a central location
+          make-backup-files t
+          backup-directory-alist '(("." . "~/.emacs.d/backups"))
+          delete-old-versions -1
+          version-control t
+          vc-make-backup-files t
+          indent-tabs-mode nil
+          auto-save-file-name-transforms '((".*" "~/.emacs.d/auto-save-list/" t)))
+
+    (setq-default org-catch-invisible-edits 'show
+                  indent-tabs-mode nil
+                  global-tab-line-mode nil
+                  tab-line-mode nil
+                  tab-bar-mode nil
+                  line-spacing 0.3
+                  fill-column 100
+                  sentence-end-double-space nil
+                  visual-line-mode t
+                  whitespace-line-column 110)
+
+    ;; Blink modeline instead of ring bell
+    (setq ring-bell-function
+          (lambda ()
+            (let ((orig-fg (face-foreground 'mode-line)))
+              (set-face-foreground 'mode-line "Magenta")
+              (run-with-idle-timer 0.1 nil
+                                   (lambda (fg) (set-face-foreground 'mode-line fg))
+                                   orig-fg))))
+
+    ;; Open settings.org (this file)
+    (defun amo/open-settings-file ()
+      "Open settings.org"
+      (interactive)
+      (find-file "~/.emacs.d/settings.org"))
+
+    ;; Reload config
+    (defun amo/reload-config ()
+      "Reload configuration"
+      (interactive)
+      ;; (dot-env-load)
+      (load-file "~/.emacs.d/init.el"))
+
+    ;; Open notes directory
+    (defun amo/open-notes-file ()
+      "Open notes file"
+      (interactive)
+      (find-file org-directory))
+
+    ;; Move point to other window immediately after split
+    (defun amo/split-window-below ()
+      "Create a new window below and move point to new window."
+      (interactive)
+      (split-window-below)
+      (other-window 1))
+
+    (defun amo/split-window-horizontally()
+      "Create a new window to the right and move point to new window."
+      (interactive)
+      (split-window-horizontally)
+      (other-window 1))
+
+    ;; Un-highlight region after mark jump
+    (defun amo/exchange-point-and-mark ()
+      "Deactivates mark after exchanging point and mark"
+      (interactive)
+      (exchange-point-and-mark)
+      (deactivate-mark))
+
+    ;; Transpose chars and words backwards
+    (defun amo/transpose-chars-backwards ()
+      "Just like transpose-chars but goes the other way"
+      (interactive)
+      (transpose-chars -1))
+
+    (defun amo/transpose-words-backwards ()
+      "Just like transpose-words but goes the other way"
+      (interactive)
+      (transpose-words -1))
+
+    ;; Move char after point to end of next word
+    (defun amo/transpose-char-to-end-of-next-word ()
+      "Move char at point to the end of the next word.
+    Use case is to push closing parentheses out to contain subsequent characters
+    when a function is typed and the closing parenthesis is automatically added.
+    Skips over periods, quotes, and closing parentheses."
+      (interactive)
+
+      ;; helpers
+      (defun amo/should-move-forward-one-char (c)
+        (or
+         (char-equal (following-char) ?\")
+         (char-equal (following-char) ?\))))
+      (defun amo/should-move-forward-one-word (c)
+        (char-equal (following-char) ?.))
+      (defun amo/should-move (c)
+        (or
+         (amo/should-move-forward-one-char c)
+         (amo/should-move-forward-one-word c)))
+
+      (forward-char)
+      (let ((start (point))
+            (end nil))
+        (save-excursion
+          (forward-word)
+          (while (amo/should-move (following-char))
+            (if (amo/should-move-forward-one-char (following-char))
+                (forward-char)
+              (forward-word)))
+          (setq end (point)))
+        (transpose-subr 'forward-char (- end start)))
+      (backward-char))
+
+    ;; Move lines up and down
+    (defmacro amo/save-column (&rest body)
+      `(let ((column (current-column)))
+         (unwind-protect
+             (progn ,@body)
+           (move-to-column column))))
+    (put 'save-column 'lisp-indent-function 0)
+
+    (defun amo/move-line-up ()
+      (interactive)
+      (amo/save-column
+       (transpose-lines 1)
+       (forward-line -2)))
+
+    (defun amo/move-line-down ()
+      (interactive)
+      (amo/save-column
+       (forward-line 1)
+       (transpose-lines 1)
+       (forward-line -1)))
+
+
+    :bind (
+           ;; Personal prefix C-z
+           ("C-z s" . amo/open-settings-file)
+           ("C-z r" . amo/reload-config)
+           ("C-z n" . amo/open-notes-file)
+           ("C-z C-z r" . restart-emacs)
+           ("C-z t" . customize-themes)
+           ("C-z e" . eshell)
+           ("C-z g" . gptel)
+
+           ;; Other bindings
+           ("C-x 2" . amo/split-window-below)
+           ("C-x 3" . amo/split-window-horizontally)
+           ("C-x C-x" . amo/exchange-point-and-mark)
+           ("C-S-t" . amo/transpose-chars-backwards)
+           ("M-T" . amo/transpose-words-backwards)
+           ("C-S-f" . amo/transpose-char-to-end-of-next-word)
+           ("M-<down>" . amo/move-line-down)
+           ("M-<up>" . amo/move-line-up)
+           ("C-s-p" . scroll-down-line)
+           ("C-s-n" . scroll-up-line)
+           ("C-x K" . kill-buffer-and-window))
+
+
+    :config
+    ;; Don't auto-complete when we are debugging
+    (defun amo/comint-mode-actions ()
+      (setq-local corfu-auto nil) [])
+
+    ;; Cleanup whitespace
+    (defun amo/whitespace-cleanup ()
+      (whitespace-cleanup)
+      (delete-trailing-whitespace))
+
+    :hook ((comint-mode . amo/comint-mode-actions)
+           (before-save . amo/whitespace-cleanup))
+
+    :config
+    ;; Copy whole line to kill ring when no active region
+    (defadvice kill-ring-save (before slick-copy activate compile)
+      "When called interactively with no active region, copy a single line instead."
+      (interactive
+       (if mark-active
+           (list (region-beginning) (region-end))
+         (message "Copied line")
+         (list (line-beginning-position) (line-beginning-position 2)))))
+
+    )
+#+end_src
+
 * Programming
 ** Packages
 *** treesit-auto
@@ -806,231 +1031,6 @@
           '("~/.emacs.d/snippets"))
     (use-package yasnippet-snippets
       :straight t))
-#+end_src
-
-* General Configuration
-#+begin_src emacs-lisp
-  (use-package emacs
-    :custom
-    (ediff-split-window-function (quote split-window-horizontally))
-    (ediff-window-setup-function (quote ediff-setup-windows-plain))
-
-    :config
-    ;; Set custom prefix key ("C-z")
-    (define-prefix-command 'z-map)
-    (global-set-key (kbd "C-z") 'z-map)
-
-    (set-frame-font amo/font nil t)
-    (set-face-attribute 'fixed-pitch nil :font amo/font)
-    (set-face-attribute 'variable-pitch nil :font amo/font)
-    (set-face-attribute 'default nil :height amo/base-font-size)
-    (desktop-save-mode 1)
-    (fset 'yes-or-no-p 'y-or-n-p)
-    (blink-cursor-mode 0)
-    (electric-pair-mode 1)
-    (delete-selection-mode 1)
-    (global-hl-line-mode t)
-    (recentf-mode 1)
-    (savehist-mode 1)
-    (whitespace-mode -1)
-    (global-display-line-numbers-mode 1)
-
-    (setq scroll-step 1
-          recentf-max-menu-items 25
-          recentf-max-saved-items 25
-          save-interprogram-paste-before-kill t
-          auto-mode-alist (append '(("\\.cl$" . lisp-mode))
-                                  auto-mode-alist)
-          inferior-lisp-program "/usr/local/bin/sbcl"
-          font-latex-fontify-script nil
-          auto-save-default nil
-          create-lockfiles nil
-          delete-by-moving-to-trash t
-          dired-kill-when-opening-new-dired-buffer t
-          comment-column 64
-
-          ;; Save backups to a central location
-          make-backup-files t
-          backup-directory-alist '(("." . "~/.emacs.d/backups"))
-          delete-old-versions -1
-          version-control t
-          vc-make-backup-files t
-          indent-tabs-mode nil
-          auto-save-file-name-transforms '((".*" "~/.emacs.d/auto-save-list/" t)))
-
-    (setq-default org-catch-invisible-edits 'show
-                  indent-tabs-mode nil
-                  global-tab-line-mode nil
-                  tab-line-mode nil
-                  tab-bar-mode nil
-                  line-spacing 0.3
-                  fill-column 100
-                  sentence-end-double-space nil
-                  visual-line-mode t
-                  whitespace-line-column 110)
-
-    ;; Blink modeline instead of ring bell
-    (setq ring-bell-function
-          (lambda ()
-            (let ((orig-fg (face-foreground 'mode-line)))
-              (set-face-foreground 'mode-line "Magenta")
-              (run-with-idle-timer 0.1 nil
-                                   (lambda (fg) (set-face-foreground 'mode-line fg))
-                                   orig-fg))))
-
-    ;; Open settings.org (this file)
-    (defun amo/open-settings-file ()
-      "Open settings.org"
-      (interactive)
-      (find-file "~/.emacs.d/settings.org"))
-
-    ;; Reload config
-    (defun amo/reload-config ()
-      "Reload configuration"
-      (interactive)
-      ;; (dot-env-load)
-      (load-file "~/.emacs.d/init.el"))
-
-    ;; Open notes directory
-    (defun amo/open-notes-file ()
-      "Open notes file"
-      (interactive)
-      (find-file org-directory))
-
-    ;; Move point to other window immediately after split
-    (defun amo/split-window-below ()
-      "Create a new window below and move point to new window."
-      (interactive)
-      (split-window-below)
-      (other-window 1))
-
-    (defun amo/split-window-horizontally()
-      "Create a new window to the right and move point to new window."
-      (interactive)
-      (split-window-horizontally)
-      (other-window 1))
-
-    ;; Un-highlight region after mark jump
-    (defun amo/exchange-point-and-mark ()
-      "Deactivates mark after exchanging point and mark"
-      (interactive)
-      (exchange-point-and-mark)
-      (deactivate-mark))
-
-    ;; Transpose chars and words backwards
-    (defun amo/transpose-chars-backwards ()
-      "Just like transpose-chars but goes the other way"
-      (interactive)
-      (transpose-chars -1))
-
-    (defun amo/transpose-words-backwards ()
-      "Just like transpose-words but goes the other way"
-      (interactive)
-      (transpose-words -1))
-
-    ;; Move char after point to end of next word
-    (defun amo/transpose-char-to-end-of-next-word ()
-      "Move char at point to the end of the next word.
-    Use case is to push closing parentheses out to contain subsequent characters
-    when a function is typed and the closing parenthesis is automatically added.
-    Skips over periods, quotes, and closing parentheses."
-      (interactive)
-
-      ;; helpers
-      (defun amo/should-move-forward-one-char (c)
-        (or
-         (char-equal (following-char) ?\")
-         (char-equal (following-char) ?\))))
-      (defun amo/should-move-forward-one-word (c)
-        (char-equal (following-char) ?.))
-      (defun amo/should-move (c)
-        (or
-         (amo/should-move-forward-one-char c)
-         (amo/should-move-forward-one-word c)))
-
-      (forward-char)
-      (let ((start (point))
-            (end nil))
-        (save-excursion
-          (forward-word)
-          (while (amo/should-move (following-char))
-            (if (amo/should-move-forward-one-char (following-char))
-                (forward-char)
-              (forward-word)))
-          (setq end (point)))
-        (transpose-subr 'forward-char (- end start)))
-      (backward-char))
-
-    ;; Move lines up and down
-    (defmacro amo/save-column (&rest body)
-      `(let ((column (current-column)))
-         (unwind-protect
-             (progn ,@body)
-           (move-to-column column))))
-    (put 'save-column 'lisp-indent-function 0)
-
-    (defun amo/move-line-up ()
-      (interactive)
-      (amo/save-column
-       (transpose-lines 1)
-       (forward-line -2)))
-
-    (defun amo/move-line-down ()
-      (interactive)
-      (amo/save-column
-       (forward-line 1)
-       (transpose-lines 1)
-       (forward-line -1)))
-
-
-    :bind (
-           ;; Personal prefix C-z
-           ("C-z s" . amo/open-settings-file)
-           ("C-z r" . amo/reload-config)
-           ("C-z n" . amo/open-notes-file)
-           ("C-z C-z r" . restart-emacs)
-           ("C-z t" . customize-themes)
-           ("C-z e" . eshell)
-           ("C-z g" . gptel)
-
-           ;; Other bindings
-           ("C-x 2" . amo/split-window-below)
-           ("C-x 3" . amo/split-window-horizontally)
-           ("C-x C-x" . amo/exchange-point-and-mark)
-           ("C-S-t" . amo/transpose-chars-backwards)
-           ("M-T" . amo/transpose-words-backwards)
-           ("C-S-f" . amo/transpose-char-to-end-of-next-word)
-           ("M-<down>" . amo/move-line-down)
-           ("M-<up>" . amo/move-line-up)
-           ("C-s-p" . scroll-down-line)
-           ("C-s-n" . scroll-up-line)
-           ("C-x K" . kill-buffer-and-window))
-
-
-    :config
-    ;; Don't auto-complete when we are debugging
-    (defun amo/comint-mode-actions ()
-      (setq-local corfu-auto nil) [])
-
-    ;; Cleanup whitespace
-    (defun amo/whitespace-cleanup ()
-      (whitespace-cleanup)
-      (delete-trailing-whitespace))
-
-    :hook ((comint-mode . amo/comint-mode-actions)
-           (before-save . amo/whitespace-cleanup))
-
-    :config
-    ;; Copy whole line to kill ring when no active region
-    (defadvice kill-ring-save (before slick-copy activate compile)
-      "When called interactively with no active region, copy a single line instead."
-      (interactive
-       (if mark-active
-           (list (region-beginning) (region-end))
-         (message "Copied line")
-         (list (line-beginning-position) (line-beginning-position 2)))))
-
-    )
 #+end_src
 
 * Appearance
