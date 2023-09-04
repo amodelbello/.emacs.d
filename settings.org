@@ -465,8 +465,6 @@
     (org-mode . org-superstar-mode))
 #+end_src
 
-<<<<<<< HEAD
-
 * Other Useful Packages
 ** Ace Window
 :PROPERTIES:

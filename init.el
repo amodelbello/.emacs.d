@@ -1,6 +1,7 @@
-;;
+;; Garbage collect at the end of startup
+(add-hook 'after-init-hook #'garbage-collect t)
+
 ;; straight.el bootstrap
-;;
 (defvar bootstrap-version)
 (let ((bootstrap-file
        (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
