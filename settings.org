@@ -212,7 +212,8 @@
       (delete-trailing-whitespace))
 
     :hook ((comint-mode . amo/comint-mode-actions)
-           (before-save . amo/whitespace-cleanup))
+           (before-save . amo/whitespace-cleanup)
+           (focus-out . garbage-collect))
 
     :config
     ;; Copy whole line to kill ring when no active region
