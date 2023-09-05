@@ -198,7 +198,9 @@
            ("M-<up>" . amo/move-line-up)
            ("C-s-p" . scroll-down-line)
            ("C-s-n" . scroll-up-line)
-           ("C-x K" . kill-buffer-and-window))
+           ("C-x K" . kill-buffer-and-window)
+           :map dired-mode-map
+           ("C-o" . nil))
 
 
     :config
