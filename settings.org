@@ -792,7 +792,9 @@
     :straight t
     :after org
     :config
-    (setq denote-directory (concat org-directory "/denote"))
+    (setq denote-directory (concat org-directory "/denote")
+          denote-date-prompt-use-org-read-date t)
+    :hook ((dired-mode . denote-dired-mode))
     :bind (("C-c n n" . denote)
            ("C-c n N" . denote-type)
            ("C-c n d" . denote-date)
