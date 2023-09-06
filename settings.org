@@ -331,6 +331,16 @@
     :bind
     (("C-x g" . magit)))
 #+end_src
+** magit-todos
+:PROPERTIES:
+:REPO:     https://github.com/alphapapa/magit-todos
+:DESCRIPTION: Show source files' TODOs (and FIXMEs, etc) in Magit status buffer
+:END:
+#+begin_src emacs-lisp
+  (use-package magit-todos
+    :straight t
+    :hook ((magit-mode . magit-todos-mode)))
+#+end_src
 ** git-messenger
 :PROPERTIES:
 :REPO:     https://github.com/emacsorphanage/git-messenger
