@@ -803,7 +803,9 @@
     :after org
     :config
     (setq denote-directory (concat org-directory "/denote")
-          denote-date-prompt-use-org-read-date t)
+          denote-date-prompt-use-org-read-date t
+          denote-known-keywords nil
+          denote-allow-multi-word-keywords t)
     :hook ((dired-mode . denote-dired-mode))
     :bind (("C-c n n" . denote)
            ("C-c n N" . denote-type)
@@ -816,6 +818,8 @@
            ("C-c n b" . denote-backlinks)
            ("C-c n f f" . denote-find-link)
            ("C-c n f b" . denote-find-backlink)
+           ("C-c n k a" . denote-keywords-add)
+           ("C-c n k k" . denote-keywords-remove)
            ("C-c n r" . denote-rename-file)
            ("C-c n R" . denote-rename-file-using-front-matter)
            :map dired-mode-map
