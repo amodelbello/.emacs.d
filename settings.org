@@ -89,12 +89,6 @@
     ;; (dot-env-load)
     (load-file "~/.emacs.d/init.el"))
 
-  ;; Open notes directory
-  (defun amo/open-notes-file ()
-    "Open notes file"
-    (interactive)
-    (find-file org-directory))
-
   ;; Move point to other window immediately after split
   (defun amo/split-window-below ()
     "Create a new window below and move point to new window."
@@ -185,10 +179,9 @@
 ** Custom Bindings
 #+begin_src emacs-lisp
   :bind (
-         ;; Personal prefix C-z
+         ;; Custom prefix C-z
          ("C-z s" . amo/open-settings-file)
          ("C-z r" . amo/reload-config)
-         ("C-z n" . amo/open-notes-file)
          ("C-z C-z r" . restart-emacs)
          ("C-z t" . customize-themes)
          ("C-z e" . eshell)
