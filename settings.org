@@ -89,6 +89,15 @@
     ;; (dot-env-load)
     (load-file "~/.emacs.d/init.el"))
 
+  ;; Delete desktop files and restart emacs
+  (defun amo/delete-emacs-desktop-files-restart ()
+    "Delete saved desktop, then restart emacs"
+    (interactive)
+    (setq desktop-save-mode nil)
+    (delete-file (concat user-emacs-directory ".emacs.desktop"))
+    (delete-file (concat user-emacs-directory ".emacs.desktop.lock"))
+    (restart-emacs))
+
   ;; Move point to other window immediately after split
   (defun amo/split-window-below ()
     "Create a new window below and move point to new window."
@@ -183,6 +192,7 @@
          ("C-z s" . amo/open-settings-file)
          ("C-z r" . amo/reload-config)
          ("C-z C-z r" . restart-emacs)
+         ("C-z C-z C-z r" . amo/delete-emacs-desktop-files-restart)
          ("C-z t" . customize-themes)
          ("C-z e" . eshell)
 
