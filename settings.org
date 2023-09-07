@@ -42,7 +42,6 @@
           auto-save-default nil
           create-lockfiles nil
           delete-by-moving-to-trash t
-          dired-kill-when-opening-new-dired-buffer t
           comment-column 64
 
           ;; Save backups to a central location
@@ -207,9 +206,7 @@
          ("M-<up>" . amo/move-line-up)
          ("C-s-p" . scroll-down-line)
          ("C-s-n" . scroll-up-line)
-         ("C-x K" . kill-buffer-and-window)
-         :map dired-mode-map
-         ("C-o" . nil))
+         ("C-x K" . kill-buffer-and-window))
 #+end_src
 
 ** Functions for hooks
@@ -245,6 +242,15 @@
        (list (line-beginning-position) (line-beginning-position 2))))))
 #+end_src
 
+** dired
+#+begin_src emacs-lisp
+  (use-package dired
+    :config
+    (setq dired-kill-when-opening-new-dired-buffer t)
+    :bind (
+           :map dired-mode-map
+           ("C-o" . nil)))
+#+end_src
 * Programming
 ** Packages
 *** treesit-auto
