@@ -1030,6 +1030,7 @@
             "\\*cider-error\\*"
             "\\*cider-scratch\\*"
             "\\*Messages\\*"
+            "\\*helpful"
             "\\*Warnings\\*"
             "\\*Compile-Log\\*"
             "\\*Completions\\*"
