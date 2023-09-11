@@ -823,7 +823,7 @@
     :straight t
     :after org
     :config
-    (setq denote-directory (concat org-directory "/denote")
+    (setq denote-directory (dot-env-get 'DENOTE_DIRECTORY (concat org-directory "/denote"))
           denote-date-prompt-use-org-read-date t
           denote-known-keywords nil
           denote-allow-multi-word-keywords t)
