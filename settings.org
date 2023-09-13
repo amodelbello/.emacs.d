@@ -886,6 +886,7 @@
   (use-package eyebrowse
     :straight t
     :config
+    (setq eyebrowse-new-workspace t)
     (eyebrowse-mode))
 #+end_src
 ** gptel
