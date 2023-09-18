@@ -339,6 +339,23 @@
     (pyvenv-mode +1))
 #+end_src
 
+*** Docker
+**** dockerfile-mode
+:PROPERTIES:
+:REPO:     https://github.com/spotify/dockerfile-mode
+:END:
+#+begin_src emacs-lisp
+  (use-package dockerfile-mode
+    :straight t)
+#+end_src
+**** docker-compose-mode
+:PROPERTIES:
+:REPO:     https://github.com/meqif/docker-compose-mode
+:END:
+#+begin_src emacs-lisp
+  (use-package docker-compose-mode
+    :straight t)
+#+end_src
 * Version Control
 ** Magit
 :PROPERTIES:
