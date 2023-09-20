@@ -182,6 +182,10 @@
      (transpose-lines 1)
      (forward-line -1)))
 
+  (defun amo/open-notes-directory ()
+    "Open notes directory"
+    (interactive)
+    (find-file org-directory))
 #+end_src
 
 ** Custom Bindings
@@ -194,6 +198,7 @@
          ("C-z C-z C-z r" . amo/delete-emacs-desktop-files-restart)
          ("C-z t" . customize-themes)
          ("C-z e" . eshell)
+         ("C-z n" . amo/open-notes-directory)
 
          ;; Other bindings
          ("C-x 2" . amo/split-window-below)
