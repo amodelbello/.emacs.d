@@ -692,17 +692,7 @@
     (org-list-allow-alphabetical t)
     (org-M-RET-may-split-line '((default . nil)))
     (org-capture-templates
-     '(("s"
-        "Sprint"
-        entry
-        (file org-sprint-file)
-        "* %? %^G \nDEADLINE: %^t SCHEDULED: %^t %^{SCOPED_STORY_POINTS}p\n\n** Issues\n" :empty-lines-after 1 :prepend t)
-       ("p"
-        "Sprint Issue"
-        entry
-        (file org-sprint-file)
-        "*** %? %^G \n %^{STORY_POINTS}p %^{ORIGINALLY_SCOPED}p %^{COMPLETED}p" :empty-lines 1 :prepend t)
-       ("i"
+     '(("i"
         "Issue Note"
         entry
         (file+headline org-issue-file "Issue Items")
