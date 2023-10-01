@@ -29,7 +29,7 @@
     (recentf-mode 1)
     (savehist-mode 1)
     (whitespace-mode -1)
-    (global-display-line-numbers-mode 1)
+    (global-display-line-numbers-mode 0)
 
     (setq scroll-step 1
           recentf-max-menu-items 25
