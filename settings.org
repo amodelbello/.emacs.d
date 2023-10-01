@@ -8,8 +8,8 @@
 #+begin_src emacs-lisp
   (use-package emacs
     :custom
-    (ediff-split-window-function (quote split-window-horizontally))
-    (ediff-window-setup-function (quote ediff-setup-windows-plain))
+    (ediff-split-window-function 'split-window-horizontally)
+    (ediff-window-setup-function 'ediff-setup-windows-plain)
 
     :config
     ;; Set custom prefix key ("C-z")
@@ -1151,10 +1151,6 @@
 #+end_src
 
 * Appearance
-#+begin_src emacs-lisp
-  (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
-#+end_src
-
 ** Nerd Icons
 :PROPERTIES:
 :REPO:     https://github.com/rainstormstudio/nerd-icons.el
