@@ -252,6 +252,8 @@
   (use-package dired
     :config
     (setq dired-kill-when-opening-new-dired-buffer t)
+    :hook
+    ((dired-mode . dired-hide-details-mode))
     :bind (
            :map dired-mode-map
            ("C-o" . nil)))
