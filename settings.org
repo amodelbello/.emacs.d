@@ -681,7 +681,8 @@
 
     :bind
     (("C-c c" . org-capture)
-     ("C-c a" . org-agenda))
+     ("C-c a" . org-agenda)
+     ("C-c h" . consult-org-heading))
 
     :custom
     (org-hide-emphasis-markers t)
