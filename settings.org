@@ -186,6 +186,11 @@
     "Open notes directory"
     (interactive)
     (find-file org-directory))
+
+  (defun amo/open-denote-directory ()
+    "Open denote directory"
+    (interactive)
+    (find-file (concat org-directory "/denote")))
 #+end_src
 
 ** Custom Bindings
@@ -199,6 +204,7 @@
          ("C-z t" . customize-themes)
          ("C-z e" . eshell)
          ("C-z n" . amo/open-notes-directory)
+         ("C-z d" . amo/open-denote-directory)
 
          ;; Other bindings
          ("C-x 2" . amo/split-window-below)
