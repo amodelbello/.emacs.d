@@ -43,6 +43,7 @@
           create-lockfiles nil
           delete-by-moving-to-trash t
           comment-column 64
+          enable-recursive-minibuffers t
 
           ;; Save backups to a central location
           make-backup-files t
