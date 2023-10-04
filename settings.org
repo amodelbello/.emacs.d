@@ -257,13 +257,24 @@
 ** dired
 #+begin_src emacs-lisp
   (use-package dired
-    :config
-    (setq dired-kill-when-opening-new-dired-buffer t)
-    :hook
-    ((dired-mode . dired-hide-details-mode))
-    :bind (
-           :map dired-mode-map
-           ("C-o" . nil)))
+    :config  (setq dired-kill-when-opening-new-dired-buffer t
+                   dired-listing-switches "-al")
+    (defun mydired-sort ()
+      "Sort dired listings with directories first."
+      (save-excursion
+        (let (buffer-read-only)
+          (forward-line 2) ;; beyond dir. header
+          (sort-regexp-fields t "^.*$" "[ ]*." (point) (point-max)))
+        (set-buffer-modified-p nil)))
+
+    (defadvice dired-readin
+        (after dired-after-updating-hook first () activate)
+      "Sort dired listings with directories first before adding marks."
+      (mydired-sort))
+
+    :hook ((dired-mode . dired-hide-details-mode))
+    :bind (:map dired-mode-map
+                ("C-o" . nil)))
 #+end_src
 * Programming
 ** Packages
