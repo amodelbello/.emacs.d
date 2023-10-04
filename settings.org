@@ -946,6 +946,7 @@
     :straight t
     :bind (("C-h f" . helpful-callable)
            ("C-h v" . helpful-variable)
+           ("C-h o" . helpful-symbol)
            ("C-h k" . helpful-key)
            ("C-h x" . helpful-command)
            ("C-h d" . helpful-at-point)
