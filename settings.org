@@ -1173,6 +1173,17 @@
    '(nerd-icons :type git :host github :repo "rainstormstudio/nerd-icons.el"))
 #+end_src
 
+** nerd-icons-dired
+:PROPERTIES:
+:REPO:     https://github.com/rainstormstudio/nerd-icons-dired
+:DESCRIPTION: Use nerd-icons for Dired
+:END:m
+#+begin_src emacs-lisp
+  (use-package nerd-icons-dired
+    :straight t
+    :hook
+    (dired-mode . nerd-icons-dired-mode))
+#+end_src
 ** Doom Modeline
 :PROPERTIES:
 :REPO:     https://github.com/seagle0128/doom-modeline
