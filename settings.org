@@ -259,6 +259,8 @@
   (use-package dired
     :config  (setq dired-kill-when-opening-new-dired-buffer t
                    dired-listing-switches "-al")
+
+    ;; from https://www.emacswiki.org/emacs/DiredSortDirectoriesFirst
     (defun mydired-sort ()
       "Sort dired listings with directories first."
       (save-excursion
@@ -266,7 +268,6 @@
           (forward-line 2) ;; beyond dir. header
           (sort-regexp-fields t "^.*$" "[ ]*." (point) (point-max)))
         (set-buffer-modified-p nil)))
-
     (defadvice dired-readin
         (after dired-after-updating-hook first () activate)
       "Sort dired listings with directories first before adding marks."
