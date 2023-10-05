@@ -776,7 +776,8 @@
      ("C-x o" . ace-window))
     :config
     (defvar aw-dispatch-always nil)
-    (setq aw-scope 'frame))
+    (setq aw-scope 'frame
+          aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l)))
 #+end_src
 ** aggressive-indent-mode
 :PROPERTIES:
