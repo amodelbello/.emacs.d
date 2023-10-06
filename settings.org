@@ -779,7 +779,7 @@
     (defvar aw-dispatch-always nil)
     (setq aw-scope 'frame
           aw-dispatch-always t
-          aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l)))
+          aw-keys '(?j ?k ?d ?s ?a ?g ?h ?k ?l)))
 #+end_src
 ** aggressive-indent-mode
 :PROPERTIES:
