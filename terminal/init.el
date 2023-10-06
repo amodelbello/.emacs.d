@@ -1,4 +1,3 @@
-(setq package-user-dir "~/.emacs.d/terminal/elpa")
 (setq user-emacs-directory "~/.emacs.d/terminal/")
 
 (defvar bootstrap-version)
