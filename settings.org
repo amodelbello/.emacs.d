@@ -807,7 +807,7 @@
            :map org-mode-map
            ("C-'" . nil)
            :map flyspell-mode-map
-           ("C-'" . nil)))
+           ("C-;" . nil)))
 #+end_src
 ** buffer-move
 :PROPERTIES:
