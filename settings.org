@@ -238,7 +238,8 @@
 #+begin_src emacs-lisp
   :hook ((comint-mode . amo/comint-mode-actions)
          (before-save . amo/whitespace-cleanup)
-         (focus-out . garbage-collect))
+         (focus-out . garbage-collect)
+         (text-mode . flyspell-mode))
   #+end_src
 
 ** Advice
