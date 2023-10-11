@@ -1122,7 +1122,8 @@
     :straight t
     :config
     (projectile-global-mode)
-    (setq projectile-indexing-method 'alien)
+    (setq projectile-indexing-method 'alien
+          projectile-ignored-projects '("~/"))
     :bind (("s-p" . projectile-command-map)
            ("C-c p" . projectile-command-map)))
 #+end_src
