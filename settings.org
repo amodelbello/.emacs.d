@@ -280,6 +280,12 @@
     :bind (:map dired-mode-map
                 ("C-o" . nil)))
 #+end_src
+** ibuffer
+#+begin_src emacs-lisp
+  (use-package ibuffer
+    :bind (:map ibuffer-mode-map
+                ("C-o" . nil)))
+#+end_src
 * Programming
 ** Packages
 *** treesit-auto
