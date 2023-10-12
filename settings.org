@@ -219,7 +219,8 @@
          ("C-s-p" . scroll-down-line)
          ("C-s-n" . scroll-up-line)
          ("C-x K" . kill-buffer-and-window)
-         ("M-SPC" . cycle-spacing))
+         ("M-SPC" . cycle-spacing)
+         ("M-z" . zap-up-to-char))
 #+end_src
 
 ** Functions for hooks
