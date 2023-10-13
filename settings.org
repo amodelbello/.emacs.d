@@ -688,7 +688,7 @@
   (use-package org
     :config
     (setq org-directory (dot-env-get 'ORG_DIRECTORY_PATH "~/.emacs.d/org-directory")
-          org-agenda-files (list org-directory)
+          org-agenda-files (directory-files-recursively org-directory "\\.org$")
           org-sprint-file (concat org-directory "/sprints.org")
           org-standup-file (concat org-directory "/standups.org")
           org-issue-file (concat org-directory "/issues.org")
