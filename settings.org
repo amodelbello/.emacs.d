@@ -192,6 +192,27 @@
     "Open denote directory"
     (interactive)
     (find-file (concat org-directory "/denote")))
+
+  ;; Toggle capitalization of character at point
+  (defun amo/toggle-capitalization ()
+    "Toggle the capitalization of the character at point."
+    (interactive)
+    (let ((char (char-after)))
+      (cond ((amo/upcase-p char) (amo/downcase-char 1))
+            ((amo/downcase-p char) (upcase-char 1))
+            (t (message "No character at point.")))))
+
+  (defun amo/upcase-p (char)
+    (eq char (upcase char)))
+
+  (defun amo/downcase-p (char)
+    (eq char (downcase char)))
+
+  (defun amo/downcase-char (arg)
+    "Lowercasify ARG chars starting from point.  Point doesn't move."
+    (interactive "p")
+    (save-excursion
+      (downcase-region (point) (progn (forward-char arg) (point)))))
 #+end_src
 
 ** Custom Bindings
@@ -216,6 +237,7 @@
          ("C-S-f" . amo/transpose-char-to-end-of-next-word)
          ("M-<down>" . amo/move-line-down)
          ("M-<up>" . amo/move-line-up)
+         ("C-'" . amo/toggle-capitalization)
          ("C-s-p" . scroll-down-line)
          ("C-s-n" . scroll-up-line)
          ("C-x K" . kill-buffer-and-window)
@@ -810,8 +832,7 @@
 #+begin_src emacs-lisp
   (use-package avy
     :straight t
-    :bind (("C-'" . avy-goto-char)
-           ("C-;" . avy-goto-char-2)
+    :bind (("C-;" . avy-goto-char-2)
            :map org-mode-map
            ("C-'" . nil)
            :map flyspell-mode-map
