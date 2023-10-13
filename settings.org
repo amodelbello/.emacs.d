@@ -198,15 +198,9 @@
     "Toggle the capitalization of the character at point."
     (interactive)
     (let ((char (char-after)))
-      (cond ((amo/upcase-p char) (amo/downcase-char 1))
-            ((amo/downcase-p char) (upcase-char 1))
+      (cond ((eq char (upcase char)) (amo/downcase-char 1))
+            ((eq char (downcase char)) (upcase-char 1))
             (t (message "No character at point.")))))
-
-  (defun amo/upcase-p (char)
-    (eq char (upcase char)))
-
-  (defun amo/downcase-p (char)
-    (eq char (downcase char)))
 
   (defun amo/downcase-char (arg)
     "Lowercasify ARG chars starting from point.  Point doesn't move."
