@@ -332,7 +332,8 @@
     :hook ((after-save . amo/eglot-format-on-save)
            (python-ts-mode . eglot-ensure)
            (bash-ts-mode . eglot-ensure)
-           (go-ts-mode . eglot-ensure))
+           (go-ts-mode . eglot-ensure)
+           (haskell-mode . eglot-ensure))
     :bind (:map eglot-mode-map
                 ("<C-return>" . xref-find-references)
                 ("C-c e f n" . flymake-goto-next-error)
@@ -351,6 +352,14 @@
     :straight t)
 #+end_src
 ** Languages
+*** Haskell
+**** haskell-mode
+#+begin_src emacs-lisp
+  (use-package haskell-mode
+    :straight t
+    :config (setq haskell-interactive-popup-errors nil)
+    :hook (haskell-mode . (lambda () (interactive-haskell-mode t))))
+#+end_src
 *** Python
 **** interpreter
 #+begin_src emacs-lisp
