@@ -12,6 +12,12 @@
     (ediff-window-setup-function 'ediff-setup-windows-plain)
 
     :config
+    ;; Use C-h for delete-backward-char
+    (global-set-key (kbd "C-h") 'delete-backward-char)
+
+    ;; Use C-H for help prefix
+    (global-set-key (kbd "C-S-h") 'help-command)
+
     ;; Set custom prefix key ("C-z")
     (define-prefix-command 'z-map)
     (global-set-key (kbd "C-z") 'z-map)
@@ -987,13 +993,13 @@
 #+begin_src emacs-lisp
   (use-package helpful
     :straight t
-    :bind (("C-h f" . helpful-callable)
-           ("C-h v" . helpful-variable)
-           ("C-h o" . helpful-symbol)
-           ("C-h k" . helpful-key)
-           ("C-h x" . helpful-command)
-           ("C-h d" . helpful-at-point)
-           ("C-h F" . helpful-function)))
+    :bind (("C-S-h f" . helpful-callable)
+           ("C-S-h v" . helpful-variable)
+           ("C-S-h o" . helpful-symbol)
+           ("C-S-h k" . helpful-key)
+           ("C-S-h x" . helpful-command)
+           ("C-S-h d" . helpful-at-point)
+           ("C-S-h F" . helpful-function)))
 #+end_src
 ** ibuffer-projectile
 :PROPERTIES:
