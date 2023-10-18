@@ -936,17 +936,11 @@
 :DESCRIPTION: Make Emacs use the $PATH set up by the user's shell
 :END:
 #+begin_src emacs-lisp
-  (when (memq window-system '(mac ns)) ;; MacOS
-           (use-package exec-path-from-shell
-             :straight t
-             :config
-             (setq exec-path-from-shell-arguments nil) ; non-interactive, i.e. .zshenv not .zshrc
-             (exec-path-from-shell-initialize)))
-  (when (memq window-system '(x)) ;; Linux
-           (use-package exec-path-from-shell
-             :straight t
-             :config
-             (exec-path-from-shell-initialize)))
+  (when (memq window-system '(mac ns x)) ;; Linux
+    (use-package exec-path-from-shell
+      :straight t
+      :config
+      (exec-path-from-shell-initialize)))
 #+end_src
 ** expand-region
 :PROPERTIES:
