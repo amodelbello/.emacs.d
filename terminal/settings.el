@@ -107,7 +107,7 @@
    ("<C-backspace>" . crux-kill-line-backwards)))
 
 (use-package expand-region
-  :ensure t
+  :straight t
   :bind (("C-=" . er/expand-region)
          ("C--" . er/contract-region)))
 
