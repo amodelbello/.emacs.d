@@ -41,6 +41,9 @@
 (whitespace-mode -1)
 (define-prefix-command 'z-map)
 
+;; Use C-h for delete-backward-char
+(global-set-key (kbd "C-h") 'delete-backward-char)
+
 (global-set-key (kbd "C-z") 'z-map)
 (define-key z-map (kbd "t") 'customize-themes)
 
