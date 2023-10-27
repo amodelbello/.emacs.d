@@ -12,6 +12,9 @@
     (ediff-window-setup-function 'ediff-setup-windows-plain)
 
     :config
+    ;; Maximize frames when created
+    (add-to-list 'default-frame-alist '(fullscreen . maximized))
+
     ;; Use C-h for delete-backward-char
     (global-set-key (kbd "C-h") 'delete-backward-char)
 
@@ -968,7 +971,7 @@
   (use-package eyebrowse
     :straight t
     :config
-    (setq eyebrowse-new-workspace t)
+    (setq eyebrowse-new-workspace (lambda () (dashboard-open)))
     (eyebrowse-mode))
 #+end_src
 ** gptel
@@ -1223,7 +1226,7 @@
   (use-package dashboard
     :straight t
     :config
-    (dashboard-setup-startup-hook)
+    (dashboard-open)
     (setq dashboard-center-content t
           dashboard-items '((projects . 5)
                             (bookmarks . 5)
