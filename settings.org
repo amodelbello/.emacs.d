@@ -1230,13 +1230,10 @@
     (setq dashboard-center-content t
           dashboard-items '((projects . 5)
                             (bookmarks . 5)
-                            (recents  . 5)
-                            (agenda . 5)
-                            (registers . 5))
-          ;; dashboard-display-icons-p t
-          ;; dashboard-icon-type 'nerd-icons
-          ;; dashboard-set-heading-icons t
-          ;; dashboard-set-file-icons t
+                            (recents  . 5))
+          dashboard-display-icons-p t
+          dashboard-icon-type 'nerd-icons
+          dashboard-set-file-icons t
           dashboard-set-footer nil
           ;; dashboard-projects-switch-function #'projectile-persp-switch-project
           ))
