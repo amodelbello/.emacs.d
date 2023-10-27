@@ -1214,14 +1214,40 @@
 #+end_src
 
 * Appearance
+** Dashboard
+:PROPERTIES:
+:REPO:     https://github.com/emacs-dashboard/emacs-dashboard
+:DESCRIPTION: An extensible emacs dashboard
+:END:
+#+begin_src emacs-lisp
+  (use-package dashboard
+    :straight t
+    :config
+    (dashboard-setup-startup-hook)
+    (setq dashboard-center-content t
+          dashboard-items '((projects . 5)
+                            (bookmarks . 5)
+                            (recents  . 5)
+                            (agenda . 5)
+                            (registers . 5))
+          ;; dashboard-display-icons-p t
+          ;; dashboard-icon-type 'nerd-icons
+          ;; dashboard-set-heading-icons t
+          ;; dashboard-set-file-icons t
+          dashboard-set-footer nil
+          ;; dashboard-projects-switch-function #'projectile-persp-switch-project
+          ))
+#+end_src
 ** Nerd Icons
 :PROPERTIES:
 :REPO:     https://github.com/rainstormstudio/nerd-icons.el
 :DESCRIPTION: A library for easily using Nerd Font icons inside Emacs
 :END:
 #+begin_src emacs-lisp
-  (straight-use-package
-   '(nerd-icons :type git :host github :repo "rainstormstudio/nerd-icons.el"))
+  ;; (straight-use-package
+  ;;  '(nerd-icons :type git :host github :repo "rainstormstudio/nerd-icons.el"))
+  (use-package nerd-icons
+    :straight t)
 #+end_src
 
 ** nerd-icons-corfu
