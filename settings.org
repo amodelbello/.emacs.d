@@ -41,6 +41,8 @@
     (global-display-line-numbers-mode 0)
 
     (setq scroll-step 1
+          require-final-newline t
+          frame-inhibit-implied-resize t
           recentf-max-menu-items 25
           recentf-max-saved-items 25
           save-interprogram-paste-before-kill t
