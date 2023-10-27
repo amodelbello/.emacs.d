@@ -1226,7 +1226,6 @@
   (use-package dashboard
     :straight t
     :config
-    (dashboard-open)
     (setq dashboard-center-content t
           dashboard-items '((projects . 5)
                             (bookmarks . 5)
@@ -1236,7 +1235,8 @@
           dashboard-set-file-icons t
           dashboard-set-footer nil
           ;; dashboard-projects-switch-function #'projectile-persp-switch-project
-          ))
+          )
+    (dashboard-open))
 #+end_src
 ** Nerd Icons
 :PROPERTIES:
