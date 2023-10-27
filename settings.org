@@ -1229,6 +1229,8 @@
     :straight t
     :config
     (setq dashboard-center-content t
+          dashboard-banner-logo-title "No! The beard stays. You go."
+          dashboard-startup-banner 'logo
           dashboard-items '((projects . 5)
                             (bookmarks . 5)
                             (recents  . 5))
