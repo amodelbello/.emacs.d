@@ -46,8 +46,6 @@
           recentf-max-menu-items 25
           recentf-max-saved-items 25
           save-interprogram-paste-before-kill t
-          auto-mode-alist (append '(("\\.cl$" . lisp-mode))
-                                  auto-mode-alist)
           inferior-lisp-program "/usr/local/bin/sbcl"
           font-latex-fontify-script nil
           auto-save-default nil
@@ -55,6 +53,11 @@
           delete-by-moving-to-trash t
           comment-column 64
           enable-recursive-minibuffers t
+
+          ;; Change mode based on file extension
+          auto-mode-alist (append '(("\\.cl$" . lisp-mode)
+                                    ("\\.mod$" . go-mod-ts-mode))
+                                  auto-mode-alist)
 
           ;; Save backups to a central location
           make-backup-files t
