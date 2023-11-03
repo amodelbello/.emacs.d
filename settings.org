@@ -366,6 +366,14 @@
     :straight t)
 #+end_src
 ** Languages
+*** Golang
+**** go-ts-mode
+#+begin_src emacs-lisp
+  (use-package go-ts-mode
+    :hook (go-ts-mode . (lambda () (setq-local tab-width 4
+                                               electric-indent-inhibit t)
+                          (aggressive-indent-mode -1))))
+#+end_src
 *** Haskell
 **** haskell-mode
 #+begin_src emacs-lisp
