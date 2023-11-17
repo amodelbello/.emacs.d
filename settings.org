@@ -221,6 +221,13 @@
     (interactive "p")
     (save-excursion
       (downcase-region (point) (progn (forward-char arg) (point)))))
+
+  (defun amo/toggle-line-numbers ()
+    "Toggle the display of line numbers"
+    (interactive)
+    (if (eq nil global-display-line-numbers-mode)
+        (global-display-line-numbers-mode 1)
+      (global-display-line-numbers-mode 0)))
 #+end_src
 
 ** Custom Bindings
@@ -235,6 +242,7 @@
          ("C-z e" . eshell)
          ("C-z n" . amo/open-notes-directory)
          ("C-z d" . amo/open-denote-directory)
+         ("C-z l" . amo/toggle-line-numbers)
 
          ;; Other bindings
          ("C-x 2" . amo/split-window-below)
