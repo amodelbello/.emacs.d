@@ -308,17 +308,43 @@
                  input-decode-map
                function-key-map)))
     (define-key map "\e[1;P9"  (kbd "H-a"))
+    (global-set-key (kbd "H-a") 'er/expand-region)
+
     (define-key map "\e[1;P10" (kbd "H-b"))
+    (global-set-key (kbd "H-b") 'er/contract-region) ;; FIXME - map to undo for some reason
+
     (define-key map "\e[1;P11" (kbd "H-c"))
+    (global-set-key (kbd "H-c") 'avy-goto-char-2)
+    (global-set-key (kbd "C-x H-c") 'comment-line)
+
     (define-key map "\e[1;P12" (kbd "H-d"))
+    (global-set-key (kbd "H-d") 'crux-smart-open-line-above)
+
     (define-key map "\e[1;P13" (kbd "H-e"))
+    (global-set-key (kbd "H-e") 'crux-top-join-line)
+
     (define-key map "\e[1;P14" (kbd "H-f"))
+    (global-set-key (kbd "H-f") 'crux-kill-whole-line)
+
     (define-key map "\e[1;P15" (kbd "H-g"))
+    (global-set-key (kbd "H-g") 'scroll-down-line)
+
     (define-key map "\e[1;P16" (kbd "H-h"))
+    (global-set-key (kbd "H-h") 'scroll-up-line)
+
     (define-key map "\e[1;P17" (kbd "H-i"))
+    (global-set-key (kbd "H-i") 'help-command)
+
     (define-key map "\e[1;P18" (kbd "H-j"))
+    (global-set-key (kbd "H-j") 'amo/move-line-down)
+
     (define-key map "\e[1;P19" (kbd "H-k"))
+    (global-set-key (kbd "H-k") 'amo/move-line-up)
+
     (define-key map "\e[1;P20" (kbd "H-l"))
+    (global-set-key (kbd "H-l") 'amo/toggle-capitalization)
+
+    ;; Additional available keybindings
     (define-key map "\e[1;P21" (kbd "H-m"))
     (define-key map "\e[1;P22" (kbd "H-n"))
     (define-key map "\e[1;P23" (kbd "H-o"))
@@ -355,17 +381,3 @@
     (define-key map "\e[1;P54" (kbd "H-<f10>"))
     (define-key map "\e[1;P55" (kbd "H-<f11>"))
     (define-key map "\e[1;P56" (kbd "H-<f12>"))))
-
-(global-set-key (kbd "H-a") 'er/expand-region)
-(global-set-key (kbd "H-b") 'er/contract-region) ;; FIXME - map to undo for some reason
-(global-set-key (kbd "H-c") 'avy-goto-char-2)
-(global-set-key (kbd "C-x H-c") 'comment-line)
-(global-set-key (kbd "H-d") 'crux-smart-open-line-above)
-(global-set-key (kbd "H-e") 'crux-top-join-line)
-(global-set-key (kbd "H-f") 'crux-kill-whole-line)
-(global-set-key (kbd "H-g") 'scroll-down-line)
-(global-set-key (kbd "H-h") 'scroll-up-line)
-(global-set-key (kbd "H-i") 'help-command)
-(global-set-key (kbd "H-j") 'amo/move-line-down)
-(global-set-key (kbd "H-k") 'amo/move-line-up)
-(global-set-key (kbd "H-l") 'amo/toggle-capitalization)
