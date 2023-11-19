@@ -40,7 +40,8 @@
     (whitespace-mode -1)
     (global-display-line-numbers-mode 0)
 
-    (setq scroll-step 1
+    (setq warning-minimum-level :error
+          scroll-step 1
           require-final-newline t
           frame-inhibit-implied-resize t
           recentf-max-menu-items 25
@@ -768,8 +769,8 @@
      ("C-c h" . consult-org-heading))
 
     :custom
+    (setq org-use-tag-inheritance t)
     (org-hide-emphasis-markers t)
-    (org-use-tag-inheritance nil)
     (org-list-demote-modify-bullet
      '(("-" . "+") ("+" . "*") ("*" . "-")))
     (org-list-allow-alphabetical t)
