@@ -29,7 +29,7 @@
 
 (add-hook 'before-save-hook 'whitespace-cleanup)
 
-(global-display-line-numbers-mode 1)
+(global-display-line-numbers-mode 0)
 (fset 'yes-or-no-p 'y-or-n-p)
 (tool-bar-mode -1)
 (menu-bar-mode -1)
@@ -68,6 +68,15 @@
   ;; (dot-env-load)
   (load-file "~/.emacs.d/terminal/init.el"))
 (define-key z-map (kbd "r") #'amo/reload-config)
+
+;; Toggle line numbers
+(defun amo/toggle-line-numbers ()
+  "Toggle the display of line numbers"
+  (interactive)
+  (if (eq nil global-display-line-numbers-mode)
+      (global-display-line-numbers-mode 1)
+    (global-display-line-numbers-mode 0)))
+(define-key z-map (kbd "l") 'amo/toggle-line-numbers)
 
 (put 'narrow-to-region 'disabled nil)
 
