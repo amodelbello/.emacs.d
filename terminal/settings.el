@@ -2,11 +2,6 @@
 ;; Add `alias emacs="emacs -nw -q --load '~/.emacs.d/terminal/init.el'"`
 ;; to your shell configuration
 
-
-(defun on-after-init()
-  (unless (display-graphic-p (selected-frame))
-    (set-face-background 'default "unspecified-bg" (selected-frame))))
-
 (straight-use-package
  '(nerd-icons :type git :host github :repo "rainstormstudio/nerd-icons.el"))
 
