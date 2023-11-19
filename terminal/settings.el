@@ -88,6 +88,27 @@
     (global-display-line-numbers-mode 0)))
 (define-key z-map (kbd "l") 'amo/toggle-line-numbers)
 
+;; Move lines up and down
+(defmacro amo/save-column (&rest body)
+  `(let ((column (current-column)))
+     (unwind-protect
+         (progn ,@body)
+       (move-to-column column))))
+(put 'save-column 'lisp-indent-function 0)
+
+(defun amo/move-line-up ()
+  (interactive)
+  (amo/save-column
+   (transpose-lines 1)
+   (forward-line -2)))
+
+(defun amo/move-line-down ()
+  (interactive)
+  (amo/save-column
+   (forward-line 1)
+   (transpose-lines 1)
+   (forward-line -1)))
+
 (put 'narrow-to-region 'disabled nil)
 
 (use-package ace-window
@@ -331,3 +352,5 @@
 (global-set-key (kbd "H-g") 'scroll-down-line)
 (global-set-key (kbd "H-h") 'scroll-up-line)
 (global-set-key (kbd "H-i") 'help-command)
+(global-set-key (kbd "H-j") 'amo/move-line-down)
+(global-set-key (kbd "H-k") 'amo/move-line-up)
