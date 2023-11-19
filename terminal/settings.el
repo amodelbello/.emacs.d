@@ -83,8 +83,7 @@
 (use-package ace-window
   :straight t
   :bind
-  (("C-x o" . ace-window)
-   ("M-z" . ace-window))
+  (("C-o" . ace-window))
   :config
   (defvar aw-dispatch-always nil)
   (setq aw-scope 'frame)
