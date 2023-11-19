@@ -47,11 +47,11 @@
 (global-set-key (kbd "C-z") 'z-map)
 (define-key z-map (kbd "t") 'customize-themes)
 
-(defun open-settings-file ()
+(defun amo/open-settings-file ()
   "Open settings.el"
   (interactive)
   (find-file "~/.emacs.d/terminal/settings.el"))
-(define-key z-map (kbd "s") 'open-settings-file)
+(define-key z-map (kbd "s") 'amo/open-settings-file)
 
 (setq ring-bell-function
       (lambda ()
