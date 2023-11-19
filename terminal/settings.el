@@ -88,6 +88,21 @@
     (global-display-line-numbers-mode 0)))
 (define-key z-map (kbd "l") 'amo/toggle-line-numbers)
 
+;; Toggle capitalization of character at point
+(defun amo/toggle-capitalization ()
+  "Toggle the capitalization of the character at point."
+  (interactive)
+  (let ((char (char-after)))
+    (cond ((eq char (upcase char)) (progn (amo/downcase-char 1) (forward-char)))
+          ((eq char (downcase char)) (progn (upcase-char 1) (forward-char)))
+          (t (message "No character at point.")))))
+
+(defun amo/downcase-char (arg)
+  "Lowercasify ARG chars starting from point.  Point doesn't move."
+  (interactive "p")
+  (save-excursion
+    (downcase-region (point) (progn (forward-char arg) (point)))))
+
 ;; Move lines up and down
 (defmacro amo/save-column (&rest body)
   `(let ((column (current-column)))
@@ -353,3 +368,4 @@
 (global-set-key (kbd "H-i") 'help-command)
 (global-set-key (kbd "H-j") 'amo/move-line-down)
 (global-set-key (kbd "H-k") 'amo/move-line-up)
+(global-set-key (kbd "H-l") 'amo/toggle-capitalization)
