@@ -42,7 +42,7 @@
    (if mark-active
        (list (region-beginning) (region-end))
      (message "Copied line")
-     (list (line-beginning-position) (line-beginning-position 2))))))
+     (list (line-beginning-position) (line-beginning-position 2)))))
 
 ;; Use C-h for delete-backward-char
 (global-set-key (kbd "C-h") 'delete-backward-char)
