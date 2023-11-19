@@ -745,8 +745,7 @@
     :config
     (setq org-directory (dot-env-get 'ORG_DIRECTORY_PATH "~/.emacs.d/org-directory")
           org-agenda-files (directory-files-recursively org-directory "\\.org$")
-          org-issue-file (concat org-directory "/issues.org")
-          org-meeting-file (concat org-directory "/meeting-notes.org")
+          org-notes-file (concat org-directory "/notes.org")
           org-union-file (concat org-directory "/union-notes.org")
           org-lists-file (concat org-directory "/lists.org")
           org-archive-location (concat org-directory "/_archive/%s_archive::"))
@@ -776,15 +775,10 @@
     (org-list-allow-alphabetical t)
     (org-M-RET-may-split-line '((default . nil)))
     (org-capture-templates
-     '(("i"
-        "Issue Note"
+     '(("n"
+        "General Note"
         entry
-        (file+headline org-issue-file "Issue Items")
-        "** %? %^G \n%T \n%i \n" :empty-lines 1 :prepend t)
-       ("m"
-        "Meeting Note"
-        entry
-        (file+headline org-meeting-file "Meeting Items")
+        (file org-notes-file)
         "** %?\n%T\n%i\n" :empty-lines-after 1 :prepend t)
        ("u"
         "Union Note"
@@ -805,8 +799,7 @@
         "Interesting Albums"
         item
         (file+headline org-lists-file "Interesting Albums")
-        "%?")))
-    )
+        "%?"))))
 #+end_src
 
 ** org-superstar-mode
