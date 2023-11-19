@@ -45,7 +45,14 @@
 (global-set-key (kbd "C-h") 'delete-backward-char)
 
 (global-set-key (kbd "C-z") 'z-map)
-(define-key z-map (kbd "t") 'customize-themes)
+
+(defun amo/modus-themes-toggle ()
+  "Toggle modus theme, sets to operandi if unset"
+  (interactive)
+  (if (string-match "modus" (symbol-name (car custom-enabled-themes)))
+      (modus-themes-toggle)
+    (load-theme 'modus-operandi)))
+(define-key z-map (kbd "t") 'amo/modus-themes-toggle)
 
 (defun amo/open-settings-file ()
   "Open settings.el"
