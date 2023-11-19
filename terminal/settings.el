@@ -324,9 +324,10 @@
 (global-set-key (kbd "H-a") 'er/expand-region)
 (global-set-key (kbd "H-b") 'er/contract-region) ;; FIXME - map to undo for some reason
 (global-set-key (kbd "H-c") 'avy-goto-char-2)
+(global-set-key (kbd "C-x H-c") 'comment-line)
 (global-set-key (kbd "H-d") 'crux-smart-open-line-above)
 (global-set-key (kbd "H-e") 'crux-top-join-line)
 (global-set-key (kbd "H-f") 'crux-kill-whole-line)
 (global-set-key (kbd "H-g") 'scroll-down-line)
 (global-set-key (kbd "H-h") 'scroll-up-line)
-(global-set-key (kbd "C-x H-c") 'comment-line)
+(global-set-key (kbd "H-i") 'help-command)
