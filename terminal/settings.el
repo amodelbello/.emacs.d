@@ -303,81 +303,98 @@
 
 ;; Terminal mappings to support iterm2 for Mac
 ;; https://www.emacswiki.org/emacs/iTerm2#h5o-11
-(progn
-  (let ((map (if (boundp 'input-decode-map)
-                 input-decode-map
-               function-key-map)))
-    (define-key map "\e[1;P9"  (kbd "H-a"))
-    (global-set-key (kbd "H-a") 'er/expand-region)
+(defun amo/define-escape-sequences-and-bindings ()
+  (interactive)
+  (progn
+    (let ((map (if (boundp 'input-decode-map)
+                   input-decode-map
+                 function-key-map)))
 
-    (define-key map "\e[1;P10" (kbd "H-b"))
-    (global-set-key (kbd "H-b") 'er/contract-region) ;; FIXME - map to undo for some reason
+      ;; C-=
+      (define-key map "\e[1;P9"  (kbd "H-a"))
+      (global-set-key (kbd "H-a") 'er/expand-region)
 
-    (define-key map "\e[1;P11" (kbd "H-c"))
-    (global-set-key (kbd "H-c") 'avy-goto-char-2)
-    (global-set-key (kbd "C-x H-c") 'comment-line)
+      ;; C--
+      (define-key map "\e[1;P10" (kbd "H-b"))
+      (global-set-key (kbd "H-b") 'er/contract-region) ;; FIXME - maps to undo for some reason
 
-    (define-key map "\e[1;P12" (kbd "H-d"))
-    (global-set-key (kbd "H-d") 'crux-smart-open-line-above)
+      ;; C-;
+      (define-key map "\e[1;P11" (kbd "H-c"))
+      (global-set-key (kbd "H-c") 'avy-goto-char-2)
+      (global-set-key (kbd "C-x H-c") 'comment-line)
 
-    (define-key map "\e[1;P13" (kbd "H-e"))
-    (global-set-key (kbd "H-e") 'crux-top-join-line)
+      ;; s-o
+      (define-key map "\e[1;P12" (kbd "H-d"))
+      (global-set-key (kbd "H-d") 'crux-smart-open-line-above)
 
-    (define-key map "\e[1;P14" (kbd "H-f"))
-    (global-set-key (kbd "H-f") 'crux-kill-whole-line)
+      ;; s-j
+      (define-key map "\e[1;P13" (kbd "H-e"))
+      (global-set-key (kbd "H-e") 'crux-top-join-line)
 
-    (define-key map "\e[1;P15" (kbd "H-g"))
-    (global-set-key (kbd "H-g") 'scroll-down-line)
+      ;; s-k
+      (define-key map "\e[1;P14" (kbd "H-f"))
+      (global-set-key (kbd "H-f") 'crux-kill-whole-line)
 
-    (define-key map "\e[1;P16" (kbd "H-h"))
-    (global-set-key (kbd "H-h") 'scroll-up-line)
+      ;; C-s-p
+      (define-key map "\e[1;P15" (kbd "H-g"))
+      (global-set-key (kbd "H-g") 'scroll-down-line)
 
-    (define-key map "\e[1;P17" (kbd "H-i"))
-    (global-set-key (kbd "H-i") 'help-command)
+      ;; C-s-n
+      (define-key map "\e[1;P16" (kbd "H-h"))
+      (global-set-key (kbd "H-h") 'scroll-up-line)
 
-    (define-key map "\e[1;P18" (kbd "H-j"))
-    (global-set-key (kbd "H-j") 'amo/move-line-down)
+      ;; C-S-h
+      (define-key map "\e[1;P17" (kbd "H-i"))
+      (global-set-key (kbd "H-i") 'help-command)
 
-    (define-key map "\e[1;P19" (kbd "H-k"))
-    (global-set-key (kbd "H-k") 'amo/move-line-up)
+      ;; M-S<down>
+      (define-key map "\e[1;P18" (kbd "H-j"))
+      (global-set-key (kbd "H-j") 'amo/move-line-down)
 
-    (define-key map "\e[1;P20" (kbd "H-l"))
-    (global-set-key (kbd "H-l") 'amo/toggle-capitalization)
+      ;; M-S-<up>
+      (define-key map "\e[1;P19" (kbd "H-k"))
+      (global-set-key (kbd "H-k") 'amo/move-line-up)
 
-    ;; Additional available keybindings
-    (define-key map "\e[1;P21" (kbd "H-m"))
-    (define-key map "\e[1;P22" (kbd "H-n"))
-    (define-key map "\e[1;P23" (kbd "H-o"))
-    (define-key map "\e[1;P24" (kbd "H-p"))
-    (define-key map "\e[1;P25" (kbd "H-q"))
-    (define-key map "\e[1;P26" (kbd "H-r"))
-    (define-key map "\e[1;P27" (kbd "H-s"))
-    (define-key map "\e[1;P28" (kbd "H-t"))
-    (define-key map "\e[1;P29" (kbd "H-u"))
-    (define-key map "\e[1;P30" (kbd "H-v"))
-    (define-key map "\e[1;P31" (kbd "H-w"))
-    (define-key map "\e[1;P32" (kbd "H-x"))
-    (define-key map "\e[1;P33" (kbd "H-y"))
-    (define-key map "\e[1;P34" (kbd "H-z"))
-    (define-key map "\e[1;P35" (kbd "H-0"))
-    (define-key map "\e[1;P36" (kbd "H-1"))
-    (define-key map "\e[1;P37" (kbd "H-2"))
-    (define-key map "\e[1;P38" (kbd "H-3"))
-    (define-key map "\e[1;P39" (kbd "H-4"))
-    (define-key map "\e[1;P40" (kbd "H-5"))
-    (define-key map "\e[1;P41" (kbd "H-6"))
-    (define-key map "\e[1;P42" (kbd "H-7"))
-    (define-key map "\e[1;P43" (kbd "H-8"))
-    (define-key map "\e[1;P44" (kbd "H-9"))
-    (define-key map "\e[1;P45" (kbd "H-<f1>"))
-    (define-key map "\e[1;P46" (kbd "H-<f2>"))
-    (define-key map "\e[1;P47" (kbd "H-<f3>"))
-    (define-key map "\e[1;P48" (kbd "H-<f4>"))
-    (define-key map "\e[1;P49" (kbd "H-<f5>"))
-    (define-key map "\e[1;P50" (kbd "H-<f6>"))
-    (define-key map "\e[1;P51" (kbd "H-<f7>"))
-    (define-key map "\e[1;P52" (kbd "H-<f8>"))
-    (define-key map "\e[1;P53" (kbd "H-<f9>"))
-    (define-key map "\e[1;P54" (kbd "H-<f10>"))
-    (define-key map "\e[1;P55" (kbd "H-<f11>"))
-    (define-key map "\e[1;P56" (kbd "H-<f12>"))))
+      ;; C-'
+      (define-key map "\e[1;P20" (kbd "H-l"))
+      (global-set-key (kbd "H-l") 'amo/toggle-capitalization)
+
+      ;; Additional available keybindings
+      (define-key map "\e[1;P21" (kbd "H-m"))
+      (define-key map "\e[1;P22" (kbd "H-n"))
+      (define-key map "\e[1;P23" (kbd "H-o"))
+      (define-key map "\e[1;P24" (kbd "H-p"))
+      (define-key map "\e[1;P25" (kbd "H-q"))
+      (define-key map "\e[1;P26" (kbd "H-r"))
+      (define-key map "\e[1;P27" (kbd "H-s"))
+      (define-key map "\e[1;P28" (kbd "H-t"))
+      (define-key map "\e[1;P29" (kbd "H-u"))
+      (define-key map "\e[1;P30" (kbd "H-v"))
+      (define-key map "\e[1;P31" (kbd "H-w"))
+      (define-key map "\e[1;P32" (kbd "H-x"))
+      (define-key map "\e[1;P33" (kbd "H-y"))
+      (define-key map "\e[1;P34" (kbd "H-z"))
+      (define-key map "\e[1;P35" (kbd "H-0"))
+      (define-key map "\e[1;P36" (kbd "H-1"))
+      (define-key map "\e[1;P37" (kbd "H-2"))
+      (define-key map "\e[1;P38" (kbd "H-3"))
+      (define-key map "\e[1;P39" (kbd "H-4"))
+      (define-key map "\e[1;P40" (kbd "H-5"))
+      (define-key map "\e[1;P41" (kbd "H-6"))
+      (define-key map "\e[1;P42" (kbd "H-7"))
+      (define-key map "\e[1;P43" (kbd "H-8"))
+      (define-key map "\e[1;P44" (kbd "H-9"))
+      (define-key map "\e[1;P45" (kbd "H-<f1>"))
+      (define-key map "\e[1;P46" (kbd "H-<f2>"))
+      (define-key map "\e[1;P47" (kbd "H-<f3>"))
+      (define-key map "\e[1;P48" (kbd "H-<f4>"))
+      (define-key map "\e[1;P49" (kbd "H-<f5>"))
+      (define-key map "\e[1;P50" (kbd "H-<f6>"))
+      (define-key map "\e[1;P51" (kbd "H-<f7>"))
+      (define-key map "\e[1;P52" (kbd "H-<f8>"))
+      (define-key map "\e[1;P53" (kbd "H-<f9>"))
+      (define-key map "\e[1;P54" (kbd "H-<f10>"))
+      (define-key map "\e[1;P55" (kbd "H-<f11>"))
+      (define-key map "\e[1;P56" (kbd "H-<f12>")))))
+
+(add-hook 'server-after-make-frame-hook 'amo/define-escape-sequences-and-bindings)
