@@ -49,12 +49,14 @@
 
 (global-set-key (kbd "C-z") 'z-map)
 
-(defun amo/modus-themes-toggle ()
+(defun amo/modus-themes-toggle (&optional ignore-if-set)
   "Toggle modus theme, sets to operandi if unset"
   (interactive)
   (if (string-match "modus" (symbol-name (car custom-enabled-themes)))
-      (modus-themes-toggle)
+      (when (not ignore-if-set)
+        (modus-themes-toggle))
     (load-theme 'modus-operandi)))
+(amo/modus-themes-toggle t)
 (define-key z-map (kbd "t") 'amo/modus-themes-toggle)
 
 (defun amo/open-settings-file ()
