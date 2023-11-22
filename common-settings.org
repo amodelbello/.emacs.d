@@ -1,0 +1,192 @@
+#+title Common settings
+#+author: Amo DelBello
+#+description: Common settings shared by GUI and terminal config
+#+startup: content
+
+* General Configuration
+** Variables and Modes
+#+begin_src emacs-lisp
+  (use-package emacs
+    :config
+    ;; Use C-h for delete-backward-char
+    (global-set-key (kbd "C-h") 'delete-backward-char)
+
+    ;; Set custom prefix key ("C-z")
+    (define-prefix-command 'z-map)
+    (global-set-key (kbd "C-z") 'z-map)
+
+    (global-display-line-numbers-mode 0)
+    (fset 'yes-or-no-p 'y-or-n-p)
+    (recentf-mode 1)
+    (savehist-mode 1)
+    (whitespace-mode -1)
+    (delete-selection-mode 1)
+    (blink-cursor-mode 0)
+    (electric-pair-mode 1)
+    (put 'narrow-to-region 'disabled nil)
+
+    (setq save-interprogram-paste-before-kill t
+          enable-recursive-minibuffers t)
+
+    (setq-default indent-tabs-mode nil
+                  global-tab-line-mode nil
+                  tab-line-mode nil
+                  tab-bar-mode nil
+                  line-spacing 0.3
+                  fill-column 100
+                  sentence-end-double-space nil
+                  visual-line-mode t
+                  whitespace-line-column 110)
+
+    ;; Blink modeline instead of ring bell
+    (setq ring-bell-function
+          (lambda ()
+            (let ((orig-fg (face-foreground 'mode-line)))
+              (set-face-foreground 'mode-line "Magenta")
+              (run-with-idle-timer 0.1 nil
+                                   (lambda (fg) (set-face-foreground 'mode-line fg))
+                                   orig-fg))))
+#+end_src
+
+** Functions for custom bindings
+#+begin_src emacs-lisp
+  ;; Un-highlight region after mark jump
+  (defun amo/exchange-point-and-mark ()
+    "Deactivates mark after exchanging point and mark"
+    (interactive)
+    (exchange-point-and-mark)
+    (deactivate-mark))
+
+  ;; Transpose chars and words backwards
+  (defun amo/transpose-chars-backwards ()
+    "Just like transpose-chars but goes the other way"
+    (interactive)
+    (transpose-chars -1))
+
+  (defun amo/transpose-words-backwards ()
+    "Just like transpose-words but goes the other way"
+    (interactive)
+    (transpose-words -1))
+
+  ;; Move char after point to end of next word
+  (defun amo/transpose-char-to-end-of-next-word ()
+    "Move char at point to the end of the next word.
+  Use case is to push closing parentheses out to contain subsequent characters
+  when a function is typed and the closing parenthesis is automatically added.
+  Skips over periods, quotes, and closing parentheses."
+    (interactive)
+
+    ;; helpers
+    (defun amo/should-move-forward-one-char (c)
+      (or
+       (char-equal (following-char) ?\")
+       (char-equal (following-char) ?\))))
+    (defun amo/should-move-forward-one-word (c)
+      (char-equal (following-char) ?.))
+    (defun amo/should-move (c)
+      (or
+       (amo/should-move-forward-one-char c)
+       (amo/should-move-forward-one-word c)))
+
+    (forward-char)
+    (let ((start (point))
+          (end nil))
+      (save-excursion
+        (forward-word)
+        (while (amo/should-move (following-char))
+          (if (amo/should-move-forward-one-char (following-char))
+              (forward-char)
+            (forward-word)))
+        (setq end (point)))
+      (transpose-subr 'forward-char (- end start)))
+    (backward-char))
+
+  ;; Move lines up and down
+  (defmacro amo/save-column (&rest body)
+    `(let ((column (current-column)))
+       (unwind-protect
+           (progn ,@body)
+         (move-to-column column))))
+  (put 'save-column 'lisp-indent-function 0)
+
+  (defun amo/move-line-up ()
+    (interactive)
+    (amo/save-column
+     (transpose-lines 1)
+     (forward-line -2)))
+
+  (defun amo/move-line-down ()
+    (interactive)
+    (amo/save-column
+     (forward-line 1)
+     (transpose-lines 1)
+     (forward-line -1)))
+
+  ;; Toggle capitalization of character at point
+  (defun amo/toggle-capitalization ()
+    "Toggle the capitalization of the character at point."
+    (interactive)
+    (let ((char (char-after)))
+      (cond ((eq char (upcase char)) (progn (amo/downcase-char 1) (forward-char)))
+            ((eq char (downcase char)) (progn (upcase-char 1) (forward-char)))
+            (t (message "No character at point.")))))
+
+  (defun amo/downcase-char (arg)
+    "Lowercasify ARG chars starting from point.  Point doesn't move."
+    (interactive "p")
+    (save-excursion
+      (downcase-region (point) (progn (forward-char arg) (point)))))
+
+  (defun amo/toggle-line-numbers ()
+    "Toggle the display of line numbers"
+    (interactive)
+    (if (eq nil global-display-line-numbers-mode)
+        (global-display-line-numbers-mode 1)
+      (global-display-line-numbers-mode 0)))
+#+end_src
+
+** Custom Bindings
+#+begin_src emacs-lisp
+  :bind (("C-z l" . amo/toggle-line-numbers)
+         ("C-x C-x" . amo/exchange-point-and-mark)
+         ("C-S-t" . amo/transpose-chars-backwards)
+         ("M-T" . amo/transpose-words-backwards)
+         ("C-S-f" . amo/transpose-char-to-end-of-next-word)
+         ("M-z" . zap-up-to-char)))
+#+end_src
+
+** dired
+#+begin_src emacs-lisp
+  (use-package dired
+    :config  (setq dired-kill-when-opening-new-dired-buffer t
+                   dired-listing-switches "-al")
+
+    ;; from https://www.emacswiki.org/emacs/DiredSortDirectoriesFirst
+    (defun mydired-sort ()
+      "Sort dired listings with directories first."
+      (save-excursion
+        (let (buffer-read-only)
+          (forward-line 2) ;; beyond dir. header
+          (sort-regexp-fields t "^.*$" "[ ]*." (point) (point-max)))
+        (set-buffer-modified-p nil)))
+    (defadvice dired-readin
+        (after dired-after-updating-hook first () activate)
+      "Sort dired listings with directories first before adding marks."
+      (mydired-sort))
+
+    :hook ((dired-mode . dired-hide-details-mode))
+    :bind (:map dired-mode-map
+                ("C-o" . nil)))
+#+end_src
+
+** Advice
+#+begin_src emacs-lisp
+  ;; Copy whole line to kill ring when no active region
+  (defadvice kill-ring-save (before slick-copy activate compile)
+    "When called interactively with no active region, copy a single line instead."
+    (interactive
+     (if mark-active
+         (list (region-beginning) (region-end))
+       (message "Copied line")
+       (list (line-beginning-position) (line-beginning-position 2)))))
+#+end_src

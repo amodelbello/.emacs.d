@@ -1,21 +1,7 @@
 ;; Garbage collect at the end of startup
 (add-hook 'after-init-hook #'garbage-collect t)
 
-;; straight.el bootstrap
-(defvar bootstrap-version)
-(let ((bootstrap-file
-       (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
-      (bootstrap-version 6))
-  (unless (file-exists-p bootstrap-file)
-    (with-current-buffer
-        (url-retrieve-synchronously
-         "https://raw.githubusercontent.com/radian-software/straight.el/develop/install.el"
-         'silent 'inhibit-cookies)
-      (goto-char (point-max))
-      (eval-print-last-sexp)))
-  (load bootstrap-file nil 'nomessage))
-(straight-use-package 'use-package)
-(straight-use-package 'org)
+(load-file "~/.emacs.d/straight-config.el")
 
 (use-package use-package-ensure-system-package
   :straight t)
@@ -32,12 +18,8 @@
       amo/base-font-size (* (string-to-number amo/font-size) 10)
       amo/font (concat amo/font-family " " amo/font-size))
 
-;; Load our main config
+;; Load config files
+(org-babel-load-file (expand-file-name "~/.emacs.d/common-settings.org"))
 (org-babel-load-file (expand-file-name "~/.emacs.d/settings.org"))
-
-;; Load customize settings
-(setq custom-file "~/.emacs.d/customize.el")
-(unless (file-exists-p custom-file)
-  (write-region "" "" custom-file))
-(load-file custom-file)
-(put 'narrow-to-region 'disabled nil)
+(org-babel-load-file (expand-file-name "~/.emacs.d/common-packages.org"))
+(load-file "~/.emacs.d/customize-settings.el")

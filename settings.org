@@ -15,30 +15,15 @@
     ;; Maximize frames when created
     (add-to-list 'default-frame-alist '(fullscreen . maximized))
 
-    ;; Use C-h for delete-backward-char
-    (global-set-key (kbd "C-h") 'delete-backward-char)
-
     ;; Use C-H for help prefix
     (global-set-key (kbd "C-S-h") 'help-command)
-
-    ;; Set custom prefix key ("C-z")
-    (define-prefix-command 'z-map)
-    (global-set-key (kbd "C-z") 'z-map)
 
     (set-frame-font amo/font nil t)
     (set-face-attribute 'fixed-pitch nil :font amo/font)
     (set-face-attribute 'variable-pitch nil :font amo/font)
     (set-face-attribute 'default nil :height amo/base-font-size)
     (desktop-save-mode 1)
-    (fset 'yes-or-no-p 'y-or-n-p)
-    (blink-cursor-mode 0)
-    (electric-pair-mode 1)
-    (delete-selection-mode 1)
     (global-hl-line-mode t)
-    (recentf-mode 1)
-    (savehist-mode 1)
-    (whitespace-mode -1)
-    (global-display-line-numbers-mode 0)
 
     (setq warning-minimum-level :error
           scroll-step 1
@@ -46,14 +31,12 @@
           frame-inhibit-implied-resize t
           recentf-max-menu-items 25
           recentf-max-saved-items 25
-          save-interprogram-paste-before-kill t
           inferior-lisp-program "/usr/local/bin/sbcl"
           font-latex-fontify-script nil
           auto-save-default nil
           create-lockfiles nil
           delete-by-moving-to-trash t
           comment-column 64
-          enable-recursive-minibuffers t
 
           ;; Change mode based on file extension
           auto-mode-alist (append '(("\\.cl$" . lisp-mode)
@@ -69,25 +52,7 @@
           indent-tabs-mode nil
           auto-save-file-name-transforms '((".*" "~/.emacs.d/auto-save-list/" t)))
 
-    (setq-default org-catch-invisible-edits 'show
-                  indent-tabs-mode nil
-                  global-tab-line-mode nil
-                  tab-line-mode nil
-                  tab-bar-mode nil
-                  line-spacing 0.3
-                  fill-column 100
-                  sentence-end-double-space nil
-                  visual-line-mode t
-                  whitespace-line-column 110)
-
-    ;; Blink modeline instead of ring bell
-    (setq ring-bell-function
-          (lambda ()
-            (let ((orig-fg (face-foreground 'mode-line)))
-              (set-face-foreground 'mode-line "Magenta")
-              (run-with-idle-timer 0.1 nil
-                                   (lambda (fg) (set-face-foreground 'mode-line fg))
-                                   orig-fg))))
+    (setq-default org-catch-invisible-edits 'show)
     #+end_src
 ** Functions for custom bindings
 #+begin_src emacs-lisp
@@ -126,77 +91,6 @@
     (split-window-horizontally)
     (other-window 1))
 
-  ;; Un-highlight region after mark jump
-  (defun amo/exchange-point-and-mark ()
-    "Deactivates mark after exchanging point and mark"
-    (interactive)
-    (exchange-point-and-mark)
-    (deactivate-mark))
-
-  ;; Transpose chars and words backwards
-  (defun amo/transpose-chars-backwards ()
-    "Just like transpose-chars but goes the other way"
-    (interactive)
-    (transpose-chars -1))
-
-  (defun amo/transpose-words-backwards ()
-    "Just like transpose-words but goes the other way"
-    (interactive)
-    (transpose-words -1))
-
-  ;; Move char after point to end of next word
-  (defun amo/transpose-char-to-end-of-next-word ()
-    "Move char at point to the end of the next word.
-  Use case is to push closing parentheses out to contain subsequent characters
-  when a function is typed and the closing parenthesis is automatically added.
-  Skips over periods, quotes, and closing parentheses."
-    (interactive)
-
-    ;; helpers
-    (defun amo/should-move-forward-one-char (c)
-      (or
-       (char-equal (following-char) ?\")
-       (char-equal (following-char) ?\))))
-    (defun amo/should-move-forward-one-word (c)
-      (char-equal (following-char) ?.))
-    (defun amo/should-move (c)
-      (or
-       (amo/should-move-forward-one-char c)
-       (amo/should-move-forward-one-word c)))
-
-    (forward-char)
-    (let ((start (point))
-          (end nil))
-      (save-excursion
-        (forward-word)
-        (while (amo/should-move (following-char))
-          (if (amo/should-move-forward-one-char (following-char))
-              (forward-char)
-            (forward-word)))
-        (setq end (point)))
-      (transpose-subr 'forward-char (- end start)))
-    (backward-char))
-
-  ;; Move lines up and down
-  (defmacro amo/save-column (&rest body)
-    `(let ((column (current-column)))
-       (unwind-protect
-           (progn ,@body)
-         (move-to-column column))))
-  (put 'save-column 'lisp-indent-function 0)
-
-  (defun amo/move-line-up ()
-    (interactive)
-    (amo/save-column
-     (transpose-lines 1)
-     (forward-line -2)))
-
-  (defun amo/move-line-down ()
-    (interactive)
-    (amo/save-column
-     (forward-line 1)
-     (transpose-lines 1)
-     (forward-line -1)))
 
   (defun amo/open-notes-directory ()
     "Open notes directory"
@@ -207,28 +101,6 @@
     "Open denote directory"
     (interactive)
     (find-file (concat org-directory "/denote")))
-
-  ;; Toggle capitalization of character at point
-  (defun amo/toggle-capitalization ()
-    "Toggle the capitalization of the character at point."
-    (interactive)
-    (let ((char (char-after)))
-      (cond ((eq char (upcase char)) (progn (amo/downcase-char 1) (forward-char)))
-            ((eq char (downcase char)) (progn (upcase-char 1) (forward-char)))
-            (t (message "No character at point.")))))
-
-  (defun amo/downcase-char (arg)
-    "Lowercasify ARG chars starting from point.  Point doesn't move."
-    (interactive "p")
-    (save-excursion
-      (downcase-region (point) (progn (forward-char arg) (point)))))
-
-  (defun amo/toggle-line-numbers ()
-    "Toggle the display of line numbers"
-    (interactive)
-    (if (eq nil global-display-line-numbers-mode)
-        (global-display-line-numbers-mode 1)
-      (global-display-line-numbers-mode 0)))
 #+end_src
 
 ** Custom Bindings
@@ -243,15 +115,10 @@
          ("C-z e" . eshell)
          ("C-z n" . amo/open-notes-directory)
          ("C-z d" . amo/open-denote-directory)
-         ("C-z l" . amo/toggle-line-numbers)
 
          ;; Other bindings
          ("C-x 2" . amo/split-window-below)
          ("C-x 3" . amo/split-window-horizontally)
-         ("C-x C-x" . amo/exchange-point-and-mark)
-         ("C-S-t" . amo/transpose-chars-backwards)
-         ("M-T" . amo/transpose-words-backwards)
-         ("C-S-f" . amo/transpose-char-to-end-of-next-word)
          ("M-<down>" . amo/move-line-down)
          ("M-<up>" . amo/move-line-up)
          ("C-'" . amo/toggle-capitalization)
@@ -259,7 +126,7 @@
          ("C-s-n" . scroll-up-line)
          ("C-x K" . kill-buffer-and-window)
          ("M-SPC" . cycle-spacing)
-         ("M-z" . zap-up-to-char))
+         )
 #+end_src
 
 ** Functions for hooks
@@ -280,45 +147,9 @@
   :hook ((comint-mode . amo/comint-mode-actions)
          (before-save . amo/whitespace-cleanup)
          (focus-out . garbage-collect)
-         (text-mode . flyspell-mode))
+         (text-mode . flyspell-mode)))
   #+end_src
 
-** Advice
-#+begin_src emacs-lisp
-  :config
-  ;; Copy whole line to kill ring when no active region
-  (defadvice kill-ring-save (before slick-copy activate compile)
-    "When called interactively with no active region, copy a single line instead."
-    (interactive
-     (if mark-active
-         (list (region-beginning) (region-end))
-       (message "Copied line")
-       (list (line-beginning-position) (line-beginning-position 2))))))
-#+end_src
-
-** dired
-#+begin_src emacs-lisp
-  (use-package dired
-    :config  (setq dired-kill-when-opening-new-dired-buffer t
-                   dired-listing-switches "-al")
-
-    ;; from https://www.emacswiki.org/emacs/DiredSortDirectoriesFirst
-    (defun mydired-sort ()
-      "Sort dired listings with directories first."
-      (save-excursion
-        (let (buffer-read-only)
-          (forward-line 2) ;; beyond dir. header
-          (sort-regexp-fields t "^.*$" "[ ]*." (point) (point-max)))
-        (set-buffer-modified-p nil)))
-    (defadvice dired-readin
-        (after dired-after-updating-hook first () activate)
-      "Sort dired listings with directories first before adding marks."
-      (mydired-sort))
-
-    :hook ((dired-mode . dired-hide-details-mode))
-    :bind (:map dired-mode-map
-                ("C-o" . nil)))
-#+end_src
 ** ibuffer
 #+begin_src emacs-lisp
   (use-package ibuffer
@@ -507,138 +338,6 @@
      (magit-post-refresh . diff-hl-magit-post-refresh)))
 #+end_src
 * Minibuffer & Completion
-** Vertico
-:PROPERTIES:
-:REPO:     https://github.com/minad/vertico
-:DESCRIPTION: Performant and minimalistic vertical completion UI based on the default completion system.
-:END:
-#+begin_src emacs-lisp
-  (use-package vertico
-    :straight (:files (:defaults "extensions/*"))
-    :bind (:map vertico-map
-                ("C-j" . vertico-directory-enter)
-                ("DEL" . vertico-directory-delete-char)
-                ("M-DEL" . vertico-directory-delete-word))
-    :hook (rfn-eshadow-update-overlay . vertico-directory-tidy)
-    :init
-    (vertico-mode))
-#+end_src
-** Embark
-:PROPERTIES:
-:REPO:     https://github.com/oantolin/embark
-:DESCRIPTION: Emacs Mini-Buffer Actions Rooted in Keymaps
-:END:
-#+begin_src emacs-lisp
-  (use-package embark
-    :straight t
-
-    :bind
-    (("C-." . embark-act)         ;; pick some comfortable binding
-     ("C-\"" . embark-dwim)        ;; good alternative: M-.
-     ("C-S-h B" . embark-bindings)) ;; alternative for `describe-bindings'
-
-    :init
-
-    ;; Optionally replace the key help with a completing-read interface
-    (setq prefix-help-command #'embark-prefix-help-command)
-
-    ;; Show the Embark target at point via Eldoc.  You may adjust the Eldoc
-    ;; strategy, if you want to see the documentation from multiple providers.
-    (add-hook 'eldoc-documentation-functions #'embark-eldoc-first-target)
-    ;; (setq eldoc-documentation-strategy #'eldoc-documentation-compose-eagerly)
-
-    :config
-
-    ;; Hide the mode line of the Embark live/completions buffers
-    (add-to-list 'display-buffer-alist
-                 '("\\`\\*Embark Collect \\(Live\\|Completions\\)\\*"
-                   nil
-                   (window-parameters (mode-line-format . none)))))
-
-  ;; Consult users will also want the embark-consult package.
-  (use-package embark-consult
-    :straight t ; only need to install it, embark loads it after consult if found
-    :hook
-    (embark-collect-mode . consult-preview-at-point-mode))
-#+end_src
-** Marginalia
-:PROPERTIES:
-:DESCRIPTION: Enable rich annotations in the minibuffer
-:REPO:     https://github.com/minad/marginalia
-:END:
-#+begin_src emacs-lisp
-  (use-package marginalia
-    :straight t
-    :init
-    (marginalia-mode))
-#+end_src
-
-** Consult
-:PROPERTIES:
-:REPO:     https://github.com/minad/consult
-:DESCRIPTION: Search and navigation commands based on the Emacs completion function completing-read
-:END:
-#+begin_src emacs-lisp
-  ;; Example configuration for Consult
-  (use-package consult
-    :straight t
-
-    ;; Replace bindings. Lazily loaded due by `use-package'.
-    :bind (("C-s" . consult-line)
-           ("C-c m" . consult-man)
-           ("C-c i" . consult-info)
-           ([remap Info-search] . consult-info)
-           ("C-x b" . consult-buffer)
-           ("C-x 4 b" . consult-buffer-other-window)
-           ("C-x r b" . consult-bookmark)
-           ("M-y" . consult-yank-pop)
-           ("M-g g" . consult-goto-line)
-           ("M-g o" . consult-outline)
-           ("M-g m" . consult-mark)
-           ("M-g k" . consult-global-mark)
-           ("M-g i" . consult-imenu)
-           ("M-g I" . consult-imenu-multi)
-           ("M-s d" . consult-find)
-           ("M-s D" . consult-locate)
-           ("M-s g" . consult-grep)
-           ("M-s G" . consult-git-grep)
-           ("M-s r" . consult-ripgrep)
-           ("M-s e" . consult-isearch-history))
-
-    ;; Enable automatic preview at point in the *Completions* buffer. This is
-    ;; relevant when you use the default completion UI.
-    :hook (completion-list-mode . consult-preview-at-point-mode)
-
-    ;; The :init configuration is always executed (Not lazy)
-    :init
-
-    ;; Optionally configure the register formatting. This improves the register
-    ;; preview for `consult-register', `consult-register-load',
-    ;; `consult-register-store' and the Emacs built-ins.
-    (setq register-preview-delay 0.5
-          register-preview-function #'consult-register-format)
-
-    ;; Optionally tweak the register preview window.
-    ;; This adds thin lines, sorting and hides the mode line of the window.
-    (advice-add #'register-preview :override #'consult-register-window)
-
-    ;; Use Consult to select xref locations with preview
-    (setq xref-show-xrefs-function #'consult-xref
-          xref-show-definitions-function #'consult-xref)
-
-    ;; Configure other variables and modes in the :config section,
-    ;; after lazily loading the package.
-    :config
-    (consult-customize
-     consult-theme :preview-key '(:debounce 0.2 any)
-     consult-ripgrep consult-git-grep consult-grep
-     consult-bookmark consult-recent-file consult-xref
-     consult--source-bookmark consult--source-file-register
-     consult--source-recent-file consult--source-project-recent-file
-     ;; :preview-key "M-."
-     :preview-key '(:debounce 0.4 any)))
-#+end_src
-
 ** consult-projectile
 :PROPERTIES:
 :REPO:     https://github.com/emacsmirror/consult-projectile
@@ -654,18 +353,7 @@
     (define-key projectile-command-map (kbd "p") #'consult-projectile-switch-project)
     (define-key projectile-command-map (kbd "b") #'consult-projectile-switch-to-buffer))
 #+end_src
-** orderless
-:PROPERTIES:
-:DESCRIPTION: Emacs completion style that matches multiple regexps in any order
-:REPO:     https://github.com/oantolin/orderless
-:END:
-#+begin_src emacs-lisp
-  (use-package orderless
-    :straight t
-    :config
-    (setq completion-styles '(orderless basic)
-          completion-category-overrides '((file (styles basic partial-completion)))))
-#+end_src
+
 ** Corfu
 :PROPERTIES:
 :REPO:     https://github.com/minad/corfu
@@ -693,45 +381,6 @@
     ;; Enable indentation+completion using the TAB key.
     ;; `completion-at-point' is often bound to M-TAB.
     (setq tab-always-indent 'complete))
-#+end_src
-** nerd-icons-completion
-:PROPERTIES:
-:REPO:     https://github.com/rainstormstudio/nerd-icons-completion
-:DESCRIPTION: Icons for candidates in minibuffer
-:END:
-#+begin_src emacs-lisp
-  (use-package nerd-icons-completion
-    :straight t
-    :after marginalia
-    :hook ((marginalia-mode . nerd-icons-completion-marginalia-setup))
-    :init
-    (nerd-icons-completion-mode 1))
-#+end_src
-
-** kind-icon
-:PROPERTIES:
-:REPO:     https://github.com/jdtsmith/kind-icon
-:DESCRIPTION: Completion kind text/icon prefix labelling for emacs in-region completion
-:END:
-#+begin_src emacs-lisp
-  (use-package kind-icon
-    :straight t
-    :after corfu
-    :custom
-    (kind-icon-default-face 'corfu-default) ; to compute blended backgrounds correctly
-    :config
-    (add-to-list 'corfu-margin-formatters #'kind-icon-margin-formatter))
-#+end_src
-** which-key
-:PROPERTIES:
-:REPO:     https://github.com/justbur/emacs-which-key
-:DESCRIPTION: Emacs package that displays available keybindings in popup
-:END:
-#+begin_src emacs-lisp
-  (use-package which-key
-    :straight t
-    :config
-    (which-key-mode))
 #+end_src
 
 * Org Mode
@@ -815,49 +464,6 @@
 #+end_src
 
 * Other Useful Packages
-** Ace Window
-:PROPERTIES:
-:REPO:     [[https://github.com/abo-abo/ace-window]]
-:DESCRIPTION: Quickly switch windows in Emacs
-:END:
-#+begin_src emacs-lisp
-  (use-package ace-window
-    :straight t
-    :bind
-    (("C-o" . ace-window)
-     ("C-x o" . ace-window))
-    :config
-    (setq aw-scope 'frame
-          aw-dispatch-always nil
-          aw-keys '(?j ?k ?d ?s ?a ?g ?h ?k ?l)))
-#+end_src
-** aggressive-indent-mode
-:PROPERTIES:
-:REPO:     https://github.com/Malabarba/aggressive-indent-mode
-:DESCRIPTION: Emacs minor mode that keeps your code always indented
-:END:
-#+begin_src emacs-lisp
-  (use-package aggressive-indent
-    :straight t
-    :config
-    (global-aggressive-indent-mode 1)
-    (add-to-list 'aggressive-indent-excluded-modes 'html-mode)
-    (add-to-list 'aggressive-indent-excluded-modes 'python-ts-mode))
-#+end_src
-** Avy
-:PROPERTIES:
-:REPO:     [[https://github.com/abo-abo/avy]]
-:DESCRIPTION: Jumping to visible text using a char-based decision tree
-:END:
-#+begin_src emacs-lisp
-  (use-package avy
-    :straight t
-    :bind (("C-;" . avy-goto-char-2)
-           :map org-mode-map
-           ("C-'" . nil)
-           :map flyspell-mode-map
-           ("C-;" . nil)))
-#+end_src
 ** buffer-move
 :PROPERTIES:
 :REPO:     https://github.com/lukhas/buffer-move
@@ -877,28 +483,6 @@
      ("<C-S-left>" . buf-move-left)
      ("<C-S-right>" . buf-move-right)))
 #+end_src
-** Crux
-:PROPERTIES:
-:REPO:     https://github.com/bbatsov/crux
-:DOCS:     [[https://emacsredux.com/blog/2016/01/30/crux/]]
-:DESCRIPTION: A Collection of Ridiculously Useful eXtensions for Emacs
-:END:
-#+begin_src emacs-lisp
-  (use-package crux
-    :straight t
-    :bind
-    (("s-o" . crux-smart-open-line-above)
-     ("M-o" . crux-smart-open-line)
-     ("s-r" . crux-recentf-find-file)
-     ("C-c D" . crux-delete-file-and-buffer)
-     ("C-c d" . crux-duplicate-current-line-or-region)
-     ("C-c M-d" . crux-duplicate-and-comment-current-line-or-region)
-     ("C-c r" . crux-rename-file-and-buffer)
-     ("s-j" . crux-top-join-line)
-     ("s-k" . crux-kill-whole-line)
-     ("<C-backspace>" . crux-kill-line-backwards)))
-#+end_src
-
 ** denote
 :PROPERTIES:
 :DESCRIPTION: Simple notes for Emacs with an efficient file-naming scheme
@@ -958,17 +542,6 @@
       :straight t
       :config
       (exec-path-from-shell-initialize)))
-#+end_src
-** expand-region
-:PROPERTIES:
-:REPO:     https://github.com/magnars/expand-region.el
-:DESCRIPTION: Emacs extension to increase selected region by semantic units.
-:END:
-#+begin_src emacs-lisp
-  (use-package expand-region
-    :straight t
-    :bind (("C-=" . er/expand-region)
-           ("C--" . er/contract-region)))
 #+end_src
 ** Eyebrowse
 :PROPERTIES:
@@ -1032,34 +605,6 @@
     :bind (("C-x C-b" . ibuffer)))
 #+end_src
 
-** Idle Highlight Mode
-:PROPERTIES:
-:REPO:     https://codeberg.org/ideasman42/emacs-idle-highlight-mode
-:DESCRIPTION: Simple symbol highlighting package for Emacs
-:END:
-#+begin_src emacs-lisp
-  (use-package idle-highlight-mode
-    :straight t
-    :config
-    (setq idle-highlight-idle-time 0.2
-          idle-highlight-exclude-point t)
-    :hook
-    ((prog-mode text-mode) . idle-highlight-mode))
-
-#+end_src
-
-** jump-char
-:PROPERTIES:
-:REPO:     https://github.com/lewang/jump-char
-:DESCRIPTION: Navigation by character occurrence
-:END:
-#+begin_src emacs-lisp
-  (use-package jump-char
-    :straight (:host github :repo "lewang/jump-char"
-                 :branch "master")
-    :bind (("M-n" . jump-char-forward)
-           ("M-N" . jump-char-backward)))
-#+end_src
 ** markdown-mode
 :PROPERTIES:
 :REPO:     https://github.com/jrblevin/markdown-mode
@@ -1071,17 +616,6 @@
     :mode ("README\\.md\\'" . gfm-mode)
     :init (setq markdown-command "multimarkdown"))
 #+end_src
-** minions
-:PROPERTIES:
-:REPO:     https://github.com/tarsius/minions
-:DESCRIPTION: A minor-mode menu for the mode line
-:END:
-#+begin_src emacs-lisp
-  (use-package minions
-    :straight t
-    :config
-    (minions-mode 1))
-#+end_src
 ** package-lint
 :PROPERTIES:
 :REPO:     https://github.com/purcell/package-lint
@@ -1091,23 +625,6 @@
   (use-package package-lint
     :straight t)
 #+end_src
-** Paredit
-:PROPERTIES:
-:REPO:     https://github.com/emacsmirror/paredit/blob/master/paredit.el
-:DOCS:     https://www.emacswiki.org/emacs/ParEdit, https://wikemacs.org/wiki/Paredit-mode
-:DESCRIPTION: A minor mode for performing structured editing of S-expression data
-:END:
-#+begin_src emacs-lisp
-  (use-package paredit
-    :straight t
-    :hook
-    ((lisp-mode . paredit-mode)
-     (emacs-lisp-mode . paredit-mode)
-     (clojure-mode . paredit-mode)
-     (clojurescript-mode . paredit-mode)
-     (clojurec-mode . paredit-mode)
-     (cider-repl-mode . paredit-mode)))
-#+end_src
 ** Popper
 :PROPERTIES:
 :REPO:     https://github.com/karthink/popper
@@ -1116,7 +633,7 @@
 #+begin_src emacs-lisp
   (use-package popper
     :straight t
-    :bind (("s-3" . popper-toggle-latest)
+    :bind (("s-3" . popper-toggle)
            ("s-4" . popper-cycle)
            ("s-5" . popper-toggle-type))
     :init
@@ -1190,23 +707,6 @@
     :straight t
     :bind (("C->" . transpose-frame)))
 #+end_src
-** undo-tree
-:PROPERTIES:
-:REPO:     https://github.com/apchamberlain/undo-tree.el
-:DOCS:     https://www.emacswiki.org/emacs/UndoTree
-:DESCRIPTION: Visualize Emacs undo information as a graphical tree and navigate to previous states
-:END:
-#+begin_src emacs-lisp
-  (use-package undo-tree
-    :straight t
-    :config
-    (global-undo-tree-mode)
-    (setq undo-tree-history-directory-alist `((".*" . ,temporary-file-directory))
-          undo-tree-enable-undo-in-region t
-          undo-tree-auto-save-history t)
-    :diminish
-    (undo-tree-mode))
-#+end_src
 ** YASnippet
 :PROPERTIES:
 :REPO:     https://github.com/joaotavora/yasnippet
@@ -1233,6 +733,7 @@
 #+begin_src emacs-lisp
   (use-package dashboard
     :straight t
+    :after nerd-icons
     :config
     (setq dashboard-center-content t
           dashboard-banner-logo-title "No! The beard stays. You go."
@@ -1247,38 +748,6 @@
           ;; dashboard-projects-switch-function #'projectile-persp-switch-project
           )
     (dashboard-open))
-#+end_src
-** Nerd Icons
-:PROPERTIES:
-:REPO:     https://github.com/rainstormstudio/nerd-icons.el
-:DESCRIPTION: A library for easily using Nerd Font icons inside Emacs
-:END:
-#+begin_src emacs-lisp
-  ;; (straight-use-package
-  ;;  '(nerd-icons :type git :host github :repo "rainstormstudio/nerd-icons.el"))
-  (use-package nerd-icons
-    :straight t)
-#+end_src
-
-** nerd-icons-corfu
-:PROPERTIES:
-:REPO:     https://github.com/LuigiPiucco/nerd-icons-corfu/tree/2e546d12fd85b506561cdfb47b26f8c95b24d6cf
-:DESCRIPTION: Icons for corfu via nerd-icons
-:END:
-#+begin_src emacs-lisp
-  (use-package nerd-icons-corfu
-    :straight t)
-#+end_src
-** nerd-icons-dired
-:PROPERTIES:
-:REPO:     https://github.com/rainstormstudio/nerd-icons-dired
-:DESCRIPTION: Use nerd-icons for Dired
-:END:m
-#+begin_src emacs-lisp
-  (use-package nerd-icons-dired
-    :straight t
-    :hook
-    (dired-mode . nerd-icons-dired-mode))
 #+end_src
 ** Doom Modeline
 :PROPERTIES:

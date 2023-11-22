@@ -1,0 +1,178 @@
+#+title Terminal Config
+#+author: Amo DelBello
+#+description: Stripped down version of GUI config for the terminal
+#+startup: content
+
+Add `alias emacs="emacs -nw -q --load '~/.emacs.d/terminal/init.el'"`
+to your shell configuration
+
+* General Configuration
+** Variables and Modes
+#+begin_src emacs-lisp
+  (use-package emacs
+    :config
+    (setq inhibit-startup-screen t
+          x-select-enable-clipboard t
+          auto-save-default nil
+          make-backup-files nil
+          create-lockfiles nil)
+
+    (add-hook 'before-save-hook 'whitespace-cleanup)
+    (tool-bar-mode -1)
+    (menu-bar-mode -1)
+
+#+end_src
+** Functions for custom bindings
+#+begin_src emacs-lisp
+  (defun amo/modus-themes-toggle (&optional ignore-if-set)
+    "Toggle modus theme, sets to operandi if unset"
+    (interactive)
+    (if (string-match "modus" (symbol-name (car custom-enabled-themes)))
+        (when (not ignore-if-set)
+          (modus-themes-toggle))
+      (load-theme 'modus-operandi)))
+  (amo/modus-themes-toggle t)
+
+  (defun amo/open-settings-file ()
+    "Open settings.el"
+    (interactive)
+    (find-file "~/.emacs.d/terminal/settings.org"))
+
+  ;; Reload config
+  (defun amo/reload-config ()
+    "Reload configuration"
+    (interactive)
+    ;; (dot-env-load)
+    (load-file "~/.emacs.d/terminal/init.el"))
+#+end_src
+
+** Custom Bindings
+#+begin_src emacs-lisp
+  :bind (("C-z s" . amo/open-settings-file)
+         ("C-z r" . amo/reload-config)
+         ("C-z t" . amo/modus-themes-toggle)))
+#+end_src
+
+** Packages
+*** Magit
+#+begin_src emacs-lisp
+(use-package magit
+  :straight t
+  :bind
+  (("C-x g" . magit)))
+#+end_src
+
+*** company
+:PROPERTIES:
+:DOCS:     https://company-mode.github.io/
+:REPO:     https://github.com/company-mode/company-mode
+:DESCRIPTION: Modular in-buffer completion framework for Emacs
+:END:
+#+begin_src emacs-lisp
+(use-package company
+  :straight t
+  :config
+  (global-company-mode))
+#+end_src
+
+** Terminal mappings
+:PROPERTIES:
+:INFO:     https://www.emacswiki.org/emacs/iTerm2#h5o-11
+:END:
+#+begin_src emacs-lisp
+  (defun amo/define-escape-sequences-and-bindings ()
+    (interactive)
+    (progn
+      (let ((map (if (boundp 'input-decode-map)
+                     input-decode-map
+                   function-key-map)))
+
+        ;; C-=
+        (define-key map "\e[1;P9"  (kbd "H-a"))
+        (global-set-key (kbd "H-a") 'er/expand-region)
+
+        ;; C--
+        (define-key map "\e[1;P10" (kbd "H-b"))
+        (global-set-key (kbd "H-b") 'er/contract-region) ;; FIXME - maps to undo for some reason
+
+        ;; C-;
+        (define-key map "\e[1;P11" (kbd "H-c"))
+        (global-set-key (kbd "H-c") 'avy-goto-char-2)
+        (global-set-key (kbd "C-x H-c") 'comment-line)
+
+        ;; s-o
+        (define-key map "\e[1;P12" (kbd "H-d"))
+        (global-set-key (kbd "H-d") 'crux-smart-open-line-above)
+
+        ;; s-j
+        (define-key map "\e[1;P13" (kbd "H-e"))
+        (global-set-key (kbd "H-e") 'crux-top-join-line)
+
+        ;; s-k
+        (define-key map "\e[1;P14" (kbd "H-f"))
+        (global-set-key (kbd "H-f") 'crux-kill-whole-line)
+
+        ;; C-s-p
+        (define-key map "\e[1;P15" (kbd "H-g"))
+        (global-set-key (kbd "H-g") 'scroll-down-line)
+
+        ;; C-s-n
+        (define-key map "\e[1;P16" (kbd "H-h"))
+        (global-set-key (kbd "H-h") 'scroll-up-line)
+
+        ;; C-S-h
+        (define-key map "\e[1;P17" (kbd "H-i"))
+        (global-set-key (kbd "H-i") 'help-command)
+
+        ;; M-S<down>
+        (define-key map "\e[1;P18" (kbd "H-j"))
+        (global-set-key (kbd "H-j") 'amo/move-line-down)
+
+        ;; M-S-<up>
+        (define-key map "\e[1;P19" (kbd "H-k"))
+        (global-set-key (kbd "H-k") 'amo/move-line-up)
+
+        ;; C-'
+        (define-key map "\e[1;P20" (kbd "H-l"))
+        (global-set-key (kbd "H-l") 'amo/toggle-capitalization)
+
+        ;; Additional available keybindings
+        (define-key map "\e[1;P21" (kbd "H-m"))
+        (define-key map "\e[1;P22" (kbd "H-n"))
+        (define-key map "\e[1;P23" (kbd "H-o"))
+        (define-key map "\e[1;P24" (kbd "H-p"))
+        (define-key map "\e[1;P25" (kbd "H-q"))
+        (define-key map "\e[1;P26" (kbd "H-r"))
+        (define-key map "\e[1;P27" (kbd "H-s"))
+        (define-key map "\e[1;P28" (kbd "H-t"))
+        (define-key map "\e[1;P29" (kbd "H-u"))
+        (define-key map "\e[1;P30" (kbd "H-v"))
+        (define-key map "\e[1;P31" (kbd "H-w"))
+        (define-key map "\e[1;P32" (kbd "H-x"))
+        (define-key map "\e[1;P33" (kbd "H-y"))
+        (define-key map "\e[1;P34" (kbd "H-z"))
+        (define-key map "\e[1;P35" (kbd "H-0"))
+        (define-key map "\e[1;P36" (kbd "H-1"))
+        (define-key map "\e[1;P37" (kbd "H-2"))
+        (define-key map "\e[1;P38" (kbd "H-3"))
+        (define-key map "\e[1;P39" (kbd "H-4"))
+        (define-key map "\e[1;P40" (kbd "H-5"))
+        (define-key map "\e[1;P41" (kbd "H-6"))
+        (define-key map "\e[1;P42" (kbd "H-7"))
+        (define-key map "\e[1;P43" (kbd "H-8"))
+        (define-key map "\e[1;P44" (kbd "H-9"))
+        (define-key map "\e[1;P45" (kbd "H-<f1>"))
+        (define-key map "\e[1;P46" (kbd "H-<f2>"))
+        (define-key map "\e[1;P47" (kbd "H-<f3>"))
+        (define-key map "\e[1;P48" (kbd "H-<f4>"))
+        (define-key map "\e[1;P49" (kbd "H-<f5>"))
+        (define-key map "\e[1;P50" (kbd "H-<f6>"))
+        (define-key map "\e[1;P51" (kbd "H-<f7>"))
+        (define-key map "\e[1;P52" (kbd "H-<f8>"))
+        (define-key map "\e[1;P53" (kbd "H-<f9>"))
+        (define-key map "\e[1;P54" (kbd "H-<f10>"))
+        (define-key map "\e[1;P55" (kbd "H-<f11>"))
+        (define-key map "\e[1;P56" (kbd "H-<f12>")))))
+
+  (add-hook 'server-after-make-frame-hook 'amo/define-escape-sequences-and-bindings)
+#+end_src

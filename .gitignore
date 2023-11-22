@@ -58,6 +58,8 @@ forge-database.sqlite
 
 customize.el
 settings.el
+common-settings.el
+common-packages.el
 bookmarks
 emojis/
 .dap-breakpoints
@@ -72,6 +74,5 @@ history
 # Terminal config
 /terminal/straight
 /terminal/.emacs.desktop
-!/terminal/settings.el
 session.*
 org-directory

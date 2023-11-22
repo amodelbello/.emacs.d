@@ -1,0 +1,382 @@
+#+title Common Packages
+#+author: Amo DelBello
+#+description: Common packages shared by GUI and terminal config
+#+startup: content
+
+* Minibuffer & Completion
+** Vertico
+:PROPERTIES:
+:REPO:     https://github.com/minad/vertico
+:DESCRIPTION: Performant and minimalistic vertical completion UI based on the default completion system.
+:END:
+#+begin_src emacs-lisp
+  (use-package vertico
+    :straight (:files (:defaults "extensions/*"))
+    :bind (:map vertico-map
+                ("C-j" . vertico-directory-enter)
+                ("DEL" . vertico-directory-delete-char)
+                ("M-DEL" . vertico-directory-delete-word))
+    :hook (rfn-eshadow-update-overlay . vertico-directory-tidy)
+    :init
+    (vertico-mode))
+#+end_src
+** Embark
+:PROPERTIES:
+:REPO:     https://github.com/oantolin/embark
+:DESCRIPTION: Emacs Mini-Buffer Actions Rooted in Keymaps
+:END:
+#+begin_src emacs-lisp
+  (use-package embark
+    :straight t
+
+    :bind
+    (("C-." . embark-act)         ;; pick some comfortable binding
+     ("C-\"" . embark-dwim)        ;; good alternative: M-.
+     ("C-S-h B" . embark-bindings)) ;; alternative for `describe-bindings'
+
+    :init
+
+    ;; Optionally replace the key help with a completing-read interface
+    (setq prefix-help-command #'embark-prefix-help-command)
+
+    ;; Show the Embark target at point via Eldoc.  You may adjust the Eldoc
+    ;; strategy, if you want to see the documentation from multiple providers.
+    (add-hook 'eldoc-documentation-functions #'embark-eldoc-first-target)
+    ;; (setq eldoc-documentation-strategy #'eldoc-documentation-compose-eagerly)
+
+    :config
+
+    ;; Hide the mode line of the Embark live/completions buffers
+    (add-to-list 'display-buffer-alist
+                 '("\\`\\*Embark Collect \\(Live\\|Completions\\)\\*"
+                   nil
+                   (window-parameters (mode-line-format . none)))))
+
+  ;; Consult users will also want the embark-consult package.
+  (use-package embark-consult
+    :straight t ; only need to install it, embark loads it after consult if found
+    :hook
+    (embark-collect-mode . consult-preview-at-point-mode))
+#+end_src
+** Marginalia
+:PROPERTIES:
+:DESCRIPTION: Enable rich annotations in the minibuffer
+:REPO:     https://github.com/minad/marginalia
+:END:
+#+begin_src emacs-lisp
+  (use-package marginalia
+    :straight t
+    :init
+    (marginalia-mode))
+#+end_src
+
+** Consult
+:PROPERTIES:
+:REPO:     https://github.com/minad/consult
+:DESCRIPTION: Search and navigation commands based on the Emacs completion function completing-read
+:END:
+#+begin_src emacs-lisp
+  ;; Example configuration for Consult
+  (use-package consult
+    :straight t
+
+    ;; Replace bindings. Lazily loaded due by `use-package'.
+    :bind (("C-s" . consult-line)
+           ("C-c m" . consult-man)
+           ("C-c i" . consult-info)
+           ([remap Info-search] . consult-info)
+           ("C-x b" . consult-buffer)
+           ("C-x 4 b" . consult-buffer-other-window)
+           ("C-x r b" . consult-bookmark)
+           ("M-y" . consult-yank-pop)
+           ("M-g g" . consult-goto-line)
+           ("M-g o" . consult-outline)
+           ("M-g m" . consult-mark)
+           ("M-g k" . consult-global-mark)
+           ("M-g i" . consult-imenu)
+           ("M-g I" . consult-imenu-multi)
+           ("M-s d" . consult-find)
+           ("M-s D" . consult-locate)
+           ("M-s g" . consult-grep)
+           ("M-s G" . consult-git-grep)
+           ("M-s r" . consult-ripgrep)
+           ("M-s e" . consult-isearch-history))
+
+    ;; Enable automatic preview at point in the *Completions* buffer. This is
+    ;; relevant when you use the default completion UI.
+    :hook (completion-list-mode . consult-preview-at-point-mode)
+
+    ;; The :init configuration is always executed (Not lazy)
+    :init
+
+    ;; Optionally configure the register formatting. This improves the register
+    ;; preview for `consult-register', `consult-register-load',
+    ;; `consult-register-store' and the Emacs built-ins.
+    (setq register-preview-delay 0.5
+          register-preview-function #'consult-register-format)
+
+    ;; Optionally tweak the register preview window.
+    ;; This adds thin lines, sorting and hides the mode line of the window.
+    (advice-add #'register-preview :override #'consult-register-window)
+
+    ;; Use Consult to select xref locations with preview
+    (setq xref-show-xrefs-function #'consult-xref
+          xref-show-definitions-function #'consult-xref)
+
+    ;; Configure other variables and modes in the :config section,
+    ;; after lazily loading the package.
+    :config
+    (consult-customize
+     consult-theme :preview-key '(:debounce 0.2 any)
+     consult-ripgrep consult-git-grep consult-grep
+     consult-bookmark consult-recent-file consult-xref
+     consult--source-bookmark consult--source-file-register
+     consult--source-recent-file consult--source-project-recent-file
+     ;; :preview-key "M-."
+     :preview-key '(:debounce 0.4 any)))
+#+end_src
+
+** orderless
+:PROPERTIES:
+:DESCRIPTION: Emacs completion style that matches multiple regexps in any order
+:REPO:     https://github.com/oantolin/orderless
+:END:
+#+begin_src emacs-lisp
+  (use-package orderless
+    :straight t
+    :config
+    (setq completion-styles '(orderless basic)
+          completion-category-overrides '((file (styles basic partial-completion)))))
+#+end_src
+
+** nerd-icons-completion
+:PROPERTIES:
+:REPO:     https://github.com/rainstormstudio/nerd-icons-completion
+:DESCRIPTION: Icons for candidates in minibuffer
+:END:
+#+begin_src emacs-lisp
+  (use-package nerd-icons-completion
+    :straight t
+    :after marginalia
+    :hook ((marginalia-mode . nerd-icons-completion-marginalia-setup))
+    :init
+    (nerd-icons-completion-mode 1))
+#+end_src
+
+** kind-icon
+:PROPERTIES:
+:REPO:     https://github.com/jdtsmith/kind-icon
+:DESCRIPTION: Completion kind text/icon prefix labelling for emacs in-region completion
+:END:
+#+begin_src emacs-lisp
+  (use-package kind-icon
+    :straight t
+    :after corfu
+    :custom
+    (kind-icon-default-face 'corfu-default) ; to compute blended backgrounds correctly
+    :config
+    (add-to-list 'corfu-margin-formatters #'kind-icon-margin-formatter))
+#+end_src
+
+** which-key
+:PROPERTIES:
+:REPO:     https://github.com/justbur/emacs-which-key
+:DESCRIPTION: Emacs package that displays available keybindings in popup
+:END:
+#+begin_src emacs-lisp
+  (use-package which-key
+    :straight t
+    :config
+    (which-key-mode))
+#+end_src
+
+* Other Useful Packages
+
+** Ace Window
+:PROPERTIES:
+:REPO:     [[https://github.com/abo-abo/ace-window]]
+:DESCRIPTION: Quickly switch windows in Emacs
+:END:
+#+begin_src emacs-lisp
+  (use-package ace-window
+    :straight t
+    :bind
+    (("C-o" . ace-window)
+     ("C-x o" . ace-window))
+    :config
+    (setq aw-scope 'frame
+          aw-dispatch-always nil
+          aw-keys '(?j ?k ?d ?s ?a ?g ?h ?k ?l)))
+#+end_src
+
+** aggressive-indent-mode
+:PROPERTIES:
+:REPO:     https://github.com/Malabarba/aggressive-indent-mode
+:DESCRIPTION: Emacs minor mode that keeps your code always indented
+:END:
+#+begin_src emacs-lisp
+  (use-package aggressive-indent
+    :straight t
+    :config
+    (global-aggressive-indent-mode 1)
+    (add-to-list 'aggressive-indent-excluded-modes 'html-mode)
+    (add-to-list 'aggressive-indent-excluded-modes 'python-ts-mode))
+#+end_src
+
+** Avy
+:PROPERTIES:
+:REPO:     [[https://github.com/abo-abo/avy]]
+:DESCRIPTION: Jumping to visible text using a char-based decision tree
+:END:
+#+begin_src emacs-lisp
+  (use-package avy
+    :straight t
+    :bind (("C-;" . avy-goto-char-2)
+           :map org-mode-map
+           ("C-'" . nil)
+           :map flyspell-mode-map
+           ("C-;" . nil)))
+#+end_src
+
+** Crux
+:PROPERTIES:
+:REPO:     https://github.com/bbatsov/crux
+:DOCS:     [[https://emacsredux.com/blog/2016/01/30/crux/]]
+:DESCRIPTION: A Collection of Ridiculously Useful eXtensions for Emacs
+:END:
+#+begin_src emacs-lisp
+  (use-package crux
+    :straight t
+    :bind
+    (("s-o" . crux-smart-open-line-above)
+     ("M-o" . crux-smart-open-line)
+     ("s-r" . crux-recentf-find-file)
+     ("C-c D" . crux-delete-file-and-buffer)
+     ("C-c d" . crux-duplicate-current-line-or-region)
+     ("C-c M-d" . crux-duplicate-and-comment-current-line-or-region)
+     ("C-c r" . crux-rename-file-and-buffer)
+     ("s-j" . crux-top-join-line)
+     ("s-k" . crux-kill-whole-line)
+     ("<C-backspace>" . crux-kill-line-backwards)))
+#+end_src
+
+** expand-region
+:PROPERTIES:
+:REPO:     https://github.com/magnars/expand-region.el
+:DESCRIPTION: Emacs extension to increase selected region by semantic units.
+:END:
+#+begin_src emacs-lisp
+  (use-package expand-region
+    :straight t
+    :bind (("C-=" . er/expand-region)
+           ("C--" . er/contract-region)))
+#+end_src
+
+** Idle Highlight Mode
+:PROPERTIES:
+:REPO:     https://codeberg.org/ideasman42/emacs-idle-highlight-mode
+:DESCRIPTION: Simple symbol highlighting package for Emacs
+:END:
+#+begin_src emacs-lisp
+  (use-package idle-highlight-mode
+    :straight t
+    :config
+    (setq idle-highlight-idle-time 0.2
+          idle-highlight-exclude-point t)
+    :hook
+    ((prog-mode text-mode) . idle-highlight-mode))
+
+#+end_src
+
+** jump-char
+:PROPERTIES:
+:REPO:     https://github.com/lewang/jump-char
+:DESCRIPTION: Navigation by character occurrence
+:END:
+#+begin_src emacs-lisp
+  (use-package jump-char
+    :straight (:host github :repo "lewang/jump-char"
+                 :branch "master")
+    :bind (("M-n" . jump-char-forward)
+           ("M-N" . jump-char-backward)))
+#+end_src
+
+** minions
+:PROPERTIES:
+:REPO:     https://github.com/tarsius/minions
+:DESCRIPTION: A minor-mode menu for the mode line
+:END:
+#+begin_src emacs-lisp
+  (use-package minions
+    :straight t
+    :config
+    (minions-mode 1))
+#+end_src
+
+** Paredit
+:PROPERTIES:
+:REPO:     https://github.com/emacsmirror/paredit/blob/master/paredit.el
+:DOCS:     https://www.emacswiki.org/emacs/ParEdit, https://wikemacs.org/wiki/Paredit-mode
+:DESCRIPTION: A minor mode for performing structured editing of S-expression data
+:END:
+#+begin_src emacs-lisp
+  (use-package paredit
+    :straight t
+    :hook
+    ((lisp-mode . paredit-mode)
+     (emacs-lisp-mode . paredit-mode)
+     (clojure-mode . paredit-mode)
+     (clojurescript-mode . paredit-mode)
+     (clojurec-mode . paredit-mode)
+     (cider-repl-mode . paredit-mode)))
+#+end_src
+
+** undo-tree
+:PROPERTIES:
+:REPO:     https://github.com/apchamberlain/undo-tree.el
+:DOCS:     https://www.emacswiki.org/emacs/UndoTree
+:DESCRIPTION: Visualize Emacs undo information as a graphical tree and navigate to previous states
+:END:
+#+begin_src emacs-lisp
+  (use-package undo-tree
+    :straight t
+    :config
+    (global-undo-tree-mode)
+    (setq undo-tree-history-directory-alist `((".*" . ,temporary-file-directory))
+          undo-tree-enable-undo-in-region t
+          undo-tree-auto-save-history t)
+    :diminish
+    (undo-tree-mode))
+#+end_src
+
+* Appearance
+** Nerd Icons
+:PROPERTIES:
+:REPO:     https://github.com/rainstormstudio/nerd-icons.el
+:DESCRIPTION: A library for easily using Nerd Font icons inside Emacs
+:END:
+#+begin_src emacs-lisp
+  (use-package nerd-icons
+    :straight t)
+#+end_src
+
+** nerd-icons-corfu
+:PROPERTIES:
+:REPO:     https://github.com/LuigiPiucco/nerd-icons-corfu/tree/2e546d12fd85b506561cdfb47b26f8c95b24d6cf
+:DESCRIPTION: Icons for corfu via nerd-icons
+:END:
+#+begin_src emacs-lisp
+  (use-package nerd-icons-corfu
+    :straight t)
+#+end_src
+** nerd-icons-dired
+:PROPERTIES:
+:REPO:     https://github.com/rainstormstudio/nerd-icons-dired
+:DESCRIPTION: Use nerd-icons for Dired
+:END:
+#+begin_src emacs-lisp
+  (use-package nerd-icons-dired
+    :straight t
+    :hook
+    (dired-mode . nerd-icons-dired-mode))
+#+end_src
