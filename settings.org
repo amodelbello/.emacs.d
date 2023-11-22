@@ -518,18 +518,6 @@
            ("C-c C-d C-r . denote-dired-rename-marked-files")
            ("C-c C-d C-R . denote-dired-rename-marked-files-using-front-matter")))
 #+end_src
-** dired-subtree
-:PROPERTIES:
-:REPO:     https://github.com/Fuco1/dired-hacks/blob/master/dired-subtree.el
-:DESCRIPTION: From dired-hacs, a collection of useful dired additions
-:END:
-#+begin_src emacs-lisp
-  (use-package dired-subtree
-    :straight t
-    :bind ( :map dired-mode-map
-            ("<tab>" . dired-subtree-toggle)
-            ("<backtab>" . dired-subtree-cycle)))
-#+end_src
 ** exec-path-from-shell
 :PROPERTIES:
 :REPO:     https://github.com/purcell/exec-path-from-shell
