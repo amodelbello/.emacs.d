@@ -731,9 +731,7 @@
           dashboard-display-icons-p t
           dashboard-icon-type 'nerd-icons
           dashboard-set-file-icons t
-          dashboard-set-footer nil
-          ;; dashboard-projects-switch-function #'projectile-persp-switch-project
-          )
+          dashboard-set-footer nil)
     (dashboard-open))
 #+end_src
 ** Doom Modeline
