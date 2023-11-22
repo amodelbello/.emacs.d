@@ -26,6 +26,7 @@
     (put 'narrow-to-region 'disabled nil)
 
     (setq save-interprogram-paste-before-kill t
+          require-final-newline t
           enable-recursive-minibuffers t)
 
     (setq-default indent-tabs-mode nil

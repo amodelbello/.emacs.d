@@ -27,7 +27,6 @@
 
     (setq warning-minimum-level :error
           scroll-step 1
-          require-final-newline t
           frame-inhibit-implied-resize t
           recentf-max-menu-items 25
           recentf-max-saved-items 25
