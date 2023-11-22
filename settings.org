@@ -785,3 +785,13 @@
   (use-package modus-themes
     :straight t)
 #+end_src
+
+** nerd-icons-corfu
+:PROPERTIES:
+:REPO:     https://github.com/LuigiPiucco/nerd-icons-corfu/tree/2e546d12fd85b506561cdfb47b26f8c95b24d6cf
+:DESCRIPTION: Icons for corfu via nerd-icons
+:END:
+#+begin_src emacs-lisp
+  (use-package nerd-icons-corfu
+    :straight t)
+#+end_src
