@@ -1,4 +1,4 @@
-#+title Terminal Config
+#+title: Terminal Config
 #+author: Amo DelBello
 #+description: Stripped down version of GUI config for the terminal
 #+startup: content
