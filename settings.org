@@ -44,13 +44,12 @@
 
           ;; Save backups to a central location
           make-backup-files t
-          backup-directory-alist '(("." . "~/.emacs.d/backups"))
+          backup-directory-alist '(("." . "~/.emacs.d/backups")) ;TODO: Don't hardcode
           delete-old-versions -1
           version-control t
           vc-make-backup-files t
           indent-tabs-mode nil
-          auto-save-file-name-transforms '((".*" "~/.emacs.d/auto-save-list/" t)))
-
+          auto-save-file-name-transforms '((".*" "~/.emacs.d/auto-save-list/" t))) ;TODO: Don't hardcode
     (setq-default org-catch-invisible-edits 'show)
     #+end_src
 ** Functions for custom bindings
@@ -59,14 +58,14 @@
   (defun amo/open-settings-file ()
     "Open settings.org"
     (interactive)
-    (find-file "~/.emacs.d/settings.org"))
+    (find-file (concat user-emacs-directory "settings.org")))
 
   ;; Reload config
   (defun amo/reload-config ()
     "Reload configuration"
     (interactive)
     ;; (dot-env-load)
-    (load-file "~/.emacs.d/init.el"))
+    (load-file (concat user-emacs-directory "init.el")))
 
   ;; Delete desktop files and restart emacs
   (defun amo/delete-emacs-desktop-files-restart ()
@@ -391,7 +390,8 @@
 #+begin_src emacs-lisp
   (use-package org
     :config
-    (setq org-directory (dot-env-get 'ORG_DIRECTORY_PATH "~/.emacs.d/org-directory")
+    (setq org-directory (dot-env-get 'ORG_DIRECTORY_PATH
+                                     (concat user-emacs-directory "org-directory"))
           org-agenda-files (directory-files-recursively org-directory "\\.org$")
           org-notes-file (concat org-directory "/notes.org")
           org-union-file (concat org-directory "/union-notes.org")
@@ -706,7 +706,7 @@
     :config
     (yas-global-mode)
     (setq yas-snippet-dirs
-          '("~/.emacs.d/snippets"))
+          '("~/.emacs.d/snippets")) ;TODO: Don't hardcode
     (use-package yasnippet-snippets
       :straight t))
 #+end_src

@@ -58,8 +58,8 @@ forge-database.sqlite
 
 customize.el
 settings.el
-common-settings.el
-common-packages.el
+common/settings.el
+common/packages.el
 bookmarks
 emojis/
 .dap-breakpoints

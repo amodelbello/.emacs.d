@@ -1,12 +1,15 @@
 ;; Garbage collect at the end of startup
 (add-hook 'after-init-hook #'garbage-collect t)
 
-(load-file "~/.emacs.d/straight-config.el")
+(load-file (concat user-emacs-directory "common/functions.el"))
+(load-straight)
+(load-customize)
 
 (use-package use-package-ensure-system-package
   :straight t)
 
 ;; Load dot-env envrionment
+;; https://github.com/amodelbello/dot-env.el
 (use-package dot-env
   :straight t
   :config
@@ -19,7 +22,6 @@
       amo/font (concat amo/font-family " " amo/font-size))
 
 ;; Load config files
-(org-babel-load-file (expand-file-name "~/.emacs.d/common-settings.org"))
-(org-babel-load-file (expand-file-name "~/.emacs.d/settings.org"))
-(org-babel-load-file (expand-file-name "~/.emacs.d/common-packages.org"))
-(load-file "~/.emacs.d/customize-settings.el")
+(org-babel-load-file (expand-file-name (concat user-emacs-directory "common/settings.org")))
+(org-babel-load-file (expand-file-name (concat user-emacs-directory "settings.org")))
+(org-babel-load-file (expand-file-name (concat user-emacs-directory "common/packages.org")))

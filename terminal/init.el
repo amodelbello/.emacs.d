@@ -1,7 +1,7 @@
-(setq user-emacs-directory "~/.emacs.d/terminal/")
+(load-file (concat user-emacs-directory "common/functions.el"))
+(load-straight (concat user-emacs-directory "terminal/"))
+(load-customize (concat user-emacs-directory "terminal/"))
 
-(load-file "~/.emacs.d/straight-config.el")
-(org-babel-load-file (expand-file-name "~/.emacs.d/common-settings.org"))
-(org-babel-load-file (expand-file-name "~/.emacs.d/terminal/settings.org"))
-(org-babel-load-file (expand-file-name "~/.emacs.d/common-packages.org"))
-(load-file "~/.emacs.d/customize-settings.el")
+(org-babel-load-file (expand-file-name (concat user-emacs-directory "common/settings.org")))
+(org-babel-load-file (expand-file-name (concat user-emacs-directory "terminal/settings.org")))
+(org-babel-load-file (expand-file-name (concat user-emacs-directory "common/packages.org")))
