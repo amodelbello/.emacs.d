@@ -1,4 +1,4 @@
-#+title Common settings
+#+title: Common settings
 #+author: Amo DelBello
 #+description: Common settings shared by GUI and terminal config
 #+startup: content

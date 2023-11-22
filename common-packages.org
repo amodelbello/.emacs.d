@@ -1,4 +1,4 @@
-#+title Common Packages
+#+title: Common Packages
 #+author: Amo DelBello
 #+description: Common packages shared by GUI and terminal config
 #+startup: content
