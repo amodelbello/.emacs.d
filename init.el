@@ -3,7 +3,6 @@
 
 (load-file (concat user-emacs-directory "common/functions.el"))
 (load-straight)
-(load-customize)
 
 (use-package use-package-ensure-system-package
   :straight t)
@@ -25,3 +24,4 @@
 (org-babel-load-file (expand-file-name (concat user-emacs-directory "common/settings.org")))
 (org-babel-load-file (expand-file-name (concat user-emacs-directory "settings.org")))
 (org-babel-load-file (expand-file-name (concat user-emacs-directory "common/packages.org")))
+(load-customize)
