@@ -1,0 +1,26 @@
+#+title: Custom Emacs Configuration
+#+author: Amo DelBello
+#+description: "NO! The beard stays. You go."
+#+startup: content
+#+options: toc:nil
+#+options: num:0
+
+An emacs configuration for both GUI and terminal. Instructions on setting up emacsclient for the terminal config can be found [[file:terminal/daemon-config.org][here]].
+
+#+TOC: headlines
+
+* Common Functions
+These are functions needed by both configurations during initial startup.
+#+INCLUDE: "./common/functions.el" src emacs-lisp
+
+* Common General Configuration
+#+INCLUDE: "./common/settings.org"
+
+* Common Packages
+#+INCLUDE: "./common/packages.org"
+
+* GUI Config
+#+INCLUDE: "./settings.org"
+
+* Terminal Config
+#+INCLUDE: "./terminal/settings.org"

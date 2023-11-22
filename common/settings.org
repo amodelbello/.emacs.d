@@ -3,8 +3,7 @@
 #+description: Common settings shared by GUI and terminal config
 #+startup: content
 
-* General Configuration
-** Variables and Modes
+* Variables and Modes
 #+begin_src emacs-lisp
   (use-package emacs
     :config
@@ -49,7 +48,7 @@
                                    orig-fg))))
 #+end_src
 
-** Functions for custom bindings
+* Functions for custom bindings
 #+begin_src emacs-lisp
   ;; Un-highlight region after mark jump
   (defun amo/exchange-point-and-mark ()
@@ -146,7 +145,7 @@
       (global-display-line-numbers-mode 0)))
 #+end_src
 
-** Custom Bindings
+* Custom Bindings
 #+begin_src emacs-lisp
   :bind (("C-z l" . amo/toggle-line-numbers)
          ("C-x C-x" . amo/exchange-point-and-mark)
@@ -156,7 +155,7 @@
          ("M-z" . zap-up-to-char)))
 #+end_src
 
-** dired
+* dired
 #+begin_src emacs-lisp
   (use-package dired
     :config  (setq dired-kill-when-opening-new-dired-buffer t
@@ -180,7 +179,7 @@
                 ("C-o" . nil)))
 #+end_src
 
-** Advice
+* Advice
 #+begin_src emacs-lisp
   ;; Copy whole line to kill ring when no active region
   (defadvice kill-ring-save (before slick-copy activate compile)

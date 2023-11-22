@@ -2,7 +2,8 @@
   (defvar bootstrap-version)
   (let* ((base-dir (or base-dir user-emacs-directory))
          (bootstrap-file
-          (expand-file-name "straight/repos/straight.el/bootstrap.el" base-dir))
+          (expand-file-name
+           (concat user-emacs-directory "straight/repos/straight.el/bootstrap.el") base-dir))
          (bootstrap-version 6))
     (unless (file-exists-p bootstrap-file)
       (with-current-buffer

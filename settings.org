@@ -1,6 +1,5 @@
-#+title: Custom emacs settings
+#+title: GUI Config
 #+author: Amo DelBello
-#+description: "NO! The beard stays. You go."
 #+startup: content
 
 * General Configuration
@@ -448,6 +447,12 @@
         item
         (file+headline org-lists-file "Interesting Albums")
         "%?"))))
+
+  (use-package ox-gfm
+    :straight t
+    :config
+    (eval-after-load "org"
+      '(require 'ox-gfm nil t)))
 #+end_src
 
 ** org-superstar-mode

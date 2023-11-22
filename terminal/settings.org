@@ -1,10 +1,6 @@
 #+title: Terminal Config
 #+author: Amo DelBello
-#+description: Stripped down version of GUI config for the terminal
 #+startup: content
-
-Add `alias emacs="emacs -nw -q --load '~/.emacs.d/terminal/init.el'"`
-to your shell configuration
 
 * General Configuration
 ** Variables and Modes
