@@ -136,9 +136,15 @@ to your shell configuration
         (define-key map "\e[1;P20" (kbd "H-l"))
         (global-set-key (kbd "H-l") 'amo/toggle-capitalization)
 
-        ;; Additional available keybindings
+        ;; C-.
         (define-key map "\e[1;P21" (kbd "H-m"))
+        (global-set-key (kbd "H-m") 'embark-act)
+
+        ;; s-r
         (define-key map "\e[1;P22" (kbd "H-n"))
+        (global-set-key (kbd "H-n") 'consult-recent-file)
+
+        ;; Additional available keybindings
         (define-key map "\e[1;P23" (kbd "H-o"))
         (define-key map "\e[1;P24" (kbd "H-p"))
         (define-key map "\e[1;P25" (kbd "H-q"))
@@ -175,4 +181,5 @@ to your shell configuration
         (define-key map "\e[1;P56" (kbd "H-<f12>")))))
 
   (add-hook 'server-after-make-frame-hook 'amo/define-escape-sequences-and-bindings)
+  (amo/define-escape-sequences-and-bindings)
 #+end_src

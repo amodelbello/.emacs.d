@@ -88,6 +88,7 @@
            ("C-x b" . consult-buffer)
            ("C-x 4 b" . consult-buffer-other-window)
            ("C-x r b" . consult-bookmark)
+           ("s-r" . consult-recent-file)
            ("M-y" . consult-yank-pop)
            ("M-g g" . consult-goto-line)
            ("M-g o" . consult-outline)
@@ -250,7 +251,6 @@
     :bind
     (("s-o" . crux-smart-open-line-above)
      ("M-o" . crux-smart-open-line)
-     ("s-r" . crux-recentf-find-file)
      ("C-c D" . crux-delete-file-and-buffer)
      ("C-c d" . crux-duplicate-current-line-or-region)
      ("C-c M-d" . crux-duplicate-and-comment-current-line-or-region)
