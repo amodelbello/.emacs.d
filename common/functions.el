@@ -1,4 +1,4 @@
-(defun load-straight (&optional base-dir)
+(defun amo/load-straight (&optional base-dir)
   (defvar bootstrap-version)
   (let* ((base-dir (or base-dir user-emacs-directory))
          (bootstrap-file
@@ -15,10 +15,13 @@
   (straight-use-package 'use-package)
   (straight-use-package 'org))
 
-(defun load-customize (&optional base-dir)
+(defun amo/load-customize (&optional base-dir)
   (defvar custom-file)
   (let* ((base-dir (or base-dir user-emacs-directory)))
     (setq custom-file (concat base-dir "customize.el"))
     (unless (file-exists-p custom-file)
       (write-region "" "" custom-file))
     (load custom-file)))
+
+(defun amo/load-config-file (config-file)
+  (org-babel-load-file (expand-file-name (concat user-emacs-directory config-file))))
