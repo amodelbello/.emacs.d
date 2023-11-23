@@ -158,7 +158,6 @@
 *** treesit-auto
 - Repo :: https://github.com/renzmann/treesit-auto
 - Description :: Automatic installation, usage, and fallback for tree-sitter major modes in Emacs
-:END:
 #+begin_src emacs-lisp
   (use-package treesit-auto
     :straight t
@@ -267,7 +266,6 @@
 - Repo :: https://github.com/magit/magit
 - Docs :: https://magit.vc/
 - Description :: It's Magit! A Git Porcelain inside Emacs.
-:END:
 #+begin_src emacs-lisp
   (use-package magit
     :straight t
