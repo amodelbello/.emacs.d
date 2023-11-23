@@ -3,91 +3,91 @@ An emacs configuration for both GUI and terminal. Instructions on setting up ema
 
 # Table of Contents
 
--   [Common Functions](#orge4cc5c6)
--   [Common General Configuration](#org0fe29aa)
-    -   [Variables and Modes](#orgc8908d6)
-    -   [Functions for custom bindings](#org635bc4a)
-    -   [Custom Bindings](#orgf971fb8)
-    -   [dired](#orgb91b4af)
-    -   [Advice](#orga2d3380)
--   [Common Packages](#orga85991f)
-    -   [Minibuffer & Completion](#orgeb507ab)
-        -   [Vertico](#orgb6f8b16)
-        -   [Embark](#org78e7410)
-        -   [Marginalia](#orgbfe1613)
-        -   [Consult](#orgf30f5ae)
-        -   [orderless](#org969df8b)
-        -   [nerd-icons-completion](#orgf199065)
-        -   [kind-icon](#orga2725c5)
-        -   [which-key](#orgf096114)
-    -   [Other Useful Packages](#org1bf2d02)
-        -   [Ace Window](#org9e56c79)
-        -   [aggressive-indent-mode](#org6ba84d0)
-        -   [Avy](#org30b7a26)
-        -   [Crux](#org3d04dc8)
-        -   [expand-region](#org682fc69)
-        -   [Idle Highlight Mode](#orgecb4a13)
-        -   [jump-char](#orgd8d09b3)
-        -   [minions](#orgdaeae8a)
-        -   [Paredit](#orgf77ef83)
-        -   [undo-tree](#org9f82c54)
-    -   [Appearance](#org4cc70bb)
-        -   [Nerd Icons](#orgbff4fa1)
-        -   [nerd-icons-dired](#orgb70da9d)
--   [GUI Config](#org1b3541f)
-    -   [General Configuration](#org94f2a82)
-        -   [Variables and Modes](#org38a9553)
-        -   [Functions for custom bindings](#orgb847a7b)
-        -   [Custom Bindings](#org2ac67ed)
-        -   [Functions for hooks](#org564eb0f)
-        -   [Hooks](#org0bfb000)
-        -   [ibuffer](#orgf896562)
-    -   [Programming](#orgbd396ce)
-        -   [Packages](#org546d75f)
-        -   [Languages](#orga171ce8)
-    -   [Version Control](#orgb1042a4)
-        -   [Magit](#org68dadf6)
-        -   [magit-todos](#org715e099)
-        -   [git-messenger](#org2915f65)
-        -   [Git time machine](#org889f8ac)
-        -   [diff-hl](#org21534af)
-    -   [Minibuffer & Completion](#org04a70c5)
-        -   [consult-projectile](#org1a3b2d7)
-        -   [Corfu](#orgdba9adf)
-    -   [Org Mode](#org0f4f315)
-        -   [Org configuration](#org05c9ec3)
-        -   [org-superstar-mode](#org3653d81)
-    -   [Other Useful Packages](#org5bfdf04)
-        -   [buffer-move](#org2d75fef)
-        -   [denote](#orgd6e84fe)
-        -   [exec-path-from-shell](#orga7a8023)
-        -   [Eyebrowse](#orgf9fc3b7)
-        -   [gptel](#orgd591972)
-        -   [helpful](#org1569475)
-        -   [ibuffer-projectile](#org59a68e7)
-        -   [markdown-mode](#org97e1144)
-        -   [package-lint](#org9a80cb9)
-        -   [Popper](#org165c6cd)
-        -   [Projectile](#org15b9e14)
-        -   [rainbow-delimiters](#org8418d7e)
-        -   [Transpose Frame](#org8541b92)
-        -   [YASnippet](#org14d6432)
-    -   [Appearance](#orgc704a0b)
-        -   [Dashboard](#org24dff3c)
-        -   [Doom Modeline](#orgf738feb)
-        -   [Ef Themes](#orgb6b2d16)
-        -   [Modus Themes](#org133228d)
-        -   [nerd-icons-corfu](#org20e2282)
--   [Terminal Config](#org3428b51)
-    -   [General Configuration](#orge702ef2)
-        -   [Variables and Modes](#org72843b5)
-        -   [Functions for custom bindings](#orga61e585)
-        -   [Custom Bindings](#org81a7459)
-        -   [Packages](#org52b5d50)
-        -   [Terminal mappings](#org14f5861)
+-   [Common Functions](#orgf5e3b5a)
+-   [Common General Configuration](#org7f9277a)
+    -   [Variables and Modes](#org2ffe869)
+    -   [Functions for custom bindings](#org9326f0a)
+    -   [Custom Bindings](#org2737676)
+    -   [dired](#org4845301)
+    -   [Advice](#org1fb2fbc)
+-   [Common Packages](#org209ebeb)
+    -   [Minibuffer & Completion](#org8663266)
+        -   [Vertico](#org9438668)
+        -   [Embark](#orgef02eca)
+        -   [Marginalia](#org98b9827)
+        -   [Consult](#org4c82b70)
+        -   [orderless](#org4bdc544)
+        -   [nerd-icons-completion](#org477ce89)
+        -   [kind-icon](#org56dbb0f)
+        -   [which-key](#org56d9e70)
+    -   [Other Useful Packages](#org716920a)
+        -   [Ace Window](#org8845676)
+        -   [aggressive-indent-mode](#org9d1b471)
+        -   [Avy](#org5f2adac)
+        -   [Crux](#orgf645ac7)
+        -   [expand-region](#org59ed255)
+        -   [Idle Highlight Mode](#org1786ad7)
+        -   [jump-char](#org19f1b77)
+        -   [minions](#orgfae6c7c)
+        -   [Paredit](#org513848c)
+        -   [undo-tree](#org1f127ba)
+    -   [Appearance](#org9042dab)
+        -   [Nerd Icons](#org67db66c)
+        -   [nerd-icons-dired](#org26e1ac2)
+-   [GUI Config](#orgea18bda)
+    -   [General Configuration](#orga97954d)
+        -   [Variables and Modes](#orgb0d725e)
+        -   [Functions for custom bindings](#org9b97b4e)
+        -   [Custom Bindings](#org4ff9df1)
+        -   [Functions for hooks](#org67a6ee4)
+        -   [Hooks](#org3a2a827)
+        -   [ibuffer](#org4e66be6)
+    -   [Programming](#org2d144ad)
+        -   [Packages](#orgf51aaf1)
+        -   [Languages](#org550659b)
+    -   [Version Control](#orgde59c28)
+        -   [Magit](#org1759ecb)
+        -   [magit-todos](#org5dfeff8)
+        -   [git-messenger](#orga6e0cca)
+        -   [Git time machine](#org19be629)
+        -   [diff-hl](#orga6e7abc)
+    -   [Minibuffer & Completion](#orgf629bf7)
+        -   [consult-projectile](#orgc3042bc)
+        -   [Corfu](#org0e5c163)
+    -   [Org Mode](#org9864a8f)
+        -   [Org configuration](#org42b210f)
+        -   [org-superstar-mode](#orgbfb48ea)
+    -   [Other Useful Packages](#org7632f17)
+        -   [buffer-move](#org6f759e5)
+        -   [denote](#org546ac34)
+        -   [exec-path-from-shell](#org412aada)
+        -   [Eyebrowse](#org9a0617a)
+        -   [gptel](#orgf8c61e3)
+        -   [helpful](#org4660bbc)
+        -   [ibuffer-projectile](#org04d0699)
+        -   [markdown-mode](#org36823c7)
+        -   [package-lint](#org2a75c99)
+        -   [Popper](#org782c5bd)
+        -   [Projectile](#org5cef75a)
+        -   [rainbow-delimiters](#orgf2bca92)
+        -   [Transpose Frame](#org321f18a)
+        -   [YASnippet](#org139c64d)
+    -   [Appearance](#orgb41a5c5)
+        -   [Dashboard](#orgfe65fed)
+        -   [Doom Modeline](#org7d1bd34)
+        -   [Ef Themes](#org273db3b)
+        -   [Modus Themes](#org715e265)
+        -   [nerd-icons-corfu](#orge9da686)
+-   [Terminal Config](#orgbdaac2d)
+    -   [General Configuration](#org08be1a5)
+        -   [Variables and Modes](#orgbcef4cf)
+        -   [Functions for custom bindings](#org0fa6129)
+        -   [Custom Bindings](#org7fcfd7d)
+        -   [Packages](#org185fdd4)
+        -   [Terminal mappings](#org9176b33)
 
 
-<a id="orge4cc5c6"></a>
+<a id="orgf5e3b5a"></a>
 
 # Common Functions
 
@@ -125,13 +125,13 @@ These are functions needed by both configurations during initial startup.
 ```
 
 
-<a id="org0fe29aa"></a>
+<a id="org7f9277a"></a>
 
 # Common General Configuration
 
 
 
-<a id="orgc8908d6"></a>
+<a id="org2ffe869"></a>
 
 ## Variables and Modes
 
@@ -180,7 +180,7 @@ These are functions needed by both configurations during initial startup.
 ```
 
 
-<a id="org635bc4a"></a>
+<a id="org9326f0a"></a>
 
 ## Functions for custom bindings
 
@@ -281,7 +281,7 @@ Skips over periods, quotes, and closing parentheses."
 ```
 
 
-<a id="orgf971fb8"></a>
+<a id="org2737676"></a>
 
 ## Custom Bindings
 
@@ -295,7 +295,7 @@ Skips over periods, quotes, and closing parentheses."
 ```
 
 
-<a id="orgb91b4af"></a>
+<a id="org4845301"></a>
 
 ## dired
 
@@ -323,7 +323,7 @@ Skips over periods, quotes, and closing parentheses."
 ```
 
 
-<a id="orga2d3380"></a>
+<a id="org1fb2fbc"></a>
 
 ## Advice
 
@@ -339,20 +339,23 @@ Skips over periods, quotes, and closing parentheses."
 ```
 
 
-<a id="orga85991f"></a>
+<a id="org209ebeb"></a>
 
 # Common Packages
 
 
 
-<a id="orgeb507ab"></a>
+<a id="org8663266"></a>
 
 ## Minibuffer & Completion
 
 
-<a id="orgb6f8b16"></a>
+<a id="org9438668"></a>
 
 ### Vertico
+
+-   **Repo:** <https://github.com/minad/vertico>
+-   **Description:** Performant and minimalistic vertical completion UI based on the default completion system.
 
 ```emacs-lisp
 (use-package vertico
@@ -367,9 +370,12 @@ Skips over periods, quotes, and closing parentheses."
 ```
 
 
-<a id="org78e7410"></a>
+<a id="orgef02eca"></a>
 
 ### Embark
+
+-   **Repo:** <https://github.com/oantolin/embark>
+-   **Description:** Emacs Mini-Buffer Actions Rooted in Keymaps
 
 ```emacs-lisp
 (use-package embark
@@ -406,9 +412,12 @@ Skips over periods, quotes, and closing parentheses."
 ```
 
 
-<a id="orgbfe1613"></a>
+<a id="org98b9827"></a>
 
 ### Marginalia
+
+-   **Repo:** <https://github.com/minad/marginalia>
+-   **Description:** Enable rich annotations in the minibuffer
 
 ```emacs-lisp
 (use-package marginalia
@@ -418,9 +427,12 @@ Skips over periods, quotes, and closing parentheses."
 ```
 
 
-<a id="orgf30f5ae"></a>
+<a id="org4c82b70"></a>
 
 ### Consult
+
+-   **Repo:** <https://github.com/minad/consult>
+-   **Description:** Search and navigation commands based on the Emacs completion function completing-read
 
 ```emacs-lisp
 ;; Example configuration for Consult
@@ -485,9 +497,12 @@ Skips over periods, quotes, and closing parentheses."
 ```
 
 
-<a id="org969df8b"></a>
+<a id="org4bdc544"></a>
 
 ### orderless
+
+-   **Repo:** <https://github.com/oantolin/orderless>
+-   **Description:** Emacs completion style that matches multiple regexps in any order
 
 ```emacs-lisp
 (use-package orderless
@@ -498,9 +513,12 @@ Skips over periods, quotes, and closing parentheses."
 ```
 
 
-<a id="orgf199065"></a>
+<a id="org477ce89"></a>
 
 ### nerd-icons-completion
+
+-   **Repo:** <https://github.com/rainstormstudio/nerd-icons-completion>
+-   **Description:** Icons for candidates in minibuffer
 
 ```emacs-lisp
 (use-package nerd-icons-completion
@@ -512,9 +530,12 @@ Skips over periods, quotes, and closing parentheses."
 ```
 
 
-<a id="orga2725c5"></a>
+<a id="org56dbb0f"></a>
 
 ### kind-icon
+
+-   **Repo:** <https://github.com/jdtsmith/kind-icon>
+-   **Description:** Completion kind text/icon prefix labelling for emacs in-region completion
 
 ```emacs-lisp
 (use-package kind-icon
@@ -527,9 +548,12 @@ Skips over periods, quotes, and closing parentheses."
 ```
 
 
-<a id="orgf096114"></a>
+<a id="org56d9e70"></a>
 
 ### which-key
+
+-   **Repo:** <https://github.com/justbur/emacs-which-key>
+-   **Description:** Emacs package that displays available keybindings in popup
 
 ```emacs-lisp
 (use-package which-key
@@ -539,14 +563,17 @@ Skips over periods, quotes, and closing parentheses."
 ```
 
 
-<a id="org1bf2d02"></a>
+<a id="org716920a"></a>
 
 ## Other Useful Packages
 
 
-<a id="org9e56c79"></a>
+<a id="org8845676"></a>
 
 ### Ace Window
+
+-   **Repo:** <https://github.com/abo-abo/ace-window>
+-   **Description:** Quickly switch windows in Emacs
 
 ```emacs-lisp
 (use-package ace-window
@@ -561,9 +588,12 @@ Skips over periods, quotes, and closing parentheses."
 ```
 
 
-<a id="org6ba84d0"></a>
+<a id="org9d1b471"></a>
 
 ### aggressive-indent-mode
+
+-   **Repo:** <https://github.com/Malabarba/aggressive-indent-mode>
+-   **Description:** Emacs minor mode that keeps your code always indented
 
 ```emacs-lisp
 (use-package aggressive-indent
@@ -575,9 +605,12 @@ Skips over periods, quotes, and closing parentheses."
 ```
 
 
-<a id="org30b7a26"></a>
+<a id="org5f2adac"></a>
 
 ### Avy
+
+-   **Repo:** <https://github.com/abo-abo/avy>
+-   **Description:** Jumping to visible text using a char-based decision tree
 
 ```emacs-lisp
 (use-package avy
@@ -590,9 +623,13 @@ Skips over periods, quotes, and closing parentheses."
 ```
 
 
-<a id="org3d04dc8"></a>
+<a id="orgf645ac7"></a>
 
 ### Crux
+
+-   **Repo:** <https://github.com/bbatsov/crux>
+-   **Docs:** <https://emacsredux.com/blog/2016/01/30/crux>
+-   **Description:** A Collection of Ridiculously Useful eXtensions for Emacs
 
 ```emacs-lisp
 (use-package crux
@@ -610,9 +647,12 @@ Skips over periods, quotes, and closing parentheses."
 ```
 
 
-<a id="org682fc69"></a>
+<a id="org59ed255"></a>
 
 ### expand-region
+
+-   **Repo:** <https://github.com/magnars/expand-region.el>
+-   **Description:** Emacs extension to increase selected region by semantic units.
 
 ```emacs-lisp
 (use-package expand-region
@@ -622,9 +662,12 @@ Skips over periods, quotes, and closing parentheses."
 ```
 
 
-<a id="orgecb4a13"></a>
+<a id="org1786ad7"></a>
 
 ### Idle Highlight Mode
+
+-   **Repo:** <https://codeberg.org/ideasman42/emacs-idle-highlight-mode>
+-   **Description:** Simple symbol highlighting package for Emacs
 
 ```emacs-lisp
 (use-package idle-highlight-mode
@@ -638,9 +681,12 @@ Skips over periods, quotes, and closing parentheses."
 ```
 
 
-<a id="orgd8d09b3"></a>
+<a id="org19f1b77"></a>
 
 ### jump-char
+
+-   **Repo:** <https://github.com/lewang/jump-char>
+-   **Description:** Navigation by character occurrence
 
 ```emacs-lisp
 (use-package jump-char
@@ -651,9 +697,12 @@ Skips over periods, quotes, and closing parentheses."
 ```
 
 
-<a id="orgdaeae8a"></a>
+<a id="orgfae6c7c"></a>
 
 ### minions
+
+-   **Repo:** <https://github.com/tarsius/minions>
+-   **Description:** A minor-mode menu for the mode line
 
 ```emacs-lisp
 (use-package minions
@@ -663,9 +712,13 @@ Skips over periods, quotes, and closing parentheses."
 ```
 
 
-<a id="orgf77ef83"></a>
+<a id="org513848c"></a>
 
 ### Paredit
+
+-   **Repo:** <https://github.com/emacsmirror/paredit/blob/master/paredit.el>
+-   **Docs:** <https://www.emacswiki.org/emacs/ParEdit>, <https://wikemacs.org/wiki/Paredit-mode>
+-   **Description:** A minor mode for performing structured editing of S-expression data
 
 ```emacs-lisp
 (use-package paredit
@@ -680,9 +733,13 @@ Skips over periods, quotes, and closing parentheses."
 ```
 
 
-<a id="org9f82c54"></a>
+<a id="org1f127ba"></a>
 
 ### undo-tree
+
+-   **Repo:** <https://github.com/apchamberlain/undo-tree.el>
+-   **Docs:** <https://www.emacswiki.org/emacs/UndoTree>
+-   **Description:** Visualize Emacs undo information as a graphical tree and navigate to previous states
 
 ```emacs-lisp
 (use-package undo-tree
@@ -697,14 +754,17 @@ Skips over periods, quotes, and closing parentheses."
 ```
 
 
-<a id="org4cc70bb"></a>
+<a id="org9042dab"></a>
 
 ## Appearance
 
 
-<a id="orgbff4fa1"></a>
+<a id="org67db66c"></a>
 
 ### Nerd Icons
+
+-   **Repo:** <https://github.com/rainstormstudio/nerd-icons.el>
+-   **Description:** A library for easily using Nerd Font icons inside Emacs
 
 ```emacs-lisp
 (use-package nerd-icons
@@ -712,9 +772,12 @@ Skips over periods, quotes, and closing parentheses."
 ```
 
 
-<a id="orgb70da9d"></a>
+<a id="org26e1ac2"></a>
 
 ### nerd-icons-dired
+
+-   **Repo:** <https://github.com/rainstormstudio/nerd-icons-dired>
+-   **Description:** Use nerd-icons for Dired
 
 ```emacs-lisp
 (use-package nerd-icons-dired
@@ -724,18 +787,18 @@ Skips over periods, quotes, and closing parentheses."
 ```
 
 
-<a id="org1b3541f"></a>
+<a id="orgea18bda"></a>
 
 # GUI Config
 
 
 
-<a id="org94f2a82"></a>
+<a id="orga97954d"></a>
 
 ## General Configuration
 
 
-<a id="org38a9553"></a>
+<a id="orgb0d725e"></a>
 
 ### Variables and Modes
 
@@ -788,7 +851,7 @@ Skips over periods, quotes, and closing parentheses."
 ```
 
 
-<a id="orgb847a7b"></a>
+<a id="org9b97b4e"></a>
 
 ### Functions for custom bindings
 
@@ -841,7 +904,7 @@ Skips over periods, quotes, and closing parentheses."
 ```
 
 
-<a id="org2ac67ed"></a>
+<a id="org4ff9df1"></a>
 
 ### Custom Bindings
 
@@ -871,7 +934,7 @@ Skips over periods, quotes, and closing parentheses."
 ```
 
 
-<a id="org564eb0f"></a>
+<a id="org67a6ee4"></a>
 
 ### Functions for hooks
 
@@ -888,7 +951,7 @@ Skips over periods, quotes, and closing parentheses."
 ```
 
 
-<a id="org0bfb000"></a>
+<a id="org3a2a827"></a>
 
 ### Hooks
 
@@ -900,7 +963,7 @@ Skips over periods, quotes, and closing parentheses."
 ```
 
 
-<a id="orgf896562"></a>
+<a id="org4e66be6"></a>
 
 ### ibuffer
 
@@ -911,17 +974,22 @@ Skips over periods, quotes, and closing parentheses."
 ```
 
 
-<a id="orgbd396ce"></a>
+<a id="org2d144ad"></a>
 
 ## Programming
 
 
-<a id="org546d75f"></a>
+<a id="orgf51aaf1"></a>
 
 ### Packages
 
 -   treesit-auto
 
+    -   **Repo:** <https://github.com/renzmann/treesit-auto>
+    -   **Description:** Automatic installation, usage, and fallback for tree-sitter major modes in Emacs
+    
+    :END:
+    
     ```emacs-lisp
     (use-package treesit-auto
       :straight t
@@ -932,6 +1000,9 @@ Skips over periods, quotes, and closing parentheses."
 
 -   Eglot
 
+    -   **Repo:** <https://github.com/joaotavora/eglot>
+    -   **Description:** A client for Language Server Protocol servers
+    
     ```emacs-lisp
     (defun amo/eglot-format-on-save ()
       (when (bound-and-true-p eglot--managed-mode)
@@ -955,13 +1026,16 @@ Skips over periods, quotes, and closing parentheses."
 
 -   RealGUD
 
+    -   **Repo:** <https://github.com/realgud/realgud>
+    -   **Description:** The Grand "Cathedral" Debugger rewrite
+    
     ```emacs-lisp
     (use-package realgud
       :straight t)
     ```
 
 
-<a id="orga171ce8"></a>
+<a id="org550659b"></a>
 
 ### Languages
 
@@ -998,6 +1072,9 @@ Skips over periods, quotes, and closing parentheses."
     
     -   conda
     
+        -   **Repo:** <https://github.com/necaris/conda.el>
+        -   **Description:** Emacs helper library (and minor mode) to work with conda environments
+        
         ```emacs-lisp
         (use-package conda
           :straight t
@@ -1013,6 +1090,9 @@ Skips over periods, quotes, and closing parentheses."
     
     -   pyvenv
     
+        -   **Repo:** <https://github.com/jorgenschaefer/pyvenv>
+        -   **Description:** Python virtual environment interface for Emacs
+        
         ```emacs-lisp
         (use-package pyvenv
           :straight t
@@ -1027,6 +1107,8 @@ Skips over periods, quotes, and closing parentheses."
 
     -   dockerfile-mode
     
+        -   **Repo:** <https://github.com/spotify/dockerfile-mode>
+        
         ```emacs-lisp
         (use-package dockerfile-mode
           :straight t)
@@ -1034,20 +1116,28 @@ Skips over periods, quotes, and closing parentheses."
     
     -   docker-compose-mode
     
+        -   **Repo:** <https://github.com/meqif/docker-compose-mode>
+        
         ```emacs-lisp
         (use-package docker-compose-mode
           :straight t)
         ```
 
 
-<a id="orgb1042a4"></a>
+<a id="orgde59c28"></a>
 
 ## Version Control
 
 
-<a id="org68dadf6"></a>
+<a id="org1759ecb"></a>
 
 ### Magit
+
+-   **Repo:** <https://github.com/magit/magit>
+-   **Docs:** <https://magit.vc/>
+-   **Description:** It's Magit! A Git Porcelain inside Emacs.
+
+:END:
 
 ```emacs-lisp
 (use-package magit
@@ -1057,9 +1147,12 @@ Skips over periods, quotes, and closing parentheses."
 ```
 
 
-<a id="org715e099"></a>
+<a id="org5dfeff8"></a>
 
 ### magit-todos
+
+-   **Repo:** <https://github.com/alphapapa/magit-todos>
+-   **Description:** Show source files' TODOs (and FIXMEs, etc) in Magit status buffer
 
 ```emacs-lisp
 (use-package magit-todos
@@ -1068,9 +1161,12 @@ Skips over periods, quotes, and closing parentheses."
 ```
 
 
-<a id="org2915f65"></a>
+<a id="orga6e0cca"></a>
 
 ### git-messenger
+
+-   **Repo:** <https://github.com/emacsorphanage/git-messenger>
+-   **Description:** Emacs Port of git-messenger.vim
 
 ```emacs-lisp
 (use-package git-messenger
@@ -1081,9 +1177,12 @@ Skips over periods, quotes, and closing parentheses."
 ```
 
 
-<a id="org889f8ac"></a>
+<a id="org19be629"></a>
 
 ### Git time machine
+
+-   **Repo:** <https://github.com/emacsmirror/git-timemachine>
+-   **Description:** Walk through git revisions of a file
 
 ```emacs-lisp
 (use-package git-timemachine
@@ -1091,9 +1190,12 @@ Skips over periods, quotes, and closing parentheses."
 ```
 
 
-<a id="org21534af"></a>
+<a id="orga6e7abc"></a>
 
 ### diff-hl
+
+-   **Repo:** <https://github.com/dgutov/diff-hl>
+-   **Description:** Emacs package for highlighting uncommitted changes
 
 ```emacs-lisp
 (use-package diff-hl
@@ -1107,14 +1209,17 @@ Skips over periods, quotes, and closing parentheses."
 ```
 
 
-<a id="org04a70c5"></a>
+<a id="orgf629bf7"></a>
 
 ## Minibuffer & Completion
 
 
-<a id="org1a3b2d7"></a>
+<a id="orgc3042bc"></a>
 
 ### consult-projectile
+
+-   **Repo:** <https://github.com/emacsmirror/consult-projectile>
+-   **Description:** Consult integration for projectile
 
 ```emacs-lisp
 (use-package consult-projectile
@@ -1128,9 +1233,12 @@ Skips over periods, quotes, and closing parentheses."
 ```
 
 
-<a id="orgdba9adf"></a>
+<a id="org0e5c163"></a>
 
 ### Corfu
+
+-   **Repo:** <https://github.com/minad/corfu>
+-   **Description:** corfu.el - COmpletion in Region FUnction
 
 ```emacs-lisp
 (use-package corfu
@@ -1157,12 +1265,12 @@ Skips over periods, quotes, and closing parentheses."
 ```
 
 
-<a id="org0f4f315"></a>
+<a id="org9864a8f"></a>
 
 ## Org Mode
 
 
-<a id="org05c9ec3"></a>
+<a id="org42b210f"></a>
 
 ### Org configuration
 
@@ -1236,9 +1344,12 @@ Skips over periods, quotes, and closing parentheses."
 ```
 
 
-<a id="org3653d81"></a>
+<a id="orgbfb48ea"></a>
 
 ### org-superstar-mode
+
+-   **Repo:** <https://github.com/integral-dw/org-superstar-mode>
+-   **Description:** Make org-mode stars a little more super
 
 ```emacs-lisp
 (use-package org-superstar
@@ -1248,14 +1359,19 @@ Skips over periods, quotes, and closing parentheses."
 ```
 
 
-<a id="org5bfdf04"></a>
+<a id="org7632f17"></a>
 
 ## Other Useful Packages
 
 
-<a id="org2d75fef"></a>
+<a id="org6f759e5"></a>
 
 ### buffer-move
+
+-   **Repo:** <https://github.com/lukhas/buffer-move>
+-   **Description:** Easily swap buffers
+
+:REPO: <https://github.com/lukhas/buffer-move> :DESCRIPTION: Easily swap buffers
 
 ```emacs-lisp
 (use-package buffer-move
@@ -1273,9 +1389,13 @@ Skips over periods, quotes, and closing parentheses."
 ```
 
 
-<a id="orgd6e84fe"></a>
+<a id="org546ac34"></a>
 
 ### denote
+
+-   **Repo:** <https://github.com/protesilaos/denote>
+-   **Docs:** <https://protesilaos.com/emacs/denote>
+-   **Description:** Simple notes for Emacs with an efficient file-naming scheme
 
 ```emacs-lisp
 (use-package denote
@@ -1309,9 +1429,12 @@ Skips over periods, quotes, and closing parentheses."
 ```
 
 
-<a id="orga7a8023"></a>
+<a id="org412aada"></a>
 
 ### exec-path-from-shell
+
+-   **Repo:** <https://github.com/purcell/exec-path-from-shell>
+-   **Description:** Make Emacs use the $PATH set up by the user's shell
 
 ```emacs-lisp
 (when (memq window-system '(mac ns x)) ;; Linux
@@ -1322,9 +1445,12 @@ Skips over periods, quotes, and closing parentheses."
 ```
 
 
-<a id="orgf9fc3b7"></a>
+<a id="org9a0617a"></a>
 
 ### Eyebrowse
+
+-   **Repo:** <https://depp.brause.cc/eyebrowse/>
+-   **Description:** A simple-minded way of managing window configs in Emacs
 
 ```emacs-lisp
 (use-package eyebrowse
@@ -1335,9 +1461,12 @@ Skips over periods, quotes, and closing parentheses."
 ```
 
 
-<a id="orgd591972"></a>
+<a id="orgf8c61e3"></a>
 
 ### gptel
+
+-   **Repo:** <https://github.com/karthink/gptel>
+-   **Description:** A no-frills ChatGPT client for Emacs
 
 ```emacs-lisp
 (use-package gptel
@@ -1349,9 +1478,12 @@ Skips over periods, quotes, and closing parentheses."
 ```
 
 
-<a id="org1569475"></a>
+<a id="org4660bbc"></a>
 
 ### helpful
+
+-   **Repo:** <https://github.com/Wilfred/helpful>
+-   **Description:** A better Emacs **help** buffer
 
 ```emacs-lisp
 (use-package helpful
@@ -1366,9 +1498,12 @@ Skips over periods, quotes, and closing parentheses."
 ```
 
 
-<a id="org59a68e7"></a>
+<a id="org04d0699"></a>
 
 ### ibuffer-projectile
+
+-   **Repo:** <https://github.com/purcell/ibuffer-projectile>
+-   **Description:** Group buffers in Emacs ibuffer-mode by their projectile root directory
 
 ```emacs-lisp
 (use-package ibuffer-projectile
@@ -1386,9 +1521,12 @@ Skips over periods, quotes, and closing parentheses."
 ```
 
 
-<a id="org97e1144"></a>
+<a id="org36823c7"></a>
 
 ### markdown-mode
+
+-   **Repo:** <https://github.com/jrblevin/markdown-mode>
+-   **Description:** Emacs Markdown Mode
 
 ```emacs-lisp
 (use-package markdown-mode
@@ -1398,9 +1536,12 @@ Skips over periods, quotes, and closing parentheses."
 ```
 
 
-<a id="org9a80cb9"></a>
+<a id="org2a75c99"></a>
 
 ### package-lint
+
+-   **Repo:** <https://github.com/purcell/package-lint>
+-   **Description:** A linting library for elisp package metadata
 
 ```emacs-lisp
 (use-package package-lint
@@ -1408,9 +1549,12 @@ Skips over periods, quotes, and closing parentheses."
 ```
 
 
-<a id="org165c6cd"></a>
+<a id="org782c5bd"></a>
 
 ### Popper
+
+-   **Repo:** <https://github.com/karthink/popper>
+-   **Description:** Emacs minor-mode to summon and dismiss buffers easily
 
 ```emacs-lisp
 (use-package popper
@@ -1455,9 +1599,13 @@ Skips over periods, quotes, and closing parentheses."
 ```
 
 
-<a id="org15b9e14"></a>
+<a id="org5cef75a"></a>
 
 ### Projectile
+
+-   **Repo:** <https://github.com/bbatsov/projectile>
+-   **Docs:** <https://docs.projectile.mx/projectile/index.html>
+-   **Description:** Project navigation and management library for Emacs
 
 ```emacs-lisp
 (use-package projectile
@@ -1471,9 +1619,12 @@ Skips over periods, quotes, and closing parentheses."
 ```
 
 
-<a id="org8418d7e"></a>
+<a id="orgf2bca92"></a>
 
 ### rainbow-delimiters
+
+-   **Repo:** <https://github.com/Fanael/rainbow-delimiters>
+-   **Description:** A "rainbow parentheses"-like mode which highlights delimiters
 
 ```emacs-lisp
 (use-package rainbow-delimiters
@@ -1482,9 +1633,12 @@ Skips over periods, quotes, and closing parentheses."
 ```
 
 
-<a id="org8541b92"></a>
+<a id="org321f18a"></a>
 
 ### Transpose Frame
+
+-   **Docs:** <https://www.emacswiki.org/emacs/TransposeFrame>
+-   **Description:** Interactive functions to transpose window arrangement in current frame
 
 ```emacs-lisp
 (use-package transpose-frame
@@ -1493,9 +1647,12 @@ Skips over periods, quotes, and closing parentheses."
 ```
 
 
-<a id="org14d6432"></a>
+<a id="org139c64d"></a>
 
 ### YASnippet
+
+-   **Repo:** <https://github.com/joaotavora/yasnippet>
+-   **Description:** A template system for Emacs
 
 ```emacs-lisp
 (use-package yasnippet
@@ -1510,14 +1667,17 @@ Skips over periods, quotes, and closing parentheses."
 ```
 
 
-<a id="orgc704a0b"></a>
+<a id="orgb41a5c5"></a>
 
 ## Appearance
 
 
-<a id="org24dff3c"></a>
+<a id="orgfe65fed"></a>
 
 ### Dashboard
+
+-   **Repo:** <https://github.com/emacs-dashboard/emacs-dashboard>
+-   **Description:** An extensible emacs dashboard
 
 ```emacs-lisp
 (use-package dashboard
@@ -1538,9 +1698,12 @@ Skips over periods, quotes, and closing parentheses."
 ```
 
 
-<a id="orgf738feb"></a>
+<a id="org7d1bd34"></a>
 
 ### Doom Modeline
+
+-   **Repo:** <https://github.com/seagle0128/doom-modeline>
+-   **Description:** A fancy and fast mode-line inspired by minimalism design
 
 ```emacs-lisp
 (straight-use-package '(f :type git :host github :repo "rejeep/f.el"))
@@ -1555,9 +1718,12 @@ Skips over periods, quotes, and closing parentheses."
 ```
 
 
-<a id="orgb6b2d16"></a>
+<a id="org273db3b"></a>
 
 ### Ef Themes
+
+-   **Repo:** <https://github.com/protesilaos/ef-themes>
+-   **Description:** Colourful and legible themes for GNU Emacs
 
 ```emacs-lisp
 (use-package ef-themes
@@ -1565,9 +1731,12 @@ Skips over periods, quotes, and closing parentheses."
 ```
 
 
-<a id="org133228d"></a>
+<a id="org715e265"></a>
 
 ### Modus Themes
+
+-   **Repo:** <https://github.com/protesilaos/modus-themes>
+-   **Description:** Highly accessible themes for GNU Emacs
 
 ```emacs-lisp
 (use-package modus-themes
@@ -1575,9 +1744,12 @@ Skips over periods, quotes, and closing parentheses."
 ```
 
 
-<a id="org20e2282"></a>
+<a id="orge9da686"></a>
 
 ### nerd-icons-corfu
+
+-   **Repo:** <https://github.com/LuigiPiucco/nerd-icons-corfu>
+-   **Description:** Icons for corfu via nerd-icons
 
 ```emacs-lisp
 (use-package nerd-icons-corfu
@@ -1585,18 +1757,18 @@ Skips over periods, quotes, and closing parentheses."
 ```
 
 
-<a id="org3428b51"></a>
+<a id="orgbdaac2d"></a>
 
 # Terminal Config
 
 
 
-<a id="orge702ef2"></a>
+<a id="org08be1a5"></a>
 
 ## General Configuration
 
 
-<a id="org72843b5"></a>
+<a id="orgbcef4cf"></a>
 
 ### Variables and Modes
 
@@ -1616,7 +1788,7 @@ Skips over periods, quotes, and closing parentheses."
 ```
 
 
-<a id="orga61e585"></a>
+<a id="org0fa6129"></a>
 
 ### Functions for custom bindings
 
@@ -1644,7 +1816,7 @@ Skips over periods, quotes, and closing parentheses."
 ```
 
 
-<a id="org81a7459"></a>
+<a id="org7fcfd7d"></a>
 
 ### Custom Bindings
 
@@ -1655,7 +1827,7 @@ Skips over periods, quotes, and closing parentheses."
 ```
 
 
-<a id="org52b5d50"></a>
+<a id="org185fdd4"></a>
 
 ### Packages
 
@@ -1670,6 +1842,10 @@ Skips over periods, quotes, and closing parentheses."
 
 -   company
 
+    -   **Repo:** <https://github.com/company-mode/company-mode>
+    -   **Docs:** <https://company-mode.github.io/>
+    -   **Description:** Modular in-buffer completion framework for Emacs
+    
     ```emacs-lisp
     (use-package company
       :straight t
@@ -1678,7 +1854,7 @@ Skips over periods, quotes, and closing parentheses."
     ```
 
 
-<a id="org14f5861"></a>
+<a id="org9176b33"></a>
 
 ### Terminal mappings
 

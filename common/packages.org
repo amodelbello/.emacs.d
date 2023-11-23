@@ -5,10 +5,8 @@
 
 * Minibuffer & Completion
 ** Vertico
-:PROPERTIES:
-:REPO:     https://github.com/minad/vertico
-:DESCRIPTION: Performant and minimalistic vertical completion UI based on the default completion system.
-:END:
+- Repo :: https://github.com/minad/vertico
+- Description :: Performant and minimalistic vertical completion UI based on the default completion system.
 #+begin_src emacs-lisp
   (use-package vertico
     :straight (:files (:defaults "extensions/*"))
@@ -21,10 +19,8 @@
     (vertico-mode))
 #+end_src
 ** Embark
-:PROPERTIES:
-:REPO:     https://github.com/oantolin/embark
-:DESCRIPTION: Emacs Mini-Buffer Actions Rooted in Keymaps
-:END:
+- Repo :: https://github.com/oantolin/embark
+- Description :: Emacs Mini-Buffer Actions Rooted in Keymaps
 #+begin_src emacs-lisp
   (use-package embark
     :straight t
@@ -59,10 +55,8 @@
     (embark-collect-mode . consult-preview-at-point-mode))
 #+end_src
 ** Marginalia
-:PROPERTIES:
-:DESCRIPTION: Enable rich annotations in the minibuffer
-:REPO:     https://github.com/minad/marginalia
-:END:
+- Repo :: https://github.com/minad/marginalia
+- Description :: Enable rich annotations in the minibuffer
 #+begin_src emacs-lisp
   (use-package marginalia
     :straight t
@@ -71,10 +65,8 @@
 #+end_src
 
 ** Consult
-:PROPERTIES:
-:REPO:     https://github.com/minad/consult
-:DESCRIPTION: Search and navigation commands based on the Emacs completion function completing-read
-:END:
+- Repo :: https://github.com/minad/consult
+- Description :: Search and navigation commands based on the Emacs completion function completing-read
 #+begin_src emacs-lisp
   ;; Example configuration for Consult
   (use-package consult
@@ -138,10 +130,8 @@
 #+end_src
 
 ** orderless
-:PROPERTIES:
-:DESCRIPTION: Emacs completion style that matches multiple regexps in any order
-:REPO:     https://github.com/oantolin/orderless
-:END:
+- Repo :: https://github.com/oantolin/orderless
+- Description :: Emacs completion style that matches multiple regexps in any order
 #+begin_src emacs-lisp
   (use-package orderless
     :straight t
@@ -151,10 +141,8 @@
 #+end_src
 
 ** nerd-icons-completion
-:PROPERTIES:
-:REPO:     https://github.com/rainstormstudio/nerd-icons-completion
-:DESCRIPTION: Icons for candidates in minibuffer
-:END:
+- Repo :: https://github.com/rainstormstudio/nerd-icons-completion
+- Description :: Icons for candidates in minibuffer
 #+begin_src emacs-lisp
   (use-package nerd-icons-completion
     :straight t
@@ -165,10 +153,8 @@
 #+end_src
 
 ** kind-icon
-:PROPERTIES:
-:REPO:     https://github.com/jdtsmith/kind-icon
-:DESCRIPTION: Completion kind text/icon prefix labelling for emacs in-region completion
-:END:
+- Repo :: https://github.com/jdtsmith/kind-icon
+- Description :: Completion kind text/icon prefix labelling for emacs in-region completion
 #+begin_src emacs-lisp
   (use-package kind-icon
     :straight t
@@ -180,10 +166,8 @@
 #+end_src
 
 ** which-key
-:PROPERTIES:
-:REPO:     https://github.com/justbur/emacs-which-key
-:DESCRIPTION: Emacs package that displays available keybindings in popup
-:END:
+- Repo :: https://github.com/justbur/emacs-which-key
+- Description :: Emacs package that displays available keybindings in popup
 #+begin_src emacs-lisp
   (use-package which-key
     :straight t
@@ -194,10 +178,8 @@
 * Other Useful Packages
 
 ** Ace Window
-:PROPERTIES:
-:REPO:     [[https://github.com/abo-abo/ace-window]]
-:DESCRIPTION: Quickly switch windows in Emacs
-:END:
+- Repo :: [[https://github.com/abo-abo/ace-window]]
+- Description :: Quickly switch windows in Emacs
 #+begin_src emacs-lisp
   (use-package ace-window
     :straight t
@@ -211,10 +193,8 @@
 #+end_src
 
 ** aggressive-indent-mode
-:PROPERTIES:
-:REPO:     https://github.com/Malabarba/aggressive-indent-mode
-:DESCRIPTION: Emacs minor mode that keeps your code always indented
-:END:
+- Repo :: https://github.com/Malabarba/aggressive-indent-mode
+- Description :: Emacs minor mode that keeps your code always indented
 #+begin_src emacs-lisp
   (use-package aggressive-indent
     :straight t
@@ -225,10 +205,8 @@
 #+end_src
 
 ** Avy
-:PROPERTIES:
-:REPO:     [[https://github.com/abo-abo/avy]]
-:DESCRIPTION: Jumping to visible text using a char-based decision tree
-:END:
+- Repo :: [[https://github.com/abo-abo/avy]]
+- Description :: Jumping to visible text using a char-based decision tree
 #+begin_src emacs-lisp
   (use-package avy
     :straight t
@@ -240,11 +218,9 @@
 #+end_src
 
 ** Crux
-:PROPERTIES:
-:REPO:     https://github.com/bbatsov/crux
-:DOCS:     [[https://emacsredux.com/blog/2016/01/30/crux/]]
-:DESCRIPTION: A Collection of Ridiculously Useful eXtensions for Emacs
-:END:
+- Repo :: https://github.com/bbatsov/crux
+- Docs :: https://emacsredux.com/blog/2016/01/30/crux
+- Description :: A Collection of Ridiculously Useful eXtensions for Emacs
 #+begin_src emacs-lisp
   (use-package crux
     :straight t
@@ -261,10 +237,8 @@
 #+end_src
 
 ** expand-region
-:PROPERTIES:
-:REPO:     https://github.com/magnars/expand-region.el
-:DESCRIPTION: Emacs extension to increase selected region by semantic units.
-:END:
+- Repo :: https://github.com/magnars/expand-region.el
+- Description :: Emacs extension to increase selected region by semantic units.
 #+begin_src emacs-lisp
   (use-package expand-region
     :straight t
@@ -273,10 +247,8 @@
 #+end_src
 
 ** Idle Highlight Mode
-:PROPERTIES:
-:REPO:     https://codeberg.org/ideasman42/emacs-idle-highlight-mode
-:DESCRIPTION: Simple symbol highlighting package for Emacs
-:END:
+- Repo :: https://codeberg.org/ideasman42/emacs-idle-highlight-mode
+- Description :: Simple symbol highlighting package for Emacs
 #+begin_src emacs-lisp
   (use-package idle-highlight-mode
     :straight t
@@ -289,10 +261,8 @@
 #+end_src
 
 ** jump-char
-:PROPERTIES:
-:REPO:     https://github.com/lewang/jump-char
-:DESCRIPTION: Navigation by character occurrence
-:END:
+- Repo :: https://github.com/lewang/jump-char
+- Description :: Navigation by character occurrence
 #+begin_src emacs-lisp
   (use-package jump-char
     :straight (:host github :repo "lewang/jump-char"
@@ -302,10 +272,8 @@
 #+end_src
 
 ** minions
-:PROPERTIES:
-:REPO:     https://github.com/tarsius/minions
-:DESCRIPTION: A minor-mode menu for the mode line
-:END:
+- Repo :: https://github.com/tarsius/minions
+- Description :: A minor-mode menu for the mode line
 #+begin_src emacs-lisp
   (use-package minions
     :straight t
@@ -314,11 +282,9 @@
 #+end_src
 
 ** Paredit
-:PROPERTIES:
-:REPO:     https://github.com/emacsmirror/paredit/blob/master/paredit.el
-:DOCS:     https://www.emacswiki.org/emacs/ParEdit, https://wikemacs.org/wiki/Paredit-mode
-:DESCRIPTION: A minor mode for performing structured editing of S-expression data
-:END:
+- Repo :: https://github.com/emacsmirror/paredit/blob/master/paredit.el
+- Docs :: https://www.emacswiki.org/emacs/ParEdit, https://wikemacs.org/wiki/Paredit-mode
+- Description :: A minor mode for performing structured editing of S-expression data
 #+begin_src emacs-lisp
   (use-package paredit
     :straight t
@@ -332,11 +298,9 @@
 #+end_src
 
 ** undo-tree
-:PROPERTIES:
-:REPO:     https://github.com/apchamberlain/undo-tree.el
-:DOCS:     https://www.emacswiki.org/emacs/UndoTree
-:DESCRIPTION: Visualize Emacs undo information as a graphical tree and navigate to previous states
-:END:
+- Repo :: https://github.com/apchamberlain/undo-tree.el
+- Docs :: https://www.emacswiki.org/emacs/UndoTree
+- Description :: Visualize Emacs undo information as a graphical tree and navigate to previous states
 #+begin_src emacs-lisp
   (use-package undo-tree
     :straight t
@@ -351,20 +315,16 @@
 
 * Appearance
 ** Nerd Icons
-:PROPERTIES:
-:REPO:     https://github.com/rainstormstudio/nerd-icons.el
-:DESCRIPTION: A library for easily using Nerd Font icons inside Emacs
-:END:
+- Repo :: https://github.com/rainstormstudio/nerd-icons.el
+- Description :: A library for easily using Nerd Font icons inside Emacs
 #+begin_src emacs-lisp
   (use-package nerd-icons
     :straight t)
 #+end_src
 
 ** nerd-icons-dired
-:PROPERTIES:
-:REPO:     https://github.com/rainstormstudio/nerd-icons-dired
-:DESCRIPTION: Use nerd-icons for Dired
-:END:
+- Repo :: https://github.com/rainstormstudio/nerd-icons-dired
+- Description :: Use nerd-icons for Dired
 #+begin_src emacs-lisp
   (use-package nerd-icons-dired
     :straight t

@@ -156,9 +156,8 @@
 * Programming
 ** Packages
 *** treesit-auto
-:PROPERTIES:
-:REPO:     https://github.com/renzmann/treesit-auto
-:DESCRIPTION: Automatic installation, usage, and fallback for tree-sitter major modes in Emacs 29
+- Repo :: https://github.com/renzmann/treesit-auto
+- Description :: Automatic installation, usage, and fallback for tree-sitter major modes in Emacs
 :END:
 #+begin_src emacs-lisp
   (use-package treesit-auto
@@ -168,10 +167,8 @@
     (global-treesit-auto-mode))
 #+end_src
 *** Eglot
-:PROPERTIES:
-:REPO:     https://github.com/joaotavora/eglot
-:DESCRIPTION: A client for Language Server Protocol servers
-:END:
+- Repo :: https://github.com/joaotavora/eglot
+- Description :: A client for Language Server Protocol servers
 #+begin_src emacs-lisp
   (defun amo/eglot-format-on-save ()
     (when (bound-and-true-p eglot--managed-mode)
@@ -194,10 +191,8 @@
 #+end_src
 
 *** RealGUD
-:PROPERTIES:
-:REPO:     https://github.com/realgud/realgud
-:DESCRIPTION: The Grand "Cathedral" Debugger rewrite
-:END:
+- Repo :: https://github.com/realgud/realgud
+- Description :: The Grand "Cathedral" Debugger rewrite
 #+begin_src emacs-lisp
   (use-package realgud
     :straight t)
@@ -227,10 +222,8 @@
 #+end_src
 
 **** conda
-:PROPERTIES:
-:REPO:     https://github.com/necaris/conda.el
-:DESCRIPTION: Emacs helper library (and minor mode) to work with conda environments
-:END:
+- Repo :: https://github.com/necaris/conda.el
+- Description :: Emacs helper library (and minor mode) to work with conda environments
 #+begin_src emacs-lisp
   (use-package conda
     :straight t
@@ -244,10 +237,8 @@
     (setq-default mode-line-format (cons '(:exec conda-env-current-name) mode-line-format)))
 #+end_src
 **** pyvenv
-:PROPERTIES:
-:REPO:     https://github.com/jorgenschaefer/pyvenv
-:DESCRIPTION: Python virtual environment interface for Emacs
-:END:
+- Repo :: https://github.com/jorgenschaefer/pyvenv
+- Description :: Python virtual environment interface for Emacs
 #+begin_src emacs-lisp
   (use-package pyvenv
     :straight t
@@ -260,27 +251,22 @@
 
 *** Docker
 **** dockerfile-mode
-:PROPERTIES:
-:REPO:     https://github.com/spotify/dockerfile-mode
-:END:
+- Repo :: https://github.com/spotify/dockerfile-mode
 #+begin_src emacs-lisp
   (use-package dockerfile-mode
     :straight t)
 #+end_src
 **** docker-compose-mode
-:PROPERTIES:
-:REPO:     https://github.com/meqif/docker-compose-mode
-:END:
+- Repo :: https://github.com/meqif/docker-compose-mode
 #+begin_src emacs-lisp
   (use-package docker-compose-mode
     :straight t)
 #+end_src
 * Version Control
 ** Magit
-:PROPERTIES:
-:REPO:     https://github.com/magit/magit
-:DOCS:     https://magit.vc/
-:DESCRIPTION: It's Magit! A Git Porcelain inside Emacs.
+- Repo :: https://github.com/magit/magit
+- Docs :: https://magit.vc/
+- Description :: It's Magit! A Git Porcelain inside Emacs.
 :END:
 #+begin_src emacs-lisp
   (use-package magit
@@ -289,20 +275,16 @@
     (("C-x g" . magit)))
 #+end_src
 ** magit-todos
-:PROPERTIES:
-:REPO:     https://github.com/alphapapa/magit-todos
-:DESCRIPTION: Show source files' TODOs (and FIXMEs, etc) in Magit status buffer
-:END:
+- Repo :: https://github.com/alphapapa/magit-todos
+- Description :: Show source files' TODOs (and FIXMEs, etc) in Magit status buffer
 #+begin_src emacs-lisp
   (use-package magit-todos
     :straight t
     :hook ((magit-mode . magit-todos-mode)))
 #+end_src
 ** git-messenger
-:PROPERTIES:
-:REPO:     https://github.com/emacsorphanage/git-messenger
-:DESCRIPTION: Emacs Port of git-messenger.vim
-:END:
+- Repo :: https://github.com/emacsorphanage/git-messenger
+- Description :: Emacs Port of git-messenger.vim
 #+begin_src emacs-lisp
   (use-package git-messenger
     :straight t
@@ -311,19 +293,15 @@
     :bind ("C-x m" . git-messenger:popup-message))
 #+end_src
 ** Git time machine
-:PROPERTIES:
-:REPO:     https://github.com/emacsmirror/git-timemachine
-:DESCRIPTION: Walk through git revisions of a file
-:END:
+- Repo :: https://github.com/emacsmirror/git-timemachine
+- Description :: Walk through git revisions of a file
 #+begin_src emacs-lisp
   (use-package git-timemachine
     :straight t)
 #+end_src
 ** diff-hl
-:PROPERTIES:
-:REPO:     https://github.com/dgutov/diff-hl
-:DESCRIPTION: Emacs package for highlighting uncommitted changes
-:END:
+- Repo :: https://github.com/dgutov/diff-hl
+- Description :: Emacs package for highlighting uncommitted changes
 #+begin_src emacs-lisp
   (use-package diff-hl
     :straight t
@@ -336,10 +314,8 @@
 #+end_src
 * Minibuffer & Completion
 ** consult-projectile
-:PROPERTIES:
-:REPO:     https://github.com/emacsmirror/consult-projectile
-:DESCRIPTION: Consult integration for projectile
-:END:
+- Repo :: https://github.com/emacsmirror/consult-projectile
+- Description :: Consult integration for projectile
 #+begin_src emacs-lisp
   (use-package consult-projectile
     :straight t
@@ -352,10 +328,8 @@
 #+end_src
 
 ** Corfu
-:PROPERTIES:
-:REPO:     https://github.com/minad/corfu
-:DESCRIPTION: corfu.el - COmpletion in Region FUnction
-:END:
+- Repo :: https://github.com/minad/corfu
+- Description :: corfu.el - COmpletion in Region FUnction
 #+begin_src emacs-lisp
   (use-package corfu
     :straight (:files (:defaults "extensions/*"))
@@ -456,10 +430,8 @@
 #+end_src
 
 ** org-superstar-mode
-:PROPERTIES:
-:REPO:     https://github.com/integral-dw/org-superstar-mode
-:DESCRIPTION: Make org-mode stars a little more super
-:END:
+- Repo :: https://github.com/integral-dw/org-superstar-mode
+- Description :: Make org-mode stars a little more super
 #+begin_src emacs-lisp
   (use-package org-superstar
     :straight t
@@ -469,6 +441,9 @@
 
 * Other Useful Packages
 ** buffer-move
+- Repo :: https://github.com/lukhas/buffer-move
+- Description :: Easily swap buffers
+
 :PROPERTIES:
 :REPO:     https://github.com/lukhas/buffer-move
 :DESCRIPTION: Easily swap buffers
@@ -488,11 +463,9 @@
      ("<C-S-right>" . buf-move-right)))
 #+end_src
 ** denote
-:PROPERTIES:
-:DESCRIPTION: Simple notes for Emacs with an efficient file-naming scheme
-:REPO:     https://github.com/protesilaos/denote
-:DOCS:     https://protesilaos.com/emacs/denote
-:END:
+- Repo :: https://github.com/protesilaos/denote
+- Docs :: https://protesilaos.com/emacs/denote
+- Description :: Simple notes for Emacs with an efficient file-naming scheme
 #+begin_src emacs-lisp
   (use-package denote
     :straight t
@@ -524,10 +497,8 @@
            ("C-c C-d C-R . denote-dired-rename-marked-files-using-front-matter")))
 #+end_src
 ** exec-path-from-shell
-:PROPERTIES:
-:REPO:     https://github.com/purcell/exec-path-from-shell
-:DESCRIPTION: Make Emacs use the $PATH set up by the user's shell
-:END:
+- Repo :: https://github.com/purcell/exec-path-from-shell
+- Description :: Make Emacs use the $PATH set up by the user's shell
 #+begin_src emacs-lisp
   (when (memq window-system '(mac ns x)) ;; Linux
     (use-package exec-path-from-shell
@@ -536,10 +507,8 @@
       (exec-path-from-shell-initialize)))
 #+end_src
 ** Eyebrowse
-:PROPERTIES:
-:REPO:     https://depp.brause.cc/eyebrowse/
-:DESCRIPTION: A simple-minded way of managing window configs in Emacs
-:END:
+- Repo :: https://depp.brause.cc/eyebrowse/
+- Description :: A simple-minded way of managing window configs in Emacs
 #+begin_src emacs-lisp
   (use-package eyebrowse
     :straight t
@@ -548,10 +517,8 @@
     (eyebrowse-mode))
 #+end_src
 ** gptel
-:PROPERTIES:
-:REPO:     https://github.com/karthink/gptel
-:DESCRIPTION: A no-frills ChatGPT client for Emacs
-:END:
+- Repo :: https://github.com/karthink/gptel
+- Description :: A no-frills ChatGPT client for Emacs
 #+begin_src emacs-lisp
   (use-package gptel
     :straight t
@@ -562,10 +529,8 @@
 #+end_src
 
 ** helpful
-:PROPERTIES:
-:REPO:     https://github.com/Wilfred/helpful
-:DESCRIPTION: A better Emacs *help* buffer
-:END:
+- Repo :: https://github.com/Wilfred/helpful
+- Description :: A better Emacs *help* buffer
 #+begin_src emacs-lisp
   (use-package helpful
     :straight t
@@ -578,10 +543,8 @@
            ("C-S-h F" . helpful-function)))
 #+end_src
 ** ibuffer-projectile
-:PROPERTIES:
-:DESCRIPTION: Group buffers in Emacs ibuffer-mode by their projectile root directory
-:REPO:     https://github.com/purcell/ibuffer-projectile
-:END:
+- Repo :: https://github.com/purcell/ibuffer-projectile
+- Description :: Group buffers in Emacs ibuffer-mode by their projectile root directory
 #+begin_src emacs-lisp
   (use-package ibuffer-projectile
     :straight t
@@ -598,10 +561,8 @@
 #+end_src
 
 ** markdown-mode
-:PROPERTIES:
-:REPO:     https://github.com/jrblevin/markdown-mode
-:DESCRIPTION: Emacs Markdown Mode
-:END:
+- Repo :: https://github.com/jrblevin/markdown-mode
+- Description :: Emacs Markdown Mode
 #+begin_src emacs-lisp
   (use-package markdown-mode
     :straight t
@@ -609,19 +570,15 @@
     :init (setq markdown-command "multimarkdown"))
 #+end_src
 ** package-lint
-:PROPERTIES:
-:REPO:     https://github.com/purcell/package-lint
-:DESCRIPTION: A linting library for elisp package metadata
-:END:
+- Repo :: https://github.com/purcell/package-lint
+- Description :: A linting library for elisp package metadata
 #+begin_src emacs-lisp
   (use-package package-lint
     :straight t)
 #+end_src
 ** Popper
-:PROPERTIES:
-:REPO:     https://github.com/karthink/popper
-:DESCRIPTION: Emacs minor-mode to summon and dismiss buffers easily
-:END:
+- Repo :: https://github.com/karthink/popper
+- Description :: Emacs minor-mode to summon and dismiss buffers easily
 #+begin_src emacs-lisp
   (use-package popper
     :straight t
@@ -664,11 +621,9 @@
     (add-hook 'buffer-list-update-hook 'amo/add-popper-status-to-modeline))
 #+end_src
 ** Projectile
-:PROPERTIES:
-:REPO:     https://github.com/bbatsov/projectile
-:DOCS:     https://docs.projectile.mx/projectile/index.html
-:DESCRIPTION: Project navigation and management library for Emacs
-:END:
+- Repo :: https://github.com/bbatsov/projectile
+- Docs :: https://docs.projectile.mx/projectile/index.html
+- Description :: Project navigation and management library for Emacs
 #+begin_src emacs-lisp
   (use-package projectile
     :straight t
@@ -680,30 +635,24 @@
            ("C-c p" . projectile-command-map)))
 #+end_src
 ** rainbow-delimiters
-:PROPERTIES:
-:REPO:     https://github.com/Fanael/rainbow-delimiters
-:DESCRIPTION: A "rainbow parentheses"-like mode which highlights delimiters
-:END:
+- Repo :: https://github.com/Fanael/rainbow-delimiters
+- Description :: A "rainbow parentheses"-like mode which highlights delimiters
 #+begin_src emacs-lisp
   (use-package rainbow-delimiters
     :straight t
     :hook (prog-mode . rainbow-delimiters-mode))
 #+end_src
 ** Transpose Frame
-:PROPERTIES:
-:DOCS:     https://www.emacswiki.org/emacs/TransposeFrame
-:DESCRIPTION: Interactive functions to transpose window arrangement in current frame
-:END:
+- Docs :: https://www.emacswiki.org/emacs/TransposeFrame
+- Description :: Interactive functions to transpose window arrangement in current frame
 #+begin_src emacs-lisp
   (use-package transpose-frame
     :straight t
     :bind (("C->" . transpose-frame)))
 #+end_src
 ** YASnippet
-:PROPERTIES:
-:REPO:     https://github.com/joaotavora/yasnippet
-:DESCRIPTION: A template system for Emacs
-:END:
+- Repo :: https://github.com/joaotavora/yasnippet
+- Description :: A template system for Emacs
 #+begin_src emacs-lisp
   (use-package yasnippet
     :straight t
@@ -718,10 +667,8 @@
 
 * Appearance
 ** Dashboard
-:PROPERTIES:
-:REPO:     https://github.com/emacs-dashboard/emacs-dashboard
-:DESCRIPTION: An extensible emacs dashboard
-:END:
+- Repo :: https://github.com/emacs-dashboard/emacs-dashboard
+- Description :: An extensible emacs dashboard
 #+begin_src emacs-lisp
   (use-package dashboard
     :straight t
@@ -740,10 +687,8 @@
     (dashboard-open))
 #+end_src
 ** Doom Modeline
-:PROPERTIES:
-:REPO:     https://github.com/seagle0128/doom-modeline
-:DESCRIPTION: A fancy and fast mode-line inspired by minimalism design
-:END:
+- Repo :: https://github.com/seagle0128/doom-modeline
+- Description :: A fancy and fast mode-line inspired by minimalism design
 #+begin_src emacs-lisp
   (straight-use-package '(f :type git :host github :repo "rejeep/f.el"))
   (use-package doom-modeline
@@ -757,30 +702,24 @@
 #+end_src
 
 ** Ef Themes
-:PROPERTIES:
-:REPO:     https://github.com/protesilaos/ef-themes
-:DESCRIPTION: Colourful and legible themes for GNU Emacs
-:END:
+- Repo :: https://github.com/protesilaos/ef-themes
+- Description :: Colourful and legible themes for GNU Emacs
 #+begin_src emacs-lisp
   (use-package ef-themes
     :straight t)
 #+end_src
 
 ** Modus Themes
-:PROPERTIES:
-:REPO:     https://github.com/protesilaos/modus-themes
-:DESCRIPTION: Highly accessible themes for GNU Emacs
-:END:
+- Repo :: https://github.com/protesilaos/modus-themes
+- Description :: Highly accessible themes for GNU Emacs
 #+begin_src emacs-lisp
   (use-package modus-themes
     :straight t)
 #+end_src
 
 ** nerd-icons-corfu
-:PROPERTIES:
-:REPO:     https://github.com/LuigiPiucco/nerd-icons-corfu/tree/2e546d12fd85b506561cdfb47b26f8c95b24d6cf
-:DESCRIPTION: Icons for corfu via nerd-icons
-:END:
+- Repo :: https://github.com/LuigiPiucco/nerd-icons-corfu
+- Description :: Icons for corfu via nerd-icons
 #+begin_src emacs-lisp
   (use-package nerd-icons-corfu
     :straight t)

@@ -59,11 +59,9 @@
 #+end_src
 
 *** company
-:PROPERTIES:
-:DOCS:     https://company-mode.github.io/
-:REPO:     https://github.com/company-mode/company-mode
-:DESCRIPTION: Modular in-buffer completion framework for Emacs
-:END:
+- Repo :: https://github.com/company-mode/company-mode
+- Docs :: https://company-mode.github.io/
+- Description :: Modular in-buffer completion framework for Emacs
 #+begin_src emacs-lisp
 (use-package company
   :straight t
