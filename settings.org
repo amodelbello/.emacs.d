@@ -207,6 +207,8 @@
 #+end_src
 *** Haskell
 **** haskell-mode
+- Repo :: https://github.com/haskell/haskell-mode
+- Description :: Emacs mode for Haskell
 #+begin_src emacs-lisp
   (use-package haskell-mode
     :straight t
