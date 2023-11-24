@@ -140,31 +140,6 @@
           completion-category-overrides '((file (styles basic partial-completion)))))
 #+end_src
 
-** nerd-icons-completion
-- Repo :: https://github.com/rainstormstudio/nerd-icons-completion
-- Description :: Icons for candidates in minibuffer
-#+begin_src emacs-lisp
-  (use-package nerd-icons-completion
-    :straight t
-    :after marginalia
-    :hook ((marginalia-mode . nerd-icons-completion-marginalia-setup))
-    :init
-    (nerd-icons-completion-mode 1))
-#+end_src
-
-** kind-icon
-- Repo :: https://github.com/jdtsmith/kind-icon
-- Description :: Completion kind text/icon prefix labelling for emacs in-region completion
-#+begin_src emacs-lisp
-  (use-package kind-icon
-    :straight t
-    :after corfu
-    :custom
-    (kind-icon-default-face 'corfu-default) ; to compute blended backgrounds correctly
-    :config
-    (add-to-list 'corfu-margin-formatters #'kind-icon-margin-formatter))
-#+end_src
-
 ** which-key
 - Repo :: https://github.com/justbur/emacs-which-key
 - Description :: Emacs package that displays available keybindings in popup
@@ -330,4 +305,29 @@
     :straight t
     :hook
     (dired-mode . nerd-icons-dired-mode))
+#+end_src
+
+** nerd-icons-completion
+- Repo :: https://github.com/rainstormstudio/nerd-icons-completion
+- Description :: Icons for candidates in minibuffer
+#+begin_src emacs-lisp
+  (use-package nerd-icons-completion
+    :straight t
+    :after marginalia
+    :hook ((marginalia-mode . nerd-icons-completion-marginalia-setup))
+    :init
+    (nerd-icons-completion-mode 1))
+#+end_src
+
+** kind-icon
+- Repo :: https://github.com/jdtsmith/kind-icon
+- Description :: Completion kind text/icon prefix labelling for emacs in-region completion
+#+begin_src emacs-lisp
+  (use-package kind-icon
+    :straight t
+    :after corfu
+    :custom
+    (kind-icon-default-face 'corfu-default) ; to compute blended backgrounds correctly
+    :config
+    (add-to-list 'corfu-margin-formatters #'kind-icon-margin-formatter))
 #+end_src
