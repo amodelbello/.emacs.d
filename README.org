@@ -20,7 +20,9 @@ These are functions needed by both configurations during initial startup.
 #+INCLUDE: "./common/packages.org"
 
 * GUI Config
+Configuration and packages specific to GUI
 #+INCLUDE: "./settings.org"
 
 * Terminal Config
+Configuration and packages specific to terminal
 #+INCLUDE: "./terminal/settings.org"

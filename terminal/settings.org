@@ -50,18 +50,13 @@
 #+end_src
 
 ** Packages
-*** Magit
-#+begin_src emacs-lisp
-(use-package magit
-  :straight t
-  :bind
-  (("C-x g" . magit)))
-#+end_src
-
 *** company
 - Repo :: https://github.com/company-mode/company-mode
 - Docs :: https://company-mode.github.io/
 - Description :: Modular in-buffer completion framework for Emacs
+
+[[https://codeberg.org/akib/emacs-corfu-terminal][corfu-terminal]] doesn't seem to work for some reason. Company is just fine though.
+
 #+begin_src emacs-lisp
 (use-package company
   :straight t
