@@ -375,13 +375,8 @@
       (org-indent-mode 1)
       (visual-line-mode 1))
 
-    ;; Disable checkdoc in org-mode source blocks
-    (defun amo/disable-flycheck-in-org-src-block ()
-      (setq-local flycheck-disabled-checkers '(emacs-lisp emacs-lisp-checkdoc)))
-
     :hook
     (org-mode . amo/org-mode-hook)
-    (org-src-mode . amo/disable-flycheck-in-org-src-block)
 
     :bind
     (("C-c c" . org-capture)
