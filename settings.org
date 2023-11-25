@@ -186,6 +186,7 @@
                 ("C-c e f n" . flymake-goto-next-error)
                 ("C-c e f p" . flymake-goto-prev-error)
                 ("C-c e r" . eglot-rename)
+                ("C-c e a" . eglot-code-actions)
                 ("C-c e w r" . eglot-reconnect)))
 #+end_src
 
