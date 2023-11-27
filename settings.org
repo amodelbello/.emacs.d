@@ -59,6 +59,12 @@
     (interactive)
     (find-file (concat user-emacs-directory "settings.org")))
 
+  ;; Open common settings.org
+  (defun amo/open-common-settings-file ()
+    "Open common/settings.org"
+    (interactive)
+    (find-file (concat user-emacs-directory "common/settings.org")))
+
   ;; Reload config
   (defun amo/reload-config ()
     "Reload configuration"
@@ -105,6 +111,7 @@
   :bind (
          ;; Custom prefix C-z
          ("C-z s" . amo/open-settings-file)
+         ("C-z C-z s" . amo/open-common-settings-file)
          ("C-z r" . amo/reload-config)
          ("C-z C-z r" . restart-emacs)
          ("C-z C-z C-z r" . amo/delete-emacs-desktop-files-restart)
