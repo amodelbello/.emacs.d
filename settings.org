@@ -271,6 +271,13 @@
   (use-package docker-compose-mode
     :straight t)
 #+end_src
+*** Jinja2
+- Repo :: https://github.com/paradoxxxzero/jinja2-mode
+- Description :: Jinja2 mode for emacs
+#+begin_src emacs-lisp
+  (use-package jinja2-mode
+    :straight t)
+#+end_src
 * Version Control
 ** Magit
 - Repo :: https://github.com/magit/magit
