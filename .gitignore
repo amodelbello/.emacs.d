@@ -76,3 +76,4 @@ history
 /terminal/.emacs.desktop
 session.*
 org-directory
+org-persist
