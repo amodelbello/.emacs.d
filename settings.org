@@ -5,51 +5,49 @@
 * General Configuration
 ** Variables and Modes
 #+begin_src emacs-lisp
-  (use-package emacs
-    :custom
-    (ediff-split-window-function 'split-window-horizontally)
-    (ediff-window-setup-function 'ediff-setup-windows-plain)
+  (setq ediff-split-window-function 'split-window-horizontally)
+  (setq ediff-window-setup-function 'ediff-setup-windows-plain)
 
-    :config
-    ;; Maximize frames when created
-    (add-to-list 'default-frame-alist '(fullscreen . maximized))
+  ;; Maximize frames when created
+  (add-to-list 'default-frame-alist '(fullscreen . maximized))
 
-    ;; Use C-H for help prefix
-    (global-set-key (kbd "C-S-h") 'help-command)
+  ;; Use C-H for help prefix
+  (global-set-key (kbd "C-S-h") 'help-command)
 
-    (set-frame-font amo/font nil t)
-    (set-face-attribute 'fixed-pitch nil :font amo/font)
-    (set-face-attribute 'variable-pitch nil :font amo/font)
-    (set-face-attribute 'default nil :height amo/base-font-size)
-    (desktop-save-mode 1)
-    (global-hl-line-mode t)
+  (set-frame-font amo/font nil t)
+  (set-face-attribute 'fixed-pitch nil :font amo/font)
+  (set-face-attribute 'variable-pitch nil :font amo/font)
+  (set-face-attribute 'default nil :height amo/base-font-size)
+  (desktop-save-mode 1)
+  (global-hl-line-mode t)
 
-    (setq warning-minimum-level :error
-          scroll-step 1
-          frame-inhibit-implied-resize t
-          recentf-max-menu-items 25
-          recentf-max-saved-items 25
-          inferior-lisp-program "/usr/local/bin/sbcl"
-          font-latex-fontify-script nil
-          auto-save-default nil
-          create-lockfiles nil
-          delete-by-moving-to-trash t
-          comment-column 64
+  (setq warning-minimum-level :error
+        default-directory (dot-env-get 'DEFAULT_DIRECTORY "~/")
+        scroll-step 1
+        frame-inhibit-implied-resize t
+        recentf-max-menu-items 25
+        recentf-max-saved-items 25
+        inferior-lisp-program "/usr/local/bin/sbcl"
+        font-latex-fontify-script nil
+        auto-save-default nil
+        create-lockfiles nil
+        delete-by-moving-to-trash t
+        comment-column 64
 
-          ;; Change mode based on file extension
-          auto-mode-alist (append '(("\\.cl$" . lisp-mode)
-                                    ("\\.mod$" . go-mod-ts-mode))
-                                  auto-mode-alist)
+        ;; Change mode based on file extension
+        auto-mode-alist (append '(("\\.cl$" . lisp-mode)
+                                  ("\\.mod$" . go-mod-ts-mode))
+                                auto-mode-alist)
 
-          ;; Save backups to a central location
-          make-backup-files t
-          backup-directory-alist '(("." . "~/.emacs.d/backups")) ;TODO: Don't hardcode
-          delete-old-versions -1
-          version-control t
-          vc-make-backup-files t
-          indent-tabs-mode nil
-          auto-save-file-name-transforms '((".*" "~/.emacs.d/auto-save-list/" t))) ;TODO: Don't hardcode
-    (setq-default org-catch-invisible-edits 'show)
+        ;; Save backups to a central location
+        make-backup-files t
+        backup-directory-alist '(("." . "~/.emacs.d/backups")) ;TODO: Don't hardcode
+        delete-old-versions -1
+        version-control t
+        vc-make-backup-files t
+        indent-tabs-mode nil
+        auto-save-file-name-transforms '((".*" "~/.emacs.d/auto-save-list/" t))) ;TODO: Don't hardcode
+  (setq-default org-catch-invisible-edits 'show)
     #+end_src
 ** Functions for custom bindings
 #+begin_src emacs-lisp
@@ -108,34 +106,33 @@
 
 ** Custom Bindings
 #+begin_src emacs-lisp
-  :bind (
-         ;; Custom prefix C-z
-         ("C-z s" . amo/open-settings-file)
-         ("C-z C-z s" . amo/open-common-settings-file)
-         ("C-z r" . amo/reload-config)
-         ("C-z C-z r" . restart-emacs)
-         ("C-z C-z C-z r" . amo/delete-emacs-desktop-files-restart)
-         ("C-z t" . customize-themes)
-         ("C-z e" . eshell)
-         ("C-z n" . amo/open-notes-directory)
-         ("C-z d" . amo/open-denote-directory)
 
-         ;; Other bindings
-         ("C-x 2" . amo/split-window-below)
-         ("C-x 3" . amo/split-window-horizontally)
-         ("M-<down>" . amo/move-line-down)
-         ("M-<up>" . amo/move-line-up)
-         ("C-'" . amo/toggle-capitalization)
-         ("C-s-p" . scroll-down-line)
-         ("C-s-n" . scroll-up-line)
-         ("C-x K" . kill-buffer-and-window)
-         ("M-SPC" . cycle-spacing)
-         )
+  ;; Custom prefix C-z
+  (global-set-key (kbd "C-z s") 'amo/open-settings-file)
+  (global-set-key (kbd "C-z C-z s") 'amo/open-common-settings-file)
+  (global-set-key (kbd "C-z r") 'amo/reload-config)
+  (global-set-key (kbd "C-z C-z r") 'restart-emacs)
+  (global-set-key (kbd "C-z C-z C-z r") 'amo/delete-emacs-desktop-files-restart)
+  (global-set-key (kbd "C-z t") 'customize-themes)
+  (global-set-key (kbd "C-z e") 'eshell)
+  (global-set-key (kbd "C-z n") 'amo/open-notes-directory)
+  (global-set-key (kbd "C-z d") 'amo/open-denote-directory)
+
+  ;; Other bindings
+  (global-set-key (kbd "C-x 2") 'amo/split-window-below)
+  (global-set-key (kbd "C-x 3") 'amo/split-window-horizontally)
+  (global-set-key (kbd "M-<down>") 'amo/move-line-down)
+  (global-set-key (kbd "M-<up>") 'amo/move-line-up)
+  (global-set-key (kbd "C-'") 'amo/toggle-capitalization)
+  (global-set-key (kbd "C-s-p") 'scroll-down-line)
+  (global-set-key (kbd "C-s-n") 'scroll-up-line)
+  (global-set-key (kbd "C-x K") 'kill-buffer-and-window)
+  (global-set-key (kbd "M-SPC") 'cycle-spacing)
+
 #+end_src
 
 ** Functions for hooks
 #+begin_src emacs-lisp
-  :config
   ;; Don't auto-complete when we are debugging
   (defun amo/comint-mode-actions ()
     (setq-local corfu-auto nil) [])
@@ -148,10 +145,10 @@
 
 ** Hooks
 #+begin_src emacs-lisp
-  :hook ((comint-mode . amo/comint-mode-actions)
-         (before-save . amo/whitespace-cleanup)
-         (focus-out . garbage-collect)
-         (text-mode . flyspell-mode)))
+  (add-hook 'comint-mode 'amo/comint-mode-actions)
+  (add-hook 'before-save 'amo/whitespace-cleanup)
+  (add-hook 'focus-out 'garbage-collect)
+  (add-hook 'text-mode 'flyspell-mode)
   #+end_src
 
 ** ibuffer
@@ -359,14 +356,12 @@
                   corfu-popupinfo-delay '(1.0 . 0.5)))
 
   ;; A few more useful configurations...
-  (use-package emacs
-    :init
-    ;; TAB cycle if there are only few candidates
-    (setq completion-cycle-threshold 3)
+  ;; TAB cycle if there are only few candidates
+  (setq completion-cycle-threshold 3)
 
-    ;; Enable indentation+completion using the TAB key.
-    ;; `completion-at-point' is often bound to M-TAB.
-    (setq tab-always-indent 'complete))
+  ;; Enable indentation+completion using the TAB key.
+  ;; `completion-at-point' is often bound to M-TAB.
+  (setq tab-always-indent 'complete)
 #+end_src
 
 * Org Mode
