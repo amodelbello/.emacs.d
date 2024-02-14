@@ -15,7 +15,7 @@
   (dot-env-config))
 
 ;; Set font variables
-(setq amo/font-family (dot-env-get 'FONT "DejaVu Sans Mono")
+(setq amo/font-family (dot-env-get 'FONT "")
       amo/font-size (dot-env-get 'FONT_SIZE "13")
       amo/base-font-size (* (string-to-number amo/font-size) 10)
       amo/font (concat amo/font-family " " amo/font-size))
