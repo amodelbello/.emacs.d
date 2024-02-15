@@ -385,6 +385,15 @@
       (org-indent-mode 1)
       (visual-line-mode 1))
 
+    (defun amo/org-mode-agenda-hook ()
+      "For some reason the org-agenda-files var is never set"
+      (setq org-agenda-files (directory-files-recursively org-directory "\\.org$")))
+
+    (advice-add
+     'org-agenda
+     :before
+     (lambda (&rest r) (amo/org-mode-agenda-hook)))
+
     :hook
     (org-mode . amo/org-mode-hook)
 
