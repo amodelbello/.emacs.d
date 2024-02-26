@@ -20,6 +20,7 @@
   (set-face-attribute 'default nil :height amo/base-font-size)
   (desktop-save-mode 1)
   (global-hl-line-mode t)
+  (menu-bar-mode (string-to-number (dot-env-get 'MENU_BAR_MODE "1")))
 
   (setq warning-minimum-level :error
         default-directory (dot-env-get 'DEFAULT_DIRECTORY "~/")
