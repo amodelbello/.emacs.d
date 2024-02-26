@@ -37,17 +37,19 @@
         ;; Change mode based on file extension
         auto-mode-alist (append '(("\\.cl$" . lisp-mode)
                                   ("\\.mod$" . go-mod-ts-mode))
-                                auto-mode-alist)
-
-        ;; Save backups to a central location
-        make-backup-files t
-        backup-directory-alist '(("." . "~/.emacs.d/backups")) ;TODO: Don't hardcode
-        delete-old-versions -1
-        version-control t
-        vc-make-backup-files t
-        indent-tabs-mode nil
-        auto-save-file-name-transforms '((".*" "~/.emacs.d/auto-save-list/" t))) ;TODO: Don't hardcode
+                                auto-mode-alist))
   (setq-default org-catch-invisible-edits 'show)
+
+  ;; Save backups to a central location
+  (let ((backup-directory (dot-env-get 'BACKUP_DIRECTORY "~/.emacs.d/backups/"))
+        (auto-saves-directory (dot-env-get 'AUTO_SAVES_DIRECTORY "~/.emacs.d/auto-save-list/")))
+    (setq backup-directory-alist `(("." . ,backup-directory))
+          auto-save-file-name-transforms '((".*" ,auto-saves-directory t))
+          make-backup-files t
+          delete-old-versions -1
+          version-control t
+          vc-make-backup-files t
+          indent-tabs-mode nil))
     #+end_src
 ** Functions for custom bindings
 #+begin_src emacs-lisp
