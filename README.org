@@ -9,6 +9,15 @@ An emacs configuration for both GUI and terminal. Instructions on setting up ema
 
 #+TOC: headlines
 
+* Initial Setup
+Before opening emacs with this configuration there are a few set up tasks that need to be performed:
+1. Install nerd-fonts: https://github.com/rainstormstudio/nerd-icons.el
+2. Create the following directories in ~./emacs.d~
+   - ~org-directory~
+   - ~org-directory/denote~
+   - ~backups~
+3. Configure environment variables: https://github.com/amodelbello/dot-env.el
+   example ~.env~ file: [[file:.env.example][.env.example]]
 * Common Functions
 These are functions needed by both configurations during initial startup.
 #+INCLUDE: "./common/functions.el" src emacs-lisp

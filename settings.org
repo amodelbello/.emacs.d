@@ -41,10 +41,8 @@
   (setq-default org-catch-invisible-edits 'show)
 
   ;; Save backups to a central location
-  (let ((backup-directory (dot-env-get 'BACKUP_DIRECTORY "~/.emacs.d/backups/"))
-        (auto-saves-directory (dot-env-get 'AUTO_SAVES_DIRECTORY "~/.emacs.d/auto-save-list/")))
+  (let ((backup-directory (dot-env-get 'BACKUP_DIRECTORY "~/.emacs.d/backups/")))
     (setq backup-directory-alist `(("." . ,backup-directory))
-          auto-save-file-name-transforms '((".*" ,auto-saves-directory t))
           make-backup-files t
           delete-old-versions -1
           version-control t
@@ -69,7 +67,6 @@
   (defun amo/reload-config ()
     "Reload configuration"
     (interactive)
-    ;; (dot-env-load)
     (load-file (concat user-emacs-directory "init.el")))
 
   ;; Delete desktop files and restart emacs
@@ -375,7 +372,7 @@
 #+begin_src emacs-lisp
   (use-package org
     :config
-    (setq org-directory (dot-env-get 'ORG_DIRECTORY_PATH
+    (setq org-directory (dot-env-get 'ORG_DIRECTORY
                                      (concat user-emacs-directory "org-directory"))
           org-agenda-files (directory-files-recursively org-directory "\\.org$")
           org-notes-file (concat org-directory "/notes.org")
