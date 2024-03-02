@@ -184,7 +184,8 @@
            (python-ts-mode . eglot-ensure)
            (bash-ts-mode . eglot-ensure)
            (go-ts-mode . eglot-ensure)
-           (haskell-mode . eglot-ensure))
+           (haskell-mode . eglot-ensure)
+           (c++-ts-mode. eglot-ensure))
     :bind (:map eglot-mode-map
                 ("<C-return>" . xref-find-references)
                 ("C-c e f n" . flymake-goto-next-error)
