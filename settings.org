@@ -200,12 +200,15 @@
                 ("C-c e w r" . eglot-reconnect)))
 #+end_src
 
-*** RealGUD
-- Repo :: https://github.com/realgud/realgud
-- Description :: The Grand "Cathedral" Debugger rewrite
+*** Dape
+- Repo :: https://github.com/svaante/dape
+- Description :: Debug Adapter Protocol for Emacs
 #+begin_src emacs-lisp
-  (use-package realgud
-    :straight t)
+  (use-package dape
+    :straight t
+    :config
+    (setq dape-buffer-window-arrangement 'right)
+    (setq dape-cwd-fn 'projectile-project-root))
 #+end_src
 ** Languages
 *** Golang
