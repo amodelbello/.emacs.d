@@ -14,6 +14,9 @@
   ;; Use C-H for help prefix
   (global-set-key (kbd "C-S-h") 'help-command)
 
+  ;; Ace window causes an error after initial startup unless this is run
+  (flyspell-mode)
+
   (set-frame-font amo/font nil t)
   (set-face-attribute 'fixed-pitch nil :font amo/font)
   (set-face-attribute 'variable-pitch nil :font amo/font)
