@@ -168,8 +168,10 @@
 #+begin_src emacs-lisp
   (use-package treesit-auto
     :straight t
+    :custom
+    (treesit-auto-install 'prompt)
     :config
-    (setq treesit-auto-install 'prompt)
+    (treesit-auto-add-to-auto-mode-alist 'all)
     (global-treesit-auto-mode))
 #+end_src
 *** Eglot
