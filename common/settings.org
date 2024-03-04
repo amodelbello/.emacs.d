@@ -148,6 +148,7 @@
 * Custom Bindings
 #+begin_src emacs-lisp
   :bind (("C-z l" . amo/toggle-line-numbers)
+         ("M-'" . end-of-visual-line)
          ("C-x C-x" . amo/exchange-point-and-mark)
          ("C-S-t" . amo/transpose-chars-backwards)
          ("M-T" . amo/transpose-words-backwards)
