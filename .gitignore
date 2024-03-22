@@ -70,6 +70,7 @@ backups/
 projects
 .DS_Store
 history
+eln-cache/
 
 # Terminal config
 /terminal/straight

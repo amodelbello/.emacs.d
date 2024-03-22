@@ -157,6 +157,11 @@
          ("M-z" . zap-up-to-char)))
 #+end_src
 
+* Hooks
+#+begin_src emacs-lisp
+  (add-hook 'text-mode-hook 'flyspell-mode)
+  (add-hook 'prog-mode-hook (lambda () (flyspell-mode -1)))
+#+end_src
 * dired
 #+begin_src emacs-lisp
   (use-package dired

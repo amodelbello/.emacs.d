@@ -14,9 +14,6 @@
   ;; Use C-H for help prefix
   (global-set-key (kbd "C-S-h") 'help-command)
 
-  ;; Ace window causes an error after initial startup unless this is run
-  (flyspell-mode)
-
   (set-frame-font amo/font nil t)
   (set-face-attribute 'fixed-pitch nil :font amo/font)
   (set-face-attribute 'variable-pitch nil :font amo/font)
@@ -148,10 +145,9 @@
 
 ** Hooks
 #+begin_src emacs-lisp
-  (add-hook 'comint-mode 'amo/comint-mode-actions)
-  (add-hook 'before-save 'amo/whitespace-cleanup)
-  (add-hook 'focus-out 'garbage-collect)
-  (add-hook 'text-mode 'flyspell-mode)
+  (add-hook 'comint-mode-hook 'amo/comint-mode-actions)
+  (add-hook 'before-save-hook 'amo/whitespace-cleanup)
+  (add-hook 'focus-out-hook 'garbage-collect)
   #+end_src
 
 ** ibuffer
@@ -190,6 +186,7 @@
            (bash-ts-mode . eglot-ensure)
            (go-ts-mode . eglot-ensure)
            (haskell-mode . eglot-ensure)
+           (rust-ts-mode . eglot-ensure)
            (c++-ts-mode . eglot-ensure))
     :bind (:map eglot-mode-map
                 ("<C-return>" . xref-find-references)
