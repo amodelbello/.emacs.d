@@ -448,16 +448,14 @@
       '(require 'ox-gfm nil t)))
 #+end_src
 
-** org-superstar-mode
-- Repo :: https://github.com/integral-dw/org-superstar-mode
-- Description :: Make org-mode stars a little more super
-#+begin_src emacs-lisp
-  (use-package org-superstar
-    :straight t
-    :hook
-    (org-mode . org-superstar-mode))
-#+end_src
-
+** Org Modern
+- Repo :: https://github.com/minad/org-modern
+- Description :: 🦄 Modern Org Style
+  #+begin_src emacs-lisp
+    (use-package org-modern
+      :straight t
+      :config (with-eval-after-load 'org (global-org-modern-mode)))
+  #+end_src
 * Other Useful Packages
 ** buffer-move
 - Repo :: https://github.com/lukhas/buffer-move
