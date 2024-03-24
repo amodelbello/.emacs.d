@@ -159,6 +159,7 @@
 
 * Hooks
 #+begin_src emacs-lisp
+  (add-hook 'before-save-hook 'amo/whitespace-cleanup)
   (add-hook 'text-mode-hook 'flyspell-mode)
   (add-hook 'prog-mode-hook (lambda () (flyspell-mode -1)))
 #+end_src

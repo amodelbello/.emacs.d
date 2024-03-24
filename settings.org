@@ -146,7 +146,6 @@
 ** Hooks
 #+begin_src emacs-lisp
   (add-hook 'comint-mode-hook 'amo/comint-mode-actions)
-  (add-hook 'before-save-hook 'amo/whitespace-cleanup)
   (add-hook 'focus-out-hook 'garbage-collect)
   #+end_src
 
