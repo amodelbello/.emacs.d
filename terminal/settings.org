@@ -67,9 +67,7 @@
 #+end_src
 
 ** Terminal mappings
-:PROPERTIES:
-:INFO:     https://www.emacswiki.org/emacs/iTerm2#h5o-11
-:END:
+- Info :: https://www.emacswiki.org/emacs/iTerm2#h5o-11
 #+begin_src emacs-lisp
   (defun amo/define-escape-sequences-and-bindings ()
     (interactive)

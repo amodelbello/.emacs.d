@@ -371,10 +371,8 @@
 
 * Org Mode
 ** Org configuration
-:PROPERTIES:
-:DOCS:     https://orgmode.org/
-:DESCRIPTION: A GNU Emacs major mode for keeping notes, authoring documents, computational notebooks, literate programming, maintaining to-do lists, planning projects, and more — in a fast and effective plain text system.
-:END:
+- Docs :: https://orgmode.org/
+- Description :: A GNU Emacs major mode for keeping notes, authoring documents, computational notebooks, literate programming, maintaining to-do lists, planning projects, and more — in a fast and effective plain text system.
 #+begin_src emacs-lisp
   (use-package org
     :config
@@ -460,11 +458,6 @@
 ** buffer-move
 - Repo :: https://github.com/lukhas/buffer-move
 - Description :: Easily swap buffers
-
-:PROPERTIES:
-:REPO:     https://github.com/lukhas/buffer-move
-:DESCRIPTION: Easily swap buffers
-:END:
 #+begin_src emacs-lisp
   (use-package buffer-move
     :straight t
