@@ -344,6 +344,13 @@
     (define-key projectile-command-map (kbd "b") #'consult-projectile-switch-to-buffer))
 #+end_src
 
+** consult-eglot
+- Repo :: https://github.com/mohkale/consult-eglot
+- Description :: Jump to workspace symbols with eglot and consult
+  #+begin_src emacs-lisp
+    (use-package consult-eglot
+      :straight t)
+  #+end_src
 ** Corfu
 - Repo :: https://github.com/minad/corfu
 - Description :: corfu.el - COmpletion in Region FUnction
