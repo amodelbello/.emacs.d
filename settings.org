@@ -387,7 +387,6 @@
                                      (concat user-emacs-directory "org-directory"))
           org-agenda-files (directory-files-recursively org-directory "\\.org$")
           org-notes-file (concat org-directory "/notes.org")
-          org-union-file (concat org-directory "/union-notes.org")
           org-lists-file (concat org-directory "/lists.org")
           org-archive-location (concat org-directory "/_archive/%s_archive::"))
 
@@ -421,15 +420,15 @@
     (org-M-RET-may-split-line '((default . nil)))
     (org-capture-templates
      '(("n"
-        "General Note"
+        "Note"
         entry
         (file org-notes-file)
         "** %?\n%T\n%i\n" :empty-lines-after 1 :prepend t)
-       ("u"
-        "Union Note"
-        entry
-        (file+headline org-union-file "Meeting Items")
-        "** %T %?\n%i\n" :empty-lines-after 1)
+       ("t"
+        "Todo"
+        checkitem
+        (file+headline org-notes-file "General Todos")
+        "[ ] %T %?\n%i\n" :empty-lines-after 1)
        ("e"
         "Emacs Idea"
         checkitem
