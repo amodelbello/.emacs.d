@@ -25,7 +25,7 @@
   (use-package embark
     :straight t
     :bind (("C-." . embark-act)
-           ("C-\"" . embark-dwim)
+           ("M-." . embark-dwim)
            ("C-S-h B" . embark-bindings)
            :map flyspell-mode-map
            ("C-." . nil))
