@@ -22,6 +22,6 @@
 
 ;; Load config files
 (amo/load-config-file "common/settings.org")
-(amo/load-config-file "settings.org")
+(amo/load-config-file "gui/settings.org")
 (amo/load-config-file "common/packages.org")
 (amo/load-customize)

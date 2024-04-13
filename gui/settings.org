@@ -56,7 +56,7 @@
   (defun amo/open-settings-file ()
     "Open settings.org"
     (interactive)
-    (find-file (concat user-emacs-directory "settings.org")))
+    (find-file (concat user-emacs-directory "gui/settings.org")))
 
   ;; Open common settings.org
   (defun amo/open-common-settings-file ()

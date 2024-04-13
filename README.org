@@ -30,7 +30,7 @@ These are functions needed by both configurations during initial startup.
 
 * GUI Config
 Configuration and packages specific to GUI
-#+INCLUDE: "./settings.org"
+#+INCLUDE: "./gui/settings.org"
 
 * Terminal Config
 Configuration and packages specific to terminal
