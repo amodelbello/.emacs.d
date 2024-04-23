@@ -532,6 +532,20 @@
     (setq eyebrowse-new-workspace (lambda () (dashboard-open)))
     (eyebrowse-mode))
 #+end_src
+** flymake-margin
+- Repo :: https://github.com/LionyxML/flymake-margin
+- Description :: A package to provide flymake into the margin world
+#+begin_src emacs-lisp
+  (use-package flymake-margin
+    :straight (margin :type git
+                      :host github
+                      :repo "LionyxML/flymake-margin"
+                      :files ("*.el"))
+    :after flymake
+    :config
+    (flymake-margin-mode t))
+#+end_src
+
 ** gptel
 - Repo :: https://github.com/karthink/gptel
 - Description :: A no-frills ChatGPT client for Emacs
