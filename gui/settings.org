@@ -186,6 +186,7 @@
     :hook ((after-save . amo/eglot-format-on-save)
            (python-ts-mode . eglot-ensure)
            (bash-ts-mode . eglot-ensure)
+           (json-ts-mode . eglot-ensure)
            (go-ts-mode . eglot-ensure)
            (haskell-mode . eglot-ensure)
            (rust-ts-mode . eglot-ensure)
