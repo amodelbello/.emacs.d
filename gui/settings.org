@@ -392,7 +392,8 @@
           org-agenda-files (directory-files-recursively org-directory "\\.org$")
           org-notes-file (concat org-directory "/notes.org")
           org-lists-file (concat org-directory "/lists.org")
-          org-archive-location (concat org-directory "/_archive/%s_archive::"))
+          org-archive-location (concat org-directory "/_archive/%s_archive::")
+          org-yank-folded-subtrees nil)
 
     (defun amo/org-mode-hook ()
       (org-indent-mode 1)
