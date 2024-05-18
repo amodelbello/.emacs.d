@@ -669,6 +669,13 @@
     :bind (("s-p" . projectile-command-map)
            ("C-c p" . projectile-command-map)))
 #+end_src
+** ESS
+- Repo :: https://github.com/emacs-ess/ESS
+- Docs :: https://ess.r-project.org/
+#+begin_src emacs-lisp
+  (use-package ess
+    :straight t)
+#+end_src
 ** rainbow-delimiters
 - Repo :: https://github.com/Fanael/rainbow-delimiters
 - Description :: A "rainbow parentheses"-like mode which highlights delimiters
