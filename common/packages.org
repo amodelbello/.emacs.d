@@ -239,6 +239,14 @@
      ("<C-backspace>" . crux-kill-line-backwards)))
 #+end_src
 
+** el-patch
+- Repo :: https://github.com/radian-software/el-patch
+- Description :: ✨ Future-proof your Emacs Lisp customizations!
+#+begin_src emacs-lisp
+  (use-package el-patch
+    :straight t)
+#+end_src
+
 ** expand-region
 - Repo :: https://github.com/magnars/expand-region.el
 - Description :: Emacs extension to increase selected region by semantic units.

@@ -768,3 +768,21 @@
   (use-package nerd-icons-corfu
     :straight t)
 #+end_src
+** magit-file-icons
+- Repo :: https://github.com/gekoke/magit-file-icons
+- Description :: File icons for Magit
+#+begin_src emacs-lisp
+  (use-package magit-file-icons
+    ;; :straight (margin :type git
+    ;;                   :host github
+    ;;                   :repo "gekoke/magit-file-icons"
+    ;;                   :files ("*.el"))
+    :straight t
+    :init
+    (magit-file-icons-mode 1)
+    :custom
+    ;; These are the default values:
+    (magit-file-icons-enable-diff-file-section-icons t)
+    (magit-file-icons-enable-untracked-icons t)
+    (magit-file-icons-enable-diffstat-icons t))
+#+end_src
