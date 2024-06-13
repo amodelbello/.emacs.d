@@ -292,6 +292,17 @@
     (minions-mode 1))
 #+end_src
 
+** move-lines
+- Repo :: https://github.com/targzeta/move-lines
+- Description :: Emacs: moves current line or lines surrounding region up or down.
+  #+begin_src emacs-lisp
+    (use-package move-lines
+      :straight (:host github :repo "targzeta/move-lines"
+                       :branch "master")
+      :config
+      (global-set-key (kbd "M-<down>") 'move-lines-down))
+      (global-set-key (kbd "M-<up>") 'move-lines-up)
+  #+end_src
 ** Paredit
 - Repo :: https://github.com/emacsmirror/paredit/blob/master/paredit.el
 - Docs :: https://www.emacswiki.org/emacs/ParEdit, https://wikemacs.org/wiki/Paredit-mode
