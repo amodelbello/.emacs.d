@@ -284,6 +284,14 @@
   (use-package jinja2-mode
     :straight t)
 #+end_src
+*** SuperCollider
+- Repo :: https://github.com/supercollider/scel
+- Description :: Supercollider emacs package
+#+begin_src emacs-lisp
+  (when (executable-find "sclang")
+    (require 'sclang))
+#+end_src
+
 * Version Control
 ** Magit
 - Repo :: https://github.com/magit/magit
