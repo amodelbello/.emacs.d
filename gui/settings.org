@@ -339,7 +339,10 @@
     :hook
     ((dired-mode . diff-hl-dired-mode)
      (magit-pre-refresh . diff-hl-magit-pre-refresh)
-     (magit-post-refresh . diff-hl-magit-post-refresh)))
+     (magit-post-refresh . diff-hl-magit-post-refresh))
+    :bind
+    (("C-c e C-n" . diff-hl-show-hunk-next)
+     ("C-c e C-p" . diff-hl-show-hunk-previous)))
 #+end_src
 * Minibuffer & Completion
 ** consult-projectile
