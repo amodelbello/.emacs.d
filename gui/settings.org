@@ -190,6 +190,7 @@
            (go-ts-mode . eglot-ensure)
            (haskell-mode . eglot-ensure)
            (rust-ts-mode . eglot-ensure)
+           (java-ts-mode . eglot-ensure)
            (c++-ts-mode . eglot-ensure))
     :bind (:map eglot-mode-map
                 ("<C-return>" . xref-find-references)
@@ -211,6 +212,19 @@
     (setq dape-cwd-fn 'projectile-project-root))
 #+end_src
 ** Languages
+*** Docker
+**** dockerfile-mode
+- Repo :: https://github.com/spotify/dockerfile-mode
+#+begin_src emacs-lisp
+  (use-package dockerfile-mode
+    :straight t)
+#+end_src
+**** docker-compose-mode
+- Repo :: https://github.com/meqif/docker-compose-mode
+#+begin_src emacs-lisp
+  (use-package docker-compose-mode
+    :straight t)
+#+end_src
 *** Golang
 **** go-ts-mode
 #+begin_src emacs-lisp
@@ -264,18 +278,20 @@
     (pyvenv-mode +1))
 #+end_src
 
-*** Docker
-**** dockerfile-mode
-- Repo :: https://github.com/spotify/dockerfile-mode
+*** Java
+**** eglot-java
+- Repo :: https://github.com/yveszoundi/eglot-java
+- Description :: Java extension for the eglot LSP client
 #+begin_src emacs-lisp
-  (use-package dockerfile-mode
-    :straight t)
-#+end_src
-**** docker-compose-mode
-- Repo :: https://github.com/meqif/docker-compose-mode
-#+begin_src emacs-lisp
-  (use-package docker-compose-mode
-    :straight t)
+  (use-package eglot-java
+    :straight t
+    :bind
+    (("C-c l n" . eglot-java-file-new)
+     ("C-c l x" . eglot-java-run-main)
+     ("C-c l t" . eglot-java-run-test)
+     ("C-c l N" . eglot-java-project-new)
+     ("C-c l T" . eglot-java-project-build-task)
+     ("C-c l R" . eglot-java-project-build-refresh)))
 #+end_src
 *** Jinja2
 - Repo :: https://github.com/paradoxxxzero/jinja2-mode
