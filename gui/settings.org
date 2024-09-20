@@ -525,6 +525,17 @@
        :map dired-mode-map ("C-i" . casual-dired-tmenu)
        :map isearch-mode-map ("<f2>" . casual-isearch-tmenu)))
   #+end_src
+** consult-denote
+- Repo :: https://github.com/protesilaos/consult-denote
+- Docs :: https://protesilaos.com/emacs/consult-denote
+- Description :: Use Consult in tandem with Denote
+#+begin_src emacs-lisp
+  (use-package consult-denote
+    :straight t
+    :after denote
+    :bind (("C-c n f" . consult-denote-find)
+           ("C-c n g" . consult-denote-grep)))
+#+end_src
 ** denote
 - Repo :: https://github.com/protesilaos/denote
 - Docs :: https://protesilaos.com/emacs/denote
