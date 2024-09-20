@@ -177,28 +177,28 @@
 - Description :: A client for Language Server Protocol servers
 #+begin_src emacs-lisp
   (defun amo/eglot-format-on-save ()
-    (when (bound-and-true-p eglot--managed-mode)
+    (when (and (not (eq major-mode 'java-ts-mode)) (bound-and-true-p eglot--managed-mode))
       (eglot-format)))
 
-  (use-package eglot
-    :straight t
-    :defer t
-    :hook ((after-save . amo/eglot-format-on-save)
-           (python-ts-mode . eglot-ensure)
-           (bash-ts-mode . eglot-ensure)
-           (json-ts-mode . eglot-ensure)
-           (go-ts-mode . eglot-ensure)
-           (haskell-mode . eglot-ensure)
-           (rust-ts-mode . eglot-ensure)
-           (java-ts-mode . eglot-ensure)
-           (c++-ts-mode . eglot-ensure))
-    :bind (:map eglot-mode-map
-                ("<C-return>" . xref-find-references)
-                ("C-c e f n" . flymake-goto-next-error)
-                ("C-c e f p" . flymake-goto-prev-error)
-                ("C-c e r" . eglot-rename)
-                ("C-c e a" . eglot-code-actions)
-                ("C-c e w r" . eglot-reconnect)))
+    (use-package eglot
+      :straight t
+      :defer t
+      :hook ((after-save . amo/eglot-format-on-save)
+             (python-ts-mode . eglot-ensure)
+             (bash-ts-mode . eglot-ensure)
+             (json-ts-mode . eglot-ensure)
+             (go-ts-mode . eglot-ensure)
+             (haskell-mode . eglot-ensure)
+             (rust-ts-mode . eglot-ensure)
+             (java-ts-mode . eglot-ensure)
+             (c++-ts-mode . eglot-ensure))
+      :bind (:map eglot-mode-map
+                  ("<C-return>" . xref-find-references)
+                  ("C-c e f n" . flymake-goto-next-error)
+                  ("C-c e f p" . flymake-goto-prev-error)
+                  ("C-c e r" . eglot-rename)
+                  ("C-c e a" . eglot-code-actions)
+                  ("C-c e w r" . eglot-reconnect)))
 #+end_src
 
 *** Dape
