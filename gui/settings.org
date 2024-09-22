@@ -214,10 +214,7 @@
     :straight t
     :config
     (setq dape-buffer-window-arrangement 'right)
-    (setq dape-cwd-fn 'projectile-project-root)
-
-
-    )
+    (setq dape-cwd-fn 'projectile-project-root))
 #+end_src
 ** Languages
 *** Docker
