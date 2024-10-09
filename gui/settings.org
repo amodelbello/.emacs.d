@@ -87,14 +87,21 @@
     "Create a new window below and move point to new window."
     (interactive)
     (split-window-below)
+    (balance-windows)
     (other-window 1))
 
   (defun amo/split-window-horizontally()
     "Create a new window to the right and move point to new window."
     (interactive)
     (split-window-horizontally)
+    (balance-windows)
     (other-window 1))
 
+  (defun amo/delete-window ()
+    "Balance windows after deleting one"
+    (interactive)
+    (delete-window)
+    (balance-windows))
 
   (defun amo/open-notes-directory ()
     "Open notes directory"
@@ -122,6 +129,7 @@
   (global-set-key (kbd "C-z d") 'amo/open-denote-directory)
 
   ;; Other bindings
+  (global-set-key (kbd "C-x 0") 'amo/delete-window)
   (global-set-key (kbd "C-x 2") 'amo/split-window-below)
   (global-set-key (kbd "C-x 3") 'amo/split-window-horizontally)
   (global-set-key (kbd "M-<down>") 'amo/move-line-down)
