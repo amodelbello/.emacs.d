@@ -52,6 +52,18 @@
 
 * Functions for custom bindings
 #+begin_src emacs-lisp
+  (defun amo/copy-rectangle-to-kill-ring (Begin End)
+    "Copy region as column (rectangle region) to `kill-ring'
+  (Because the native copy-rectangle-as-kill doesn't seem to work)
+  See also: `kill-rectangle', `copy-to-register'.
+
+  URL `http://xahlee.info/emacs/emacs/emacs_copy_rectangle_text_to_clipboard.html'
+  Version: 2016-07-17"
+    ;; extract-rectangle suggested by YoungFrog, 2012-07-25
+    (interactive "r")
+    (require 'rect)
+    (kill-new (mapconcat #'identity (extract-rectangle Begin End) "\n")))
+
   ;; Un-highlight region after mark jump
   (defun amo/exchange-point-and-mark ()
     "Deactivates mark after exchanging point and mark"
@@ -155,7 +167,8 @@
          ("C-S-t" . amo/transpose-chars-backwards)
          ("M-T" . amo/transpose-words-backwards)
          ("C-S-f" . amo/transpose-char-to-end-of-next-word)
-         ("M-z" . zap-up-to-char)))
+         ("M-z" . zap-up-to-char)
+         ("C-x r M-w" . amo/copy-rectangle-to-kill-ring)))
 #+end_src
 
 * Hooks
