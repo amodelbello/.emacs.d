@@ -601,7 +601,10 @@
     :straight t
     :config
     (setq eyebrowse-new-workspace (lambda () (dashboard-open)))
-    (eyebrowse-mode))
+    (eyebrowse-mode)
+    :bind (
+           :map eyebrowse-mode-map
+           ("n" . eyebrowse-create-named-window-config)))
 #+end_src
 ** flymake-margin
 - Repo :: https://github.com/LionyxML/flymake-margin
