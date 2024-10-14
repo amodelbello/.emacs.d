@@ -195,7 +195,7 @@
                          `((java-mode java-ts-mode) .
                            ("jdtls"
                             :initializationOptions
-                            (:bundles [(,@dot-env-get 'JAVA_DEBUG_SERVER_PATH)]))))
+                            (:bundles [`(dot-env-get 'JAVA_DEBUG_SERVER_PATH)]))))
     :hook ((after-save . amo/eglot-format-on-save)
            (python-ts-mode . eglot-ensure)
            (bash-ts-mode . eglot-ensure)
@@ -601,10 +601,8 @@
     :straight t
     :config
     (setq eyebrowse-new-workspace (lambda () (dashboard-open)))
-    (eyebrowse-mode)
-    :bind (
-           :map eyebrowse-mode-map
-           ("n" . eyebrowse-create-named-window-config)))
+    (global-set-key (kbd "C-c C-w n") 'eyebrowse-create-named-window-config)
+    (eyebrowse-mode))
 #+end_src
 ** flymake-margin
 - Repo :: https://github.com/LionyxML/flymake-margin
