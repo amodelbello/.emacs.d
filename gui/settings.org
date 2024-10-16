@@ -195,7 +195,7 @@
                          `((java-mode java-ts-mode) .
                            ("jdtls"
                             :initializationOptions
-                            (:bundles [`(dot-env-get 'JAVA_DEBUG_SERVER_PATH)]))))
+                            (:bundles [(,@dot-env-get 'JAVA_DEBUG_SERVER_PATH)]))))
     :hook ((after-save . amo/eglot-format-on-save)
            (python-ts-mode . eglot-ensure)
            (bash-ts-mode . eglot-ensure)
