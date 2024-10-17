@@ -207,8 +207,7 @@
            (c++-ts-mode . eglot-ensure))
     :bind (:map eglot-mode-map
                 ("<C-return>" . xref-find-references)
-                ("C-c e f n" . flymake-goto-next-error)
-                ("C-c e f p" . flymake-goto-prev-error)
+                ("C-c e f" . consult-flymake)
                 ("C-c e r" . eglot-rename)
                 ("C-c e a" . eglot-code-actions)
                 ("C-c e c" . compile)
