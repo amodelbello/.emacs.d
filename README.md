@@ -3,6 +3,7 @@ An emacs configuration for both GUI and terminal. Instructions on setting up ema
 
 # Table of Contents
 
+<<<<<<< HEAD
 -   [Initial Setup](#orgbeb5ee9)
 -   [Common Functions](#orge43e679)
 -   [Common General Configuration](#orgbf1d7e3)
@@ -98,6 +99,103 @@ An emacs configuration for both GUI and terminal. Instructions on setting up ema
 
 
 <a id="orgbeb5ee9"></a>
+=======
+-   [Initial Setup](#org7b4663e)
+-   [Common Functions](#orgba66f32)
+-   [Common General Configuration](#orgc703fa5)
+    -   [Variables and Modes](#org0a463c5)
+    -   [Functions for custom bindings](#org2d253f5)
+    -   [Custom Bindings](#org9577e40)
+    -   [Hooks](#orgdddccec)
+    -   [dired](#org22d6be0)
+    -   [Advice](#org4996b26)
+-   [Common Packages](#orgd6ea301)
+    -   [Minibuffer & Completion](#orgf9ccc00)
+        -   [Vertico](#org189df8f)
+        -   [Embark](#orge7987b6)
+        -   [Marginalia](#org6c23cb4)
+        -   [Consult](#orgc4b3ee8)
+        -   [orderless](#orgde1cb80)
+        -   [which-key](#orga99fa80)
+    -   [Other Useful Packages](#orgd231dfd)
+        -   [Ace Window](#org229391d)
+        -   [aggressive-indent-mode](#org09f5a7c)
+        -   [Avy](#orgdecaf38)
+        -   [Crux](#orgfe5630e)
+        -   [el-patch](#org28b5941)
+        -   [expand-region](#org4113a47)
+        -   [Idle Highlight Mode](#org9358c15)
+        -   [jump-char](#org657cdb9)
+        -   [minions](#org5454fdd)
+        -   [move-lines](#org3585bd7)
+        -   [Paredit](#org568848e)
+        -   [undo-tree](#org9328e4a)
+    -   [Appearance](#orga77cb16)
+        -   [Nerd Icons](#org5df10a1)
+        -   [nerd-icons-dired](#orgd8f6414)
+        -   [nerd-icons-completion](#org5b37ee9)
+        -   [kind-icon](#orgf198f18)
+-   [GUI Config](#org80fb85b)
+    -   [General Configuration](#org90dcb66)
+        -   [Variables and Modes](#org1299dae)
+        -   [Functions for custom bindings](#org332bcf2)
+        -   [Custom Bindings](#org089f54e)
+        -   [Functions for hooks](#orge717926)
+        -   [Hooks](#orgef2c0dc)
+        -   [ibuffer](#org7afb19b)
+    -   [Programming](#orga96ce2a)
+        -   [Packages](#orge213982)
+        -   [Languages](#orge3cda58)
+    -   [Version Control](#org9f1b23f)
+        -   [Magit](#org0cb3276)
+        -   [magit-todos](#orgca2d701)
+        -   [git-messenger](#org5e9b10a)
+        -   [Git time machine](#orgcd5a287)
+        -   [diff-hl](#org4dea61f)
+    -   [Minibuffer & Completion](#orga0f20ab)
+        -   [consult-projectile](#org9c0a719)
+        -   [consult-eglot](#org6e23d28)
+        -   [Corfu](#org988aead)
+    -   [Org Mode](#orgba2c17d)
+        -   [Org configuration](#org14ec458)
+        -   [Org Modern](#orgac22862)
+    -   [Other Useful Packages](#org28060c7)
+        -   [buffer-move](#orgd305625)
+        -   [Casual Suite](#org4b296b1)
+        -   [consult-denote](#orgf9a07b6)
+        -   [denote](#org7c88eac)
+        -   [exec-path-from-shell](#org27e7c81)
+        -   [Eyebrowse](#org8703846)
+        -   [flymake-margin](#org39791b2)
+        -   [gptel](#org070a3ab)
+        -   [helpful](#org36223c8)
+        -   [ibuffer-projectile](#orgc7b361a)
+        -   [markdown-mode](#org7480579)
+        -   [package-lint](#orgf2d347e)
+        -   [Popper](#org48cd241)
+        -   [Projectile](#org79e501c)
+        -   [ESS](#orgd0669d9)
+        -   [rainbow-delimiters](#orgf32299e)
+        -   [Transpose Frame](#orgcda2dd6)
+        -   [YASnippet](#orge32db6c)
+    -   [Appearance](#org63c0d0b)
+        -   [Dashboard](#orgd0ce60a)
+        -   [Doom Modeline](#org3fc157e)
+        -   [Ef Themes](#org295f188)
+        -   [Modus Themes](#org762e890)
+        -   [nerd-icons-corfu](#org9b252a8)
+        -   [magit-file-icons](#orgbb394be)
+-   [Terminal Config](#org5199128)
+    -   [General Configuration](#orgfb32850)
+        -   [Variables and Modes](#org74cb1b3)
+        -   [Functions for custom bindings](#orge710a6c)
+        -   [Custom Bindings](#orgba86315)
+        -   [Packages](#orgaa0b24d)
+        -   [Terminal mappings](#org7cf6593)
+
+
+<a id="org7b4663e"></a>
+>>>>>>> 4970123 (Fix java debugger with eglot)
 
 # Initial Setup
 
@@ -111,7 +209,11 @@ Before opening emacs with this configuration there are a few set up tasks that n
 3.  Configure environment variables: <https://github.com/amodelbello/dot-env.el> example `.env` file: [.env.example](.env.example)
 
 
+<<<<<<< HEAD
 <a id="orge43e679"></a>
+=======
+<a id="orgba66f32"></a>
+>>>>>>> 4970123 (Fix java debugger with eglot)
 
 # Common Functions
 
@@ -149,13 +251,21 @@ These are functions needed by both configurations during initial startup.
 ```
 
 
+<<<<<<< HEAD
 <a id="orgbf1d7e3"></a>
+=======
+<a id="orgc703fa5"></a>
+>>>>>>> 4970123 (Fix java debugger with eglot)
 
 # Common General Configuration
 
 
 
+<<<<<<< HEAD
 <a id="orgf007795"></a>
+=======
+<a id="org0a463c5"></a>
+>>>>>>> 4970123 (Fix java debugger with eglot)
 
 ## Variables and Modes
 
@@ -206,7 +316,11 @@ These are functions needed by both configurations during initial startup.
 ```
 
 
+<<<<<<< HEAD
 <a id="orgca4ea07"></a>
+=======
+<a id="org2d253f5"></a>
+>>>>>>> 4970123 (Fix java debugger with eglot)
 
 ## Functions for custom bindings
 
@@ -319,7 +433,11 @@ Skips over periods, quotes, and closing parentheses."
 ```
 
 
+<<<<<<< HEAD
 <a id="org646d36c"></a>
+=======
+<a id="org9577e40"></a>
+>>>>>>> 4970123 (Fix java debugger with eglot)
 
 ## Custom Bindings
 
@@ -335,7 +453,11 @@ Skips over periods, quotes, and closing parentheses."
 ```
 
 
+<<<<<<< HEAD
 <a id="org36d0646"></a>
+=======
+<a id="orgdddccec"></a>
+>>>>>>> 4970123 (Fix java debugger with eglot)
 
 ## Hooks
 
@@ -346,7 +468,11 @@ Skips over periods, quotes, and closing parentheses."
 ```
 
 
+<<<<<<< HEAD
 <a id="org5527f09"></a>
+=======
+<a id="org22d6be0"></a>
+>>>>>>> 4970123 (Fix java debugger with eglot)
 
 ## dired
 
@@ -374,7 +500,11 @@ Skips over periods, quotes, and closing parentheses."
 ```
 
 
+<<<<<<< HEAD
 <a id="org56c10c1"></a>
+=======
+<a id="org4996b26"></a>
+>>>>>>> 4970123 (Fix java debugger with eglot)
 
 ## Advice
 
@@ -390,18 +520,30 @@ Skips over periods, quotes, and closing parentheses."
 ```
 
 
+<<<<<<< HEAD
 <a id="org450942d"></a>
+=======
+<a id="orgd6ea301"></a>
+>>>>>>> 4970123 (Fix java debugger with eglot)
 
 # Common Packages
 
 
 
+<<<<<<< HEAD
 <a id="org0fd1349"></a>
+=======
+<a id="orgf9ccc00"></a>
+>>>>>>> 4970123 (Fix java debugger with eglot)
 
 ## Minibuffer & Completion
 
 
+<<<<<<< HEAD
 <a id="orgbba031f"></a>
+=======
+<a id="org189df8f"></a>
+>>>>>>> 4970123 (Fix java debugger with eglot)
 
 ### Vertico
 
@@ -421,7 +563,11 @@ Skips over periods, quotes, and closing parentheses."
 ```
 
 
+<<<<<<< HEAD
 <a id="orgc72a00f"></a>
+=======
+<a id="orge7987b6"></a>
+>>>>>>> 4970123 (Fix java debugger with eglot)
 
 ### Embark
 
@@ -490,7 +636,11 @@ targets."
 ```
 
 
+<<<<<<< HEAD
 <a id="org9174f1d"></a>
+=======
+<a id="org6c23cb4"></a>
+>>>>>>> 4970123 (Fix java debugger with eglot)
 
 ### Marginalia
 
@@ -505,7 +655,11 @@ targets."
 ```
 
 
+<<<<<<< HEAD
 <a id="orgf149517"></a>
+=======
+<a id="orgc4b3ee8"></a>
+>>>>>>> 4970123 (Fix java debugger with eglot)
 
 ### Consult
 
@@ -575,7 +729,11 @@ targets."
 ```
 
 
+<<<<<<< HEAD
 <a id="org66d3493"></a>
+=======
+<a id="orgde1cb80"></a>
+>>>>>>> 4970123 (Fix java debugger with eglot)
 
 ### orderless
 
@@ -591,7 +749,11 @@ targets."
 ```
 
 
+<<<<<<< HEAD
 <a id="org09dcd6e"></a>
+=======
+<a id="orga99fa80"></a>
+>>>>>>> 4970123 (Fix java debugger with eglot)
 
 ### which-key
 
@@ -606,12 +768,20 @@ targets."
 ```
 
 
+<<<<<<< HEAD
 <a id="org3b808e9"></a>
+=======
+<a id="orgd231dfd"></a>
+>>>>>>> 4970123 (Fix java debugger with eglot)
 
 ## Other Useful Packages
 
 
+<<<<<<< HEAD
 <a id="orgb64f7c1"></a>
+=======
+<a id="org229391d"></a>
+>>>>>>> 4970123 (Fix java debugger with eglot)
 
 ### Ace Window
 
@@ -631,7 +801,11 @@ targets."
 ```
 
 
+<<<<<<< HEAD
 <a id="orgb8368d8"></a>
+=======
+<a id="org09f5a7c"></a>
+>>>>>>> 4970123 (Fix java debugger with eglot)
 
 ### aggressive-indent-mode
 
@@ -648,7 +822,11 @@ targets."
 ```
 
 
+<<<<<<< HEAD
 <a id="org14cef52"></a>
+=======
+<a id="orgdecaf38"></a>
+>>>>>>> 4970123 (Fix java debugger with eglot)
 
 ### Avy
 
@@ -666,7 +844,11 @@ targets."
 ```
 
 
+<<<<<<< HEAD
 <a id="org6b1987b"></a>
+=======
+<a id="orgfe5630e"></a>
+>>>>>>> 4970123 (Fix java debugger with eglot)
 
 ### Crux
 
@@ -690,7 +872,11 @@ targets."
 ```
 
 
+<<<<<<< HEAD
 <a id="orgb4824dc"></a>
+=======
+<a id="org28b5941"></a>
+>>>>>>> 4970123 (Fix java debugger with eglot)
 
 ### el-patch
 
@@ -703,7 +889,11 @@ targets."
 ```
 
 
+<<<<<<< HEAD
 <a id="org236f423"></a>
+=======
+<a id="org4113a47"></a>
+>>>>>>> 4970123 (Fix java debugger with eglot)
 
 ### expand-region
 
@@ -718,7 +908,11 @@ targets."
 ```
 
 
+<<<<<<< HEAD
 <a id="org8177a79"></a>
+=======
+<a id="org9358c15"></a>
+>>>>>>> 4970123 (Fix java debugger with eglot)
 
 ### Idle Highlight Mode
 
@@ -737,7 +931,11 @@ targets."
 ```
 
 
+<<<<<<< HEAD
 <a id="org2f0d73d"></a>
+=======
+<a id="org657cdb9"></a>
+>>>>>>> 4970123 (Fix java debugger with eglot)
 
 ### jump-char
 
@@ -753,7 +951,11 @@ targets."
 ```
 
 
+<<<<<<< HEAD
 <a id="orgfc5444c"></a>
+=======
+<a id="org5454fdd"></a>
+>>>>>>> 4970123 (Fix java debugger with eglot)
 
 ### minions
 
@@ -768,7 +970,11 @@ targets."
 ```
 
 
+<<<<<<< HEAD
 <a id="org28d6ee0"></a>
+=======
+<a id="org3585bd7"></a>
+>>>>>>> 4970123 (Fix java debugger with eglot)
 
 ### move-lines
 
@@ -785,7 +991,11 @@ targets."
     ```
 
 
+<<<<<<< HEAD
 <a id="orgef3a06e"></a>
+=======
+<a id="org568848e"></a>
+>>>>>>> 4970123 (Fix java debugger with eglot)
 
 ### Paredit
 
@@ -806,7 +1016,11 @@ targets."
 ```
 
 
+<<<<<<< HEAD
 <a id="org7d1b6e8"></a>
+=======
+<a id="org9328e4a"></a>
+>>>>>>> 4970123 (Fix java debugger with eglot)
 
 ### undo-tree
 
@@ -827,12 +1041,20 @@ targets."
 ```
 
 
+<<<<<<< HEAD
 <a id="org525ccbb"></a>
+=======
+<a id="orga77cb16"></a>
+>>>>>>> 4970123 (Fix java debugger with eglot)
 
 ## Appearance
 
 
+<<<<<<< HEAD
 <a id="org4309444"></a>
+=======
+<a id="org5df10a1"></a>
+>>>>>>> 4970123 (Fix java debugger with eglot)
 
 ### Nerd Icons
 
@@ -845,7 +1067,11 @@ targets."
 ```
 
 
+<<<<<<< HEAD
 <a id="org868cc9e"></a>
+=======
+<a id="orgd8f6414"></a>
+>>>>>>> 4970123 (Fix java debugger with eglot)
 
 ### nerd-icons-dired
 
@@ -860,7 +1086,11 @@ targets."
 ```
 
 
+<<<<<<< HEAD
 <a id="orgb6f945a"></a>
+=======
+<a id="org5b37ee9"></a>
+>>>>>>> 4970123 (Fix java debugger with eglot)
 
 ### nerd-icons-completion
 
@@ -877,7 +1107,11 @@ targets."
 ```
 
 
+<<<<<<< HEAD
 <a id="org841567f"></a>
+=======
+<a id="orgf198f18"></a>
+>>>>>>> 4970123 (Fix java debugger with eglot)
 
 ### kind-icon
 
@@ -895,19 +1129,31 @@ targets."
 ```
 
 
+<<<<<<< HEAD
 <a id="orgf7fca35"></a>
+=======
+<a id="org80fb85b"></a>
+>>>>>>> 4970123 (Fix java debugger with eglot)
 
 # GUI Config
 
 Configuration and packages specific to GUI
 
 
+<<<<<<< HEAD
 <a id="orga2f939d"></a>
+=======
+<a id="org90dcb66"></a>
+>>>>>>> 4970123 (Fix java debugger with eglot)
 
 ## General Configuration
 
 
+<<<<<<< HEAD
 <a id="org9b58e3c"></a>
+=======
+<a id="org1299dae"></a>
+>>>>>>> 4970123 (Fix java debugger with eglot)
 
 ### Variables and Modes
 
@@ -962,7 +1208,11 @@ Configuration and packages specific to GUI
 ```
 
 
+<<<<<<< HEAD
 <a id="org76625e5"></a>
+=======
+<a id="org332bcf2"></a>
+>>>>>>> 4970123 (Fix java debugger with eglot)
 
 ### Functions for custom bindings
 
@@ -1027,7 +1277,11 @@ Configuration and packages specific to GUI
 ```
 
 
+<<<<<<< HEAD
 <a id="org4b6cb56"></a>
+=======
+<a id="org089f54e"></a>
+>>>>>>> 4970123 (Fix java debugger with eglot)
 
 ### Custom Bindings
 
@@ -1059,7 +1313,11 @@ Configuration and packages specific to GUI
 ```
 
 
+<<<<<<< HEAD
 <a id="org9f273c7"></a>
+=======
+<a id="orge717926"></a>
+>>>>>>> 4970123 (Fix java debugger with eglot)
 
 ### Functions for hooks
 
@@ -1075,7 +1333,11 @@ Configuration and packages specific to GUI
 ```
 
 
+<<<<<<< HEAD
 <a id="org197ea5a"></a>
+=======
+<a id="orgef2c0dc"></a>
+>>>>>>> 4970123 (Fix java debugger with eglot)
 
 ### Hooks
 
@@ -1085,7 +1347,11 @@ Configuration and packages specific to GUI
 ```
 
 
+<<<<<<< HEAD
 <a id="org0e267f8"></a>
+=======
+<a id="org7afb19b"></a>
+>>>>>>> 4970123 (Fix java debugger with eglot)
 
 ### ibuffer
 
@@ -1096,12 +1362,20 @@ Configuration and packages specific to GUI
 ```
 
 
+<<<<<<< HEAD
 <a id="org0ea0ac9"></a>
+=======
+<a id="orga96ce2a"></a>
+>>>>>>> 4970123 (Fix java debugger with eglot)
 
 ## Programming
 
 
+<<<<<<< HEAD
 <a id="orge85e206"></a>
+=======
+<a id="orge213982"></a>
+>>>>>>> 4970123 (Fix java debugger with eglot)
 
 ### Packages
 
@@ -1137,7 +1411,7 @@ Configuration and packages specific to GUI
                            `((java-mode java-ts-mode) .
                              ("jdtls"
                               :initializationOptions
-                              (:bundles [,@(dot-env-get 'JAVA_DEBUG_SERVER_PATH)]))))
+                              (:bundles [,(dot-env-get 'JAVA_DEBUG_SERVER_PATH)]))))
       :hook ((after-save . amo/eglot-format-on-save)
              (python-ts-mode . eglot-ensure)
              (bash-ts-mode . eglot-ensure)
@@ -1146,6 +1420,7 @@ Configuration and packages specific to GUI
              (haskell-mode . eglot-ensure)
              (rust-ts-mode . eglot-ensure)
              (java-ts-mode . eglot-ensure)
+             (c-ts-mode . eglot-ensure)
              (c++-ts-mode . eglot-ensure))
       :bind (:map eglot-mode-map
                   ("<C-return>" . xref-find-references)
@@ -1170,7 +1445,11 @@ Configuration and packages specific to GUI
     ```
 
 
+<<<<<<< HEAD
 <a id="org211b266"></a>
+=======
+<a id="orge3cda58"></a>
+>>>>>>> 4970123 (Fix java debugger with eglot)
 
 ### Languages
 
@@ -1301,12 +1580,20 @@ Configuration and packages specific to GUI
     ```
 
 
+<<<<<<< HEAD
 <a id="org62e6e7f"></a>
+=======
+<a id="org9f1b23f"></a>
+>>>>>>> 4970123 (Fix java debugger with eglot)
 
 ## Version Control
 
 
+<<<<<<< HEAD
 <a id="org847149c"></a>
+=======
+<a id="org0cb3276"></a>
+>>>>>>> 4970123 (Fix java debugger with eglot)
 
 ### Magit
 
@@ -1322,7 +1609,11 @@ Configuration and packages specific to GUI
 ```
 
 
+<<<<<<< HEAD
 <a id="org9684286"></a>
+=======
+<a id="orgca2d701"></a>
+>>>>>>> 4970123 (Fix java debugger with eglot)
 
 ### magit-todos
 
@@ -1336,7 +1627,11 @@ Configuration and packages specific to GUI
 ```
 
 
+<<<<<<< HEAD
 <a id="org0ee1782"></a>
+=======
+<a id="org5e9b10a"></a>
+>>>>>>> 4970123 (Fix java debugger with eglot)
 
 ### git-messenger
 
@@ -1352,7 +1647,11 @@ Configuration and packages specific to GUI
 ```
 
 
+<<<<<<< HEAD
 <a id="org8aaccc0"></a>
+=======
+<a id="orgcd5a287"></a>
+>>>>>>> 4970123 (Fix java debugger with eglot)
 
 ### Git time machine
 
@@ -1365,7 +1664,11 @@ Configuration and packages specific to GUI
 ```
 
 
+<<<<<<< HEAD
 <a id="orga735284"></a>
+=======
+<a id="org4dea61f"></a>
+>>>>>>> 4970123 (Fix java debugger with eglot)
 
 ### diff-hl
 
@@ -1387,12 +1690,20 @@ Configuration and packages specific to GUI
 ```
 
 
+<<<<<<< HEAD
 <a id="org5212094"></a>
+=======
+<a id="orga0f20ab"></a>
+>>>>>>> 4970123 (Fix java debugger with eglot)
 
 ## Minibuffer & Completion
 
 
+<<<<<<< HEAD
 <a id="org6fdcd91"></a>
+=======
+<a id="org9c0a719"></a>
+>>>>>>> 4970123 (Fix java debugger with eglot)
 
 ### consult-projectile
 
@@ -1411,7 +1722,11 @@ Configuration and packages specific to GUI
 ```
 
 
+<<<<<<< HEAD
 <a id="org53ed79a"></a>
+=======
+<a id="org6e23d28"></a>
+>>>>>>> 4970123 (Fix java debugger with eglot)
 
 ### consult-eglot
 
@@ -1424,7 +1739,11 @@ Configuration and packages specific to GUI
     ```
 
 
+<<<<<<< HEAD
 <a id="org99cd3a7"></a>
+=======
+<a id="org988aead"></a>
+>>>>>>> 4970123 (Fix java debugger with eglot)
 
 ### Corfu
 
@@ -1454,12 +1773,20 @@ Configuration and packages specific to GUI
 ```
 
 
+<<<<<<< HEAD
 <a id="org472390a"></a>
+=======
+<a id="orgba2c17d"></a>
+>>>>>>> 4970123 (Fix java debugger with eglot)
 
 ## Org Mode
 
 
+<<<<<<< HEAD
 <a id="orgc5caaf3"></a>
+=======
+<a id="org14ec458"></a>
+>>>>>>> 4970123 (Fix java debugger with eglot)
 
 ### Org configuration
 
@@ -1540,7 +1867,11 @@ Configuration and packages specific to GUI
 ```
 
 
+<<<<<<< HEAD
 <a id="org43f23db"></a>
+=======
+<a id="orgac22862"></a>
+>>>>>>> 4970123 (Fix java debugger with eglot)
 
 ### Org Modern
 
@@ -1554,12 +1885,20 @@ Configuration and packages specific to GUI
     ```
 
 
+<<<<<<< HEAD
 <a id="org1af8e61"></a>
+=======
+<a id="org28060c7"></a>
+>>>>>>> 4970123 (Fix java debugger with eglot)
 
 ## Other Useful Packages
 
 
+<<<<<<< HEAD
 <a id="orgbef07fb"></a>
+=======
+<a id="orgd305625"></a>
+>>>>>>> 4970123 (Fix java debugger with eglot)
 
 ### buffer-move
 
@@ -1582,7 +1921,11 @@ Configuration and packages specific to GUI
 ```
 
 
+<<<<<<< HEAD
 <a id="orgc1a75c8"></a>
+=======
+<a id="org4b296b1"></a>
+>>>>>>> 4970123 (Fix java debugger with eglot)
 
 ### Casual Suite
 
@@ -1602,7 +1945,11 @@ Configuration and packages specific to GUI
     ```
 
 
+<<<<<<< HEAD
 <a id="orgfbb9220"></a>
+=======
+<a id="orgf9a07b6"></a>
+>>>>>>> 4970123 (Fix java debugger with eglot)
 
 ### consult-denote
 
@@ -1619,7 +1966,11 @@ Configuration and packages specific to GUI
 ```
 
 
+<<<<<<< HEAD
 <a id="org6f69797"></a>
+=======
+<a id="org7c88eac"></a>
+>>>>>>> 4970123 (Fix java debugger with eglot)
 
 ### denote
 
@@ -1659,7 +2010,11 @@ Configuration and packages specific to GUI
 ```
 
 
+<<<<<<< HEAD
 <a id="orge5a3a26"></a>
+=======
+<a id="org27e7c81"></a>
+>>>>>>> 4970123 (Fix java debugger with eglot)
 
 ### exec-path-from-shell
 
@@ -1675,7 +2030,11 @@ Configuration and packages specific to GUI
 ```
 
 
+<<<<<<< HEAD
 <a id="orgfab4f03"></a>
+=======
+<a id="org8703846"></a>
+>>>>>>> 4970123 (Fix java debugger with eglot)
 
 ### Eyebrowse
 
@@ -1692,7 +2051,11 @@ Configuration and packages specific to GUI
 ```
 
 
+<<<<<<< HEAD
 <a id="orgc97d2a3"></a>
+=======
+<a id="org39791b2"></a>
+>>>>>>> 4970123 (Fix java debugger with eglot)
 
 ### flymake-margin
 
@@ -1711,7 +2074,11 @@ Configuration and packages specific to GUI
 ```
 
 
+<<<<<<< HEAD
 <a id="org14a2620"></a>
+=======
+<a id="org070a3ab"></a>
+>>>>>>> 4970123 (Fix java debugger with eglot)
 
 ### gptel
 
@@ -1728,7 +2095,11 @@ Configuration and packages specific to GUI
 ```
 
 
+<<<<<<< HEAD
 <a id="org0659a1c"></a>
+=======
+<a id="org36223c8"></a>
+>>>>>>> 4970123 (Fix java debugger with eglot)
 
 ### helpful
 
@@ -1748,7 +2119,11 @@ Configuration and packages specific to GUI
 ```
 
 
+<<<<<<< HEAD
 <a id="org1bf7c9f"></a>
+=======
+<a id="orgc7b361a"></a>
+>>>>>>> 4970123 (Fix java debugger with eglot)
 
 ### ibuffer-projectile
 
@@ -1771,7 +2146,11 @@ Configuration and packages specific to GUI
 ```
 
 
+<<<<<<< HEAD
 <a id="org80c3a3f"></a>
+=======
+<a id="org7480579"></a>
+>>>>>>> 4970123 (Fix java debugger with eglot)
 
 ### markdown-mode
 
@@ -1786,7 +2165,11 @@ Configuration and packages specific to GUI
 ```
 
 
+<<<<<<< HEAD
 <a id="orgeea17b5"></a>
+=======
+<a id="orgf2d347e"></a>
+>>>>>>> 4970123 (Fix java debugger with eglot)
 
 ### package-lint
 
@@ -1799,7 +2182,11 @@ Configuration and packages specific to GUI
 ```
 
 
+<<<<<<< HEAD
 <a id="org3e2d86b"></a>
+=======
+<a id="org48cd241"></a>
+>>>>>>> 4970123 (Fix java debugger with eglot)
 
 ### Popper
 
@@ -1849,7 +2236,11 @@ Configuration and packages specific to GUI
 ```
 
 
+<<<<<<< HEAD
 <a id="org0823ed1"></a>
+=======
+<a id="org79e501c"></a>
+>>>>>>> 4970123 (Fix java debugger with eglot)
 
 ### Projectile
 
@@ -1869,7 +2260,11 @@ Configuration and packages specific to GUI
 ```
 
 
+<<<<<<< HEAD
 <a id="orgc67c8ca"></a>
+=======
+<a id="orgd0669d9"></a>
+>>>>>>> 4970123 (Fix java debugger with eglot)
 
 ### ESS
 
@@ -1882,7 +2277,11 @@ Configuration and packages specific to GUI
 ```
 
 
+<<<<<<< HEAD
 <a id="org7877684"></a>
+=======
+<a id="orgf32299e"></a>
+>>>>>>> 4970123 (Fix java debugger with eglot)
 
 ### rainbow-delimiters
 
@@ -1896,7 +2295,11 @@ Configuration and packages specific to GUI
 ```
 
 
+<<<<<<< HEAD
 <a id="org05e2bb7"></a>
+=======
+<a id="orgcda2dd6"></a>
+>>>>>>> 4970123 (Fix java debugger with eglot)
 
 ### Transpose Frame
 
@@ -1910,7 +2313,11 @@ Configuration and packages specific to GUI
 ```
 
 
+<<<<<<< HEAD
 <a id="org0eb693c"></a>
+=======
+<a id="orge32db6c"></a>
+>>>>>>> 4970123 (Fix java debugger with eglot)
 
 ### YASnippet
 
@@ -1930,12 +2337,20 @@ Configuration and packages specific to GUI
 ```
 
 
+<<<<<<< HEAD
 <a id="org7f4fc6b"></a>
+=======
+<a id="org63c0d0b"></a>
+>>>>>>> 4970123 (Fix java debugger with eglot)
 
 ## Appearance
 
 
+<<<<<<< HEAD
 <a id="org40e9aab"></a>
+=======
+<a id="orgd0ce60a"></a>
+>>>>>>> 4970123 (Fix java debugger with eglot)
 
 ### Dashboard
 
@@ -1963,7 +2378,11 @@ Configuration and packages specific to GUI
 ```
 
 
+<<<<<<< HEAD
 <a id="org7e62d91"></a>
+=======
+<a id="org3fc157e"></a>
+>>>>>>> 4970123 (Fix java debugger with eglot)
 
 ### Doom Modeline
 
@@ -1983,7 +2402,11 @@ Configuration and packages specific to GUI
 ```
 
 
+<<<<<<< HEAD
 <a id="org17e5f24"></a>
+=======
+<a id="org295f188"></a>
+>>>>>>> 4970123 (Fix java debugger with eglot)
 
 ### Ef Themes
 
@@ -1996,7 +2419,11 @@ Configuration and packages specific to GUI
 ```
 
 
+<<<<<<< HEAD
 <a id="org56b577c"></a>
+=======
+<a id="org762e890"></a>
+>>>>>>> 4970123 (Fix java debugger with eglot)
 
 ### Modus Themes
 
@@ -2009,7 +2436,11 @@ Configuration and packages specific to GUI
 ```
 
 
+<<<<<<< HEAD
 <a id="orgbeee2b6"></a>
+=======
+<a id="org9b252a8"></a>
+>>>>>>> 4970123 (Fix java debugger with eglot)
 
 ### nerd-icons-corfu
 
@@ -2022,7 +2453,11 @@ Configuration and packages specific to GUI
 ```
 
 
+<<<<<<< HEAD
 <a id="org06bd21c"></a>
+=======
+<a id="orgbb394be"></a>
+>>>>>>> 4970123 (Fix java debugger with eglot)
 
 ### magit-file-icons
 
@@ -2046,19 +2481,31 @@ Configuration and packages specific to GUI
 ```
 
 
+<<<<<<< HEAD
 <a id="org62535af"></a>
+=======
+<a id="org5199128"></a>
+>>>>>>> 4970123 (Fix java debugger with eglot)
 
 # Terminal Config
 
 Configuration and packages specific to terminal
 
 
+<<<<<<< HEAD
 <a id="orge683d3f"></a>
+=======
+<a id="orgfb32850"></a>
+>>>>>>> 4970123 (Fix java debugger with eglot)
 
 ## General Configuration
 
 
+<<<<<<< HEAD
 <a id="org450a714"></a>
+=======
+<a id="org74cb1b3"></a>
+>>>>>>> 4970123 (Fix java debugger with eglot)
 
 ### Variables and Modes
 
@@ -2080,7 +2527,11 @@ Configuration and packages specific to terminal
 ```
 
 
+<<<<<<< HEAD
 <a id="org5fd451c"></a>
+=======
+<a id="orge710a6c"></a>
+>>>>>>> 4970123 (Fix java debugger with eglot)
 
 ### Functions for custom bindings
 
@@ -2108,7 +2559,11 @@ Configuration and packages specific to terminal
 ```
 
 
+<<<<<<< HEAD
 <a id="org86285f3"></a>
+=======
+<a id="orgba86315"></a>
+>>>>>>> 4970123 (Fix java debugger with eglot)
 
 ### Custom Bindings
 
@@ -2119,7 +2574,11 @@ Configuration and packages specific to terminal
 ```
 
 
+<<<<<<< HEAD
 <a id="orgc5b4670"></a>
+=======
+<a id="orgaa0b24d"></a>
+>>>>>>> 4970123 (Fix java debugger with eglot)
 
 ### Packages
 
@@ -2139,7 +2598,11 @@ Configuration and packages specific to terminal
     ```
 
 
+<<<<<<< HEAD
 <a id="org63e304f"></a>
+=======
+<a id="org7cf6593"></a>
+>>>>>>> 4970123 (Fix java debugger with eglot)
 
 ### Terminal mappings
 
