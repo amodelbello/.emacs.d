@@ -318,6 +318,17 @@
      (cider-repl-mode . paredit-mode)))
 #+end_src
 
+** rg.el
+- Repo :: https://github.com/dajva/rg.el
+- Docs :: https://rgel.readthedocs.io/
+- Description :: Emacs search tool based on ripgrep
+#+begin_src emacs-lisp
+  (use-package rg
+    :straight t
+    :config
+    (rg-enable-default-bindings))
+#+end_src
+
 ** undo-tree
 - Repo :: https://github.com/apchamberlain/undo-tree.el
 - Docs :: https://www.emacswiki.org/emacs/UndoTree
@@ -340,7 +351,9 @@
 - Description :: A library for easily using Nerd Font icons inside Emacs
 #+begin_src emacs-lisp
   (use-package nerd-icons
-    :straight t)
+    :straight t
+    :custom
+    (nerd-icons-font-family "Symbols Nerd Font Mono"))
 #+end_src
 
 ** nerd-icons-dired
