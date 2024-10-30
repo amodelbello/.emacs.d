@@ -525,20 +525,6 @@
      ("<C-S-right>" . buf-move-right)))
 #+end_src
 
-** Casual Suite
-- Repo :: https://github.com/kickingvegas/casual-suite
-- Description :: Casual Suite - An umbrella package to support a single install point for all Casual porcelains.
-  #+begin_src emacs-lisp
-    (use-package casual-suite
-      :straight t
-      :bind
-      (
-       ("C-," . casual-avy-tmenu)
-       :map Calc-mode-map ("C-i" . casual-calc-tmenu)
-       :map Info-mode-map ("C-i" . casual-info-tmenu)
-       :map dired-mode-map ("C-i" . casual-dired-tmenu)
-       :map isearch-mode-map ("<f2>" . casual-isearch-tmenu)))
-  #+end_src
 ** consult-denote
 - Repo :: https://github.com/protesilaos/consult-denote
 - Docs :: https://protesilaos.com/emacs/consult-denote
