@@ -52,6 +52,18 @@
 
 * Functions for custom bindings
 #+begin_src emacs-lisp
+  ;; Open README.org
+  (defun amo/export-readme-file ()
+    "Export README.org"
+    (interactive)
+    (let ((current-file-name (or (buffer-file-name) (buffer-name)))
+          (is-file-p (buffer-file-name)))
+      (find-file (concat user-emacs-directory "README.org"))
+      (org-export-dispatch)
+      (if is-file-p
+          (find-file current-file-name)
+        (switch-to-buffer current-file-name))))
+
   (defun amo/copy-rectangle-to-kill-ring (Begin End)
     "Copy region as column (rectangle region) to `kill-ring'
   (Because the native copy-rectangle-as-kill doesn't seem to work)
@@ -157,11 +169,31 @@
     (if (eq nil global-display-line-numbers-mode)
         (global-display-line-numbers-mode 1)
       (global-display-line-numbers-mode 0)))
+
+  ;; Copy current file path & line number to kill ring
+  (defun amo/copy-file-path-and-line-number (arg)
+    "Copy current file path & line number to kill ring
+
+  If called with the universal argument, provide full path.
+  Otherwise use the projectile project root if present"
+    (interactive "P")
+    (let* ((file-path (or (buffer-file-name) (buffer-name)))
+           (project-path
+            (if (and (null arg) (projectile-project-root))
+                (concat (file-name-nondirectory (directory-file-name (projectile-project-root)))
+                        "/" (string-replace
+                             (or (projectile-project-root) "") ""
+                             file-path))
+              file-path)))
+      (kill-new (concat project-path
+                        ":" (number-to-string (line-number-at-pos))))))
 #+end_src
 
 * Custom Bindings
 #+begin_src emacs-lisp
-  :bind (("C-z l" . amo/toggle-line-numbers)
+  :bind (("C-z g" . amo/export-readme-file)
+         ("C-z l" . amo/toggle-line-numbers)
+         ("C-z p" . amo/copy-file-path-and-line-number)
          ("M-'" . end-of-visual-line)
          ("C-x C-x" . amo/exchange-point-and-mark)
          ("C-S-t" . amo/transpose-chars-backwards)
