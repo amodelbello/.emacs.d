@@ -572,10 +572,10 @@
 #+begin_src emacs-lisp
   (use-package eyebrowse
     :straight t
+    :bind (("C-c C-w n" . eyebrowse-create-named-window-config))
     :config
     (setq eyebrowse-new-workspace (lambda () (dashboard-open)))
-    (global-set-key (kbd "C-c C-w n") 'eyebrowse-create-named-window-config)
-    (eyebrowse-mode))
+    (eyebrowse-mode t))
 #+end_src
 ** flymake-margin
 - Repo :: https://github.com/LionyxML/flymake-margin
