@@ -31,11 +31,6 @@
       (load-theme 'modus-vivendi)))
   (amo/modus-themes-toggle t)
 
-  (defun amo/open-settings-file ()
-    "Open settings.el"
-    (interactive)
-    (find-file "~/.emacs.d/terminal/settings.org"))
-
   ;; Reload config
   (defun amo/reload-config ()
     "Reload configuration"
@@ -46,8 +41,7 @@
 
 ** Custom Bindings
 #+begin_src emacs-lisp
-  :bind (("C-z s" . amo/open-settings-file)
-         ("C-z r" . amo/reload-config)
+  :bind (("C-z r" . amo/reload-config)
          ("C-z t" . amo/modus-themes-toggle)))
 #+end_src
 

@@ -52,6 +52,42 @@
 
 * Functions for custom bindings
 #+begin_src emacs-lisp
+  ;; Open common settings.org
+  (defun amo/open-common-settings-file ()
+    "Open common/settings.org"
+    (interactive)
+    (find-file (concat user-emacs-directory "common/settings.org")))
+
+  ;; Open common packages.org
+  (defun amo/open-common-packages-file ()
+    "Open common/packages.org"
+    (interactive)
+    (find-file (concat user-emacs-directory "common/packages.org")))
+
+  ;; Open common functions.el
+  (defun amo/open-common-functions-file ()
+    "Open common/functions.org"
+    (interactive)
+    (find-file (concat user-emacs-directory "common/functions.el")))
+
+  ;; Open gui settings.org
+  (defun amo/open-gui-settings-file ()
+    "Open settings.org"
+    (interactive)
+    (find-file (concat user-emacs-directory "gui/settings.org")))
+
+  ;; Open terminal settings.org
+  (defun amo/open-terminal-settings-file ()
+    "Open terminal/settings.org"
+    (interactive)
+    (find-file (concat user-emacs-directory "terminal/settings.org")))
+
+  ;; Open .env file
+  (defun amo/open-dotenv-file ()
+    "Open .env"
+    (interactive)
+    (find-file (concat user-emacs-directory ".env")))
+
   ;; Open README.org
   (defun amo/export-readme-file ()
     "Export README.org"
@@ -191,7 +227,13 @@
 
 * Custom Bindings
 #+begin_src emacs-lisp
-  :bind (("C-z g" . amo/export-readme-file)
+  :bind (("C-z s c s" . amo/open-common-settings-file)
+         ("C-z s c p" . amo/open-common-packages-file)
+         ("C-z s c f" . amo/open-common-functions-file)
+         ("C-z s g s" . amo/open-gui-settings-file)
+         ("C-z s t s" . amo/open-terminal-settings-file)
+         ("C-z s e" . amo/open-dotenv-file)
+         ("C-z g" . amo/export-readme-file)
          ("C-z l" . amo/toggle-line-numbers)
          ("C-z p" . amo/copy-file-path-and-line-number)
          ("M-'" . end-of-visual-line)

@@ -55,18 +55,6 @@
     #+end_src
 ** Functions for custom bindings
 #+begin_src emacs-lisp
-  ;; Open settings.org (this file)
-  (defun amo/open-settings-file ()
-    "Open settings.org"
-    (interactive)
-    (find-file (concat user-emacs-directory "gui/settings.org")))
-
-  ;; Open common settings.org
-  (defun amo/open-common-settings-file ()
-    "Open common/settings.org"
-    (interactive)
-    (find-file (concat user-emacs-directory "common/settings.org")))
-
   ;; Reload config
   (defun amo/reload-config ()
     "Reload configuration"
@@ -118,8 +106,6 @@
 #+begin_src emacs-lisp
 
   ;; Custom prefix C-z
-  (global-set-key (kbd "C-z s") 'amo/open-settings-file)
-  (global-set-key (kbd "C-z C-z s") 'amo/open-common-settings-file)
   (global-set-key (kbd "C-z r") 'amo/reload-config)
   (global-set-key (kbd "C-z C-z r") 'restart-emacs)
   (global-set-key (kbd "C-z C-z C-z r") 'amo/delete-emacs-desktop-files-restart)
