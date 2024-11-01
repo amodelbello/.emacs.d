@@ -57,7 +57,7 @@
   (defun amo/open-emacs-config-file (path)
     "Open a file within .emacs.d
 
-  PATH is path to file inside .emacs."
+  PATH is path to file inside .emacs.d"
     (interactive)
     (find-file (concat user-emacs-directory path)))
 
