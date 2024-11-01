@@ -91,6 +91,11 @@
     (delete-window)
     (balance-windows))
 
+  (defun amo/open-main-notes-file ()
+    "Open main notes file"
+    (interactive)
+    (find-file (concat org-directory "/notes.org")))
+
   (defun amo/open-notes-directory ()
     "Open notes directory"
     (interactive)
@@ -111,7 +116,8 @@
   (global-set-key (kbd "C-z C-z C-z r") 'amo/delete-emacs-desktop-files-restart)
   (global-set-key (kbd "C-z t") 'customize-themes)
   (global-set-key (kbd "C-z e") 'eshell)
-  (global-set-key (kbd "C-z n") 'amo/open-notes-directory)
+  (global-set-key (kbd "C-z n") 'amo/open-main-notes-file)
+  (global-set-key (kbd "C-z C-z n") 'amo/open-notes-directory)
   (global-set-key (kbd "C-z d") 'amo/open-denote-directory)
 
   ;; Other bindings
