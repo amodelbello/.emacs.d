@@ -718,6 +718,7 @@
 ** ESS
 - Repo :: https://github.com/emacs-ess/ESS
 - Docs :: https://ess.r-project.org/
+- Description :: Emacs Speaks Statistics: ESS
 #+begin_src emacs-lisp
   (use-package ess
     :straight t)
