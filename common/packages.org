@@ -23,7 +23,7 @@
                                                    (interactive)
                                                    (let ((vertico-resize t))
                                                      (setq vertico-count (if (= vertico-count 10)
-                                                                             (- (frame-height) 20)
+                                                                             (- (floor  (* (frame-height) 0.75)) 10)
                                                                            10))
                                                      (vertico--exhibit)))))
 #+end_src
