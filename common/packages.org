@@ -16,7 +16,16 @@
                 ("M-DEL" . vertico-directory-delete-word))
     :hook (rfn-eshadow-update-overlay . vertico-directory-tidy)
     :init
-    (vertico-mode))
+    (vertico-mode)
+    :config
+    (advice-add 'vertico--setup :before (lambda () (setq vertico-count 10)))
+    (define-key minibuffer-local-map (kbd "s-'") (lambda ()
+                                                   (interactive)
+                                                   (let ((vertico-resize t))
+                                                     (setq vertico-count (if (= vertico-count 10)
+                                                                             (- (frame-height) 20)
+                                                                           10))
+                                                     (vertico--exhibit)))))
 #+end_src
 ** Embark
 - Repo :: https://github.com/oantolin/embark
