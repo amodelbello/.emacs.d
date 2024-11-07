@@ -70,18 +70,18 @@
     (delete-file (concat user-emacs-directory ".emacs.desktop.lock"))
     (restart-emacs))
 
-  ;; Move point to other window immediately after split
-  (defun amo/split-window-below ()
-    "Create a new window below and move point to new window."
-    (interactive)
-    (split-window-below)
-    (balance-windows)
-    (other-window 1))
-
-  (defun amo/split-window-horizontally()
-    "Create a new window to the right and move point to new window."
-    (interactive)
-    (split-window-horizontally)
+  (defun amo/split-window (arg side)
+    "Create a new window on SIDE.
+  Universal argument will split based off root window.
+  Double universal argument will split based off of window parent
+  Also balance windows and move point to new window"
+    (interactive "p")
+    (split-window
+     (cond
+      ((= arg 4) (frame-root-window))
+      ((= arg 16) (window-parent (selected-window)))
+      ((= arg 1) (selected-window)))
+     nil side nil)
     (balance-windows)
     (other-window 1))
 
@@ -122,8 +122,8 @@
 
   ;; Other bindings
   (global-set-key (kbd "C-x 0") 'amo/delete-window)
-  (global-set-key (kbd "C-x 2") 'amo/split-window-below)
-  (global-set-key (kbd "C-x 3") 'amo/split-window-horizontally)
+  (global-set-key (kbd "C-x 2") (lambda (arg) (interactive "p") (amo/split-window arg 'below)))
+  (global-set-key (kbd "C-x 3") (lambda (arg) (interactive "p") (amo/split-window arg 'right)))
   (global-set-key (kbd "M-<down>") 'amo/move-line-down)
   (global-set-key (kbd "M-<up>") 'amo/move-line-up)
   (global-set-key (kbd "C-'") 'amo/toggle-capitalization)
