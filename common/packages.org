@@ -341,6 +341,7 @@
 ** sicp-info
 - Repo :: https://github.com/webframp/sicp-info?tab=readme-ov-file
 - Docs :: http://www.neilvandyke.org/sicp-texi/
+- Description :: Stucture and Interpretation of Computer Progams in info format
 #+begin_src emacs-lisp
   (use-package sicp
     :straight t)
