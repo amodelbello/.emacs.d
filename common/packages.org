@@ -338,6 +338,13 @@
     (rg-enable-default-bindings))
 #+end_src
 
+** sicp-info
+- Repo :: https://github.com/webframp/sicp-info?tab=readme-ov-file
+- Docs :: http://www.neilvandyke.org/sicp-texi/
+#+begin_src emacs-lisp
+  (use-package sicp
+    :straight t)
+#+end_src
 ** undo-tree
 - Repo :: https://github.com/apchamberlain/undo-tree.el
 - Docs :: https://www.emacswiki.org/emacs/UndoTree
