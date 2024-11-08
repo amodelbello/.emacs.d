@@ -264,6 +264,14 @@
     :bind (("C-=" . er/expand-region)
            ("C--" . er/contract-region)))
 #+end_src
+** Geiser (Scheme)
+- Repo :: https://github.com/emacsmirror/geiser
+- Docs :: https://www.nongnu.org/geiser/
+- Description :: GNU Emacs and Scheme talk to each other
+#+begin_src emacs-lisp
+  (use-package geiser-guile
+    :straight t)
+#+end_src
 
 ** Idle Highlight Mode
 - Repo :: https://codeberg.org/ideasman42/emacs-idle-highlight-mode
@@ -276,7 +284,6 @@
           idle-highlight-exclude-point t)
     :hook
     ((prog-mode text-mode) . idle-highlight-mode))
-
 #+end_src
 
 ** jump-char
