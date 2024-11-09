@@ -332,7 +332,14 @@
      (clojure-mode . paredit-mode)
      (clojurescript-mode . paredit-mode)
      (clojurec-mode . paredit-mode)
-     (cider-repl-mode . paredit-mode)))
+     (cider-repl-mode . paredit-mode))
+    :bind (:map paredit-mode-map
+                ("M-(" . paredit-wrap-round)
+                ("M-[" . paredit-wrap-square)
+                ("M-{" . paredit-wrap-curly)
+                ("M-<" . paredit-wrap-angled)
+                ("M-S-<right>" . paredit-backward-barf-sexp)
+                ("M-S-<left>" . paredit-backward-slurp-sexp)))
 #+end_src
 
 ** rg.el
