@@ -328,6 +328,7 @@
     :hook
     ((lisp-mode . paredit-mode)
      (emacs-lisp-mode . paredit-mode)
+     (scheme-mode . paredit-mode)
      (clojure-mode . paredit-mode)
      (clojurescript-mode . paredit-mode)
      (clojurec-mode . paredit-mode)
