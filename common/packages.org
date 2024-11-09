@@ -338,8 +338,8 @@
                 ("M-[" . paredit-wrap-square)
                 ("M-{" . paredit-wrap-curly)
                 ("M-<" . paredit-wrap-angled)
-                ("M-S-<right>" . paredit-backward-barf-sexp)
-                ("M-S-<left>" . paredit-backward-slurp-sexp)))
+                ("C-M-<right>" . paredit-backward-barf-sexp)
+                ("C-M-<left>" . paredit-backward-slurp-sexp)))
 #+end_src
 
 ** rg.el
