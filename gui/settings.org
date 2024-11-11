@@ -681,6 +681,7 @@
             "Output\\*$"
             "\\*Async Shell Command\\*"
             "\\*eldoc\\*"
+            "\\*Geiser Debug\\*"
             "^pop-"
             help-mode
             compilation-mode)
