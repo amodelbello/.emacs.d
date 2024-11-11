@@ -7,6 +7,19 @@
 (use-package use-package-ensure-system-package
   :straight t)
 
+;; Compile Emacs Lisp libraries automatically.
+;; https://github.com/jamescherti/compile-angel.el
+(use-package compile-angel
+  :ensure t
+  :demand t
+  :straight (compile-angel
+             :type git
+             :host github
+             :repo "jamescherti/compile-angel.el")
+  :config
+  (compile-angel-on-save-mode)
+  (compile-angel-on-load-mode))
+
 ;; Load dot-env envrionment
 ;; https://github.com/amodelbello/dot-env.el
 (use-package dot-env
