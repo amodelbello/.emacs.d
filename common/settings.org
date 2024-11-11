@@ -209,6 +209,8 @@
          ("M-T" . amo/transpose-words-backwards)
          ("C-S-f" . amo/transpose-char-to-end-of-next-word)
          ("M-z" . zap-up-to-char)
+         ("C-c t =" . text-scale-increase)
+         ("C-c t -" . text-scale-decrease)
          ("C-x r M-w" . amo/copy-rectangle-to-kill-ring)))
 #+end_src
 
