@@ -228,6 +228,21 @@
            ("C-;" . nil)))
 #+end_src
 
+** compile-angel
+- Repo :: https://github.com/jamescherti/compile-angel.el
+- Description :: Compile Emacs Lisp libraries automatically.
+#+begin_src emacs-lisp
+(use-package compile-angel
+  :ensure t
+  :demand t
+  :straight (compile-angel
+             :type git
+             :host github
+             :repo "jamescherti/compile-angel.el")
+  :config
+  (compile-angel-on-save-mode)
+  (compile-angel-on-load-mode))
+#+end_src
 ** Crux
 - Repo :: https://github.com/bbatsov/crux
 - Docs :: https://emacsredux.com/blog/2016/01/30/crux
