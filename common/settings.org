@@ -30,6 +30,7 @@
           vc-follow-symlinks nil
           require-final-newline t
           enable-recursive-minibuffers t
+          python-indent-guess-indent-offset-verbose nil
           ispell-program-name (dot-env-get 'ISPELL_PATH "/usr/bin/ispell"))
 
     (setq-default indent-tabs-mode nil
