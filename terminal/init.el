@@ -1,9 +1,6 @@
 (load-file (concat user-emacs-directory "common/functions.el"))
 (amo/load-straight (concat user-emacs-directory "terminal/"))
 
-(use-package use-package-ensure-system-package
-  :straight t)
-
 ;; Load dot-env envrionment
 ;; https://github.com/amodelbello/dot-env.el
 (use-package dot-env
