@@ -42,6 +42,13 @@
                   sentence-end-double-space nil
                   whitespace-line-column 110)
 
+  ;; Do not show those confusing warnings when installing packages
+  ;; https://protesilaos.com/codelog/2024-11-28-basic-emacs-configuration/
+  (add-to-list 'display-buffer-alist
+               '("\\`\\*\\(Warnings\\|Compile-Log\\)\\*\\'"
+               (display-buffer-no-window)
+               (allow-no-window . t)))
+
   ;; Blink modeline instead of ring bell
   (setq ring-bell-function
         (lambda ()
