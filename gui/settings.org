@@ -568,6 +568,14 @@
       :straight t
       :config (with-eval-after-load 'org (global-org-modern-mode)))
   #+end_src
+** org-appear
+- Repo :: https://github.com/awth13/org-appear
+- Description :: Toggle visibility of hidden Org mode element parts upon entering and leaving an element
+#+begin_src emacs-lisp
+  (use-package org-appear
+    :straight (:type git :host github :repo "awth13/org-appear")
+    :hook (org-mode . org-appear-mode))
+#+end_src
 * Other Useful Packages
 ** buffer-move
 - Repo :: https://github.com/lukhas/buffer-move
@@ -641,6 +649,15 @@
       :straight t
       :config
       (exec-path-from-shell-initialize)))
+#+end_src
+** ESUP
+- Repo :: https://github.com/jschaf/esup
+- Description :: ESUP - Emacs Start Up Profiler
+#+begin_src emacs-lisp
+  (use-package esup
+    :straight t
+    :config
+    (setq esup-depth 0))
 #+end_src
 ** Eyebrowse
 - Repo :: https://depp.brause.cc/eyebrowse/

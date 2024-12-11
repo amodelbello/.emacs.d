@@ -1,3 +1,5 @@
+;;; -*- lexical-binding: t -*-
+
 ;; Garbage collect at the end of startup
 (add-hook 'after-init-hook #'garbage-collect t)
 

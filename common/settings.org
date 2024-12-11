@@ -31,6 +31,7 @@
           require-final-newline t
           enable-recursive-minibuffers t
           python-indent-guess-indent-offset-verbose nil
+          custom-safe-themes t
           ispell-program-name (dot-env-get 'ISPELL_PATH "/usr/bin/ispell"))
 
     (setq-default indent-tabs-mode nil
@@ -42,21 +43,25 @@
                   sentence-end-double-space nil
                   whitespace-line-column 110)
 
-  ;; Do not show those confusing warnings when installing packages
-  ;; https://protesilaos.com/codelog/2024-11-28-basic-emacs-configuration/
-  (add-to-list 'display-buffer-alist
-               '("\\`\\*\\(Warnings\\|Compile-Log\\)\\*\\'"
-               (display-buffer-no-window)
-               (allow-no-window . t)))
+    ;; Do not show those confusing warnings when installing packages
+    ;; https://protesilaos.com/codelog/2024-11-28-basic-emacs-configuration/
+    (add-to-list 'display-buffer-alist
+                 '("\\`\\*\\(Warnings\\|Compile-Log\\)\\*\\'"
+                 (display-buffer-no-window)
+                 (allow-no-window . t)))
 
-  ;; Blink modeline instead of ring bell
-  (setq ring-bell-function
-        (lambda ()
-          (let ((orig-fg (face-foreground 'mode-line)))
-            (set-face-foreground 'mode-line "Magenta")
-            (run-with-idle-timer 0.1 nil
-                                 (lambda (fg) (set-face-foreground 'mode-line fg))
-                                 orig-fg))))
+    ;; Blink modeline instead of ring bell
+    (setq ring-bell-function
+          (lambda ()
+            (let ((orig-fg (face-foreground 'mode-line)))
+              (set-face-foreground 'mode-line "Magenta")
+              (run-with-idle-timer 0.1 nil
+                                   (lambda (fg) (set-face-foreground 'mode-line fg))
+                                   orig-fg))))
+
+    ;; Use forward slashes to distinguish duplicate files
+    (require 'uniquify)
+    (setq uniquify-buffer-name-style 'forward)
 #+end_src
 
 * Functions for custom bindings
@@ -238,6 +243,7 @@ Necessary when the bound function requires arguments
   (add-hook 'before-save-hook 'amo/whitespace-cleanup)
   (add-hook 'text-mode-hook 'flyspell-mode)
   (add-hook 'prog-mode-hook (lambda () (flyspell-mode -1)))
+  (add-hook 'prog-mode-hook 'subword-mode)
 #+end_src
 * dired
 #+begin_src emacs-lisp
