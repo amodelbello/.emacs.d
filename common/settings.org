@@ -209,6 +209,20 @@
               file-path)))
       (kill-new (concat project-path
                         ":" (number-to-string (line-number-at-pos))))))
+
+
+  ;; From https://github.com/larstvei/dot-emacs
+  ;; just-one-space removes all whitespace around a point - giving it a negative argument it removes newlines as well.
+  ;; We wrap a interactive function around it to be able to bind it to a key.
+  ;; In Emacs 24.4 cycle-spacing was introduced, and it works like just-one-space,
+  ;; but when run in succession it cycles between one, zero and the original number of spaces.
+  (defun cycle-spacing-delete-newlines ()
+    "Removes whitespace before and after the point."
+    (interactive)
+    (if (version< emacs-version "24.4")
+        (just-one-space -1)
+      (cycle-spacing -1)))
+
 #+end_src
 
 * use-package Style Bindings
@@ -225,7 +239,8 @@
          ("C-c t =" . text-scale-increase)
          ("C-c t -" . text-scale-decrease)
          ("C-z '" . indent-new-comment-line)
-         ("C-x r M-w" . amo/copy-rectangle-to-kill-ring)))
+         ("C-x r M-w" . amo/copy-rectangle-to-kill-ring)
+         ("M-/" . cycle-spacing-delete-newlines)))
 #+end_src
 
 * Traditional-Style Bindings
