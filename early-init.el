@@ -18,3 +18,6 @@
 (push '(tool-bar-lines . 0) default-frame-alist)
 (push '(vertical-scroll-bars) default-frame-alist)
 (setq inhibit-startup-message t)
+
+(set-language-environment "UTF-8")
+(setq default-input-method nil)
