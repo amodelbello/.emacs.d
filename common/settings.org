@@ -209,8 +209,8 @@
                              file-path))
               file-path)))
       (kill-new (concat project-path
-                        ":" (number-to-string (line-number-at-pos))))))
-
+                        ":" (number-to-string (line-number-at-pos))))
+      (message "Copied current path and line number to kill ring!")))
 
   ;; From https://github.com/larstvei/dot-emacs
   ;; just-one-space removes all whitespace around a point - giving it a negative argument it removes newlines as well.
