@@ -251,7 +251,7 @@ Necessary when the bound function requires arguments
   (keymap-global-set "C-z s e" (lambda () (interactive) (amo/open-emacs-config-file ".env")))
   (keymap-global-set "C-z s c s" (lambda () (interactive) (amo/open-emacs-config-file "common/settings.org")))
   (keymap-global-set "C-z s c p" (lambda () (interactive) (amo/open-emacs-config-file "common/packages.org")))
-  (keymap-global-set "C-z s c f" (lambda () (interactive) (amo/open-emacs-config-file "common/functions.org")))
+  (keymap-global-set "C-z s c f" (lambda () (interactive) (amo/open-emacs-config-file "common/functions.el")))
   (keymap-global-set "C-z s g s" (lambda () (interactive) (amo/open-emacs-config-file "gui/settings.org")))
   (keymap-global-set "C-z s t s" (lambda () (interactive) (amo/open-emacs-config-file "terminal/settings.org")))
 #+end_src
