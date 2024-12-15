@@ -32,7 +32,8 @@
           enable-recursive-minibuffers t
           python-indent-guess-indent-offset-verbose nil
           custom-safe-themes t
-          ispell-program-name (dot-env-get 'ISPELL_PATH "/usr/bin/ispell"))
+          ispell-program-name (dot-env-get 'ISPELL_PATH "/usr/bin/ispell")
+          dictionary-server "dict.org")
 
     (setq-default indent-tabs-mode nil
                   global-tab-line-mode nil
