@@ -427,7 +427,7 @@
     :config
     (global-emsg-blame-mode)
     (defun my--emsg-blame-display ()
-      (message " %s • %s •️ %s" emsg-blame--commit-author emsg-blame--commit-date emsg-blame--commit-summary))
+      (message " %s • %s • %s" emsg-blame--commit-author emsg-blame--commit-date emsg-blame--commit-summary))
     (setq emsg-blame-display #'my--emsg-blame-display
           ;; Prevent eldoc from overwritting message buffer output from this package
           eldoc-message-function '(lambda (format-string &rest args) ())))
