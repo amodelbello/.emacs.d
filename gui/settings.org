@@ -611,6 +611,9 @@
   (use-package denote
     :straight t
     :after org
+    :init
+    ;; to prevent "non-prefix key" error
+    (define-key global-map (kbd "C-c n") (make-sparse-keymap))
     :config
     (setq denote-directory (dot-env-get 'DENOTE_DIRECTORY (concat org-directory "/denote"))
           denote-date-prompt-use-org-read-date t
