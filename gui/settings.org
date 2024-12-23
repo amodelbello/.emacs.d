@@ -37,6 +37,7 @@
         create-lockfiles nil
         delete-by-moving-to-trash t
         comment-column 64
+        eshell-scroll-show-maximum-output nil
 
         ;; Change mode based on file extension
         auto-mode-alist (append '(("\\.cl$" . lisp-mode)
