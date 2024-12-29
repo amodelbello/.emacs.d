@@ -737,7 +737,6 @@
            :map perspective-map
            ("," . persp-rename)
            ("." . persp-switch)
-           ("n" . persp-switch)
            ("'" . persp-prev)
            ("\"" . persp-kill)))
 #+end_src
