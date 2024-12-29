@@ -53,7 +53,7 @@ recentf
 transient/
 .cache
 forge-database.sqlite
-
+.perspective
 customize.el
 settings.el
 common/settings.el

@@ -18,7 +18,7 @@
   (set-face-attribute 'fixed-pitch nil :font amo/font)
   (set-face-attribute 'variable-pitch nil :font amo/font)
   (set-face-attribute 'default nil :height amo/base-font-size)
-  (desktop-save-mode 1)
+
   (global-hl-line-mode t)
   (menu-bar-mode (string-to-number (dot-env-get 'MENU_BAR_MODE "1")))
 
@@ -115,12 +115,11 @@
     (load-file (concat user-emacs-directory "init.el")))
 
   ;; Delete desktop files and restart emacs
-  (defun amo/delete-emacs-desktop-files-restart ()
+  (defun amo/delete-emacs-perspective-file-restart ()
     "Delete saved desktop, then restart emacs"
     (interactive)
     (setq desktop-save-mode nil)
-    (delete-file (concat user-emacs-directory ".emacs.desktop"))
-    (delete-file (concat user-emacs-directory ".emacs.desktop.lock"))
+    (delete-file (concat user-emacs-directory ".perspective"))
     (restart-emacs))
 
   (defun amo/split-window (arg side)
@@ -166,7 +165,7 @@
   ;; Custom prefix C-z
   (global-set-key (kbd "C-z r") 'amo/reload-config)
   (global-set-key (kbd "C-z C-z r") 'restart-emacs)
-  (global-set-key (kbd "C-z C-z C-z r") 'amo/delete-emacs-desktop-files-restart)
+  (global-set-key (kbd "C-z C-z C-z r") 'amo/delete-emacs-perspective-file-restart)
   (global-set-key (kbd "C-z t") 'customize-themes)
   (global-set-key (kbd "C-z e") 'eshell)
   (global-set-key (kbd "C-z n") 'amo/open-main-notes-file)
@@ -723,22 +722,25 @@
     :straight t
     :custom
     (persp-mode-prefix-key (kbd "C-c C-w"))
+    (persp-state-default-file (concat user-emacs-directory ".perspective"))
     :init
     (persp-mode)
+    (persp-state-load (concat user-emacs-directory ".perspective"))
     :config
     (setq switch-to-prev-buffer-skip
           (lambda (win buff bury-or-kill)
             (not (persp-is-current-buffer buff))))
     (consult-customize consult--source-buffer :hidden t :default nil)
     (add-to-list 'consult-buffer-sources persp-consult-source)
-
-    :bind (
-           ("C-x C-b" . persp-ibuffer)
+    :hook ((kill-emacs . persp-state-save)
+           (restart-emacs . persp-state-save))
+    :bind (("C-x C-b" . persp-ibuffer)
            :map perspective-map
            ("," . persp-rename)
            ("." . persp-switch)
-           )
-    )
+           ("n" . persp-switch)
+           ("'" . persp-prev)
+           ("\"" . persp-kill)))
 #+end_src
 ** Popper
 - Repo :: https://github.com/karthink/popper
