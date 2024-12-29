@@ -659,17 +659,6 @@
     :config
     (setq esup-depth 0))
 #+end_src
-** Eyebrowse
-- Repo :: https://depp.brause.cc/eyebrowse/
-- Description :: A simple-minded way of managing window configs in Emacs
-#+begin_src emacs-lisp
-  (use-package eyebrowse
-    :straight t
-    :config
-    (setq eyebrowse-new-workspace (lambda () (dashboard-open)))
-    (eyebrowse-mode 1)
-    (define-key eyebrowse-mode-map (kbd "C-c C-w n") 'eyebrowse-create-named-window-config))
-#+end_src
 ** flymake-margin
 - Repo :: https://github.com/LionyxML/flymake-margin
 - Description :: A package to provide flymake into the margin world
@@ -710,24 +699,6 @@
            ("C-S-h d" . helpful-at-point)
            ("C-S-h F" . helpful-function)))
 #+end_src
-** ibuffer-projectile
-- Repo :: https://github.com/purcell/ibuffer-projectile
-- Description :: Group buffers in Emacs ibuffer-mode by their projectile root directory
-#+begin_src emacs-lisp
-  (use-package ibuffer-projectile
-    :straight t
-    :after projectile
-    :config (setq ibuffer-show-empty-filter-groups nil)
-    :hook ((ibuffer . (lambda ()
-                        (ibuffer-projectile-set-filter-groups)
-                        (unless (eq ibuffer-sorting-mode 'alphabetic)
-                          (ibuffer-do-sort-by-alphabetic))))
-           (ibuffer-mode . (lambda ()
-                             (ibuffer-auto-mode 1)
-                             (ibuffer-switch-to-saved-filter-groups "default"))))
-    :bind (("C-x C-b" . ibuffer)))
-#+end_src
-
 ** markdown-mode
 - Repo :: https://github.com/jrblevin/markdown-mode
 - Description :: Emacs Markdown Mode
@@ -743,6 +714,31 @@
 #+begin_src emacs-lisp
   (use-package package-lint
     :straight t)
+#+end_src
+** perspective-el
+- Repo :: https://github.com/nex3/perspective-el
+- Description :: Perspectives for Emacs.
+#+begin_src emacs-lisp
+  (use-package perspective
+    :straight t
+    :custom
+    (persp-mode-prefix-key (kbd "C-c C-w"))
+    :init
+    (persp-mode)
+    :config
+    (setq switch-to-prev-buffer-skip
+          (lambda (win buff bury-or-kill)
+            (not (persp-is-current-buffer buff))))
+    (consult-customize consult--source-buffer :hidden t :default nil)
+    (add-to-list 'consult-buffer-sources persp-consult-source)
+
+    :bind (
+           ("C-x C-b" . persp-ibuffer)
+           :map perspective-map
+           ("," . persp-rename)
+           ("." . persp-switch)
+           )
+    )
 #+end_src
 ** Popper
 - Repo :: https://github.com/karthink/popper
