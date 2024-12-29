@@ -3,106 +3,106 @@ An emacs configuration for both GUI and terminal. Instructions on setting up ema
 
 # Table of Contents
 
--   [Initial Setup](#org5f2b001)
--   [Common Functions](#org9bd9d6a)
--   [Common General Configuration](#org066ba44)
-    -   [Variables and Modes](#org9c7c9a7)
-    -   [Functions for custom bindings](#org0a4263e)
-    -   [use-package Style Bindings](#org157730f)
-    -   [Traditional-Style Bindings](#orgb36fe8a)
-    -   [Hooks](#orgd7da212)
-    -   [dired](#orgf047e3c)
-    -   [Advice](#orge83b2b6)
--   [Common Packages](#org0ef702e)
-    -   [Minibuffer & Completion](#org5bd8345)
-        -   [Vertico](#org8e4451b)
-        -   [Embark](#orgae04964)
-        -   [Marginalia](#orgab9a742)
-        -   [Consult](#orgf04d348)
-        -   [orderless](#org562df5f)
-        -   [which-key](#orga13b61e)
-    -   [Other Useful Packages](#org4d01aa1)
-        -   [Ace Window](#org200d9b6)
-        -   [aggressive-indent-mode](#org793a964)
-        -   [Avy](#orgc6d737c)
-        -   [Crux](#org397e781)
-        -   [el-patch](#orgaf8d9f6)
-        -   [expand-region](#org01ae16d)
-        -   [Geiser (Scheme)](#orgec0acd6)
-        -   [Idle Highlight Mode](#orgb5df848)
-        -   [jump-char](#org36a75a8)
-        -   [minions](#orgab1d593)
-        -   [move-lines](#org586f157)
-        -   [Paredit](#orgd1459d9)
-        -   [rg.el](#org4b78935)
-        -   [sicp-info](#orgf2faad4)
-        -   [undo-tree](#org7b7d020)
-    -   [Appearance](#org3a8b28f)
-        -   [Nerd Icons](#org1a0a498)
-        -   [nerd-icons-dired](#org25d905c)
-        -   [nerd-icons-completion](#org124ce44)
-        -   [kind-icon](#org53b3bb5)
--   [GUI Config](#org0e80917)
-    -   [General Configuration](#org456c280)
-        -   [Variables and Modes](#orge41b897)
-        -   [Functions for custom bindings](#org5d2d553)
-        -   [Custom Bindings](#org14c141e)
-        -   [Functions for hooks](#orgb6ca840)
-        -   [Hooks](#org4a8d770)
-        -   [ibuffer](#orgd4465e4)
-    -   [Programming](#orgc26d14c)
-        -   [Packages](#org6a81b44)
-        -   [Languages](#org15e8a34)
-    -   [Version Control](#orgd01f95b)
-        -   [Magit](#org83aff75)
-        -   [magit-todos](#org46d0078)
-        -   [git-messenger](#org47ab412)
-        -   [Git time machine](#org1663a5b)
-        -   [diff-hl](#orga8c115f)
-        -   [emsg-blame](#org29e11e7)
-    -   [Minibuffer & Completion](#orgf099333)
-        -   [consult-projectile](#org3f3fcd9)
-        -   [consult-eglot](#orgea8e951)
-        -   [Corfu](#org803b826)
-    -   [Org Mode](#org1f4fc67)
-        -   [Org configuration](#orga0b1405)
-        -   [Org Modern](#org8acdbe0)
-        -   [org-appear](#org9d925bf)
-    -   [Other Useful Packages](#org793cd0b)
-        -   [buffer-move](#org98027e0)
-        -   [consult-denote](#org7812c17)
-        -   [denote](#org6eade6c)
-        -   [exec-path-from-shell](#orgf4cc404)
-        -   [ESUP](#orgf8c0d3c)
-        -   [flymake-margin](#orgb95384c)
-        -   [gptel](#org8e3a503)
-        -   [helpful](#orgfc2fc3e)
-        -   [markdown-mode](#org1ccce68)
-        -   [package-lint](#org730537c)
-        -   [perspective-el](#org6ea334c)
-        -   [Popper](#orga01f29f)
-        -   [Projectile](#org4869cc3)
-        -   [ESS](#org1a40007)
-        -   [rainbow-delimiters](#orga36ba93)
-        -   [Transpose Frame](#org418af5f)
-        -   [YASnippet](#org0646fdc)
-    -   [Appearance](#org2f9204e)
-        -   [Dashboard](#orgf15c1e9)
-        -   [Doom Modeline](#org4d6f357)
-        -   [Ef Themes](#org3c7b9b9)
-        -   [Modus Themes](#orgbabca7c)
-        -   [nerd-icons-corfu](#orgca6d3c2)
-        -   [magit-file-icons](#org5f2e34d)
--   [Terminal Config](#org37a094f)
-    -   [General Configuration](#org67c91e8)
-        -   [Variables and Modes](#org16b3387)
-        -   [Functions for custom bindings](#org8a348d6)
-        -   [Custom Bindings](#org3b9efc7)
-        -   [Packages](#org7a1bfee)
-        -   [Terminal mappings](#orgc4d8e6f)
+-   [Initial Setup](#org46b5346)
+-   [Common Functions](#orgac3c546)
+-   [Common General Configuration](#org8ce713d)
+    -   [Variables and Modes](#org82285f2)
+    -   [Functions for custom bindings](#org6cae725)
+    -   [use-package Style Bindings](#org6fbfbe9)
+    -   [Traditional-Style Bindings](#org0ce5abd)
+    -   [Hooks](#org87d96ef)
+    -   [dired](#orge3f5e0f)
+    -   [Advice](#org4515cd8)
+-   [Common Packages](#orgad4827d)
+    -   [Minibuffer & Completion](#orgbfaf206)
+        -   [Vertico](#orgb971292)
+        -   [Embark](#org27cd69e)
+        -   [Marginalia](#org8632a7b)
+        -   [Consult](#orgb8a81c8)
+        -   [orderless](#orgb7e5439)
+        -   [which-key](#org47b0221)
+    -   [Other Useful Packages](#org6dd131c)
+        -   [Ace Window](#org5613576)
+        -   [aggressive-indent-mode](#orgb572e36)
+        -   [Avy](#orgdda919c)
+        -   [Crux](#orge321bf8)
+        -   [el-patch](#org1040e6d)
+        -   [expand-region](#org987fedc)
+        -   [Geiser (Scheme)](#org4ce363a)
+        -   [Idle Highlight Mode](#org8f18a5c)
+        -   [jump-char](#orgcfbb1bb)
+        -   [minions](#orgd00c72a)
+        -   [move-lines](#org0799ef8)
+        -   [Paredit](#org01b3e3b)
+        -   [rg.el](#org2a7cc8c)
+        -   [sicp-info](#orgcfcc70e)
+        -   [undo-tree](#org98cf77e)
+    -   [Appearance](#org17f4458)
+        -   [Nerd Icons](#orgb680606)
+        -   [nerd-icons-dired](#orgead5f79)
+        -   [nerd-icons-completion](#org2df42f1)
+        -   [kind-icon](#orgfd09aad)
+-   [GUI Config](#orgc6236bb)
+    -   [General Configuration](#org98182f3)
+        -   [Variables and Modes](#org4a3e047)
+        -   [Functions for custom bindings](#orgfe4c499)
+        -   [Custom Bindings](#org37584bc)
+        -   [Functions for hooks](#org7291441)
+        -   [Hooks](#org6c66c0f)
+        -   [ibuffer](#orgaa410b4)
+    -   [Programming](#org8713c77)
+        -   [Packages](#orgcf369c1)
+        -   [Languages](#org5d3e8e5)
+    -   [Version Control](#org2f917fd)
+        -   [Magit](#orgd56908a)
+        -   [magit-todos](#orgcb43422)
+        -   [git-messenger](#org49cb4e2)
+        -   [Git time machine](#org1e30cc0)
+        -   [diff-hl](#org0b981a4)
+        -   [emsg-blame](#org2861eb4)
+    -   [Minibuffer & Completion](#orga318b69)
+        -   [consult-projectile](#orgc8176ac)
+        -   [consult-eglot](#org55f53cf)
+        -   [Corfu](#orgc061998)
+    -   [Org Mode](#org6def417)
+        -   [Org configuration](#org973a27b)
+        -   [Org Modern](#org5b19f5e)
+        -   [org-appear](#org4a87756)
+    -   [Other Useful Packages](#org6fa94ee)
+        -   [buffer-move](#org5dcca0c)
+        -   [consult-denote](#orge62a118)
+        -   [denote](#orge28b323)
+        -   [exec-path-from-shell](#org445d7b2)
+        -   [ESUP](#org19b127c)
+        -   [flymake-margin](#org4da6915)
+        -   [gptel](#org95af2da)
+        -   [helpful](#orgbd9a4cc)
+        -   [markdown-mode](#org9c9d230)
+        -   [package-lint](#org32109f6)
+        -   [perspective-el](#orgd84ec7b)
+        -   [Popper](#orgf60b34c)
+        -   [Projectile](#org4aa9b3f)
+        -   [ESS](#org3b8911c)
+        -   [rainbow-delimiters](#org2f11317)
+        -   [Transpose Frame](#org701c5c9)
+        -   [YASnippet](#orgc451e48)
+    -   [Appearance](#orgd928b4b)
+        -   [Dashboard](#org0c0281a)
+        -   [Doom Modeline](#org0b371ca)
+        -   [Ef Themes](#org7e09ec7)
+        -   [Modus Themes](#org3f01a86)
+        -   [nerd-icons-corfu](#org336e5cf)
+        -   [magit-file-icons](#org79642d1)
+-   [Terminal Config](#org91a93af)
+    -   [General Configuration](#org5858892)
+        -   [Variables and Modes](#org7721ce5)
+        -   [Functions for custom bindings](#orgb305d22)
+        -   [Custom Bindings](#org811e908)
+        -   [Packages](#org86e80e0)
+        -   [Terminal mappings](#orge1855cb)
 
 
-<a id="org5f2b001"></a>
+<a id="org46b5346"></a>
 
 # Initial Setup
 
@@ -116,7 +116,7 @@ Before opening emacs with this configuration there are a few set up tasks that n
 3.  Configure environment variables: <https://github.com/amodelbello/dot-env.el> example `.env` file: [.env.example](.env.example)
 
 
-<a id="org9bd9d6a"></a>
+<a id="orgac3c546"></a>
 
 # Common Functions
 
@@ -154,13 +154,13 @@ These are functions needed by both configurations during initial startup.
 ```
 
 
-<a id="org066ba44"></a>
+<a id="org8ce713d"></a>
 
 # Common General Configuration
 
 
 
-<a id="org9c7c9a7"></a>
+<a id="org82285f2"></a>
 
 ## Variables and Modes
 
@@ -226,7 +226,7 @@ These are functions needed by both configurations during initial startup.
 ```
 
 
-<a id="org0a4263e"></a>
+<a id="org6cae725"></a>
 
 ## Functions for custom bindings
 
@@ -391,7 +391,7 @@ Otherwise use the projectile project root if present"
 ```
 
 
-<a id="org157730f"></a>
+<a id="org6fbfbe9"></a>
 
 ## use-package Style Bindings
 
@@ -414,7 +414,7 @@ Otherwise use the projectile project root if present"
 ```
 
 
-<a id="orgb36fe8a"></a>
+<a id="org0ce5abd"></a>
 
 ## Traditional-Style Bindings
 
@@ -430,7 +430,7 @@ Necessary when the bound function requires arguments
 ```
 
 
-<a id="orgd7da212"></a>
+<a id="org87d96ef"></a>
 
 ## Hooks
 
@@ -442,7 +442,7 @@ Necessary when the bound function requires arguments
 ```
 
 
-<a id="orgf047e3c"></a>
+<a id="orge3f5e0f"></a>
 
 ## dired
 
@@ -470,7 +470,7 @@ Necessary when the bound function requires arguments
 ```
 
 
-<a id="orge83b2b6"></a>
+<a id="org4515cd8"></a>
 
 ## Advice
 
@@ -486,18 +486,18 @@ Necessary when the bound function requires arguments
 ```
 
 
-<a id="org0ef702e"></a>
+<a id="orgad4827d"></a>
 
 # Common Packages
 
 
 
-<a id="org5bd8345"></a>
+<a id="orgbfaf206"></a>
 
 ## Minibuffer & Completion
 
 
-<a id="org8e4451b"></a>
+<a id="orgb971292"></a>
 
 ### Vertico
 
@@ -526,7 +526,7 @@ Necessary when the bound function requires arguments
 ```
 
 
-<a id="orgae04964"></a>
+<a id="org27cd69e"></a>
 
 ### Embark
 
@@ -595,7 +595,7 @@ targets."
 ```
 
 
-<a id="orgab9a742"></a>
+<a id="org8632a7b"></a>
 
 ### Marginalia
 
@@ -610,7 +610,7 @@ targets."
 ```
 
 
-<a id="orgf04d348"></a>
+<a id="orgb8a81c8"></a>
 
 ### Consult
 
@@ -680,7 +680,7 @@ targets."
 ```
 
 
-<a id="org562df5f"></a>
+<a id="orgb7e5439"></a>
 
 ### orderless
 
@@ -696,7 +696,7 @@ targets."
 ```
 
 
-<a id="orga13b61e"></a>
+<a id="org47b0221"></a>
 
 ### which-key
 
@@ -711,12 +711,12 @@ targets."
 ```
 
 
-<a id="org4d01aa1"></a>
+<a id="org6dd131c"></a>
 
 ## Other Useful Packages
 
 
-<a id="org200d9b6"></a>
+<a id="org5613576"></a>
 
 ### Ace Window
 
@@ -736,7 +736,7 @@ targets."
 ```
 
 
-<a id="org793a964"></a>
+<a id="orgb572e36"></a>
 
 ### aggressive-indent-mode
 
@@ -753,7 +753,7 @@ targets."
 ```
 
 
-<a id="orgc6d737c"></a>
+<a id="orgdda919c"></a>
 
 ### Avy
 
@@ -771,7 +771,7 @@ targets."
 ```
 
 
-<a id="org397e781"></a>
+<a id="orge321bf8"></a>
 
 ### Crux
 
@@ -795,7 +795,7 @@ targets."
 ```
 
 
-<a id="orgaf8d9f6"></a>
+<a id="org1040e6d"></a>
 
 ### el-patch
 
@@ -808,7 +808,7 @@ targets."
 ```
 
 
-<a id="org01ae16d"></a>
+<a id="org987fedc"></a>
 
 ### expand-region
 
@@ -823,7 +823,7 @@ targets."
 ```
 
 
-<a id="orgec0acd6"></a>
+<a id="org4ce363a"></a>
 
 ### Geiser (Scheme)
 
@@ -837,7 +837,7 @@ targets."
 ```
 
 
-<a id="orgb5df848"></a>
+<a id="org8f18a5c"></a>
 
 ### Idle Highlight Mode
 
@@ -855,7 +855,7 @@ targets."
 ```
 
 
-<a id="org36a75a8"></a>
+<a id="orgcfbb1bb"></a>
 
 ### jump-char
 
@@ -871,7 +871,7 @@ targets."
 ```
 
 
-<a id="orgab1d593"></a>
+<a id="orgd00c72a"></a>
 
 ### minions
 
@@ -886,7 +886,7 @@ targets."
 ```
 
 
-<a id="org586f157"></a>
+<a id="org0799ef8"></a>
 
 ### move-lines
 
@@ -903,7 +903,7 @@ targets."
     ```
 
 
-<a id="orgd1459d9"></a>
+<a id="org01b3e3b"></a>
 
 ### Paredit
 
@@ -932,7 +932,7 @@ targets."
 ```
 
 
-<a id="org4b78935"></a>
+<a id="org2a7cc8c"></a>
 
 ### rg.el
 
@@ -948,7 +948,7 @@ targets."
 ```
 
 
-<a id="orgf2faad4"></a>
+<a id="orgcfcc70e"></a>
 
 ### sicp-info
 
@@ -962,7 +962,7 @@ targets."
 ```
 
 
-<a id="org7b7d020"></a>
+<a id="org98cf77e"></a>
 
 ### undo-tree
 
@@ -983,12 +983,12 @@ targets."
 ```
 
 
-<a id="org3a8b28f"></a>
+<a id="org17f4458"></a>
 
 ## Appearance
 
 
-<a id="org1a0a498"></a>
+<a id="orgb680606"></a>
 
 ### Nerd Icons
 
@@ -1003,7 +1003,7 @@ targets."
 ```
 
 
-<a id="org25d905c"></a>
+<a id="orgead5f79"></a>
 
 ### nerd-icons-dired
 
@@ -1018,7 +1018,7 @@ targets."
 ```
 
 
-<a id="org124ce44"></a>
+<a id="org2df42f1"></a>
 
 ### nerd-icons-completion
 
@@ -1035,7 +1035,7 @@ targets."
 ```
 
 
-<a id="org53b3bb5"></a>
+<a id="orgfd09aad"></a>
 
 ### kind-icon
 
@@ -1053,19 +1053,19 @@ targets."
 ```
 
 
-<a id="org0e80917"></a>
+<a id="orgc6236bb"></a>
 
 # GUI Config
 
 Configuration and packages specific to GUI
 
 
-<a id="org456c280"></a>
+<a id="org98182f3"></a>
 
 ## General Configuration
 
 
-<a id="orge41b897"></a>
+<a id="org4a3e047"></a>
 
 ### Variables and Modes
 
@@ -1173,7 +1173,7 @@ Configuration and packages specific to GUI
 ```
 
 
-<a id="org5d2d553"></a>
+<a id="orgfe4c499"></a>
 
 ### Functions for custom bindings
 
@@ -1230,7 +1230,7 @@ Also balance windows and move point to new window"
 ```
 
 
-<a id="org14c141e"></a>
+<a id="org37584bc"></a>
 
 ### Custom Bindings
 
@@ -1261,7 +1261,7 @@ Also balance windows and move point to new window"
 ```
 
 
-<a id="orgb6ca840"></a>
+<a id="org7291441"></a>
 
 ### Functions for hooks
 
@@ -1277,7 +1277,7 @@ Also balance windows and move point to new window"
 ```
 
 
-<a id="org4a8d770"></a>
+<a id="org6c66c0f"></a>
 
 ### Hooks
 
@@ -1287,7 +1287,7 @@ Also balance windows and move point to new window"
 ```
 
 
-<a id="orgd4465e4"></a>
+<a id="orgaa410b4"></a>
 
 ### ibuffer
 
@@ -1298,12 +1298,12 @@ Also balance windows and move point to new window"
 ```
 
 
-<a id="orgc26d14c"></a>
+<a id="org8713c77"></a>
 
 ## Programming
 
 
-<a id="org6a81b44"></a>
+<a id="orgcf369c1"></a>
 
 ### Packages
 
@@ -1373,7 +1373,7 @@ Also balance windows and move point to new window"
     ```
 
 
-<a id="org15e8a34"></a>
+<a id="org5d3e8e5"></a>
 
 ### Languages
 
@@ -1440,10 +1440,9 @@ Also balance windows and move point to new window"
         (use-package conda
           :straight t
           :init
-          (setq conda-anaconda-home (expand-file-name "~/opt/miniconda3")
-                conda-env-home-directory (expand-file-name "~/opt/miniconda3")
+          (setq conda-anaconda-home (expand-file-name (dot-env-get 'CONDA_PATH "~/opt/miniconda3"))
+                conda-env-home-directory (expand-file-name (dot-env-get 'CONDA_PATH "~/opt/miniconda3"))
                 conda-env-autoactivate-mode t)
-        
           (add-hook 'find-file-hook (lambda () (when (bound-and-true-p conda-project-env-path)
                                                  (conda-env-activate-for-buffer))))
           (setq-default mode-line-format (cons '(:exec conda-env-current-name) mode-line-format)))
@@ -1504,12 +1503,12 @@ Also balance windows and move point to new window"
     ```
 
 
-<a id="orgd01f95b"></a>
+<a id="org2f917fd"></a>
 
 ## Version Control
 
 
-<a id="org83aff75"></a>
+<a id="orgd56908a"></a>
 
 ### Magit
 
@@ -1525,7 +1524,7 @@ Also balance windows and move point to new window"
 ```
 
 
-<a id="org46d0078"></a>
+<a id="orgcb43422"></a>
 
 ### magit-todos
 
@@ -1539,7 +1538,7 @@ Also balance windows and move point to new window"
 ```
 
 
-<a id="org47ab412"></a>
+<a id="org49cb4e2"></a>
 
 ### git-messenger
 
@@ -1555,7 +1554,7 @@ Also balance windows and move point to new window"
 ```
 
 
-<a id="org1663a5b"></a>
+<a id="org1e30cc0"></a>
 
 ### Git time machine
 
@@ -1568,7 +1567,7 @@ Also balance windows and move point to new window"
 ```
 
 
-<a id="orga8c115f"></a>
+<a id="org0b981a4"></a>
 
 ### diff-hl
 
@@ -1590,7 +1589,7 @@ Also balance windows and move point to new window"
 ```
 
 
-<a id="org29e11e7"></a>
+<a id="org2861eb4"></a>
 
 ### emsg-blame
 
@@ -1610,12 +1609,12 @@ Also balance windows and move point to new window"
 ```
 
 
-<a id="orgf099333"></a>
+<a id="orga318b69"></a>
 
 ## Minibuffer & Completion
 
 
-<a id="org3f3fcd9"></a>
+<a id="orgc8176ac"></a>
 
 ### consult-projectile
 
@@ -1634,7 +1633,7 @@ Also balance windows and move point to new window"
 ```
 
 
-<a id="orgea8e951"></a>
+<a id="org55f53cf"></a>
 
 ### consult-eglot
 
@@ -1647,7 +1646,7 @@ Also balance windows and move point to new window"
     ```
 
 
-<a id="org803b826"></a>
+<a id="orgc061998"></a>
 
 ### Corfu
 
@@ -1677,12 +1676,12 @@ Also balance windows and move point to new window"
 ```
 
 
-<a id="org1f4fc67"></a>
+<a id="org6def417"></a>
 
 ## Org Mode
 
 
-<a id="orga0b1405"></a>
+<a id="org973a27b"></a>
 
 ### Org configuration
 
@@ -1763,7 +1762,7 @@ Also balance windows and move point to new window"
 ```
 
 
-<a id="org8acdbe0"></a>
+<a id="org5b19f5e"></a>
 
 ### Org Modern
 
@@ -1777,7 +1776,7 @@ Also balance windows and move point to new window"
     ```
 
 
-<a id="org9d925bf"></a>
+<a id="org4a87756"></a>
 
 ### org-appear
 
@@ -1791,12 +1790,12 @@ Also balance windows and move point to new window"
 ```
 
 
-<a id="org793cd0b"></a>
+<a id="org6fa94ee"></a>
 
 ## Other Useful Packages
 
 
-<a id="org98027e0"></a>
+<a id="org5dcca0c"></a>
 
 ### buffer-move
 
@@ -1819,7 +1818,7 @@ Also balance windows and move point to new window"
 ```
 
 
-<a id="org7812c17"></a>
+<a id="orge62a118"></a>
 
 ### consult-denote
 
@@ -1836,7 +1835,7 @@ Also balance windows and move point to new window"
 ```
 
 
-<a id="org6eade6c"></a>
+<a id="orge28b323"></a>
 
 ### denote
 
@@ -1879,7 +1878,7 @@ Also balance windows and move point to new window"
 ```
 
 
-<a id="orgf4cc404"></a>
+<a id="org445d7b2"></a>
 
 ### exec-path-from-shell
 
@@ -1895,7 +1894,7 @@ Also balance windows and move point to new window"
 ```
 
 
-<a id="orgf8c0d3c"></a>
+<a id="org19b127c"></a>
 
 ### ESUP
 
@@ -1910,7 +1909,7 @@ Also balance windows and move point to new window"
 ```
 
 
-<a id="orgb95384c"></a>
+<a id="org4da6915"></a>
 
 ### flymake-margin
 
@@ -1929,7 +1928,7 @@ Also balance windows and move point to new window"
 ```
 
 
-<a id="org8e3a503"></a>
+<a id="org95af2da"></a>
 
 ### gptel
 
@@ -1946,7 +1945,7 @@ Also balance windows and move point to new window"
 ```
 
 
-<a id="orgfc2fc3e"></a>
+<a id="orgbd9a4cc"></a>
 
 ### helpful
 
@@ -1966,7 +1965,7 @@ Also balance windows and move point to new window"
 ```
 
 
-<a id="org1ccce68"></a>
+<a id="org9c9d230"></a>
 
 ### markdown-mode
 
@@ -1981,7 +1980,7 @@ Also balance windows and move point to new window"
 ```
 
 
-<a id="org730537c"></a>
+<a id="org32109f6"></a>
 
 ### package-lint
 
@@ -1994,7 +1993,7 @@ Also balance windows and move point to new window"
 ```
 
 
-<a id="org6ea334c"></a>
+<a id="orgd84ec7b"></a>
 
 ### perspective-el
 
@@ -2028,7 +2027,7 @@ Also balance windows and move point to new window"
 ```
 
 
-<a id="orga01f29f"></a>
+<a id="orgf60b34c"></a>
 
 ### Popper
 
@@ -2079,7 +2078,7 @@ Also balance windows and move point to new window"
 ```
 
 
-<a id="org4869cc3"></a>
+<a id="org4aa9b3f"></a>
 
 ### Projectile
 
@@ -2099,7 +2098,7 @@ Also balance windows and move point to new window"
 ```
 
 
-<a id="org1a40007"></a>
+<a id="org3b8911c"></a>
 
 ### ESS
 
@@ -2113,7 +2112,7 @@ Also balance windows and move point to new window"
 ```
 
 
-<a id="orga36ba93"></a>
+<a id="org2f11317"></a>
 
 ### rainbow-delimiters
 
@@ -2127,7 +2126,7 @@ Also balance windows and move point to new window"
 ```
 
 
-<a id="org418af5f"></a>
+<a id="org701c5c9"></a>
 
 ### Transpose Frame
 
@@ -2141,7 +2140,7 @@ Also balance windows and move point to new window"
 ```
 
 
-<a id="org0646fdc"></a>
+<a id="orgc451e48"></a>
 
 ### YASnippet
 
@@ -2161,12 +2160,12 @@ Also balance windows and move point to new window"
 ```
 
 
-<a id="org2f9204e"></a>
+<a id="orgd928b4b"></a>
 
 ## Appearance
 
 
-<a id="orgf15c1e9"></a>
+<a id="org0c0281a"></a>
 
 ### Dashboard
 
@@ -2194,7 +2193,7 @@ Also balance windows and move point to new window"
 ```
 
 
-<a id="org4d6f357"></a>
+<a id="org0b371ca"></a>
 
 ### Doom Modeline
 
@@ -2214,7 +2213,7 @@ Also balance windows and move point to new window"
 ```
 
 
-<a id="org3c7b9b9"></a>
+<a id="org7e09ec7"></a>
 
 ### Ef Themes
 
@@ -2227,7 +2226,7 @@ Also balance windows and move point to new window"
 ```
 
 
-<a id="orgbabca7c"></a>
+<a id="org3f01a86"></a>
 
 ### Modus Themes
 
@@ -2240,7 +2239,7 @@ Also balance windows and move point to new window"
 ```
 
 
-<a id="orgca6d3c2"></a>
+<a id="org336e5cf"></a>
 
 ### nerd-icons-corfu
 
@@ -2253,7 +2252,7 @@ Also balance windows and move point to new window"
 ```
 
 
-<a id="org5f2e34d"></a>
+<a id="org79642d1"></a>
 
 ### magit-file-icons
 
@@ -2277,19 +2276,19 @@ Also balance windows and move point to new window"
 ```
 
 
-<a id="org37a094f"></a>
+<a id="org91a93af"></a>
 
 # Terminal Config
 
 Configuration and packages specific to terminal
 
 
-<a id="org67c91e8"></a>
+<a id="org5858892"></a>
 
 ## General Configuration
 
 
-<a id="org16b3387"></a>
+<a id="org7721ce5"></a>
 
 ### Variables and Modes
 
@@ -2311,7 +2310,7 @@ Configuration and packages specific to terminal
 ```
 
 
-<a id="org8a348d6"></a>
+<a id="orgb305d22"></a>
 
 ### Functions for custom bindings
 
@@ -2334,7 +2333,7 @@ Configuration and packages specific to terminal
 ```
 
 
-<a id="org3b9efc7"></a>
+<a id="org811e908"></a>
 
 ### Custom Bindings
 
@@ -2344,7 +2343,7 @@ Configuration and packages specific to terminal
 ```
 
 
-<a id="org7a1bfee"></a>
+<a id="org86e80e0"></a>
 
 ### Packages
 
@@ -2364,7 +2363,7 @@ Configuration and packages specific to terminal
     ```
 
 
-<a id="orgc4d8e6f"></a>
+<a id="orge1855cb"></a>
 
 ### Terminal mappings
 
