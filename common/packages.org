@@ -378,6 +378,13 @@
 #+end_src
 
 * Appearance
+** Standard Themes
+- Repo :: https://github.com/protesilaos/standard-themes
+- Description :: Like the default GNU Emacs theme but more consistent
+#+begin_src emacs-lisp
+  (use-package standard-themes
+    :straight t)
+#+end_src
 ** Nerd Icons
 - Repo :: https://github.com/rainstormstudio/nerd-icons.el
 - Description :: A library for easily using Nerd Font icons inside Emacs
