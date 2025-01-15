@@ -283,6 +283,18 @@
     (setq highlight-thing-exclude-thing-under-point t)
     :hook ((prog-mode . highlight-thing-mode)))
 #+end_src
+** Idle Highlight Mode
+- Repo :: https://codeberg.org/ideasman42/emacs-idle-highlight-mode
+- Description :: Simple symbol highlighting package for Emacs
+ #+begin_src emacs-lisp
+   (use-package idle-highlight-mode
+     :straight t
+     :config
+     (setq idle-highlight-idle-time 0.2
+           idle-highlight-exclude-point t
+           idle-highlight-ignore-modes (list 'org-mode))
+     (idle-highlight-global-mode))
+ #+end_src
 
 ** jump-char
 - Repo :: https://github.com/lewang/jump-char

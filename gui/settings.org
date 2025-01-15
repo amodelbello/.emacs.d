@@ -236,11 +236,13 @@
   (use-package eglot
     :straight t
     :defer t
-    :config (add-to-list 'eglot-server-programs
-                         `((java-mode java-ts-mode) .
-                           ("jdtls"
-                            :initializationOptions
-                            (:bundles [,(dot-env-get 'JAVA_DEBUG_SERVER_PATH)]))))
+    :config
+    (setq eglot-ignored-server-capabilites '(:documentHighlightProvider))
+    (add-to-list 'eglot-server-programs
+                 `((java-mode java-ts-mode) .
+                   ("jdtls"
+                    :initializationOptions
+                    (:bundles [,(dot-env-get 'JAVA_DEBUG_SERVER_PATH)]))))
     :hook ((after-save . amo/eglot-format-on-save)
            (python-ts-mode . eglot-ensure)
            (bash-ts-mode . eglot-ensure)
