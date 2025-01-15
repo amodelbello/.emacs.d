@@ -273,17 +273,15 @@
     :straight t)
 #+end_src
 
-** Idle Highlight Mode
-- Repo :: https://codeberg.org/ideasman42/emacs-idle-highlight-mode
-- Description :: Simple symbol highlighting package for Emacs
+** highlight-thing
+- Repo :: https://github.com/fgeller/highlight-thing.el
+- Description :: Emacs global minor mode to highlight thing under point.
 #+begin_src emacs-lisp
-  (use-package idle-highlight-mode
+  (use-package highlight-thing
     :straight t
     :config
-    (setq idle-highlight-idle-time 0.2
-          idle-highlight-exclude-point t)
-    :hook
-    ((prog-mode text-mode) . idle-highlight-mode))
+    (setq highlight-thing-exclude-thing-under-point t)
+    :hook ((prog-mode . highlight-thing-mode)))
 #+end_src
 
 ** jump-char

@@ -229,7 +229,8 @@
 - Description :: A client for Language Server Protocol servers
 #+begin_src emacs-lisp
   (defun amo/eglot-format-on-save ()
-    (when (and (not (eq major-mode 'java-ts-mode)) (bound-and-true-p eglot--managed-mode))
+    (when (and (not (or (eq major-mode 'java-ts-mode)))
+               (bound-and-true-p eglot--managed-mode))
       (eglot-format)))
 
   (use-package eglot
@@ -302,6 +303,12 @@
     :hook (haskell-mode . (lambda () (interactive-haskell-mode t))))
 #+end_src
 *** Python
+**** python-ts-mode
+#+begin_src emacs-lisp
+  (use-package emacs
+    :hook (python-ts-mode . (lambda () (setq-local tab-width 4
+                                                   electric-indent-inhibit t))))
+#+end_src
 **** interpreter
 #+begin_src emacs-lisp
   (when (executable-find "ipython")
@@ -748,7 +755,7 @@
            :map perspective-map
            ("," . persp-rename)
            ("." . persp-switch)
-           ("'" . persp-prev)
+           ("'" . persp-switch-last)
            ("\"" . persp-kill)))
 #+end_src
 ** Popper
