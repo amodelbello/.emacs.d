@@ -25,8 +25,6 @@
   (setq warning-minimum-level :error
         default-directory (dot-env-get 'DEFAULT_DIRECTORY "~/")
         scroll-step 1
-        ;; split-width-threshold 120
-        ;; split-height-threshold 160
         compilation-window-height 24
         frame-inhibit-implied-resize t
         recentf-max-menu-items 25
