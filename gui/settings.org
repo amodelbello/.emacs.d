@@ -257,7 +257,8 @@
                 ("C-c e r" . eglot-rename)
                 ("C-c e a" . eglot-code-actions)
                 ("C-c e c" . compile)
-                ("C-c e w r" . eglot-reconnect)))
+                ("C-c e w r" . eglot-reconnect)
+                ("C-c e w k" . eglot-shutdown)))
 #+end_src
 
 *** Dape
@@ -307,7 +308,8 @@
 #+begin_src emacs-lisp
   (use-package emacs
     :hook (python-ts-mode . (lambda () (setq-local tab-width 4
-                                                   electric-indent-inhibit t))))
+                                                   electric-indent-inhibit t)
+                              (aggressive-indent-mode -1))))
 #+end_src
 **** interpreter
 #+begin_src emacs-lisp
