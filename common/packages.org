@@ -273,16 +273,6 @@
     :straight t)
 #+end_src
 
-** highlight-thing
-- Repo :: https://github.com/fgeller/highlight-thing.el
-- Description :: Emacs global minor mode to highlight thing under point.
-#+begin_src emacs-lisp
-  (use-package highlight-thing
-    :straight t
-    :config
-    (setq highlight-thing-exclude-thing-under-point t)
-    :hook ((prog-mode . highlight-thing-mode)))
-#+end_src
 ** Idle Highlight Mode
 - Repo :: https://codeberg.org/ideasman42/emacs-idle-highlight-mode
 - Description :: Simple symbol highlighting package for Emacs
