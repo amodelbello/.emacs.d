@@ -209,10 +209,14 @@
 #+begin_src emacs-lisp
   (use-package aggressive-indent
     :straight t
-    :config
-    (global-aggressive-indent-mode 1)
-    (add-to-list 'aggressive-indent-excluded-modes 'html-mode)
-    (add-to-list 'aggressive-indent-excluded-modes 'python-ts-mode))
+    :hook ((lisp-mode . aggressive-indent-mode)
+           (emacs-lisp-mode . aggressive-indent-mode)
+           (scheme-mode . aggressive-indent-mode)
+           (common-lisp-mode . aggressive-indent-mode)
+           (clojure-mode . aggressive-indent-mode)
+           (clojurescript-mode . aggressive-indent-mode)
+           (clojurec-mode . aggressive-indent-mode)
+           (cider-repl-mode . aggressive-indent-mode)))
 #+end_src
 
 ** Avy
@@ -329,6 +333,7 @@
     ((lisp-mode . paredit-mode)
      (emacs-lisp-mode . paredit-mode)
      (scheme-mode . paredit-mode)
+     (common-lisp-mode . paredit-mode)
      (clojure-mode . paredit-mode)
      (clojurescript-mode . paredit-mode)
      (clojurec-mode . paredit-mode)
