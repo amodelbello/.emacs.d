@@ -27,6 +27,7 @@
     (put 'narrow-to-region 'disabled nil)
 
     (setq save-interprogram-paste-before-kill t
+          desktop-save-mode nil
           vc-follow-symlinks nil
           require-final-newline t
           enable-recursive-minibuffers t

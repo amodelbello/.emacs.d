@@ -112,12 +112,13 @@
     (interactive)
     (load-file (concat user-emacs-directory "init.el")))
 
-  ;; Delete desktop files and restart emacs
+  ;; Delete perspectives and customization file and restart emacs
   (defun amo/delete-emacs-perspective-file-restart ()
     "Delete saved desktop, then restart emacs"
     (interactive)
-    (setq desktop-save-mode nil)
-    (delete-file (concat user-emacs-directory ".perspective"))
+    (delete-file (concat user-emacs-directory "customize.el"))
+    (persp-switch "main")
+    (persp-kill-others)
     (restart-emacs))
 
   (defun amo/split-window (arg side)
@@ -290,8 +291,7 @@
 #+begin_src emacs-lisp
   (use-package go-ts-mode
     :hook (go-ts-mode . (lambda () (setq-local tab-width 4
-                                               electric-indent-inhibit t)
-                          (aggressive-indent-mode -1))))
+                                               electric-indent-inhibit t))))
 #+end_src
 *** Haskell
 **** haskell-mode
@@ -307,9 +307,7 @@
 **** python-ts-mode
 #+begin_src emacs-lisp
   (use-package emacs
-    :hook (python-ts-mode . (lambda () (setq-local tab-width 4
-                                                   electric-indent-inhibit t)
-                              (aggressive-indent-mode -1))))
+    :hook (python-ts-mode . (lambda () (setq-local tab-width 4))))
 #+end_src
 **** interpreter
 #+begin_src emacs-lisp
