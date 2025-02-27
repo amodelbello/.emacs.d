@@ -176,16 +176,6 @@
           completion-category-overrides '((file (styles basic partial-completion)))))
 #+end_src
 
-** which-key
-- Repo :: https://github.com/justbur/emacs-which-key
-- Description :: Emacs package that displays available keybindings in popup
-#+begin_src emacs-lisp
-  (use-package which-key
-    :straight t
-    :config
-    (which-key-mode))
-#+end_src
-
 * Other Useful Packages
 
 ** Ace Window

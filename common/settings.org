@@ -24,6 +24,7 @@
     (electric-pair-mode 1)
     (turn-on-visual-line-mode)
     (visual-line-mode 1)
+    (which-key-mode 1)
     (put 'narrow-to-region 'disabled nil)
 
     (setq save-interprogram-paste-before-kill t
