@@ -697,18 +697,32 @@
     :straight t
     :init
     (define-key global-map (kbd "C-c g") (make-sparse-keymap))
+    (setq gptel-directives '((default
+                         . "You are a large language model living in Emacs and a careful programmer. Make sure any code in your responses is properly formatted and has easy to read syntax highlighting appropriate for the specific language used.")
+                        (programming
+                         . "You are a large language model and a careful programmer. Provide code and only code as output without any additional text, prompt or note. Make sure any code in your responses is properly formatted and has easy to read syntax highlighting appropriate for the specific language used.")
+                        (writing
+                         . "You are a large language model and a writing assistant.")
+                        (chat
+                         . "You are a large language model and a conversation partner.")))
     :config
     (setq
      gptel-default-mode #'org-mode
-     gptel-model 'mistral:latest
+     gptel-model (intern (dot-env-get 'GPTEL_MODEL "mistral:latest"))
      gptel-backend (gptel-make-ollama "Ollama"
                      :host "localhost:11434"
                      :stream t
-                     :models (mapcar #'intern (split-string(dot-env-get 'LOCAL_LLMS "mistral:latest")))))
+                     :models (mapcar #'intern (split-string(dot-env-get 'LOCAL_LLMS "mistral:latest"))))
+     )
     :bind (("C-c g g" . gptel)
            ("C-c g s" . gptel-send)
-           ("C-c g m" . gptel-menu))
-    :hook ((gptel-mode . visual-line-mode)))
+           ("C-c g m" . gptel-menu)
+           ("C-c g r" . gptel-rewrite)
+           ("C-c g a" . gptel-add)
+           ("C-c g k" . gptel-abort))
+    :hook ((gptel-mode . visual-line-mode)
+           (gptel-post-stream . gptel-auto-scroll)
+           (gptel-post-response-functions . gptel-end-of-response)))
 #+end_src
 
 ** helpful
@@ -760,7 +774,8 @@
     (consult-customize consult--source-buffer :hidden t :default nil)
     (add-to-list 'consult-buffer-sources persp-consult-source)
     :hook ((kill-emacs . persp-state-save)
-           (restart-emacs . persp-state-save))
+           (restart-emacs . persp-state-save)
+           (persp-created . dashboard-open))
     :bind (("C-x C-b" . persp-ibuffer)
            :map perspective-map
            ("," . persp-rename)
