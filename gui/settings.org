@@ -272,6 +272,19 @@
     (setq dape-buffer-window-arrangement 'right)
     (setq dape-cwd-fn 'projectile-project-root))
 #+end_src
+*** imenu-list
+- Repo :: https://github.com/bmag/imenu-list
+- Description :: Emacs plugin to show the current buffer's imenu entries in a separate buffer
+#+begin_src emacs-lisp
+  (use-package imenu-list
+    :straight t
+    :config
+    (setq imenu-list-focus-after-activation t
+          imenu-list-position 'left
+          imenu-list-auto-resize t)
+    :bind (("M-g i" . imenu-list-smart-toggle)))
+#+end_src
+
 ** Languages
 *** Docker
 **** dockerfile-mode

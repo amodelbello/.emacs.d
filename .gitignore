@@ -78,3 +78,6 @@ org-directory
 org-persist
 eglot-java-eclipse-jdt-cache/
 share/
+
+bookmarks.eld
+projects.eld
