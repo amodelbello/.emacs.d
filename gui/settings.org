@@ -282,7 +282,7 @@
     (setq imenu-list-focus-after-activation t
           imenu-list-position 'left
           imenu-list-auto-resize t)
-    :bind (("M-g i" . imenu-list-smart-toggle)))
+    :bind (("M-i" . imenu-list-smart-toggle)))
 #+end_src
 
 ** Languages
