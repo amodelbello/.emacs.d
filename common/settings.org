@@ -226,6 +226,18 @@
         (just-one-space -1)
       (cycle-spacing -1)))
 
+  (defun amo/repeat-current-window-right ()
+    "Close other windows, duplicate current window to the right"
+    (interactive)
+    (delete-other-windows)
+    (split-window-right))
+
+  (defun amo/repeat-current-window-below ()
+    "Close other windows, duplicate current window below"
+    (interactive)
+    (delete-other-windows)
+    (split-window-below))
+
 #+end_src
 
 * use-package Style Bindings
@@ -244,7 +256,9 @@
          ("C-z '" . indent-new-comment-line)
          ("C-x r M-w" . amo/copy-rectangle-to-kill-ring)
          ("M-/" . cycle-spacing-delete-newlines)
-         ("C-c 1" . dictionary-lookup-definition)))
+         ("C-c 1" . dictionary-lookup-definition)
+         ("C-c 2" . amo/repeat-current-window-below)
+         ("C-c 3" . amo/repeat-current-window-right)))
 #+end_src
 
 * Traditional-Style Bindings
