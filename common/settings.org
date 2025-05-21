@@ -281,22 +281,8 @@ Necessary when the bound function requires arguments
 * dired
 #+begin_src emacs-lisp
   (use-package dired
-    :config  (setq dired-kill-when-opening-new-dired-buffer t
-                   dired-listing-switches "-al")
-
-    ;; from https://www.emacswiki.org/emacs/DiredSortDirectoriesFirst
-    (defun mydired-sort ()
-      "Sort dired listings with directories first."
-      (save-excursion
-        (let (buffer-read-only)
-          (forward-line 2) ;; beyond dir. header
-          (sort-regexp-fields t "^.*$" "[ ]*." (point) (point-max)))
-        (set-buffer-modified-p nil)))
-    (defadvice dired-readin
-        (after dired-after-updating-hook first () activate)
-      "Sort dired listings with directories first before adding marks."
-      (mydired-sort))
-
+    :config (setq dired-kill-when-opening-new-dired-buffer t
+                  dired-listing-switches "-ahl --group-directories-first")
     :hook ((dired-mode . dired-hide-details-mode))
     :bind (:map dired-mode-map
                 ("C-o" . nil)))
