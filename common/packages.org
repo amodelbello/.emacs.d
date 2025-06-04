@@ -165,6 +165,20 @@
      :preview-key '(:debounce 0.4 any)))
 #+end_src
 
+** consult-dir
+- Repo :: https://github.com/karthink/consult-dir
+- Description :: Insert paths into the minibuffer prompt in Emacs
+#+begin_src emacs-lisp
+(use-package consult-dir
+  :straight t
+  :bind (("C-x C-d" . consult-dir)
+         :map vertico-map
+         ("C-x C-d" . consult-dir)
+         ("C-x C-j" . consult-dir-jump-file))
+  :config
+  (define-key vertico-map (kbd "C-x C-j") #'consult-dir-jump-file))
+#+end_src
+
 ** orderless
 - Repo :: https://github.com/oantolin/orderless
 - Description :: Emacs completion style that matches multiple regexps in any order
