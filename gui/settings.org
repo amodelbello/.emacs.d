@@ -791,8 +791,7 @@
     (consult-customize consult--source-buffer :hidden t :default nil)
     (add-to-list 'consult-buffer-sources persp-consult-source)
     :hook ((kill-emacs . persp-state-save)
-           (restart-emacs . persp-state-save)
-           (persp-created . dashboard-open))
+           (restart-emacs . persp-state-save))
     :bind (("C-x C-b" . persp-ibuffer)
            :map perspective-map
            ("," . persp-rename)
