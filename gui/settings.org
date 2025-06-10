@@ -135,7 +135,7 @@
       ((= arg 1) (selected-window)))
      nil side nil)
     (balance-windows)
-    (other-window 1))
+  (other-window 1))
 
   (defun amo/delete-window ()
     "Balance windows after deleting one"
@@ -396,7 +396,10 @@
   (use-package magit
     :straight t
     :bind
-    (("C-x g" . magit)))
+    (("C-x g" . magit))
+    :after nerd-icons
+    :custom
+    (magit-format-file-function #'magit-format-file-nerd-icons))
 #+end_src
 ** magit-todos
 - Repo :: https://github.com/alphapapa/magit-todos
@@ -920,22 +923,4 @@
 #+begin_src emacs-lisp
   (use-package nerd-icons-corfu
     :straight t)
-#+end_src
-** magit-file-icons
-- Repo :: https://github.com/gekoke/magit-file-icons
-- Description :: File icons for Magit
-#+begin_src emacs-lisp
-  (use-package magit-file-icons
-    ;; :straight (margin :type git
-    ;;                   :host github
-    ;;                   :repo "gekoke/magit-file-icons"
-    ;;                   :files ("*.el"))
-    :straight t
-    :init
-    (magit-file-icons-mode 1)
-    :custom
-    ;; These are the default values:
-    (magit-file-icons-enable-diff-file-section-icons t)
-    (magit-file-icons-enable-untracked-icons t)
-    (magit-file-icons-enable-diffstat-icons t))
 #+end_src

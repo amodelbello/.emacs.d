@@ -231,14 +231,15 @@
     "Close other windows, duplicate current window to the right"
     (interactive)
     (delete-other-windows)
-    (split-window-right))
+    (split-window-right)
+    (other-window 1))
 
   (defun amo/repeat-current-window-below ()
     "Close other windows, duplicate current window below"
     (interactive)
     (delete-other-windows)
-    (split-window-below))
-
+    (split-window-below)
+    (other-window 1))
 #+end_src
 
 * use-package Style Bindings
