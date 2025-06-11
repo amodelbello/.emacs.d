@@ -915,7 +915,9 @@
           doom-modeline-vcs-max-length 40
           doom-modeline-buffer-encoding t
           doom-modeline-persp-name t
+          doom-modeline-total-line-number t
           doom-modeline-display-default-persp-name nil
+          doom-modeline-vcs-display-function #'doom-modeline-vcs-name
           doom-modeline-persp-icon t))
 #+end_src
 ** Ef Themes
