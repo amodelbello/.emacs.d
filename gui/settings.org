@@ -251,6 +251,7 @@
            (go-ts-mode . eglot-ensure)
            (haskell-mode . eglot-ensure)
            (rust-ts-mode . eglot-ensure)
+           (vue-mode . eglot-ensure)
            (java-ts-mode . eglot-ensure)
            (c-ts-mode . eglot-ensure)
            (c++-ts-mode . eglot-ensure))
@@ -387,6 +388,13 @@
     (require 'sclang))
 #+end_src
 
+*** Vue
+- Repo :: https://github.com/AdamNiederer/vue-mode
+- Description :: Emacs major mode for vue.js
+#+begin_src emacs-lisp
+  (use-package vue-mode
+    :straight t)
+#+end_src
 * Version Control
 ** Magit
 - Repo :: https://github.com/magit/magit
