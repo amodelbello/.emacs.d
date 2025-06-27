@@ -152,12 +152,7 @@
     "Open notes directory"
     (interactive)
     (find-file org-directory))
-
-  (defun amo/open-denote-directory ()
-    "Open denote directory"
-    (interactive)
-    (find-file (concat org-directory "/denote")))
-#+end_src
+src
 
 ** Custom Bindings
 #+begin_src emacs-lisp
@@ -171,7 +166,6 @@
   (global-set-key (kbd "C-z e") 'eshell)
   (global-set-key (kbd "C-z n") 'amo/open-main-notes-file)
   (global-set-key (kbd "C-z C-z n") 'amo/open-notes-directory)
-  (global-set-key (kbd "C-z d") 'amo/open-denote-directory)
 
   ;; Other bindings
   (global-set-key (kbd "C-x 0") 'amo/delete-window)
@@ -591,6 +585,37 @@
       '(require 'ox-gfm nil t)))
 #+end_src
 
+** Org-roam
+- Repo :: https://github.com/org-roam/org-roam
+- Docs :: https://www.orgroam.com/manual.html
+- Description :: Rudimentary Roam replica with Org-mode
+  #+begin_src emacs-lisp
+    (use-package org-roam
+      :straight t
+      :after org
+      :init
+      ;; to prevent "non-prefix key" error
+      (define-key global-map (kbd "C-c n") (make-sparse-keymap))
+
+      :config
+      (setq org-roam-directory (dot-env-get 'ORG_ROAM_DIRECTORY (concat org-directory "/org-roam"))
+            org-roam-node-display-template
+            (concat "${title:*} "
+                    (propertize "${tags:100}" 'face 'org-tag))
+            )
+      (org-roam-db-autosync-mode)
+      (add-hook 'after-save-hook (lambda () (if (org-roam-file-p) (org-roam-db-sync))))
+
+      :bind (("C-c n i" . org-roam-node-insert)
+             ("C-c n f" . org-roam-node-find)
+             ("C-c n c" . org-roam-capture)
+             ("C-c n b" . org-roam-buffer-toggle)
+             ("C-c n d" . org-roam-buffer-display-dedicated)
+             ("C-c n t" . org-roam-tag-add)
+             ("C-c n r" . org-roam-tag-remove)
+             ("C-c n a" . org-roam-alias-add)
+             ("C-c n u" . org-id-get-create)))
+  #+end_src
 ** Org Modern
 - Repo :: https://github.com/minad/org-modern
 - Description :: 🦄 Modern Org Style
@@ -634,54 +659,6 @@
      ("<C-S-right>" . buf-move-right)))
 #+end_src
 
-** consult-denote
-- Repo :: https://github.com/protesilaos/consult-denote
-- Docs :: https://protesilaos.com/emacs/consult-denote
-- Description :: Use Consult in tandem with Denote
-#+begin_src emacs-lisp
-  (use-package consult-denote
-    :straight t
-    :after denote
-    :bind (("C-c n f" . consult-denote-find)
-           ("C-c n g" . consult-denote-grep)))
-#+end_src
-** denote
-- Repo :: https://github.com/protesilaos/denote
-- Docs :: https://protesilaos.com/emacs/denote
-- Description :: Simple notes for Emacs with an efficient file-naming scheme
-#+begin_src emacs-lisp
-  (use-package denote
-    :straight t
-    :after org
-    :init
-    ;; to prevent "non-prefix key" error
-    (define-key global-map (kbd "C-c n") (make-sparse-keymap))
-    :config
-    (setq denote-directory (dot-env-get 'DENOTE_DIRECTORY (concat org-directory "/denote"))
-          denote-date-prompt-use-org-read-date t
-          denote-known-keywords nil
-          denote-allow-multi-word-keywords t)
-    :hook ((dired-mode . denote-dired-mode))
-    :bind (("C-c n n" . denote)
-           ("C-c n N" . denote-type)
-           ("C-c n d" . denote-date)
-           ("C-c n z" . denote-signature)
-           ("C-c n s" . denote-subdirectory)
-           ("C-c n t" . denote-template)
-           ("C-c n i" . denote-link)
-           ("C-c n I" . denote-add-links)
-           ("C-c n b" . denote-backlinks)
-           ("C-c n f f" . denote-find-link)
-           ("C-c n f b" . denote-find-backlink)
-           ("C-c n k a" . denote-keywords-add)
-           ("C-c n k k" . denote-keywords-remove)
-           ("C-c n r" . denote-rename-file)
-           ("C-c n R" . denote-rename-file-using-front-matter)
-           :map dired-mode-map
-           ("C-c C-d C-i . denote-link-dired-marked-notes")
-           ("C-c C-d C-r . denote-dired-rename-marked-files")
-           ("C-c C-d C-R . denote-dired-rename-marked-files-using-front-matter")))
-#+end_src
 ** exec-path-from-shell
 - Repo :: https://github.com/purcell/exec-path-from-shell
 - Description :: Make Emacs use the $PATH set up by the user's shell
