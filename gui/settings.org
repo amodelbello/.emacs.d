@@ -577,13 +577,18 @@
         item
         (file+headline org-lists-file "Interesting Albums")
         "%?"))))
-
-  (use-package ox-gfm
-    :straight t
-    :config
-    (eval-after-load "org"
-      '(require 'ox-gfm nil t)))
 #+end_src
+
+** ox-gfm
+- Repo :: https://github.com/larstvei/ox-gfm
+- Description :: Github Flavored Markdown Back-End for Org Export Engine
+  #+begin_src emacs-lisp
+    (use-package ox-gfm
+      :straight t
+      :config
+      (eval-after-load "org"
+        '(require 'ox-gfm nil t)))
+  #+end_src
 
 ** Org-roam
 - Repo :: https://github.com/org-roam/org-roam
