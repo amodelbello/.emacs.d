@@ -601,7 +601,13 @@
       (setq org-roam-directory (dot-env-get 'ORG_ROAM_DIRECTORY (concat org-directory "/org-roam"))
             org-roam-node-display-template
             (concat "${title:*} "
-                    (propertize "${tags:60}" 'face 'org-tag)))
+                    (propertize "${tags:60}" 'face 'org-tag))
+            org-roam-capture-templates
+            `(("d" "default" plain "%?"
+               :target (file+head "%<%Y%m%d%H%M%S>-${slug}.org"
+                                  "#+title: ${title}\n#+category: ${title}\n")
+               :unnarrowed t
+               :empty-lines 1)))
       (org-roam-db-autosync-mode)
       (add-hook 'after-save-hook (lambda () (if (org-roam-file-p) (org-roam-db-sync))))
 
@@ -720,7 +726,7 @@
     :init
     (define-key global-map (kbd "C-c g") (make-sparse-keymap))
     (setq gptel-directives '((default
-                         . "You are a large language model living in Emacs and a careful programmer. Make sure any code in your responses is properly formatted and has easy to read syntax highlighting appropriate for the specific language used.")
+                         . "You are a large language model and a conversation partner.")
                         (programming
                          . "You are a large language model and a careful programmer. Provide code and only code as output without any additional text, prompt or note. Make sure any code in your responses is properly formatted and has easy to read syntax highlighting appropriate for the specific language used.")
                         (writing
