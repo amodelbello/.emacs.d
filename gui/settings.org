@@ -556,27 +556,12 @@
         "Note"
         entry
         (file org-notes-file)
-        "** %?\n%T\n%i\n" :empty-lines-after 1 :prepend t)
+        "** %?\n%T\n%i\n" :empty-lines 1)
        ("t"
         "Todo"
-        checkitem
+        entry
         (file+headline org-notes-file "General Todos")
-        "[ ] %T %?\n%i\n" :empty-lines-after 1)
-       ("e"
-        "Emacs Idea"
-        checkitem
-        (file+headline org-lists-file "Emacs Ideas")
-        "[ ] %?" :prepend t)
-       ("k"
-        "Keyboard Idea"
-        checkitem
-        (file+headline org-lists-file "Keyboard Ideas")
-        "[ ] %?" :prepend t)
-       ("r"
-        "Interesting Albums"
-        item
-        (file+headline org-lists-file "Interesting Albums")
-        "%?"))))
+        "* TODO %?\n%T\n%i\n%a" :empty-lines 1))))
 #+end_src
 
 ** ox-gfm
@@ -632,7 +617,8 @@
              ("C-c n t" . org-roam-tag-add)
              ("C-c n r" . org-roam-tag-remove)
              ("C-c n a" . org-roam-alias-add)
-             ("C-c n u" . org-id-get-create)))
+             ("C-c n u" . org-id-get-create)
+             ("C-c n j" . org-tidy-toggle)))
   #+end_src
 ** consult-org-roam
 - Repo :: https://github.com/jgru/consult-org-roam
