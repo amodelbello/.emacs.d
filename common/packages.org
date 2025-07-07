@@ -265,7 +265,13 @@ targets."
              ("?" . casual-calc-tmenu)
              :map
              calc-alg-map
-             ("?" . casual-calc-tmenu))
+             ("?" . casual-calc-tmenu)
+             :map
+             calendar-mode-map
+             ("?" . casual-calendar)
+             :map
+             Info-mode-map
+             ("?" . casual-info-tmenu))
       :after (calc))
   #+end_src
 ** Crux
