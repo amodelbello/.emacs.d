@@ -515,13 +515,15 @@
     (setq org-directory (dot-env-get 'ORG_DIRECTORY
                                      (concat user-emacs-directory "org-directory"))
           org-agenda-files (directory-files-recursively org-directory "\\.org$")
+          org-agenda-restore-windows-after-quit t
           org-notes-file (concat org-directory "/notes.org")
           org-lists-file (concat org-directory "/lists.org")
           org-archive-location (concat org-directory "/_archive/%s_archive::")
           org-yank-folded-subtrees nil
 
           org-todo-keywords
-          '((sequence "TODO(t)" "BLOCKED(b)" "LATER(l)" "INACTIVE(i)" "CANCELED(c)" "|" "DONE(d)"))
+          '((sequence "TODO(t)" "|" "DONE(d)")
+            (sequence "BLOCKED(b)" "LATER(l)" "INACTIVE(i)" "|" "CANCELED(c)" ))
 
           org-todo-keyword-faces
           '(("BLOCKED" . (:foreground "yellow" :weight bold))
