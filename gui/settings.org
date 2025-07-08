@@ -523,6 +523,9 @@
           ;; Increase size of latex previews
           org-format-latex-options (plist-put org-format-latex-options :scale 1.4))
 
+    ;; open links in same window instead of other window
+    (setf (cdr (assoc 'file org-link-frame-setup)) 'find-file)
+
     (defun amo/org-mode-hook ()
       (org-indent-mode 1)
       (visual-line-mode 1))
@@ -618,12 +621,14 @@
              ("C-c n f" . org-roam-node-find)
              ("C-c n c" . org-roam-capture)
              ("C-c n b" . org-roam-buffer-toggle)
-             ("C-c n d" . org-roam-buffer-display-dedicated)
+             ("C-c n l" . org-roam-buffer-display-dedicated)
              ("C-c n t" . org-roam-tag-add)
              ("C-c n r" . org-roam-tag-remove)
              ("C-c n a" . org-roam-alias-add)
+             ("C-c n e" . org-roam-ref-add)
+             ("C-c n R" . org-roam-node-random)
              ("C-c n u" . org-id-get-create)
-             ("C-c n j" . org-tidy-toggle)))
+             ("C-c n d" . org-tidy-toggle)))
   #+end_src
 ** consult-org-roam
 - Repo :: https://github.com/jgru/consult-org-roam
