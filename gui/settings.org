@@ -561,7 +561,12 @@
         "Todo"
         entry
         (file+headline org-notes-file "General Todos")
-        "* TODO %?\n%T\n%i\n%a" :empty-lines 1))))
+        "* TODO %?\n%T\n%i" :empty-lines 1)
+       ("r"
+        "Todo with reference link"
+        entry
+        (file+headline org-notes-file "General Todos")
+        "* TODO %?\n%T\n%a\n" :empty-lines 1))))
 #+end_src
 
 ** ox-gfm
