@@ -520,6 +520,15 @@
           org-archive-location (concat org-directory "/_archive/%s_archive::")
           org-yank-folded-subtrees nil
 
+          org-todo-keywords
+          '((sequence "TODO(t)" "BLOCKED(b)" "LATER(l)" "INACTIVE(i)" "CANCELED(c)" "|" "DONE(d)"))
+
+          org-todo-keyword-faces
+          '(("BLOCKED" . (:foreground "yellow" :weight bold))
+            ("LATER" . (:foreground "magenta" :weight bold))
+            ("INACTIVE" . (:foreground "grey" :weight bold))
+            ("CANCELED" . (:foreground "grey" :weight bold)))
+
           ;; Increase size of latex previews
           org-format-latex-options (plist-put org-format-latex-options :scale 1.4))
 
@@ -570,6 +579,19 @@
         entry
         (file+headline org-notes-file "General Todos")
         "* TODO %?\n%T\n%a\n" :empty-lines 1))))
+#+end_src
+
+** org-super-agenda
+Repo :: https://github.com/alphapapa/org-super-agenda
+Description :: Supercharge your Org daily/weekly agenda by grouping items
+#+begin_src emacs-lisp
+  (use-package org-super-agenda
+    :straight t
+    :config
+    (setq org-super-agenda-groups '((:auto-category t)))
+
+    :hook
+    (org-mode . org-super-agenda-mode))
 #+end_src
 
 ** ox-gfm
@@ -656,7 +678,10 @@
   #+begin_src emacs-lisp
     (use-package org-modern
       :straight t
-      :config (with-eval-after-load 'org (global-org-modern-mode)))
+      :config
+      (with-eval-after-load 'org (global-org-modern-mode))
+      (setq org-modern-todo nil
+            org-modern-checkbox nil))
   #+end_src
 ** org-appear
 - Repo :: https://github.com/awth13/org-appear
