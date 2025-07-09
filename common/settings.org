@@ -279,6 +279,8 @@ Necessary when the bound function requires arguments
   (add-hook 'text-mode-hook 'flyspell-mode)
   (add-hook 'prog-mode-hook (lambda () (flyspell-mode -1)))
   (add-hook 'prog-mode-hook 'subword-mode)
+  (add-hook 'calc-mode-hook (lambda () (setq line-spacing nil)))
+  (add-hook 'calc-trail-mode-hook (lambda () (setq line-spacing nil)))
 #+end_src
 * dired
 #+begin_src emacs-lisp
