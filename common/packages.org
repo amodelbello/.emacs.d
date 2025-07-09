@@ -254,7 +254,7 @@ targets."
            ("C-;" . nil)))
 #+end_src
 
-** Casual Calc
+** Casual
 - Repo :: https://github.com/kickingvegas/casual
 - Description :: A collection of opinionated keyboard-driven user interfaces for various built-in Emacs modes.
   #+begin_src emacs-lisp
@@ -271,8 +271,7 @@ targets."
              ("?" . casual-calendar)
              :map
              Info-mode-map
-             ("?" . casual-info-tmenu))
-      :after (calc))
+             ("/" . casual-info-tmenu)))
   #+end_src
 ** Crux
 - Repo :: https://github.com/bbatsov/crux
