@@ -5,6 +5,9 @@
 * General Configuration
 ** Variables and Modes
 #+begin_src emacs-lisp
+  ;; TODO: Remove this when consult-eglot doesn't throw an error anymore
+  (straight-use-package 'project)
+
   (setq ediff-split-window-function 'split-window-horizontally)
   (setq ediff-window-setup-function 'ediff-setup-windows-plain)
 
@@ -401,6 +404,7 @@
     (("C-x g" . magit))
     :after nerd-icons
     :custom
+    (magit-git-executable "/usr/bin/git")
     (magit-format-file-function #'magit-format-file-nerd-icons))
 #+end_src
 ** magit-todos
@@ -651,6 +655,7 @@ Description :: Supercharge your Org daily/weekly agenda by grouping items
              ("C-c n a" . org-roam-alias-add)
              ("C-c n e" . org-roam-ref-add)
              ("C-c n R" . org-roam-node-random)
+             ("C-c n m" . org-roam-refile)
              ("C-c n u" . org-id-get-create)
              ("C-c n d" . org-tidy-toggle)))
   #+end_src
