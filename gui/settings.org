@@ -609,17 +609,17 @@
         "Note"
         entry
         (file org-notes-file)
-        "** %?\n%T\n%i\n" :empty-lines 1)
+        "** %?\n%i\n" :empty-lines 1)
        ("t"
         "Todo"
         entry
         (file+headline org-notes-file "General Todos")
-        "* TODO %?\n%T\n%i" :empty-lines 1)
+        "* TODO %?\n%i" :empty-lines 1)
        ("r"
         "Todo with reference link"
         entry
         (file+headline org-notes-file "General Todos")
-        "* TODO %?\n%T\n%a\n" :empty-lines 1))))
+        "* TODO %?\n%a\n" :empty-lines 1))))
 #+end_src
 
 ** org-super-agenda
@@ -727,6 +727,7 @@ Description :: Supercharge your Org daily/weekly agenda by grouping items
       :config
       (with-eval-after-load 'org (global-org-modern-mode))
       (setq org-modern-todo nil
+            org-modern-timestamp nil
             org-modern-checkbox nil))
   #+end_src
 ** org-appear
