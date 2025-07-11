@@ -558,8 +558,20 @@
           ;; Increase size of latex previews
           org-format-latex-options (plist-put org-format-latex-options :scale 1.4))
 
-    ;; open links in same window instead of other window
-    (setf (cdr (assoc 'file org-link-frame-setup)) 'find-file)
+    ;; Open links in same window instead of other window
+    ;; (with option to open in other window)
+    ;; https://stackoverflow.com/a/49855491/316971
+    (defun amo/org-open-at-point (&optional arg)
+      (interactive "P")
+      (if arg
+          (org-open-at-point)
+        (let ((org-link-frame-setup (quote
+                                     ((vm . vm-visit-folder)
+                                      (vm-imap . vm-visit-imap-folder)
+                                      (gnus . gnus)
+                                      (file . find-file)
+                                      (wl . wl)))))
+          (org-open-at-point))))
 
     (defun amo/org-mode-hook ()
       (org-indent-mode 1)
@@ -581,7 +593,9 @@
     (("C-c c" . org-capture)
      ("C-c a" . org-agenda)
      ("C-c C-j" . org-store-link)
-     ("C-c h" . consult-org-heading))
+     ("C-c h" . consult-org-heading)
+     (:map org-mode-map
+           ("C-c C-o" . amo/org-open-at-point)))
 
     :custom
     (setq org-use-tag-inheritance t)
