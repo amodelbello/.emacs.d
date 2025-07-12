@@ -595,6 +595,7 @@
      ("C-c C-j" . org-store-link)
      ("C-c h" . consult-org-heading)
      (:map org-mode-map
+           ("C-c C-r" . org-mode-restart)> >
            ("C-c C-o" . amo/org-open-at-point)))
 
     :custom
@@ -728,6 +729,13 @@ Description :: Supercharge your Org daily/weekly agenda by grouping items
       (with-eval-after-load 'org (global-org-modern-mode))
       (setq org-modern-todo nil
             org-modern-timestamp nil
+            org-modern-progress nil
+            org-modern-horizontal-rule t
+            org-modern-block-name t
+            org-modern-priority t
+            org-modern-keyword t
+            org-modern-table t
+            org-modern-tag t
             org-modern-checkbox nil))
   #+end_src
 ** org-appear
