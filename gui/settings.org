@@ -404,7 +404,7 @@
     (("C-x g" . magit))
     :after nerd-icons
     :custom
-    (magit-git-executable "/usr/bin/git")
+    (magit-git-executable (dot-env-get 'GIT_EXECUTABLE_PATH "/usr/bin/git"))
     (magit-format-file-function #'magit-format-file-nerd-icons))
 #+end_src
 ** magit-todos
