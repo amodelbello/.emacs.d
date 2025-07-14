@@ -149,7 +149,14 @@
   (defun amo/open-main-notes-file ()
     "Open main notes file"
     (interactive)
+    ;; TODO: create if doesn't exist
     (find-file (concat org-directory "/notes.org")))
+
+  (defun amo/open-issues-file ()
+    "Open issues notes file"
+    (interactive)
+    ;; TODO: create if doesn't exist
+    (find-file (concat org-directory "/issues.org")))
 
   (defun amo/open-notes-directory ()
     "Open notes directory"
@@ -168,6 +175,7 @@
   (global-set-key (kbd "C-z C-z t") 'customize-themes)
   (global-set-key (kbd "C-z e") 'eshell)
   (global-set-key (kbd "C-z n") 'amo/open-main-notes-file)
+  (global-set-key (kbd "C-z i") 'amo/open-issues-file)
   (global-set-key (kbd "C-z C-z n") 'amo/open-notes-directory)
 
   ;; Other bindings
@@ -536,20 +544,23 @@
     :config
     (setq org-directory (dot-env-get 'ORG_DIRECTORY
                                      (concat user-emacs-directory "org-directory"))
-          org-agenda-files (directory-files-recursively org-directory "\\.org$")
           org-agenda-restore-windows-after-quit t
           org-agenda-window-setup 'other-window
           org-notes-file (concat org-directory "/notes.org")
-          org-lists-file (concat org-directory "/lists.org")
+          org-issues-file (concat org-directory "/issues.org")
           org-archive-location (concat org-directory "/_archive/%s_archive::")
           org-yank-folded-subtrees nil
+          org-log-into-drawer t
 
           org-todo-keywords
-          '((sequence "TODO(t)" "QUESTION(q)" "|" "DONE(d)")
-            (sequence "BLOCKED(b)" "LATER(l)" "INACTIVE(i)" "|" "CANCELED(c)" ))
+          '((sequence "TODO(t)" "TOLEARN(l)" "|" "DONE(d!)")
+            (sequence "QUESTION(q)" "|" "ANSWERED(a!)")
+            (sequence "BLOCKED(b)" "LATER(l)" "INACTIVE(i)" "|" "CANCELED(c!)" ))
 
           org-todo-keyword-faces
-          '(("QUESTION" . (:foreground "cyan" :weight bold))
+          '(("QUESTION" . (:foreground "orange" :weight bold))
+            ("ANSWERED" . (:foreground "green" :weight bold))
+            ("TOLEARN" . (:foreground "cyan" :weight bold))
             ("BLOCKED" . (:foreground "yellow" :weight bold))
             ("LATER" . (:foreground "magenta" :weight bold))
             ("INACTIVE" . (:foreground "grey" :weight bold))
@@ -578,8 +589,9 @@
       (visual-line-mode 1))
 
     (defun amo/org-mode-agenda-hook ()
-      "For some reason the org-agenda-files var is never set"
-      (setq org-agenda-files (directory-files-recursively org-directory "\\.org$")))
+      "Doesn't seem to work when I use setq in :config"
+      (setq org-agenda-files (list (concat org-directory "/notes.org")
+                                   (concat org-directory "/issues.org"))))
 
     (advice-add
      'org-agenda
@@ -595,7 +607,7 @@
      ("C-c C-j" . org-store-link)
      ("C-c h" . consult-org-heading)
      (:map org-mode-map
-           ("C-c C-r" . org-mode-restart)> >
+           ("C-c C-r" . org-mode-restart)
            ("C-c C-o" . amo/org-open-at-point)))
 
     :custom
@@ -606,21 +618,35 @@
     (org-list-allow-alphabetical t)
     (org-M-RET-may-split-line '((default . nil)))
     (org-capture-templates
-     '(("n"
+     '(("p"
+        "Parent Issue"
+        entry
+        (file org-issues-file)
+        "* %? [/][%] %^g
+  :PROPERTIES:
+  :agenda-group: %^{Group Name}
+  :END:"
+        :empty-lines 1)
+       ("i"
+        "Issue Task"
+        entry
+        (file org-issues-file)
+        "* TODO %?\n" :empty-lines 1)
+       ("n"
         "Note"
         entry
         (file org-notes-file)
-        "** %?\n%i\n" :empty-lines 1)
+        "** %?\n" :empty-lines 1)
        ("t"
-        "Todo"
+        "General Todo"
         entry
         (file+headline org-notes-file "General Todos")
-        "* TODO %?\n%i" :empty-lines 1)
-       ("r"
-        "Todo with reference link"
+        "* TODO %?\n" :empty-lines 1)
+       ("n"
+        "Note"
         entry
-        (file+headline org-notes-file "General Todos")
-        "* TODO %?\n%a\n" :empty-lines 1))))
+        (file org-notes-file)
+        "** %?\n%i\n" :empty-lines 1))))
 #+end_src
 
 ** org-super-agenda
@@ -635,7 +661,7 @@ Description :: Supercharge your Org daily/weekly agenda by grouping items
                                            ;; :date today
                                            ;; :scheduled today
                                            :order 1)
-                                    (:auto-category t)))
+                                    (:auto-group t)))
     :hook
     (org-mode . org-super-agenda-mode))
 #+end_src
@@ -732,7 +758,7 @@ Description :: Supercharge your Org daily/weekly agenda by grouping items
             org-modern-progress nil
             org-modern-horizontal-rule t
             org-modern-block-name t
-            org-modern-priority t
+            org-modern-priority nil
             org-modern-keyword t
             org-modern-table t
             org-modern-tag t
@@ -923,6 +949,7 @@ Description :: Supercharge your Org daily/weekly agenda by grouping items
             "\\*Backtrace\\*"
             "\\*TeX Help\\*"
             "\\*Org Select\\*"
+            "\\*Agenda Commands\\*"
             "Output\\*$"
             "\\*Async Shell Command\\*"
             "\\*eldoc\\*"
