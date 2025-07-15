@@ -751,6 +751,7 @@ Description :: Supercharge your Org daily/weekly agenda by grouping items
       :config
       (with-eval-after-load 'org (global-org-modern-mode))
       (setq org-modern-todo nil
+            org-modern-fold-stars '(("▶" . "▼") ("▷" . "▽") ("▶" . "▼") ("▹" . "▿") ("▸" . "▾"))
             org-modern-timestamp nil
             org-modern-progress nil
             org-modern-horizontal-rule t
