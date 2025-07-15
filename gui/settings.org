@@ -155,7 +155,7 @@
     (interactive)
     (find-file (concat org-directory "/issues.org")))
 
-  (defun amo/open-notes-directory ()
+  (defun amo/open-org-directory ()
     (interactive)
     (find-file org-directory))
 #+end_src
@@ -172,7 +172,7 @@
   (global-set-key (kbd "C-z e") 'eshell)
   (global-set-key (kbd "C-z n") 'amo/open-main-notes-file)
   (global-set-key (kbd "C-z i") 'amo/open-issues-file)
-  (global-set-key (kbd "C-z C-z n") 'amo/open-notes-directory)
+  (global-set-key (kbd "C-z C-z n") 'amo/open-org-directory)
 
   ;; Other bindings
   (global-set-key (kbd "C-x 0") 'amo/delete-window)
