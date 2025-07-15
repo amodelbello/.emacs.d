@@ -572,7 +572,7 @@
           org-todo-keywords
           '((sequence "TODO(t)" "TASK(k)" "TOLEARN(l)" "|" "DONE(d!)")
             (sequence "QUESTION(q)" "|" "ANSWERED(a!)")
-            (sequence "BLOCKED(b)" "LATER(l)" "INACTIVE(i)" "|" "CANCELED(c!)" ))
+            (sequence "BLOCKED(b)" "LATER(f)" "INACTIVE(i)" "|" "CANCELED(c!)" ))
 
           org-todo-keyword-faces
           '(("QUESTION" . (:foreground "orange" :weight bold))
