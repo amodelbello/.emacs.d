@@ -209,6 +209,7 @@
 ** ibuffer
 #+begin_src emacs-lisp
   (use-package ibuffer
+    ;; So it doesn't clobber ace-window's binding
     :bind (:map ibuffer-mode-map
                 ("C-o" . nil)))
 #+end_src
@@ -506,6 +507,26 @@
     (use-package consult-eglot
       :straight t)
   #+end_src
+** consult-org-roam
+- Repo :: https://github.com/jgru/consult-org-roam
+- Description :: A bunch of convenience functions for operating org-roam with the help of consult
+  #+begin_src emacs-lisp
+    (use-package consult-org-roam
+      :straight t
+      :after org-roam
+      :init
+      (consult-org-roam-mode 1)
+
+      :custom
+      (consult-org-roam-grep-func #'consult-ripgrep)
+      (consult-org-roam-buffer-narrow-key ?r)
+      (consult-org-roam-buffer-after-buffers t)
+
+      :config
+      (consult-customize
+       consult-org-roam-forward-links
+       :preview-key "M-."))
+  #+end_src
 ** Corfu
 - Repo :: https://github.com/minad/corfu
 - Description :: corfu.el - COmpletion in Region FUnction
@@ -720,26 +741,6 @@ Description :: Supercharge your Org daily/weekly agenda by grouping items
              ("C-c n m" . org-roam-refile)
              ("C-c n u" . org-id-get-create)
              ("C-c n d" . org-tidy-toggle)))
-  #+end_src
-** consult-org-roam
-- Repo :: https://github.com/jgru/consult-org-roam
-- Description :: A bunch of convenience functions for operating org-roam with the help of consult
-  #+begin_src emacs-lisp
-    (use-package consult-org-roam
-      :straight t
-      :after org-roam
-      :init
-      (consult-org-roam-mode 1)
-
-      :custom
-      (consult-org-roam-grep-func #'consult-ripgrep)
-      (consult-org-roam-buffer-narrow-key ?r)
-      (consult-org-roam-buffer-after-buffers t)
-
-      :config
-      (consult-customize
-       consult-org-roam-forward-links
-       :preview-key "M-."))
   #+end_src
 ** Org Modern
 - Repo :: https://github.com/minad/org-modern
