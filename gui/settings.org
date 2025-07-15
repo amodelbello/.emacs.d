@@ -149,17 +149,13 @@
   (defun amo/open-main-notes-file ()
     "Open main notes file"
     (interactive)
-    ;; TODO: create if doesn't exist
     (find-file (concat org-directory "/notes.org")))
 
   (defun amo/open-issues-file ()
-    "Open issues notes file"
     (interactive)
-    ;; TODO: create if doesn't exist
     (find-file (concat org-directory "/issues.org")))
 
   (defun amo/open-notes-directory ()
-    "Open notes directory"
     (interactive)
     (find-file org-directory))
 #+end_src
