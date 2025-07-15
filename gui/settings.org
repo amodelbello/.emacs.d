@@ -575,11 +575,14 @@
             (sequence "BLOCKED(b)" "LATER(f)" "INACTIVE(i)" "|" "CANCELED(c!)" ))
 
           org-todo-keyword-faces
-          '(("QUESTION" . (:foreground "orange" :weight bold))
+          '(
+            ("TODO" . (:foreground "#cb4154" :weight bold))
+            ("DONE" . (:foreground "#146D15" :weight bold))
+            ("QUESTION" . (:foreground "#b8860b" :weight bold))
             ("TASK" . (:foreground "#598794" :weight bold))
-            ("ANSWERED" . (:foreground "green" :weight bold))
-            ("TOLEARN" . (:foreground "#9bddff" :weight bold))
-            ("BLOCKED" . (:foreground "#b8860b" :weight bold))
+            ("ANSWERED" . (:foreground "#146D15" :weight bold))
+            ("TOLEARN" . (:foreground "#0892d0" :weight bold))
+            ("BLOCKED" . (:foreground "orange" :weight bold))
             ("LATER" . (:foreground "magenta" :weight bold))
             ("INACTIVE" . (:foreground "#777696" :weight bold))
             ("CANCELED" . (:foreground "#777696" :weight bold)))
