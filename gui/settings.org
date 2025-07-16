@@ -567,8 +567,10 @@
           org-issues-file (concat org-directory "/issues.org")
           org-archive-location (concat org-directory "/_archive/%s_archive::")
           org-yank-folded-subtrees nil
+          org-M-RET-may-split-line '((default . nil))
+          org-insert-heading-respect-content t
+          org-log-done 'time
           org-log-into-drawer t
-
           org-todo-keywords
           '((sequence "TODO(t)" "TASK(k)" "TOLEARN(l)" "|" "DONE(d!)")
             (sequence "QUESTION(q)" "|" "ANSWERED(a!)")
@@ -637,7 +639,6 @@
     (org-list-demote-modify-bullet
      '(("-" . "+") ("+" . "*") ("*" . "-")))
     (org-list-allow-alphabetical t)
-    (org-M-RET-may-split-line '((default . nil)))
     (org-capture-templates
      '(("p"
         "Parent Issue"
@@ -653,11 +654,6 @@
         entry
         (file org-issues-file)
         "* TODO %?\n" :empty-lines 1)
-       ("n"
-        "Note"
-        entry
-        (file org-notes-file)
-        "** %?\n" :empty-lines 1)
        ("t"
         "General Todo"
         entry
@@ -667,7 +663,7 @@
         "Note"
         entry
         (file org-notes-file)
-        "** %?\n%i\n" :empty-lines 1))))
+        "** %?\n" :empty-lines 1))))
 #+end_src
 
 ** org-super-agenda
@@ -677,12 +673,17 @@ Description :: Supercharge your Org daily/weekly agenda by grouping items
   (use-package org-super-agenda
     :straight t
     :config
-    (setq org-super-agenda-groups '((:name ""
+    (setq org-super-agenda-groups '(
+                                    (:name ""
                                            :time-grid t
-                                           ;; :date today
-                                           ;; :scheduled today
                                            :order 1)
-                                    (:auto-group t)))
+                                    (:auto-group t)
+                                    (:name "To Learn"
+                                           :todo "TOLEARN")
+                                    (:name "Later"
+                                           :todo "LATER")
+                                    (:name "Emacs Ideas"
+                                           :tag ("emacs"))))
     :hook
     (org-mode . org-super-agenda-mode))
 #+end_src
