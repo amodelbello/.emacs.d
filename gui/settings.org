@@ -575,20 +575,23 @@
           '((nil :maxlevel . 1)
             (org-agenda-files :maxlevel . 1))
           org-todo-keywords
-          '((sequence "TODO(t)" "TASK(k)" "TOLEARN(l)" "|" "DONE(d!)")
+          '((sequence "INBOX(b)" "PROJECT(p)" "NEXT(n)" "TODO(t)" "TASK(k)" "TOLEARN(l)" "|" "DONE(d!)")
             (sequence "QUESTION(q)" "|" "ANSWERED(a!)")
             (sequence "BLOCKED(b)" "LATER(f)" "INACTIVE(i)" "|" "CANCELED(c!)" ))
 
           org-todo-keyword-faces
           '(
-            ("TODO" . (:foreground "#cb4154" :weight bold))
+            ("INBOX" . (:foreground "#598794" :weight bold))
+            ("PROJECT" . (:foreground "#51bed4" :weight bold))
+            ("NEXT" . (:foreground "#ff4f00" :weight bold))
+            ("TODO" . (:foreground "#b94e48" :weight bold))
             ("DONE" . (:foreground "#146D15" :weight bold))
-            ("QUESTION" . (:foreground "#b8860b" :weight bold))
+            ("QUESTION" . (:foreground "#0892d0" :weight bold))
             ("TASK" . (:foreground "#598794" :weight bold))
             ("ANSWERED" . (:foreground "#146D15" :weight bold))
             ("TOLEARN" . (:foreground "#0892d0" :weight bold))
             ("BLOCKED" . (:foreground "orange" :weight bold))
-            ("LATER" . (:foreground "magenta" :weight bold))
+            ("LATER" . (:foreground "#7851a9" :weight bold))
             ("INACTIVE" . (:foreground "#777696" :weight bold))
             ("CANCELED" . (:foreground "#777696" :weight bold)))
 
