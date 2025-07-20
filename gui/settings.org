@@ -639,6 +639,8 @@
 
     (defun amo/org-mode-hook ()
       (org-indent-mode 1)
+      (org-hide-drawer-all)
+      (org-cycle-hide-drawers 'all)
       (visual-line-mode 1))
 
     (defun amo/org-mode-agenda-hook ()
@@ -728,15 +730,6 @@ Description :: Supercharge your Org daily/weekly agenda by grouping items
       (eval-after-load "org"
         '(require 'ox-gfm nil t)))
   #+end_src
-** org-tidy
-- Repo :: https://github.com/jxq0/org-tidy
-- Description :: 🧹 An Emacs minor mode to automatically tidy org-mode property drawers
-#+begin_src emacs-lisp
-  ;; (use-package org-tidy
-  ;;   :straight t
-  ;;   :hook
-  ;;   (org-mode . org-tidy-mode))
-#+end_src
 ** Org-roam
 - Repo :: https://github.com/org-roam/org-roam
 - Docs :: https://www.orgroam.com/manual.html
