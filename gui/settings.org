@@ -158,6 +158,29 @@
   (defun amo/open-org-directory ()
     (interactive)
     (find-file org-directory))
+
+  (defun amo/org-random-header-with-path ()
+    "Pick a random header from the current Org buffer and display its full path."
+    (interactive)
+    (let ((header-paths '()))
+      (org-map-entries
+       (lambda ()
+         (let ((full-path (amo/org-get-outline-path (org-get-heading t t t t))))
+           (push full-path header-paths))) nil)
+      (if header-paths
+          (let* ((random-index (random (length header-paths)))
+                 (random-header (nth random-index header-paths)))
+            (message "Do This: %s" random-header))
+        (message "No headers found."))))
+
+  (defun amo/org-get-outline-path (header)
+    "Get the full path of a HEADER in the Org buffer."
+    (let ((path (list header)))
+      (save-excursion
+        (while (org-up-heading-safe)
+          (push (org-get-heading t t t t) path)))
+      (mapconcat 'identity path " -> ")))
+
 #+end_src
 
 ** Custom Bindings
@@ -564,13 +587,14 @@
           org-agenda-restore-windows-after-quit t
           org-agenda-window-setup 'other-window
           org-notes-file (concat org-directory "/notes.org")
-          org-issues-file (concat org-directory "/issues.org")
+          org-projects-file (concat org-directory "/projects.org")
           org-archive-location (concat org-directory "/_archive/%s_archive::")
           org-yank-folded-subtrees nil
           org-M-RET-may-split-line '((default . nil))
           org-insert-heading-respect-content t
           org-log-done 'time
           org-log-into-drawer t
+          org-enforce-todo-dependencies t
           org-refile-targets
           '((nil :maxlevel . 1)
             (org-agenda-files :maxlevel . 1))
@@ -620,7 +644,7 @@
     (defun amo/org-mode-agenda-hook ()
       "Doesn't seem to work when I use setq in :config"
       (setq org-agenda-files (list (concat org-directory "/notes.org")
-                                   (concat org-directory "/issues.org"))))
+                                   (concat org-directory "/projects.org"))))
 
     (advice-add
      'org-agenda
@@ -637,6 +661,7 @@
      ("C-c h" . consult-org-heading)
      ("C-c n R" . org-refile)
      (:map org-mode-map
+           ("C-c n s" . amo/org-random-header-with-path)
            ("C-c C-r" . org-mode-restart)
            ("C-c C-o" . amo/org-open-at-point)))
 
@@ -648,18 +673,18 @@
     (org-list-allow-alphabetical t)
     (org-capture-templates
      '(("p"
-        "Parent Issue"
+        "Project"
         entry
-        (file org-issues-file)
-        "* %? [/][%] %^g
+        (file org-projects-file)
+        "* PROJECT %? [/][%] %^g
   :PROPERTIES:
   :agenda-group: %^{Group Name}
   :END:"
         :empty-lines 1)
        ("i"
-        "Issue Task"
+        "Project Task"
         entry
-        (file org-issues-file)
+        (file org-projects-file)
         "* TODO %?\n" :empty-lines 1)
        ("t"
         "General Todo"
@@ -707,10 +732,10 @@ Description :: Supercharge your Org daily/weekly agenda by grouping items
 - Repo :: https://github.com/jxq0/org-tidy
 - Description :: 🧹 An Emacs minor mode to automatically tidy org-mode property drawers
 #+begin_src emacs-lisp
-  (use-package org-tidy
-    :straight t
-    :hook
-    (org-mode . org-tidy-mode))
+  ;; (use-package org-tidy
+  ;;   :straight t
+  ;;   :hook
+  ;;   (org-mode . org-tidy-mode))
 #+end_src
 ** Org-roam
 - Repo :: https://github.com/org-roam/org-roam
