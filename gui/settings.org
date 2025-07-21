@@ -599,16 +599,19 @@
           '((nil :maxlevel . 1)
             (org-agenda-files :maxlevel . 1))
           org-todo-keywords
-          '((sequence "INBOX(b)" "PROJECT(p)" "NEXT(n)" "TODO(t)" "TASK(k)" "TOLEARN(l)" "|" "DONE(d!)")
+          '((sequence "INBOX(b)" "PROJECT(p)" "NEXT(n)" "TODO(t)" "TASK(k)" "IMPROVEMENT(m)" "TOLEARN(l)" "|" "DONE(d!)")
             (sequence "QUESTION(q)" "|" "ANSWERED(a!)")
             (sequence "BLOCKED(b)" "LATER(f)" "INACTIVE(i)" "|" "CANCELED(c!)" ))
 
           org-todo-keyword-faces
           '(
+
             ("INBOX" . (:foreground "#598794" :weight bold))
             ("PROJECT" . (:foreground "#51bed4" :weight bold))
             ("NEXT" . (:foreground "#ff4f00" :weight bold))
             ("TODO" . (:foreground "#b94e48" :weight bold))
+            ("TASK" . (:foreground "#598794" :weight bold))
+            ("IMPROVEMENT" . (:foreground "#598794" :weight bold))
             ("DONE" . (:foreground "#146D15" :weight bold))
             ("QUESTION" . (:foreground "#0892d0" :weight bold))
             ("TASK" . (:foreground "#598794" :weight bold))
