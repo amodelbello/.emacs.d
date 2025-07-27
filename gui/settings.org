@@ -151,9 +151,9 @@
     (interactive)
     (find-file (concat org-directory "/notes.org")))
 
-  (defun amo/open-issues-file ()
+  (defun amo/open-projects-file ()
     (interactive)
-    (find-file (concat org-directory "/issues.org")))
+    (find-file (concat org-directory "/projects.org")))
 
   (defun amo/open-org-directory ()
     (interactive)
@@ -194,7 +194,7 @@
   (global-set-key (kbd "C-z C-z t") 'customize-themes)
   (global-set-key (kbd "C-z e") 'eshell)
   (global-set-key (kbd "C-z n") 'amo/open-main-notes-file)
-  (global-set-key (kbd "C-z i") 'amo/open-issues-file)
+  (global-set-key (kbd "C-z i") 'amo/open-projects-file)
   (global-set-key (kbd "C-z C-z n") 'amo/open-org-directory)
 
   ;; Other bindings
@@ -670,8 +670,8 @@
      ("C-c a" . org-agenda)
      ("C-c C-j" . org-store-link)
      ("C-c h" . consult-org-heading)
-     ("C-c n R" . org-refile)
      (:map org-mode-map
+           ("C-c C-x r" . org-refile)
            ("C-c n s" . amo/org-random-header-with-path)
            ("C-c C-r" . org-mode-restart)
            ("C-c C-o" . amo/org-open-at-point)))
