@@ -623,7 +623,7 @@
             ("CANCELED" . (:foreground "#777696" :weight bold)))
 
           ;; Increase size of latex previews
-          org-format-latex-options (plist-put org-format-latex-options :scale 1.4))
+          org-format-latex-options (plist-put org-format-latex-options :scale 1.2))
 
     ;; Open links in same window instead of other window
     ;; (with option to open in other window)
