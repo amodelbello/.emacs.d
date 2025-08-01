@@ -36,6 +36,7 @@
           enable-recursive-minibuffers t
           python-indent-guess-indent-offset-verbose nil
           custom-safe-themes t
+          calc-window-height 10
           ispell-program-name (dot-env-get 'ISPELL_PATH "/usr/bin/ispell")
           dictionary-server "dict.org")
 
