@@ -333,6 +333,10 @@
   (use-package go-ts-mode
     :hook (go-ts-mode . (lambda () (setq-local tab-width 4
                                                electric-indent-inhibit t))))
+  (setq-default eglot-workspace-configuration
+                '((:gopls .
+                          ((staticcheck . t)
+                           (matcher . "CaseSensitive")))))
 #+end_src
 *** Haskell
 **** haskell-mode
