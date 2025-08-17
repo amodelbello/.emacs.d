@@ -51,7 +51,7 @@ To create a file, visit it with \\[find-file] and enter text in its buffer.
                   tab-line-mode nil
                   tab-bar-mode nil
                   line-spacing 0.3
-                  fill-column 100
+                  fill-column 80
                   sentence-end-double-space nil
                   whitespace-line-column 110)
 
