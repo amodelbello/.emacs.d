@@ -645,7 +645,6 @@
           (org-open-at-point))))
 
     (defun amo/org-mode-hook ()
-      (setq fill-column 100)
       (auto-fill-mode 1)
       (org-indent-mode 1)
       (org-hide-drawer-all)
