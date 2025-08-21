@@ -653,7 +653,8 @@
 
     (defun amo/org-mode-agenda-hook ()
       "Doesn't seem to work when I use setq in :config"
-      (setq org-agenda-files (list (concat org-directory "/notes.org")
+      (setq org-agenda-files (list (concat org-directory "/inbox.org")
+                                   (concat org-directory "/notes.org")
                                    (concat org-directory "/projects.org"))))
 
     ;; https://emacs.stackexchange.com/questions/53526/org-mode-refiling-gobbles-a-newline-and-absorbs-the-next-heading
