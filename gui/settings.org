@@ -1097,6 +1097,14 @@ Description :: Supercharge your Org daily/weekly agenda by grouping items
     :straight t)
 #+end_src
 
+** kaolin-themes
+- Repo :: https://github.com/ogdenwebb/emacs-kaolin-themes
+- Description :: Set of eye pleasing themes for GNU Emacs. Supports both GUI and
+  terminal.
+#+begin_src emacs-lisp
+  (use-package kaolin-themes
+    :straight t)
+#+end_src
 ** Modus Themes
 - Repo :: https://github.com/protesilaos/modus-themes
 - Description :: Highly accessible themes for GNU Emacs
