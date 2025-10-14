@@ -312,7 +312,13 @@
           imenu-list-auto-resize t)
     :bind (("M-i" . imenu-list-smart-toggle)))
 #+end_src
-
+*** Origami
+- Repo :: https://github.com/gregsexton/origami.el
+- Description :: A folding minor mode for Emacs
+#+begin_src emacs-lisp
+  (use-package origami
+    :straight t)
+#+end_src
 ** Languages
 *** Docker
 **** dockerfile-mode
