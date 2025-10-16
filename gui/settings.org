@@ -333,6 +333,13 @@
   (use-package docker-compose-mode
     :straight t)
 #+end_src
+*** Flatbuffers
+- Repo :: https://github.com/Asalle/flatbuffers-mode
+- Description :: Emacs mode for flatbuffers featuring syntax highlighting
+#+begin_src emacs-lisp
+(use-package flatbuffers-mode
+  :straight t)
+#+end_src
 *** Golang
 **** go-ts-mode
 #+begin_src emacs-lisp
