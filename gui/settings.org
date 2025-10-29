@@ -290,6 +290,10 @@
                 ("C-c e c" . compile)
                 ("C-c e w r" . eglot-reconnect)
                 ("C-c e w k" . eglot-shutdown)))
+
+  ;; (with-eval-after-load 'eglot
+  ;;   (add-to-list 'eglot-server-programs
+  ;;                '(python-mode . ("pylsp" "server"))))
 #+end_src
 
 *** Dape
@@ -366,8 +370,16 @@
   (use-package copilot-chat
     :straight (:host github :repo "chep/copilot-chat.el" :files ("*.el"))
     :after (request org markdown-mode)
-    :bind
-    (("C-c g t" . copilot-chat-transient)))
+    :init
+    ;; to prevent "non-prefix key" error
+    ;; (define-key global-map (kbd "C-c g") (make-sparse-keymap))
+
+    :bind (:map global-map
+                ("C-c g g" . copilot-chat-display)
+                ("C-c g t" . copilot-chat-transient)
+                ("C-c g i" . copilot-chat-goto-input)
+                ("C-c g s" . copilot-chat-save)
+                ("C-c g l" . copilot-chat-load)))
 #+end_src
 ** Languages
 *** Docker
@@ -961,12 +973,12 @@ Description :: Supercharge your Org daily/weekly agenda by grouping items
                      :stream t
                      :models (mapcar #'intern (split-string(dot-env-get 'LOCAL_LLMS "mistral:latest"))))
      )
-    :bind (("C-c g g" . gptel)
-           ("C-c g s" . gptel-send)
-           ("C-c g m" . gptel-menu)
-           ("C-c g r" . gptel-rewrite)
-           ("C-c g a" . gptel-add)
-           ("C-c g k" . gptel-abort))
+    ;; :bind (("C-c g g" . gptel)
+    ;;        ("C-c g s" . gptel-send)
+    ;;        ("C-c g m" . gptel-menu)
+    ;;        ("C-c g r" . gptel-rewrite)
+    ;;        ("C-c g a" . gptel-add)
+    ;;        ("C-c g k" . gptel-abort))
     :hook ((gptel-mode . visual-line-mode)
            (gptel-post-stream . gptel-auto-scroll)
            (gptel-post-response-functions . gptel-end-of-response)))
