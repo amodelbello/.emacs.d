@@ -368,7 +368,8 @@
 - Description :: Chat with Github copilot in Emacs !
 #+begin_src emacs-lisp
   (use-package copilot-chat
-    :straight (:host github :repo "chep/copilot-chat.el" :files ("*.el"))
+    ;; :straight (:host github :repo "chep/copilot-chat.el" :files ("*.el"))
+    :straight t
     :after (request org markdown-mode)
     :init
     ;; to prevent "non-prefix key" error
