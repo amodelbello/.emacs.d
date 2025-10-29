@@ -319,6 +319,41 @@
   (use-package origami
     :straight t)
 #+end_src
+
+
+*** copilot
+- Repo :: https://github.com/copilot-emacs/copilot.el
+- Description :: An unofficial Copilot plugin for Emacs.
+#+begin_src emacs-lisp
+  (use-package copilot
+    :straight (:host github :repo "copilot-emacs/copilot.el" :files ("*.el"))
+    :ensure t)
+#+end_src
+*** mcp
+- Repo :: https://github.com/lizqwerscott/mcp.el
+- Description :: An Mcp client inside Emacs
+#+begin_src emacs-lisp
+  (use-package mcp
+    :straight t
+    :after gptel
+    :config ((setopt mcp-hub-servers
+             '(("github" . (:command "docker"
+                                     :args ("run" "-i" "--rm" "-e" "GITHUB_PERSONAL_ACCESS_TOKEN"
+                                            "ghcr.io/github/github-mcp-server")
+                                     :env (:GITHUB_PERSONAL_ACCESS_TOKEN (dot-env-get 'GITHUB_PERSONAL_ACCESS_TOKEN ""))))
+             :config (require 'mcp-hub)
+             :hook (after-init . mcp-hub-start-all-server)))
+#+end_src
+*** copilot-chat
+- Repo :: https://github.com/chep/copilot-chat.el
+- Description :: Chat with Github copilot in Emacs !
+#+begin_src emacs-lisp
+  (use-package copilot-chat
+    :straight (:host github :repo "chep/copilot-chat.el" :files ("*.el"))
+    :after (request org markdown-mode)
+    :bind
+    (("C-c g t" . copilot-chat-transient)))
+#+end_src
 ** Languages
 *** Docker
 **** dockerfile-mode
