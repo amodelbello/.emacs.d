@@ -8,6 +8,8 @@
   ;; TODO: Remove this when consult-eglot doesn't throw an error anymore
   (straight-use-package 'project)
 
+  (setq-default line-spacing (dot-env-get 'LINE_SPACING 1))
+
   (setq ediff-split-window-function 'split-window-horizontally)
   (setq ediff-window-setup-function 'ediff-setup-windows-plain)
 
@@ -318,6 +320,19 @@
 #+begin_src emacs-lisp
   (use-package origami
     :straight t)
+
+  ;; Hydra to use when I get around to it
+  ;; (defhydra hydra-origami (:color red)
+  ;;           "
+  ;;   _o_pen node    _n_ext fold       toggle _f_orward
+  ;;   _c_lose node   _p_revious fold   toggle _a_ll
+  ;;   "
+  ;;           ("o" origami-open-node)
+  ;;           ("c" origami-close-node)
+  ;;           ("n" origami-next-fold)
+  ;;           ("p" origami-previous-fold)
+  ;;           ("f" origami-forward-toggle-node)
+  ;;           ("a" origami-toggle-all-nodes))
 #+end_src
 
 
@@ -342,7 +357,7 @@
                                             "ghcr.io/github/github-mcp-server")
                                      :env (:GITHUB_PERSONAL_ACCESS_TOKEN (dot-env-get 'GITHUB_PERSONAL_ACCESS_TOKEN ""))))
              :config (require 'mcp-hub)
-             :hook (after-init . mcp-hub-start-all-server)))
+             :hook (after-init . mcp-hub-start-all-server)))))
 #+end_src
 *** copilot-chat
 - Repo :: https://github.com/chep/copilot-chat.el
@@ -461,8 +476,8 @@
 - Repo :: https://github.com/supercollider/scel
 - Description :: Supercollider emacs package
 #+begin_src emacs-lisp
-  (when (executable-find "sclang")
-    (require 'sclang))
+;;(when (executable-find "sclang")
+  ;;  (require 'sclang))
 #+end_src
 
 *** Vue
