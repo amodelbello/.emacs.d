@@ -372,9 +372,10 @@
     :straight t
     :after (request org markdown-mode)
     :init
+    :config
+    (setq copilot-chat-default-model (dot-env-get 'COPILOT_CHAT_DEFAULT_MODEL "claude-sonnet-4.5"))
     ;; to prevent "non-prefix key" error
     ;; (define-key global-map (kbd "C-c g") (make-sparse-keymap))
-
     :bind (:map global-map
                 ("C-c g g" . copilot-chat-display)
                 ("C-c g t" . copilot-chat-transient)
