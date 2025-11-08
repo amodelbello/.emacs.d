@@ -383,6 +383,13 @@
                 ("C-c g s" . copilot-chat-save)
                 ("C-c g l" . copilot-chat-load)))
 #+end_src
+*** protobuf-mode
+- Repo :: https://github.com/protocolbuffers/protobuf/blob/main/editors/protobuf-mode.el
+#+begin_src emacs-lisp
+  (use-package protobuf-mode
+    :straight t
+    :mode ("\\.proto\\'" . protobuf-mode))
+#+end_src
 ** Languages
 *** Docker
 **** dockerfile-mode
