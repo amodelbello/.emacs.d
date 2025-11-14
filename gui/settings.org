@@ -519,6 +519,8 @@
     :bind
     (("C-x g" . magit))
     :after nerd-icons
+    :config
+    (setq magit-diff-refine-ignore-whitespace t)
     :custom
     (magit-git-executable (dot-env-get 'GIT_EXECUTABLE_PATH "/usr/bin/git"))
     (magit-format-file-function #'magit-format-file-nerd-icons))
@@ -712,6 +714,9 @@
 
           ;; Increase size of latex previews
           org-format-latex-options (plist-put org-format-latex-options :scale 1.2))
+
+    ;; Syntax highlighting for go on src blocks
+    (add-to-list 'org-src-lang-modes '("go" . go-ts))
 
     ;; Open links in same window instead of other window
     ;; (with option to open in other window)
