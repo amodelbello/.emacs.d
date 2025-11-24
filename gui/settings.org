@@ -1045,7 +1045,8 @@ Description :: Supercharge your Org daily/weekly agenda by grouping items
           (lambda (win buff bury-or-kill)
             (not (persp-is-current-buffer buff)))
           persp-show-modestring t
-          persp-modestring-short t)
+          persp-modestring-short t
+          persp-sort 'access)
     (consult-customize consult--source-buffer :hidden t :default nil)
     (add-to-list 'consult-buffer-sources persp-consult-source)
     :hook ((kill-emacs . persp-state-save)
