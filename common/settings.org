@@ -28,12 +28,11 @@
     (put 'narrow-to-region 'disabled nil)
 
     (setq save-interprogram-paste-before-kill t
+          text-mode-ispell-word-completion nil
+          read-extended-command-predicate #'command-completion-default-include-p
           initial-major-mode 'org-mode
-          initial-scratch-message (purecopy "\
-This buffer is for text that is not saved.
-To create a file, visit it with \\[find-file] and enter text in its buffer.
+          initial-scratch-message "This buffer is for text that is not saved.\nTo create a file, visit it with \\[find-file] and enter text in its buffer.\n\n"
 
-")
           calendar-week-start-day 1
           confirm-kill-emacs #'y-or-n-p
           desktop-save-mode nil
@@ -46,6 +45,13 @@ To create a file, visit it with \\[find-file] and enter text in its buffer.
           ispell-program-name (dot-env-get 'ISPELL_PATH "/usr/bin/ispell")
           dictionary-server "dict.org")
 
+    ;; Start with point at bottom when scratch buffers are created
+    (add-hook 'emacs-startup-hook
+          (lambda ()
+            (when (get-buffer "*scratch*")
+              (with-current-buffer "*scratch*"
+                (goto-char (point-max))))))
+
     (setq-default indent-tabs-mode nil
                   global-tab-line-mode nil
                   tab-line-mode nil
@@ -53,7 +59,8 @@ To create a file, visit it with \\[find-file] and enter text in its buffer.
                   line-spacing 0.3
                   fill-column 80
                   sentence-end-double-space nil
-                  whitespace-line-column 110)
+                  whitespace-line-column 110
+                  completion-at-point-functions (remove 'ispell-completion-at-point completion-at-point-functions))
 
     ;; Do not show those confusing warnings when installing packages
     ;; https://protesilaos.com/codelog/2024-11-28-basic-emacs-configuration/
