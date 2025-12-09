@@ -680,6 +680,7 @@
           org-notes-file (concat org-directory "/notes.org")
           org-projects-file (concat org-directory "/projects.org")
           org-archive-location (concat org-directory "/_archive/%s_archive::")
+          org-export-with-drawers t
           org-yank-folded-subtrees nil
           org-M-RET-may-split-line '((default . nil))
           org-insert-heading-respect-content t
@@ -716,8 +717,7 @@
           ;; Increase size of latex previews
           org-format-latex-options (plist-put org-format-latex-options :scale 1.2))
 
-    ;; Syntax highlighting for go on src blocks
-    (add-to-list 'org-src-lang-modes '("go" . go-ts))
+    (add-to-list 'org-src-lang-modes '("go" . go-ts)) ;; Syntax highlighting for go on src blocks
 
     ;; Open links in same window instead of other window
     ;; (with option to open in other window)
@@ -806,8 +806,8 @@
 #+end_src
 
 ** org-super-agenda
-Repo :: https://github.com/alphapapa/org-super-agenda
-Description :: Supercharge your Org daily/weekly agenda by grouping items
+- Repo :: https://github.com/alphapapa/org-super-agenda
+- Description :: Supercharge your Org daily/weekly agenda by grouping items
 #+begin_src emacs-lisp
   (use-package org-super-agenda
     :straight t
@@ -826,8 +826,8 @@ Description :: Supercharge your Org daily/weekly agenda by grouping items
 #+end_src
 
 ** ox-gfm
-- Repo :: https://github.com/larstvei/ox-gfm
-- Description :: Github Flavored Markdown Back-End for Org Export Engine
+- Repo: https://github.com/larstvei/ox-gfm
+- Description: Github Flavored Markdown Back-End for Org Export Engine
   #+begin_src emacs-lisp
     (use-package ox-gfm
       :straight t
@@ -835,6 +835,7 @@ Description :: Supercharge your Org daily/weekly agenda by grouping items
       (eval-after-load "org"
         '(require 'ox-gfm nil t)))
   #+end_src
+
 ** Org-roam
 - Repo :: https://github.com/org-roam/org-roam
 - Docs :: https://www.orgroam.com/manual.html
