@@ -19,3 +19,9 @@
 (amo/load-config-file "gui/settings.org")
 (amo/load-config-file "common/packages.org")
 (amo/load-customize)
+
+;; Load theme set in customize.el if there is one
+(when custom-enabled-themes
+  (mapc (lambda (theme)
+          (load-theme theme t))
+        custom-enabled-themes))

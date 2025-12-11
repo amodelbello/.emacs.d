@@ -6,7 +6,7 @@
 ** Variables and Modes
 #+begin_src emacs-lisp
   ;; TODO: Remove this when consult-eglot doesn't throw an error anymore
-  (straight-use-package 'project)
+  ;; (straight-use-package 'project)
 
   (setq-default line-spacing (dot-env-get 'LINE_SPACING 1))
 
