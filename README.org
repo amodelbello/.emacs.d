@@ -5,7 +5,8 @@
 #+options: toc:nil
 #+options: num:0
 
-An emacs configuration for both GUI and terminal. Instructions on setting up emacsclient for the terminal config can be found [[https://github.com/amodelbello/.emacs.d/blob/main/terminal/daemon-config.org][here]].
+An emacs configuration for both GUI and terminal. Instructions on setting up
+emacsclient for the terminal config can be found [[https://github.com/amodelbello/.emacs.d/blob/main/terminal/daemon-config.org][here]].
 
 #+TOC: headlines
 

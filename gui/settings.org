@@ -107,7 +107,6 @@
   (setq-default split-height-threshold nil
                 split-width-threshold  nil
                 fill-column            80) ;; Maximum line width
-  ;; window-min-width       80) ;; No smaller windows than this
     #+end_src
 ** Functions for custom bindings
 #+begin_src emacs-lisp
@@ -229,6 +228,11 @@
 #+begin_src emacs-lisp
   (add-hook 'comint-mode-hook 'amo/comint-mode-actions)
   (add-hook 'focus-out-hook 'garbage-collect)
+
+  ;; Save theme that consult-theme may have selected but not saved
+  (require 'cus-theme)
+  (add-hook 'kill-emacs-hook 'custom-theme-save)
+  (add-hook 'restart-emacs-hook 'custom-theme-save)
   #+end_src
 
 ** ibuffer
