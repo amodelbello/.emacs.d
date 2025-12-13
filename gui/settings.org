@@ -327,23 +327,10 @@
 - Description :: A folding minor mode for Emacs
 #+begin_src emacs-lisp
   (use-package origami
-    :straight t)
-
-  ;; Hydra to use when I get around to it
-  ;; (defhydra hydra-origami (:color red)
-  ;;           "
-  ;;   _o_pen node    _n_ext fold       toggle _f_orward
-  ;;   _c_lose node   _p_revious fold   toggle _a_ll
-  ;;   "
-  ;;           ("o" origami-open-node)
-  ;;           ("c" origami-close-node)
-  ;;           ("n" origami-next-fold)
-  ;;           ("p" origami-previous-fold)
-  ;;           ("f" origami-forward-toggle-node)
-  ;;           ("a" origami-toggle-all-nodes))
+    :straight t
+    :bind (("C-c f" . origami-toggle-node))
+    :hook (prog-mode . origami-mode))
 #+end_src
-
-
 *** copilot
 - Repo :: https://github.com/copilot-emacs/copilot.el
 - Description :: An unofficial Copilot plugin for Emacs.
