@@ -269,7 +269,8 @@
     :straight t
     :defer t
     :config
-    (setq eglot-ignored-server-capabilites '(:documentHighlightProvider))
+    (setq eglot-ignored-server-capabilites '(:documentHighlightProvider)
+          eglot-code-action-indicator "⚙")
     (add-to-list 'eglot-server-programs
                  `((java-mode java-ts-mode) .
                    ("jdtls"
