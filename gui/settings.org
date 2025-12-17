@@ -107,6 +107,13 @@
   (setq-default split-height-threshold nil
                 split-width-threshold  nil
                 fill-column            80) ;; Maximum line width
+
+  (defun amo/select-buffer-by-regex (regex)
+    "Focus on the first buffer matching the given REGEX."
+    (let ((buffer (cl-find-if (lambda (b) (string-match-p regex (buffer-name b)))
+                              (buffer-list))))
+      (when buffer
+        (select-window (get-buffer-window buffer)))))
     #+end_src
 ** Functions for custom bindings
 #+begin_src emacs-lisp
@@ -276,6 +283,13 @@
                    ("jdtls"
                     :initializationOptions
                     (:bundles [,(dot-env-get 'JAVA_DEBUG_SERVER_PATH)]))))
+    (define-key global-map (kbd "C-c f") (make-sparse-keymap))
+    (add-to-list 'display-buffer-alist
+                 '("\\*Flymake diagnostics.*"
+                   (display-buffer-reuse-window display-buffer-below-selected)
+                   (window-height . 0.3)
+                   (dedicated . t)
+                   (select . t)))
     :hook ((after-save . amo/eglot-format-on-save)
            (python-ts-mode . eglot-ensure)
            (bash-ts-mode . eglot-ensure)
@@ -287,18 +301,35 @@
            (java-ts-mode . eglot-ensure)
            (c-ts-mode . eglot-ensure)
            (c++-ts-mode . eglot-ensure))
-    :bind (:map eglot-mode-map
-                ("<C-return>" . xref-find-references)
-                ("C-c e f" . consult-flymake)
-                ("C-c e r" . eglot-rename)
-                ("C-c e a" . eglot-code-actions)
-                ("C-c e c" . compile)
-                ("C-c e w r" . eglot-reconnect)
-                ("C-c e w k" . eglot-shutdown)))
+    :bind ((:map eglot-mode-map
+                 ("<C-return>" . xref-find-references)
+                 ("C-c e f f" . amo/flymake-show-buffer-diagnostics)
+                 ("C-c e f F" . amo/flymake-show-project-diagnostics)
+                 ("C-c e f n" . flymake-goto-next-error)
+                 ("C-c e f b" . flymake-goto-prev-error)
+                 ("C-c e r" . eglot-rename)
+                 ("C-c e a" . eglot-code-actions)
+                 ("C-c e c" . compile)
+                 ("C-c e w r" . eglot-reconnect)
+                 ("C-c e w k" . eglot-shutdown))
 
-  ;; (with-eval-after-load 'eglot
-  ;;   (add-to-list 'eglot-server-programs
-  ;;                '(python-mode . ("pylsp" "server"))))
+           ;; So they don't clobber ace-window's binding
+           (:map flymake-project-diagnostics-mode-map
+                 ("C-o" . nil))
+           (:map flymake-diagnostics-buffer-mode-map
+                 ("C-o" . nil))))
+
+  (defun amo/flymake-show-buffer-diagnostics ()
+    "Show Flymake buffer diagnostics and focus on the flymake buffer."
+    (interactive)
+    (flymake-show-buffer-diagnostics)
+    (amo/select-buffer-by-regex "\\*Flymake diagnostics for.*\\*"))
+
+  (defun amo/flymake-show-project-diagnostics ()
+    "Show Flymake project diagnostics and focus on the flymake buffer."
+    (interactive)
+    (flymake-show-project-diagnostics)
+    (amo/select-buffer-by-regex "\\*Flymake diagnostics for.*\\*"))
 #+end_src
 
 *** Dape
