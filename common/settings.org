@@ -287,6 +287,9 @@ Necessary when the bound function requires arguments
   (keymap-global-set "C-z s c f" (lambda () (interactive) (amo/open-emacs-config-file "common/functions.el")))
   (keymap-global-set "C-z s g s" (lambda () (interactive) (amo/open-emacs-config-file "gui/settings.org")))
   (keymap-global-set "C-z s t s" (lambda () (interactive) (amo/open-emacs-config-file "terminal/settings.org")))
+
+  ;; Use C-c h for help commands
+  (global-set-key (kbd "C-z h") 'help-command)
 #+end_src
 * Hooks
 #+begin_src emacs-lisp

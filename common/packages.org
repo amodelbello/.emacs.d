@@ -193,6 +193,32 @@ targets."
   (define-key vertico-map (kbd "C-x C-j") #'consult-dir-jump-file))
 #+end_src
 
+** Corfu
+- Repo :: https://github.com/minad/corfu
+- Description :: corfu.el - COmpletion in Region FUnction
+#+begin_src emacs-lisp
+  (use-package corfu
+    :straight (:files (:defaults "extensions/*"))
+    :init
+    (global-corfu-mode)
+    (corfu-popupinfo-mode 1)
+    (corfu-echo-mode 1)
+    (corfu-history-mode)
+    :custom (setq corfu-quit-at-boundary t)
+    :config (setq corfu-auto t
+                  corfu-auto-prefix 1
+                  corfu-quit-no-match t
+                  corfu-popupinfo-delay '(1.0 . 0.5)))
+
+  ;; A few more useful configurations...
+  ;; TAB cycle if there are only few candidates
+  (setq completion-cycle-threshold 3)
+
+  ;; Enable indentation+completion using the TAB key.
+  ;; `completion-at-point' is often bound to M-TAB.
+  (setq tab-always-indent 'complete)
+#+end_src
+
 ** orderless
 - Repo :: https://github.com/oantolin/orderless
 - Description :: Emacs completion style that matches multiple regexps in any order
