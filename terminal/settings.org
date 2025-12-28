@@ -29,7 +29,7 @@
         (when (boundp initial-load)
           (load-theme 'material t))
       (load-theme 'material-light t)))
-  (amo/toggle-theme t)
+   (load-theme 'material t)
 
   ;; Reload config
   (defun amo/reload-config ()
