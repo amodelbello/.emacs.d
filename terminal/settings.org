@@ -13,23 +13,24 @@
           x-select-enable-clipboard t
           auto-save-default nil
           make-backup-files nil
-          create-lockfiles nil)
+          create-lockfiles nil
+          modus-themes-to-toggle '(modus-operandi-tinted modus-vivendi-tinted))
 
-    (add-hook 'before-save-hook 'whitespace-cleanup)
-    (tool-bar-mode -1)
-    (menu-bar-mode -1)
-    (set-background-color "#282c3480")
+      (add-hook 'before-save-hook 'whitespace-cleanup)
+      (tool-bar-mode -1)
+      (menu-bar-mode -1)
+      (set-background-color "#282c3480")
 #+end_src
 ** Functions for custom bindings
 #+begin_src emacs-lisp
-  (defun amo/toggle-theme (&optional initial-load)
+  (defun amo/modus-themes-toggle (&optional ignore-if-set)
     "Toggle modus theme, sets to vivendi if unset"
     (interactive)
-    (if (string-match "-light" (symbol-name (car custom-enabled-themes)))
-        (when (boundp initial-load)
-          (load-theme 'material t))
-      (load-theme 'material-light t)))
-   (load-theme 'material t)
+    (if (string-match "modus" (symbol-name (car custom-enabled-themes)))
+        (when (not ignore-if-set)
+          (modus-themes-toggle))
+      (load-theme 'modus-vivendi-tinted)))
+  (amo/modus-themes-toggle t)
 
   ;; Reload config
   (defun amo/reload-config ()
@@ -42,7 +43,7 @@
 ** Custom Bindings
 #+begin_src emacs-lisp
   :bind (("C-z r" . amo/reload-config)
-         ("C-z t" . amo/toggle-theme)))
+         ("C-z t" . amo/modus-themes-toggle)))
 #+end_src
 
 ** Packages
@@ -58,12 +59,4 @@
     :config
     ;; (setq kkp-alt-modifier 'alt) ;; use this if you want to map the Alt keyboard modifier to Alt in Emacs (and not to Meta)
     (global-kkp-mode +1))
-#+end_src
-** Appearance
-*** Material Theme
-- Repo :: https://github.com/cpaulik/emacs-material-theme
-- Description :: Color Theme for emacs based on material design colors
-#+begin_src emacs-lisp
-(use-package material-theme
-  :straight t)
 #+end_src
