@@ -60,3 +60,6 @@
 
 (set-language-environment "UTF-8")
 (setq default-input-method nil)
+
+;; so it's not a bright white screen on startup
+(load-theme 'tango-dark t)
