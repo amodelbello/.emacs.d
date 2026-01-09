@@ -339,6 +339,53 @@
     (setq dape-buffer-window-arrangement 'right)
     (setq dape-cwd-fn 'projectile-project-root))
 #+end_src
+*** Flyover
+- Repo :: https://github.com/konrad1977/flyover
+- Description :: A beautiful inline overlay for Emacs (Flycheck | Flymake)
+#+begin_src emacs-lisp
+  (use-package flyover
+    :straight t
+    :hook ((flymake-mode . flyover-mode))
+    :custom
+    ;; Checker settings
+    (flyover-checkers '(flymake))
+    (flyover-levels '(error warning infof))
+    (flyover-show-at-eol t)
+    (flyover-line-position-offset 0)
+
+    ;; Appearance
+    (flyover-use-theme-colors t)
+    (flyover-background-lightness 45)
+    (flyover-percent-darker 40)
+    (flyover-text-tint 'lighter)
+    (flyover-text-tint-percent 50)
+
+    ;; Border styles: none, pill, arrow, slant, slant-inv, flames, pixels
+    (flyover-border-style 'none)
+    (flyover-border-match-icon t)
+
+    ;; Display settings
+    (flyover-hide-checker-name t)
+    (flyover-show-virtual-line t)
+    (flyover-virtual-line-type nil)
+    (flyover-line-position-offset 1)
+    (flyover-show-error-id t)
+
+    ;; Message wrapping
+    (flyover-wrap-messages t)
+    (flyover-max-line-length 80)
+
+    ;; Performance
+    (flyover-debounce-interval 0.2)
+    (flyover-cursor-debounce-interval 0.3)
+
+    ;; Display mode (controls cursor-based visibility)
+    ;; 'always
+    ;; 'hide-on-same-line
+    ;; 'hide-at-exact-position
+    ;; 'show-only-on-same-line
+    (flyover-display-mode 'show-only-on-same-line))
+#+end_src
 *** imenu-list
 - Repo :: https://github.com/bmag/imenu-list
 - Description :: Emacs plugin to show the current buffer's imenu entries in a separate buffer
@@ -614,9 +661,7 @@
 
     (setq emsg-blame-display #'my--emsg-blame-display
           ;; Prevent eldoc from overwritting message buffer output from this package
-          eldoc-message-function '(lambda (format-string &rest args) ()))
-    )
-
+          eldoc-message-function '(lambda (format-string &rest args) ())))
 #+end_src
 * Minibuffer & Completion
 ** consult-projectile
@@ -945,20 +990,6 @@
     :config
     (setq esup-depth 0))
 #+end_src
-** flymake-margin
-- Repo :: https://github.com/LionyxML/flymake-margin
-- Description :: A package to provide flymake into the margin world
-#+begin_src emacs-lisp
-  (use-package flymake-margin
-    :straight (margin :type git
-                      :host github
-                      :repo "LionyxML/flymake-margin"
-                      :files ("*.el"))
-    :after flymake
-    :config
-    (flymake-margin-mode t))
-#+end_src
-
 ** gptel
 - Repo :: https://github.com/karthink/gptel
 - Description :: A no-frills ChatGPT client for Emacs
