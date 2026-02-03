@@ -104,13 +104,6 @@
   (setq-default split-height-threshold nil
                 split-width-threshold  nil
                 fill-column            80) ;; Maximum line width
-
-  (defun amo/select-buffer-by-regex (regex)
-    "Focus on the first buffer matching the given REGEX."
-    (let ((buffer (cl-find-if (lambda (b) (string-match-p regex (buffer-name b)))
-                              (buffer-list))))
-      (when buffer
-        (select-window (get-buffer-window buffer)))))
     #+end_src
 ** Functions for custom bindings
 #+begin_src emacs-lisp
@@ -320,13 +313,13 @@
     "Show Flymake buffer diagnostics and focus on the flymake buffer."
     (interactive)
     (flymake-show-buffer-diagnostics)
-    (amo/select-buffer-by-regex "\\*Flymake diagnostics for.*\\*"))
+   )
 
   (defun amo/flymake-show-project-diagnostics ()
     "Show Flymake project diagnostics and focus on the flymake buffer."
     (interactive)
     (flymake-show-project-diagnostics)
-    (amo/select-buffer-by-regex "\\*Flymake diagnostics for.*\\*"))
+   )
 #+end_src
 
 *** Dape
@@ -435,7 +428,7 @@
 **** go-ts-mode
 #+begin_src emacs-lisp
   (use-package go-ts-mode
-    :hook (go-ts-mode . (lambda () (setq-local tab-width 4
+    :hook (go-ts-mode . (lambda () (setq-local tab-width 2
                                                electric-indent-inhibit t))))
   (setq-default eglot-workspace-configuration
                 '((:gopls .
