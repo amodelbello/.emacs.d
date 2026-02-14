@@ -756,6 +756,7 @@
            ("C-c C-x r" . org-refile)
            ("C-c n s" . amo/org-random-header-with-path)
            ("C-c C-r" . org-mode-restart)
+           ("C-c b" . org-cycle-list-bullet)
            ("C-c C-o" . amo/org-open-at-point)))
 
     :custom
