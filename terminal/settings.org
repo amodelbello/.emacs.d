@@ -14,8 +14,7 @@
           auto-save-default nil
           make-backup-files nil
           create-lockfiles nil
-          modus-themes-to-toggle '(modus-operandi-tinted modus-vivendi-tinted))
-
+          modus-themes-to-toggle '(standard-adwaita modus-vivendi))
       (add-hook 'before-save-hook 'whitespace-cleanup)
       (tool-bar-mode -1)
       (menu-bar-mode -1)
@@ -29,8 +28,7 @@
     (if (string-match "modus" (symbol-name (car custom-enabled-themes)))
         (when (not ignore-if-set)
           (modus-themes-toggle))
-      (load-theme 'modus-vivendi-tinted)))
-  (amo/modus-themes-toggle t)
+      (load-theme 'modus-vivendi)))
 
   ;; Reload config
   (defun amo/reload-config ()
@@ -59,4 +57,15 @@
     :config
     ;; (setq kkp-alt-modifier 'alt) ;; use this if you want to map the Alt keyboard modifier to Alt in Emacs (and not to Meta)
     (global-kkp-mode +1))
+#+end_src
+*** Modus Themes
+- Repo :: https://github.com/protesilaos/modus-themes
+- Description :: Highly accessible themes for GNU Emacs, conforming with the
+  highest standard for colour contrast between background and foreground values
+  (WCAG AAA).
+#+begin_src emacs-lisp
+  (use-package modus-themes
+    :straight t
+    :config
+    (amo/modus-themes-toggle t))
 #+end_src
