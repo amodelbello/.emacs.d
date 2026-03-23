@@ -1147,6 +1147,7 @@
     :config
     (setq doom-modeline-minor-modes t
           doom-modeline-vcs-max-length 40
+          doom-modeline-buffer-file-name-style 'relative-from-project
           doom-modeline-buffer-encoding t
           doom-modeline-persp-name t
           doom-modeline-total-line-number t
