@@ -273,6 +273,8 @@
          ("C-z '" . indent-new-comment-line)
          ("C-x r M-w" . amo/copy-rectangle-to-kill-ring)
          ("M-/" . cycle-spacing-delete-newlines)
+         ("C-c q" . remember)
+         ("C-c Q" . remember-notes)
          ("C-c 1" . dictionary-lookup-definition)
          ("C-c 2" . amo/repeat-current-window-below)
          ("C-c 3" . amo/repeat-current-window-right)))
