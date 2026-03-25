@@ -325,7 +325,14 @@ targets."
   (use-package el-patch
     :straight t)
 #+end_src
-
+** emacs-surround
+- Repo :: https://github.com/ganmacs/emacs-surround
+- Description :: Emacs version of vim.surround
+#+begin_src emacs-lisp
+  (use-package surround
+    :straight t
+    :bind-keymap ("M-'" . surround-keymap))
+#+end_src
 ** expand-region
 - Repo :: https://github.com/magnars/expand-region.el
 - Description :: Emacs extension to increase selected region by semantic units.
