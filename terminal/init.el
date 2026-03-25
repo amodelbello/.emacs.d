@@ -9,6 +9,6 @@
   (dot-env-config))
 
 (amo/load-config-file "common/settings.org")
-(amo/load-config-file "terminal/settings.org")
 (amo/load-config-file "common/packages.org")
+(amo/load-config-file "terminal/settings.org")
 (amo/load-customize (concat user-emacs-directory "terminal/"))

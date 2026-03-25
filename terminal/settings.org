@@ -9,6 +9,7 @@
     :config
     (setq-default left-margin-width 1 right-margin-width 1)
     (set-window-margins nil 1)
+    (idle-highlight-global-mode -1)
     (setq inhibit-startup-screen t
           x-select-enable-clipboard t
           auto-save-default nil
