@@ -334,13 +334,13 @@ targets."
     :bind-keymap ("M-'" . surround-keymap))
 #+end_src
 ** expand-region
-- Repo :: https://github.com/magnars/expand-region.el
-- Description :: Emacs extension to increase selected region by semantic units.
+- Repo :: https://github.com/casouri/expreg
+- Description :: Your friendly neighborhood expand-region clone
 #+begin_src emacs-lisp
-  (use-package expand-region
+  (use-package expreg
     :straight t
-    :bind (("C-=" . er/expand-region)
-           ("C--" . er/contract-region)))
+    :bind (("C-=" . expreg-expand)
+           ("C--" . expreg-contract)))
 #+end_src
 ** Geiser (Scheme)
 - Repo :: https://github.com/emacsmirror/geiser
