@@ -1153,7 +1153,10 @@
           doom-modeline-total-line-number t
           doom-modeline-display-default-persp-name nil
           doom-modeline-vcs-display-function #'doom-modeline-vcs-name
-          doom-modeline-persp-icon t))
+          doom-modeline-persp-icon t)
+    (doom-modeline-def-modeline 'main
+      '(eldoc bar lsp check buffer-position window-state workspace-name window-number modals matches follow buffer-info remote-host vcs word-count parrot selection-info)
+      '(compilation objed-state misc-info project-name persp-name battery grip irc mu4e gnus github debug repl minor-modes input-method indent-info buffer-encoding major-mode process time)))
 #+end_src
 ** Ef Themes
 - Repo :: https://github.com/protesilaos/ef-themes
