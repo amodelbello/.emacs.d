@@ -371,8 +371,8 @@ targets."
   (use-package jump-char
     :straight (:host github :repo "lewang/jump-char"
                  :branch "master")
-    :bind (("M-n" . jump-char-forward)
-           ("M-N" . jump-char-backward)))
+    :bind (("M-;" . jump-char-forward)
+           ("M-:" . jump-char-backward)))
 #+end_src
 
 ** minions
