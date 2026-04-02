@@ -699,8 +699,8 @@
             ("INACTIVE" . (:foreground "#777696" :weight bold))
             ("CANCELED" . (:foreground "#777696" :weight bold)))
 
-          ;; Increase size of latex previews
-          org-format-latex-options (plist-put org-format-latex-options :scale 1.2))
+          ;; Size of latex previews
+          org-format-latex-options (plist-put org-format-latex-options :scale 1.0))
 
     (add-to-list 'org-src-lang-modes '("go" . go-ts)) ;; Syntax highlighting for go on src blocks
 
