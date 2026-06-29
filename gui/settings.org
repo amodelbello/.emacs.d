@@ -5,7 +5,7 @@
 * General Configuration
 ** Variables and Modes
 #+begin_src emacs-lisp
-  (straight-use-package 'project)
+  ;; (use-package 'project)
 
   (setq-default line-spacing (dot-env-get 'LINE_SPACING 1))
 
@@ -245,7 +245,7 @@
 - Description :: Automatic installation, usage, and fallback for tree-sitter major modes in Emacs
 #+begin_src emacs-lisp
   (use-package treesit-auto
-    :straight t
+    :ensure t
     :custom
     (treesit-auto-install t)
     :config
@@ -262,8 +262,7 @@
       (eglot-format)))
 
   (use-package eglot
-    :straight t
-    :defer t
+    :ensure nil
     :config
     (setq eglot-ignored-server-capabilites '(:documentHighlightProvider)
           eglot-code-action-indicator "⚙")
@@ -326,7 +325,7 @@
 - Description :: Debug Adapter Protocol for Emacs
 #+begin_src emacs-lisp
   (use-package dape
-    :straight t
+    :ensure t
     :config
     (setq dape-buffer-window-arrangement 'right)
     (setq dape-cwd-fn 'projectile-project-root))
@@ -336,7 +335,7 @@
 - Description :: Emacs plugin to show the current buffer's imenu entries in a separate buffer
 #+begin_src emacs-lisp
   (use-package imenu-list
-    :straight t
+    :ensure t
     :config
     (setq imenu-list-focus-after-activation t
           imenu-list-position 'left
@@ -348,7 +347,7 @@
 - Description :: A folding minor mode for Emacs
 #+begin_src emacs-lisp
   (use-package origami
-    :straight t
+    :ensure t
     :bind (("C-c f" . origami-toggle-node))
     :hook (prog-mode . origami-mode))
 #+end_src
@@ -356,16 +355,16 @@
 - Repo :: https://github.com/copilot-emacs/copilot.el
 - Description :: An unofficial Copilot plugin for Emacs.
 #+begin_src emacs-lisp
-  (use-package copilot
-    :straight (:host github :repo "copilot-emacs/copilot.el" :files ("*.el"))
-    :ensure t)
+  ;; (use-package copilot
+  ;;   :ensure (:host github :repo "copilot-emacs/copilot.el" :files ("*.el"))
+  ;;   :ensure t)
 #+end_src
 *** mcp
 - Repo :: https://github.com/lizqwerscott/mcp.el
 - Description :: An Mcp client inside Emacs
 #+begin_src emacs-lisp
   (use-package mcp
-    :straight t
+    :ensure t
     :after gptel
     :config ((setopt mcp-hub-servers
              '(("github" . (:command "docker"
@@ -376,12 +375,11 @@
              :hook (after-init . mcp-hub-start-all-server)))))
 #+end_src
 *** copilot-chat
-- Repo :: https://github.com/chep/copilot-chat.el
+- Repo :: https://github.com/chep/gh-copilot-chat.el
 - Description :: Chat with Github copilot in Emacs !
 #+begin_src emacs-lisp
-  (use-package copilot-chat
-    ;; :straight (:host github :repo "chep/copilot-chat.el" :files ("*.el"))
-    :straight t
+  (use-package gh-copilot-chat
+    :ensure (:host github :repo "chep/gh-copilot-chat.el" :files ("*.el"))
     :after (request org markdown-mode)
     :init
     :config
@@ -389,17 +387,17 @@
     ;; to prevent "non-prefix key" error
     ;; (define-key global-map (kbd "C-c g") (make-sparse-keymap))
     :bind (:map global-map
-                ("C-c g g" . copilot-chat-display)
-                ("C-c g t" . copilot-chat-transient)
-                ("C-c g i" . copilot-chat-goto-input)
-                ("C-c g s" . copilot-chat-save)
-                ("C-c g l" . copilot-chat-load)))
+                ("C-c g g" . gh-copilot-chat-display)
+                ("C-c g t" . gh-copilot-chat-transient)
+                ("C-c g i" . gh-copilot-chat-goto-input)
+                ("C-c g s" . gh-copilot-chat-save)
+                ("C-c g l" . gh-copilot-chat-load)))
 #+end_src
 *** protobuf-mode
 - Repo :: https://github.com/protocolbuffers/protobuf/blob/main/editors/protobuf-mode.el
 #+begin_src emacs-lisp
   (use-package protobuf-mode
-    :straight t
+    :ensure t
     :mode ("\\.proto\\'" . protobuf-mode))
 #+end_src
 ** Languages
@@ -408,20 +406,20 @@
 - Repo :: https://github.com/spotify/dockerfile-mode
 #+begin_src emacs-lisp
   (use-package dockerfile-mode
-    :straight t)
+    :ensure t)
 #+end_src
 **** docker-compose-mode
 - Repo :: https://github.com/meqif/docker-compose-mode
 #+begin_src emacs-lisp
   (use-package docker-compose-mode
-    :straight t)
+    :ensure t)
 #+end_src
 *** Flatbuffers
 - Repo :: https://github.com/Asalle/flatbuffers-mode
 - Description :: Emacs mode for flatbuffers featuring syntax highlighting
 #+begin_src emacs-lisp
 (use-package flatbuffers-mode
-  :straight t)
+  :ensure t)
 #+end_src
 *** Golang
 **** go-ts-mode
@@ -440,14 +438,14 @@
 - Description :: Emacs mode for Haskell
 #+begin_src emacs-lisp
   (use-package haskell-mode
-    :straight t
+    :ensure t
     :config (setq haskell-interactive-popup-errors nil)
     :hook (haskell-mode . (lambda () (interactive-haskell-mode t))))
 #+end_src
 *** Python
 **** python-ts-mode
 #+begin_src emacs-lisp
-  (use-package emacs
+  (use-package emacs :ensure nil
     :hook (python-ts-mode . (lambda () (setq-local tab-width 4)))
     :bind
     ("C-M-f" . python-nav-forward-defun)
@@ -464,7 +462,7 @@
 - Description :: Emacs helper library (and minor mode) to work with conda environments
 #+begin_src emacs-lisp
   (use-package conda
-    :straight t
+    :ensure t
     :init
     (setq conda-anaconda-home (expand-file-name (dot-env-get 'CONDA_PATH "~/opt/miniconda3"))
           conda-env-home-directory (expand-file-name (dot-env-get 'CONDA_PATH "~/opt/miniconda3"))
@@ -478,7 +476,7 @@
 - Description :: Python virtual environment interface for Emacs
 #+begin_src emacs-lisp
   (use-package pyvenv
-    :straight t
+    :ensure t
     :diminish
     :config
     (setq pyvenv-mode-line-indicator
@@ -492,7 +490,7 @@
 - Description :: Java extension for the eglot LSP client
 #+begin_src emacs-lisp
   (use-package eglot-java
-    :straight t
+    :ensure t
     :bind
     (("C-c l n" . eglot-java-file-new)
      ("C-c l x" . eglot-java-run-main)
@@ -506,7 +504,7 @@
 - Description :: Jinja2 mode for emacs
 #+begin_src emacs-lisp
   (use-package jinja2-mode
-    :straight t)
+    :ensure t)
 #+end_src
 *** SuperCollider
 - Repo :: https://github.com/supercollider/scel
@@ -521,7 +519,7 @@
 - Description :: Emacs major mode for vue.js
 #+begin_src emacs-lisp
   (use-package vue-mode
-    :straight t)
+    :ensure t)
 #+end_src
 * Version Control
 ** Magit
@@ -529,8 +527,11 @@
 - Docs :: https://magit.vc/
 - Description :: It's Magit! A Git Porcelain inside Emacs.
 #+begin_src emacs-lisp
+  (use-package transient
+    :ensure t)
   (use-package magit
-    :straight t
+    :ensure t
+    :after transient
     :bind
     (("C-x g" . magit))
     :after nerd-icons
@@ -545,7 +546,7 @@
 - Description :: Show source files' TODOs (and FIXMEs, etc) in Magit status buffer
 #+begin_src emacs-lisp
   (use-package magit-todos
-    :straight t
+    :ensure t
     :hook ((magit-mode . magit-todos-mode)))
 #+end_src
 ** git-messenger
@@ -553,7 +554,7 @@
 - Description :: Emacs Port of git-messenger.vim
 #+begin_src emacs-lisp
   (use-package git-messenger
-    :straight t
+    :ensure t
     :config (setq git-messenger:show-detail t
                   git-messenger:use-magit-popup t)
     :bind ("C-x m" . git-messenger:popup-message))
@@ -563,14 +564,14 @@
 - Description :: Walk through git revisions of a file
 #+begin_src emacs-lisp
   (use-package git-timemachine
-    :straight t)
+    :ensure t)
 #+end_src
 ** diff-hl
 - Repo :: https://github.com/dgutov/diff-hl
 - Description :: Emacs package for highlighting uncommitted changes
 #+begin_src emacs-lisp
   (use-package diff-hl
-    :straight t
+    :ensure t
     :config
     (global-diff-hl-mode)
     :hook
@@ -586,7 +587,7 @@
 - Description :: A simple, fast, asynchronous, customizable display, view of git blame commit in Emacs.
 #+begin_src emacs-lisp
   (use-package emsg-blame
-    :straight (:host github :repo "ISouthRain/emsg-blame")
+    :ensure (:host github :repo "ISouthRain/emsg-blame")
     :config
     (global-emsg-blame-mode)
     (defun my--emsg-blame-display ()
@@ -617,7 +618,8 @@
 - Description :: Consult integration for projectile
 #+begin_src emacs-lisp
   (use-package consult-projectile
-    :straight t
+    :ensure t
+    :after projectile
     :config
     (define-key projectile-command-map (kbd "h") #'consult-projectile)
     (define-key projectile-command-map (kbd "f") #'consult-projectile-find-file)
@@ -631,15 +633,16 @@
 - Description :: Jump to workspace symbols with eglot and consult
   #+begin_src emacs-lisp
     (use-package consult-eglot
-      :straight t)
+      :ensure t
+      :after eglot)
   #+end_src
 ** consult-org-roam
 - Repo :: https://github.com/jgru/consult-org-roam
 - Description :: A bunch of convenience functions for operating org-roam with the help of consult
   #+begin_src emacs-lisp
     (use-package consult-org-roam
-      :straight t
-      :after org-roam
+      :ensure t
+      :after (org-roam consult)
       :init
       (consult-org-roam-mode 1)
 
@@ -659,6 +662,8 @@
 - Description :: A GNU Emacs major mode for keeping notes, authoring documents, computational notebooks, literate programming, maintaining to-do lists, planning projects, and more — in a fast and effective plain text system.
 #+begin_src emacs-lisp
   (use-package org
+    :ensure nil
+    :demand t
     :config
     (setq org-directory (dot-env-get 'ORG_DIRECTORY
                                      (concat user-emacs-directory "org-directory"))
@@ -796,10 +801,9 @@
 - Description :: Supercharge your Org daily/weekly agenda by grouping items
 #+begin_src emacs-lisp
   (use-package org-super-agenda
-    :straight t
+    :ensure t
     :config
-    (setq org-super-agenda-groups '(
-                                    (:name ""
+    (setq org-super-agenda-groups '((:name ""
                                            :time-grid t
                                            :order 1)
                                     (:auto-group t)
@@ -807,8 +811,10 @@
                                            :todo "TOLEARN")
                                     (:name "Later"
                                            :todo "LATER")))
-    :hook
-    (org-mode . org-super-agenda-mode))
+    org-super-agenda-mode
+    ;; :hook
+    ;; (org-mode . org-super-agenda-mode)
+    )
 #+end_src
 
 ** ox-gfm
@@ -816,7 +822,7 @@
 - Description: Github Flavored Markdown Back-End for Org Export Engine
   #+begin_src emacs-lisp
     (use-package ox-gfm
-      :straight t
+      :ensure t
       :config
       (eval-after-load "org"
         '(require 'ox-gfm nil t)))
@@ -828,7 +834,7 @@
 - Description :: Rudimentary Roam replica with Org-mode
   #+begin_src emacs-lisp
     (use-package org-roam
-      :straight t
+      :ensure t
       :after org
       :init
       ;; to prevent "non-prefix key" error
@@ -867,7 +873,7 @@
 - Description :: 🦄 Modern Org Style
   #+begin_src emacs-lisp
     (use-package org-modern
-      :straight t
+      :ensure t
       :config
       (with-eval-after-load 'org (global-org-modern-mode))
       (setq org-modern-todo nil
@@ -887,7 +893,7 @@
 - Description :: Toggle visibility of hidden Org mode element parts upon entering and leaving an element
 #+begin_src emacs-lisp
   (use-package org-appear
-    :straight (:type git :host github :repo "awth13/org-appear")
+    :ensure (:type git :host github :repo "awth13/org-appear")
     :hook (org-mode . org-appear-mode))
 #+end_src
 ** org-fragtog
@@ -895,7 +901,7 @@
 - Description :: Automatically toggle Org mode LaTeX fragment previews as the cursor enters and exits them
 #+begin_src emacs-lisp
   (use-package org-fragtog
-    :straight t
+    :ensure t
     :hook ((org-mode . org-fragtog-mode)))
 #+end_src
 * Other Useful Packages
@@ -904,7 +910,7 @@
 - Description :: Easily swap buffers
 #+begin_src emacs-lisp
   (use-package buffer-move
-    :straight t
+    :ensure t
     :bind
     (("<C-S-up>" . buf-move-up)
      ("<C-S-down>" . buf-move-down)
@@ -923,7 +929,7 @@
 #+begin_src emacs-lisp
   (when (memq window-system '(mac ns x)) ;; Linux
     (use-package exec-path-from-shell
-      :straight t
+      :ensure t
       :config
       (exec-path-from-shell-initialize)))
 #+end_src
@@ -932,7 +938,7 @@
 - Description :: ESUP - Emacs Start Up Profiler
 #+begin_src emacs-lisp
   (use-package esup
-    :straight t
+    :ensure t
     :config
     (setq esup-depth 0))
 #+end_src
@@ -941,7 +947,7 @@
 - Description :: A no-frills ChatGPT client for Emacs
 #+begin_src emacs-lisp
   (use-package gptel
-    :straight t
+    :ensure t
     :init
     (define-key global-map (kbd "C-c g") (make-sparse-keymap))
     (setq gptel-directives '((default
@@ -977,7 +983,7 @@
 - Description :: A better Emacs *help* buffer
 #+begin_src emacs-lisp
   (use-package helpful
-    :straight t
+    :ensure t
     :bind (("C-z h f" . helpful-callable)
            ("C-z h v" . helpful-variable)
            ("C-z h o" . helpful-symbol)
@@ -991,7 +997,7 @@
 - Description :: Emacs Markdown Mode
 #+begin_src emacs-lisp
   (use-package markdown-mode
-    :straight t
+    :ensure t
     :mode ("README\\.md\\'" . gfm-mode)
     :init (setq markdown-command "multimarkdown"))
 #+end_src
@@ -1000,14 +1006,15 @@
 - Description :: A linting library for elisp package metadata
 #+begin_src emacs-lisp
   (use-package package-lint
-    :straight t)
+    :ensure t)
 #+end_src
 ** perspective-el
 - Repo :: https://github.com/nex3/perspective-el
 - Description :: Perspectives for Emacs.
 #+begin_src emacs-lisp
   (use-package perspective
-    :straight t
+    :ensure t
+    :demand t
     :custom
     (persp-mode-prefix-key (kbd "C-c C-w"))
     (persp-state-default-file (concat user-emacs-directory ".perspective"))
@@ -1021,8 +1028,6 @@
           persp-show-modestring t
           persp-modestring-short t
           persp-sort 'access)
-    (consult-customize consult--source-buffer :hidden t :default nil)
-    (add-to-list 'consult-buffer-sources persp-consult-source)
     :hook ((kill-emacs . persp-state-save)
            (restart-emacs . persp-state-save))
     :bind (("C-x C-b" . persp-ibuffer)
@@ -1037,7 +1042,7 @@
 - Description :: Emacs minor-mode to summon and dismiss buffers easily
 #+begin_src emacs-lisp
   (use-package popper
-    :straight t
+    :ensure t
     :bind (("s-3" . popper-toggle)
            ("s-4" . popper-cycle)
            ("s-5" . popper-toggle-type))
@@ -1086,7 +1091,7 @@
 - Description :: Project navigation and management library for Emacs
 #+begin_src emacs-lisp
   (use-package projectile
-    :straight t
+    :ensure t
     :config
     (projectile-global-mode)
     (setq projectile-indexing-method 'alien
@@ -1100,14 +1105,14 @@
 - Description :: Emacs Speaks Statistics: ESS
 #+begin_src emacs-lisp
   (use-package ess
-    :straight t)
+    :ensure t)
 #+end_src
 ** rainbow-delimiters
 - Repo :: https://github.com/Fanael/rainbow-delimiters
 - Description :: A "rainbow parentheses"-like mode which highlights delimiters
 #+begin_src emacs-lisp
   (use-package rainbow-delimiters
-    :straight t
+    :ensure t
     :hook (prog-mode . rainbow-delimiters-mode))
 #+end_src
 ** Transpose Frame
@@ -1115,7 +1120,7 @@
 - Description :: Interactive functions to transpose window arrangement in current frame
 #+begin_src emacs-lisp
   (use-package transpose-frame
-    :straight t
+    :ensure t
     :bind (("C->" . transpose-frame)))
 #+end_src
 ** YASnippet
@@ -1123,14 +1128,15 @@
 - Description :: A template system for Emacs
 #+begin_src emacs-lisp
   (use-package yasnippet
-    :straight t
+    :ensure t
     :hook ((python-ts-mode . (lambda () (yas-activate-extra-mode 'python-mode))))
     :config
     (yas-global-mode)
     (setq yas-snippet-dirs
           '("~/.emacs.d/snippets")) ;TODO: Don't hardcode
     (use-package yasnippet-snippets
-      :straight t))
+      :ensure t
+      :after yasnippet))
 #+end_src
 
 * Appearance
@@ -1138,9 +1144,9 @@
 - Repo :: https://github.com/seagle0128/doom-modeline
 - Description :: A fancy and fast mode-line inspired by minimalism design
 #+begin_src emacs-lisp
-  (straight-use-package '(f :type git :host github :repo "rejeep/f.el"))
+  ;; (use-package '(f :type git :host github :repo "rejeep/f.el"))
   (use-package doom-modeline
-    :straight t
+    :ensure t
     :after f
     :init (doom-modeline-mode 1)
     :config
@@ -1162,7 +1168,8 @@
 - Description :: Colourful and legible themes for GNU Emacs
 #+begin_src emacs-lisp
   (use-package ef-themes
-    :straight t)
+    :ensure t
+    :demand t)
 #+end_src
 
 ** kaolin-themes
@@ -1171,14 +1178,14 @@
   terminal.
 #+begin_src emacs-lisp
   (use-package kaolin-themes
-    :straight t)
+    :ensure t)
 #+end_src
 ** Modus Themes
 - Repo :: https://github.com/protesilaos/modus-themes
 - Description :: Highly accessible themes for GNU Emacs
 #+begin_src emacs-lisp
   (use-package modus-themes
-    :straight t)
+    :ensure t)
 #+end_src
 
 ** nerd-icons-corfu
@@ -1186,5 +1193,6 @@
 - Description :: Icons for corfu via nerd-icons
 #+begin_src emacs-lisp
   (use-package nerd-icons-corfu
-    :straight t)
+    :after corfu
+    :ensure t)
 #+end_src

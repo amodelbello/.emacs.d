@@ -4,7 +4,7 @@
 ;; Load dot-env envrionment
 ;; https://github.com/amodelbello/dot-env.el
 (use-package dot-env
-  :straight t
+  :ensure t
   :config
   (dot-env-config))
 

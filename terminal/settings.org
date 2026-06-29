@@ -5,7 +5,7 @@
 * General Configuration
 ** Variables and Modes
 #+begin_src emacs-lisp
-  (use-package emacs
+  (use-package emacs :ensure nil
     :config
     (setq-default left-margin-width 1 right-margin-width 1)
     (set-window-margins nil 1)
@@ -52,8 +52,8 @@
 
 #+begin_src emacs-lisp
   (use-package kkp
-    :straight t
-    :straight (:host github :repo "benotn/kkp")
+    :ensure t
+    :ensure (:host github :repo "benotn/kkp")
 
     :config
     ;; (setq kkp-alt-modifier 'alt) ;; use this if you want to map the Alt keyboard modifier to Alt in Emacs (and not to Meta)
@@ -66,7 +66,7 @@
   (WCAG AAA).
 #+begin_src emacs-lisp
   (use-package modus-themes
-    :straight t
+    :ensure t
     :config
     (amo/modus-themes-toggle t))
 #+end_src
