@@ -5,7 +5,7 @@
 
 * Variables and Modes
 #+begin_src emacs-lisp
-  (use-package emacs
+  (use-package emacs :ensure nil
     :config
     ;; Use C-h for delete-backward-char
     (global-set-key (kbd "C-h") 'delete-backward-char)

@@ -9,7 +9,7 @@
 - Description :: Performant and minimalistic vertical completion UI based on the default completion system.
 #+begin_src emacs-lisp
   (use-package vertico
-    :straight (:files (:defaults "extensions/*"))
+    :ensure (:files (:defaults "extensions/*"))
     :bind (:map vertico-map
                 ("C-j" . vertico-directory-enter)
                 ("DEL" . vertico-directory-delete-char)
@@ -32,7 +32,7 @@
 - Description :: Emacs Mini-Buffer Actions Rooted in Keymaps
 #+begin_src emacs-lisp
 (use-package embark
-  :straight t
+  :ensure t
   :bind (("C-." . embark-act)
          ("C-S-h B" . embark-bindings)
          :map flyspell-mode-map
@@ -100,7 +100,7 @@ targets."
     (wgrep-toggle-readonly-area)))
 
 (use-package embark-consult
-  :straight t
+  :ensure t
   :hook
   (embark-collect-mode . consult-preview-at-point-mode))
 #+end_src
@@ -109,7 +109,7 @@ targets."
 - Description :: Enable rich annotations in the minibuffer
 #+begin_src emacs-lisp
   (use-package marginalia
-    :straight t
+    :ensure t
     :init
     (marginalia-mode))
 #+end_src
@@ -120,7 +120,7 @@ targets."
 #+begin_src emacs-lisp
   ;; Example configuration for Consult
   (use-package consult
-    :straight t
+    :ensure t
 
     ;; Replace bindings. Lazily loaded due by `use-package'.
     :bind (("C-s" . consult-line)
@@ -184,7 +184,7 @@ targets."
 - Description :: Insert paths into the minibuffer prompt in Emacs
 #+begin_src emacs-lisp
 (use-package consult-dir
-  :straight t
+  :ensure t
   :bind (("C-x C-d" . consult-dir)
          :map vertico-map
          ("C-x C-d" . consult-dir)
@@ -198,7 +198,8 @@ targets."
 - Description :: corfu.el - COmpletion in Region FUnction
 #+begin_src emacs-lisp
   (use-package corfu
-    :straight (:files (:defaults "extensions/*"))
+    ;; :ensure (:files (:defaults "extensions/*"))
+    :ensure t
     :init
     (global-corfu-mode)
     (corfu-popupinfo-mode 1)
@@ -224,7 +225,7 @@ targets."
 - Description :: Emacs completion style that matches multiple regexps in any order
 #+begin_src emacs-lisp
   (use-package orderless
-    :straight t
+    :ensure t
     :config
     (setq completion-styles '(orderless basic)
           completion-category-overrides '((file (styles basic partial-completion)))))
@@ -237,7 +238,7 @@ targets."
 - Description :: Quickly switch windows in Emacs
 #+begin_src emacs-lisp
   (use-package ace-window
-    :straight t
+    :ensure t
     :bind
     (("C-o" . ace-window)
      ("C-x o" . ace-window)
@@ -256,7 +257,7 @@ targets."
 - Description :: Emacs minor mode that keeps your code always indented
 #+begin_src emacs-lisp
   (use-package aggressive-indent
-    :straight t
+    :ensure t
     :hook ((lisp-mode . aggressive-indent-mode)
            (emacs-lisp-mode . aggressive-indent-mode)
            (scheme-mode . aggressive-indent-mode)
@@ -272,7 +273,7 @@ targets."
 - Description :: Jumping to visible text using a char-based decision tree
 #+begin_src emacs-lisp
   (use-package avy
-    :straight t
+    :ensure t
     :bind (("C-;" . avy-goto-char-2)
            :map org-mode-map
            ("C-'" . nil)
@@ -285,7 +286,7 @@ targets."
 - Description :: A collection of opinionated keyboard-driven user interfaces for various built-in Emacs modes.
   #+begin_src emacs-lisp
     (use-package casual
-      :straight t
+      :ensure t
       :bind (:map
              calc-mode-map
              ("?" . casual-calc-tmenu)
@@ -305,7 +306,7 @@ targets."
 - Description :: A Collection of Ridiculously Useful eXtensions for Emacs
 #+begin_src emacs-lisp
   (use-package crux
-    :straight t
+    :ensure t
     :bind
     (("s-o" . crux-smart-open-line-above)
      ("M-o" . crux-smart-open-line)
@@ -323,14 +324,14 @@ targets."
 - Description :: ✨ Future-proof your Emacs Lisp customizations!
 #+begin_src emacs-lisp
   (use-package el-patch
-    :straight t)
+    :ensure t)
 #+end_src
 ** emacs-surround
 - Repo :: https://github.com/ganmacs/emacs-surround
 - Description :: Emacs version of vim.surround
 #+begin_src emacs-lisp
   (use-package surround
-    :straight t
+    :ensure t
     :bind-keymap ("M-'" . surround-keymap))
 #+end_src
 ** expand-region
@@ -338,7 +339,7 @@ targets."
 - Description :: Your friendly neighborhood expand-region clone
 #+begin_src emacs-lisp
   (use-package expreg
-    :straight t
+    :ensure t
     :bind (("C-=" . expreg-expand)
            ("C--" . expreg-contract)))
 #+end_src
@@ -348,7 +349,7 @@ targets."
 - Description :: GNU Emacs and Scheme talk to each other
 #+begin_src emacs-lisp
   (use-package geiser-guile
-    :straight t)
+    :ensure t)
 #+end_src
 
 ** Idle Highlight Mode
@@ -356,7 +357,7 @@ targets."
 - Description :: Simple symbol highlighting package for Emacs
  #+begin_src emacs-lisp
    (use-package idle-highlight-mode
-     :straight t
+     :ensure t
      :config
      (setq idle-highlight-idle-time 0.2
            idle-highlight-exclude-point t
@@ -369,7 +370,7 @@ targets."
 - Description :: Navigation by character occurrence
 #+begin_src emacs-lisp
   (use-package jump-char
-    :straight (:host github :repo "lewang/jump-char"
+    :ensure (:host github :repo "lewang/jump-char"
                  :branch "master")
     :bind (("M-;" . jump-char-forward)
            ("M-:" . jump-char-backward)))
@@ -380,7 +381,7 @@ targets."
 - Description :: A minor-mode menu for the mode line
 #+begin_src emacs-lisp
   (use-package minions
-    :straight t
+    :ensure t
     :config
     (minions-mode 1))
 #+end_src
@@ -390,7 +391,7 @@ targets."
 - Description :: Emacs: moves current line or lines surrounding region up or down.
   #+begin_src emacs-lisp
     (use-package move-lines
-      :straight (:host github :repo "targzeta/move-lines"
+      :ensure (:host github :repo "targzeta/move-lines"
                        :branch "master")
       :config
       (global-set-key (kbd "M-<down>") 'move-lines-down))
@@ -402,7 +403,7 @@ targets."
 - Description :: A minor mode for performing structured editing of S-expression data
 #+begin_src emacs-lisp
   (use-package paredit
-    :straight t
+    :ensure t
     :hook
     ((lisp-mode . paredit-mode)
      (emacs-lisp-mode . paredit-mode)
@@ -427,7 +428,7 @@ targets."
 - Description :: Emacs search tool based on ripgrep
 #+begin_src emacs-lisp
   (use-package rg
-    :straight t
+    :ensure t
     :config
     (rg-enable-default-bindings))
 #+end_src
@@ -438,7 +439,7 @@ targets."
 - Description :: Stucture and Interpretation of Computer Progams in info format
 #+begin_src emacs-lisp
   (use-package sicp
-    :straight t)
+    :ensure t)
 #+end_src
 ** undo-tree
 - Repo :: https://github.com/apchamberlain/undo-tree.el
@@ -446,7 +447,7 @@ targets."
 - Description :: Visualize Emacs undo information as a graphical tree and navigate to previous states
 #+begin_src emacs-lisp
   (use-package undo-tree
-    :straight t
+    :ensure t
     :config
     (global-undo-tree-mode)
     (setq undo-tree-history-directory-alist `((".*" . ,temporary-file-directory))
@@ -462,14 +463,14 @@ targets."
 - Description :: Like the default GNU Emacs theme but more consistent
 #+begin_src emacs-lisp
   (use-package standard-themes
-    :straight t)
+    :ensure t)
 #+end_src
 ** Nerd Icons
 - Repo :: https://github.com/rainstormstudio/nerd-icons.el
 - Description :: A library for easily using Nerd Font icons inside Emacs
 #+begin_src emacs-lisp
   (use-package nerd-icons
-    :straight t
+    :ensure t
     :custom
     (nerd-icons-font-family "Symbols Nerd Font Mono"))
 #+end_src
@@ -479,7 +480,7 @@ targets."
 - Description :: Use nerd-icons for Dired
 #+begin_src emacs-lisp
   (use-package nerd-icons-dired
-    :straight t
+    :ensure t
     :hook
     (dired-mode . nerd-icons-dired-mode))
 #+end_src
@@ -489,7 +490,7 @@ targets."
 - Description :: Icons for candidates in minibuffer
 #+begin_src emacs-lisp
   (use-package nerd-icons-completion
-    :straight t
+    :ensure t
     :after marginalia
     :hook ((marginalia-mode . nerd-icons-completion-marginalia-setup))
     :init
@@ -501,7 +502,7 @@ targets."
 - Description :: Completion kind text/icon prefix labelling for emacs in-region completion
 #+begin_src emacs-lisp
   (use-package kind-icon
-    :straight t
+    :ensure t
     :after corfu
     :custom
     (kind-icon-default-face 'corfu-default) ; to compute blended backgrounds correctly

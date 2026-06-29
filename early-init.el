@@ -13,7 +13,7 @@
             (setq gc-cons-threshold 16777216 ; 16mb
                   gc-cons-percentage 0.1)))
 
-;; Using straight.el so disable package.el
+;; Using elpaca.el so disable package.el
 (setq package-enable-at-startup nil)
 
 ;; Disable UI elements before they appear

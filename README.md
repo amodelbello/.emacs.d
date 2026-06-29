@@ -3,109 +3,109 @@ An emacs configuration for both GUI and terminal. Instructions on setting up ema
 
 # Table of Contents
 
--   [Initial Setup](#orgd3f68a9)
--   [Common Functions](#org0e9d737)
--   [Common General Configuration](#orgf2c22a7)
-    -   [Variables and Modes](#org34a523b)
-    -   [Functions for custom bindings](#orge8a59bd)
-    -   [use-package Style Bindings](#org72fc54c)
-    -   [Traditional-Style Bindings](#org643c567)
-    -   [Hooks](#org05c1a3e)
-    -   [dired](#orgc026bd1)
-    -   [Advice](#org6a26ce7)
--   [Common Packages](#org895b650)
-    -   [Minibuffer & Completion](#org33eb96d)
-        -   [Vertico](#org0800766)
-        -   [Embark](#orgaf25213)
-        -   [Marginalia](#org4460b6f)
-        -   [Consult](#org961e322)
-        -   [consult-dir](#orgf19b18c)
-        -   [Corfu](#org31dae26)
-        -   [orderless](#org01b10ee)
-    -   [Other Useful Packages](#orgf4668ae)
-        -   [Ace Window](#orgbea1014)
-        -   [aggressive-indent-mode](#org4dc716d)
-        -   [Avy](#org249f792)
-        -   [Casual](#orgb3c3e5e)
-        -   [Crux](#org7f3e9b5)
-        -   [el-patch](#org02e1416)
-        -   [emacs-surround](#org313aea3)
-        -   [expand-region](#orgce19e44)
-        -   [Geiser (Scheme)](#org82924c2)
-        -   [Idle Highlight Mode](#org6ec5238)
-        -   [jump-char](#org2f70ed9)
-        -   [minions](#orgc7239ad)
-        -   [move-lines](#org2b04355)
-        -   [Paredit](#orgc7806d4)
-        -   [rg.el](#orgf8351f2)
-        -   [sicp-info](#org958f48b)
-        -   [undo-tree](#org86712c4)
-    -   [Appearance](#orgff113c3)
-        -   [Standard Themes](#org06f5c15)
-        -   [Nerd Icons](#orgb91c15f)
-        -   [nerd-icons-dired](#orge3d8279)
-        -   [nerd-icons-completion](#org6914caf)
-        -   [kind-icon](#org7f6503f)
--   [GUI Config](#org89c4c1f)
-    -   [General Configuration](#org42bbb13)
-        -   [Variables and Modes](#org75e23b7)
-        -   [Functions for custom bindings](#orgc5dc5fd)
-        -   [Custom Bindings](#orga7c177f)
-        -   [Functions for hooks](#orgaa5514b)
-        -   [Hooks](#orgbadcb18)
-        -   [ibuffer](#orgd86cf76)
-    -   [Programming](#org9d742a7)
-        -   [Packages](#orge1e40f5)
-        -   [Languages](#orgf154d13)
-    -   [Version Control](#orgdfcf76c)
-        -   [Magit](#orgd4a9655)
-        -   [magit-todos](#org80cc0e9)
-        -   [git-messenger](#orgf5a4f15)
-        -   [Git time machine](#orgc4f9fe7)
-        -   [diff-hl](#orgaca0c04)
-        -   [emsg-blame](#orga0e2162)
-    -   [Minibuffer & Completion](#org73e8031)
-        -   [consult-projectile](#org8341896)
-        -   [consult-eglot](#org01059c6)
-        -   [consult-org-roam](#orgfa5ad0e)
-    -   [Org Mode](#org9cdd9c6)
-        -   [Org configuration](#orge010b6a)
-        -   [org-super-agenda](#orgd98ea8b)
-        -   [ox-gfm](#org22cdb4b)
-        -   [Org-roam](#orgaf7eac0)
-        -   [Org Modern](#org7720efa)
-        -   [org-appear](#orgb8bafe8)
-        -   [org-fragtog](#orgb1e424e)
-    -   [Other Useful Packages](#orge1ed1cd)
-        -   [buffer-move](#orgbd8bf18)
-        -   [exec-path-from-shell](#org1916f79)
-        -   [ESUP](#org1c08c5e)
-        -   [gptel](#orga1b92b7)
-        -   [helpful](#orgc0e7863)
-        -   [markdown-mode](#org8cc5c21)
-        -   [package-lint](#orge9ce522)
-        -   [perspective-el](#org952ed0f)
-        -   [Popper](#org03b27c4)
-        -   [Projectile](#orgf891a40)
-        -   [ESS](#orgb379514)
-        -   [rainbow-delimiters](#org8e1e492)
-        -   [Transpose Frame](#org3e1343c)
-        -   [YASnippet](#orgd2e778a)
-    -   [Appearance](#orga6627d6)
-        -   [Doom Modeline](#org581c3ac)
-        -   [Ef Themes](#org9687075)
-        -   [kaolin-themes](#org7032562)
-        -   [Modus Themes](#org9b4857b)
-        -   [nerd-icons-corfu](#org24b7002)
--   [Terminal Config](#orgf00af0b)
-    -   [General Configuration](#org20d2b82)
-        -   [Variables and Modes](#orgabe418c)
-        -   [Functions for custom bindings](#org81bb622)
-        -   [Custom Bindings](#orgd4ecc17)
-        -   [Packages](#org8c04a4b)
+-   [Initial Setup](#org8ba6931)
+-   [Common Functions](#org61833f1)
+-   [Common General Configuration](#org4cd3015)
+    -   [Variables and Modes](#org67913e8)
+    -   [Functions for custom bindings](#org2264413)
+    -   [use-package Style Bindings](#org4df9ec9)
+    -   [Traditional-Style Bindings](#org4b44f59)
+    -   [Hooks](#org36ec076)
+    -   [dired](#org41c6047)
+    -   [Advice](#org1f92b34)
+-   [Common Packages](#org6d650a0)
+    -   [Minibuffer & Completion](#org37e9203)
+        -   [Vertico](#org76fc53b)
+        -   [Embark](#orgbc573fa)
+        -   [Marginalia](#org7c31882)
+        -   [Consult](#orgcd62c7a)
+        -   [consult-dir](#orgf73bdab)
+        -   [Corfu](#org57ee4cf)
+        -   [orderless](#org2808858)
+    -   [Other Useful Packages](#org0393c44)
+        -   [Ace Window](#orgc8bd5eb)
+        -   [aggressive-indent-mode](#orgf549130)
+        -   [Avy](#orge2c8950)
+        -   [Casual](#org597368d)
+        -   [Crux](#org8bb86e0)
+        -   [el-patch](#orge170254)
+        -   [emacs-surround](#orgc03e0c4)
+        -   [expand-region](#org27f4076)
+        -   [Geiser (Scheme)](#org1cefd9a)
+        -   [Idle Highlight Mode](#org371ddf3)
+        -   [jump-char](#org4cdcbe0)
+        -   [minions](#org6e3a562)
+        -   [move-lines](#orgc9ee2f7)
+        -   [Paredit](#orgefc0061)
+        -   [rg.el](#org3a03b94)
+        -   [sicp-info](#org99f6d3b)
+        -   [undo-tree](#orga46d6e4)
+    -   [Appearance](#orge011fe2)
+        -   [Standard Themes](#orgf31d543)
+        -   [Nerd Icons](#orga974596)
+        -   [nerd-icons-dired](#orgfd41e63)
+        -   [nerd-icons-completion](#org0196963)
+        -   [kind-icon](#org846f216)
+-   [GUI Config](#org51896c5)
+    -   [General Configuration](#org261b877)
+        -   [Variables and Modes](#org3186563)
+        -   [Functions for custom bindings](#orge6f7173)
+        -   [Custom Bindings](#orgc296772)
+        -   [Functions for hooks](#org489016e)
+        -   [Hooks](#org1f8dac2)
+        -   [ibuffer](#orgf485b92)
+    -   [Programming](#orgb44a3a1)
+        -   [Packages](#org5882359)
+        -   [Languages](#org860b696)
+    -   [Version Control](#orgd468232)
+        -   [Magit](#orgcc1cc23)
+        -   [magit-todos](#org71a50f4)
+        -   [git-messenger](#org3618631)
+        -   [Git time machine](#orgf6fce8c)
+        -   [diff-hl](#org1d958f1)
+        -   [emsg-blame](#orga44647c)
+    -   [Minibuffer & Completion](#org8a5c7c2)
+        -   [consult-projectile](#orgd0db48c)
+        -   [consult-eglot](#orga1d3c74)
+        -   [consult-org-roam](#orge10380b)
+    -   [Org Mode](#orgfab87dc)
+        -   [Org configuration](#org42084cb)
+        -   [org-super-agenda](#org76ed7b2)
+        -   [ox-gfm](#org110b068)
+        -   [Org-roam](#org667030b)
+        -   [Org Modern](#org739abf6)
+        -   [org-appear](#org379aa6a)
+        -   [org-fragtog](#org99da6b5)
+    -   [Other Useful Packages](#orgf4e0bf8)
+        -   [buffer-move](#orgfa400df)
+        -   [exec-path-from-shell](#org55b9171)
+        -   [ESUP](#org7495f84)
+        -   [gptel](#orgb49e905)
+        -   [helpful](#orgffe9e4b)
+        -   [markdown-mode](#org4f48d9e)
+        -   [package-lint](#org4ee382e)
+        -   [perspective-el](#org453ad27)
+        -   [Popper](#org2c111b7)
+        -   [Projectile](#org71114eb)
+        -   [ESS](#org2f9d594)
+        -   [rainbow-delimiters](#org369751c)
+        -   [Transpose Frame](#org036d1d5)
+        -   [YASnippet](#org360d14c)
+    -   [Appearance](#orgcb4abf9)
+        -   [Doom Modeline](#org6626e52)
+        -   [Ef Themes](#org35bae84)
+        -   [kaolin-themes](#org049473f)
+        -   [Modus Themes](#orgcd442f5)
+        -   [nerd-icons-corfu](#orgc92b113)
+-   [Terminal Config](#org9d5776a)
+    -   [General Configuration](#orge9137fd)
+        -   [Variables and Modes](#orgdb20542)
+        -   [Functions for custom bindings](#orgfc080d1)
+        -   [Custom Bindings](#orgd09734e)
+        -   [Packages](#orgac05245)
 
 
-<a id="orgd3f68a9"></a>
+<a id="org8ba6931"></a>
 
 # Initial Setup
 
@@ -119,30 +119,55 @@ Before opening emacs with this configuration there are a few set up tasks that n
 3.  Configure environment variables: <https://github.com/amodelbello/dot-env.el> example `.env` file: [.env.example](.env.example)
 
 
-<a id="org0e9d737"></a>
+<a id="org61833f1"></a>
 
 # Common Functions
 
 These are functions needed by both configurations during initial startup.
 
 ```emacs-lisp
-(defun amo/load-straight (&optional base-dir)
-  (defvar bootstrap-version)
-  (let* ((base-dir (or base-dir user-emacs-directory))
-         (bootstrap-file
-          (expand-file-name
-           (concat user-emacs-directory "straight/repos/straight.el/bootstrap.el") base-dir))
-         (bootstrap-version 6))
-    (unless (file-exists-p bootstrap-file)
-      (with-current-buffer
-          (url-retrieve-synchronously
-           "https://raw.githubusercontent.com/radian-software/straight.el/develop/install.el"
-           'silent 'inhibit-cookies)
-        (goto-char (point-max))
-        (eval-print-last-sexp)))
-    (load bootstrap-file nil 'nomessage))
-  (straight-use-package 'use-package)
-  (straight-use-package 'org))
+(defun amo/load-elpaca ()
+  (defvar elpaca-installer-version 0.12)
+  (defvar elpaca-directory (expand-file-name "elpaca/" user-emacs-directory))
+  (defvar elpaca-builds-directory (expand-file-name "builds/" elpaca-directory))
+  (defvar elpaca-sources-directory (expand-file-name "sources/" elpaca-directory))
+  (defvar elpaca-order '(elpaca :repo "https://github.com/progfolio/elpaca.git"
+                                :ref nil :depth 1 :inherit ignore
+                                :files (:defaults "elpaca-test.el" (:exclude "extensions"))
+                                :build (:not elpaca-activate)))
+  (let* ((repo  (expand-file-name "elpaca/" elpaca-sources-directory))
+         (build (expand-file-name "elpaca/" elpaca-builds-directory))
+         (order (cdr elpaca-order))
+         (default-directory repo))
+    (add-to-list 'load-path (if (file-exists-p build) build repo))
+    (unless (file-exists-p repo)
+      (make-directory repo t)
+      (when (<= emacs-major-version 28) (require 'subr-x))
+      (condition-case-unless-debug err
+          (if-let* ((buffer (pop-to-buffer-same-window "*elpaca-bootstrap*"))
+                    ((zerop (apply #'call-process `("git" nil ,buffer t "clone"
+                                                    ,@(when-let* ((depth (plist-get order :depth)))
+                                                        (list (format "--depth=%d" depth) "--no-single-branch"))
+                                                    ,(plist-get order :repo) ,repo))))
+                    ((zerop (call-process "git" nil buffer t "checkout"
+                                          (or (plist-get order :ref) "--"))))
+                    (emacs (concat invocation-directory invocation-name))
+                    ((zerop (call-process emacs nil buffer nil "-Q" "-L" "." "--batch"
+                                          "--eval" "(byte-recompile-directory \".\" 0 'force)")))
+                    ((require 'elpaca))
+                    ((elpaca-generate-autoloads "elpaca" repo)))
+              (progn (message "%s" (buffer-string)) (kill-buffer buffer))
+            (error "%s" (with-current-buffer buffer (buffer-string))))
+        ((error) (warn "%s" err) (delete-directory repo 'recursive))))
+    (unless (require 'elpaca-autoloads nil t)
+      (require 'elpaca)
+      (elpaca-generate-autoloads "elpaca" repo)
+      (let ((load-source-file-function nil)) (load "./elpaca-autoloads"))))
+  (add-hook 'after-init-hook #'elpaca-process-queues)
+  (elpaca `(,@elpaca-order))
+  (elpaca elpaca-use-package
+          ;; Enable use-package :ensure support for Elpaca.
+          (elpaca-use-package-mode)))
 
 (defun amo/load-customize (&optional base-dir)
   (defvar custom-file)
@@ -157,18 +182,18 @@ These are functions needed by both configurations during initial startup.
 ```
 
 
-<a id="orgf2c22a7"></a>
+<a id="org4cd3015"></a>
 
 # Common General Configuration
 
 
 
-<a id="org34a523b"></a>
+<a id="org67913e8"></a>
 
 ## Variables and Modes
 
 ```emacs-lisp
-(use-package emacs
+(use-package emacs :ensure nil
   :config
   ;; Use C-h for delete-backward-char
   (global-set-key (kbd "C-h") 'delete-backward-char)
@@ -247,7 +272,7 @@ These are functions needed by both configurations during initial startup.
 ```
 
 
-<a id="orge8a59bd"></a>
+<a id="org2264413"></a>
 
 ## Functions for custom bindings
 
@@ -425,7 +450,7 @@ Otherwise use the projectile project root if present"
 ```
 
 
-<a id="org72fc54c"></a>
+<a id="org4df9ec9"></a>
 
 ## use-package Style Bindings
 
@@ -453,7 +478,7 @@ Otherwise use the projectile project root if present"
 ```
 
 
-<a id="org643c567"></a>
+<a id="org4b44f59"></a>
 
 ## Traditional-Style Bindings
 
@@ -472,7 +497,7 @@ Necessary when the bound function requires arguments
 ```
 
 
-<a id="org05c1a3e"></a>
+<a id="org36ec076"></a>
 
 ## Hooks
 
@@ -486,7 +511,7 @@ Necessary when the bound function requires arguments
 ```
 
 
-<a id="orgc026bd1"></a>
+<a id="org41c6047"></a>
 
 ## dired
 
@@ -500,7 +525,7 @@ Necessary when the bound function requires arguments
 ```
 
 
-<a id="org6a26ce7"></a>
+<a id="org1f92b34"></a>
 
 ## Advice
 
@@ -516,18 +541,18 @@ Necessary when the bound function requires arguments
 ```
 
 
-<a id="org895b650"></a>
+<a id="org6d650a0"></a>
 
 # Common Packages
 
 
 
-<a id="org33eb96d"></a>
+<a id="org37e9203"></a>
 
 ## Minibuffer & Completion
 
 
-<a id="org0800766"></a>
+<a id="org76fc53b"></a>
 
 ### Vertico
 
@@ -536,7 +561,7 @@ Necessary when the bound function requires arguments
 
 ```emacs-lisp
 (use-package vertico
-  :straight (:files (:defaults "extensions/*"))
+  :ensure (:files (:defaults "extensions/*"))
   :bind (:map vertico-map
               ("C-j" . vertico-directory-enter)
               ("DEL" . vertico-directory-delete-char)
@@ -556,7 +581,7 @@ Necessary when the bound function requires arguments
 ```
 
 
-<a id="orgaf25213"></a>
+<a id="orgbc573fa"></a>
 
 ### Embark
 
@@ -565,7 +590,7 @@ Necessary when the bound function requires arguments
 
 ```emacs-lisp
 (use-package embark
-  :straight t
+  :ensure t
   :bind (("C-." . embark-act)
          ("C-S-h B" . embark-bindings)
          :map flyspell-mode-map
@@ -633,13 +658,13 @@ targets."
     (wgrep-toggle-readonly-area)))
 
 (use-package embark-consult
-  :straight t
+  :ensure t
   :hook
   (embark-collect-mode . consult-preview-at-point-mode))
 ```
 
 
-<a id="org4460b6f"></a>
+<a id="org7c31882"></a>
 
 ### Marginalia
 
@@ -648,13 +673,13 @@ targets."
 
 ```emacs-lisp
 (use-package marginalia
-  :straight t
+  :ensure t
   :init
   (marginalia-mode))
 ```
 
 
-<a id="org961e322"></a>
+<a id="orgcd62c7a"></a>
 
 ### Consult
 
@@ -664,7 +689,7 @@ targets."
 ```emacs-lisp
 ;; Example configuration for Consult
 (use-package consult
-  :straight t
+  :ensure t
 
   ;; Replace bindings. Lazily loaded due by `use-package'.
   :bind (("C-s" . consult-line)
@@ -724,7 +749,7 @@ targets."
 ```
 
 
-<a id="orgf19b18c"></a>
+<a id="orgf73bdab"></a>
 
 ### consult-dir
 
@@ -733,7 +758,7 @@ targets."
 
 ```emacs-lisp
 (use-package consult-dir
-  :straight t
+  :ensure t
   :bind (("C-x C-d" . consult-dir)
          :map vertico-map
          ("C-x C-d" . consult-dir)
@@ -743,7 +768,7 @@ targets."
 ```
 
 
-<a id="org31dae26"></a>
+<a id="org57ee4cf"></a>
 
 ### Corfu
 
@@ -752,7 +777,8 @@ targets."
 
 ```emacs-lisp
 (use-package corfu
-  :straight (:files (:defaults "extensions/*"))
+  ;; :ensure (:files (:defaults "extensions/*"))
+  :ensure t
   :init
   (global-corfu-mode)
   (corfu-popupinfo-mode 1)
@@ -774,7 +800,7 @@ targets."
 ```
 
 
-<a id="org01b10ee"></a>
+<a id="org2808858"></a>
 
 ### orderless
 
@@ -783,19 +809,19 @@ targets."
 
 ```emacs-lisp
 (use-package orderless
-  :straight t
+  :ensure t
   :config
   (setq completion-styles '(orderless basic)
         completion-category-overrides '((file (styles basic partial-completion)))))
 ```
 
 
-<a id="orgf4668ae"></a>
+<a id="org0393c44"></a>
 
 ## Other Useful Packages
 
 
-<a id="orgbea1014"></a>
+<a id="orgc8bd5eb"></a>
 
 ### Ace Window
 
@@ -804,7 +830,7 @@ targets."
 
 ```emacs-lisp
 (use-package ace-window
-  :straight t
+  :ensure t
   :bind
   (("C-o" . ace-window)
    ("C-x o" . ace-window)
@@ -819,7 +845,7 @@ targets."
 ```
 
 
-<a id="org4dc716d"></a>
+<a id="orgf549130"></a>
 
 ### aggressive-indent-mode
 
@@ -828,7 +854,7 @@ targets."
 
 ```emacs-lisp
 (use-package aggressive-indent
-  :straight t
+  :ensure t
   :hook ((lisp-mode . aggressive-indent-mode)
          (emacs-lisp-mode . aggressive-indent-mode)
          (scheme-mode . aggressive-indent-mode)
@@ -840,7 +866,7 @@ targets."
 ```
 
 
-<a id="org249f792"></a>
+<a id="orge2c8950"></a>
 
 ### Avy
 
@@ -849,7 +875,7 @@ targets."
 
 ```emacs-lisp
 (use-package avy
-  :straight t
+  :ensure t
   :bind (("C-;" . avy-goto-char-2)
          :map org-mode-map
          ("C-'" . nil)
@@ -858,7 +884,7 @@ targets."
 ```
 
 
-<a id="orgb3c3e5e"></a>
+<a id="org597368d"></a>
 
 ### Casual
 
@@ -867,7 +893,7 @@ targets."
     
     ```emacs-lisp
     (use-package casual
-      :straight t
+      :ensure t
       :bind (:map
              calc-mode-map
              ("?" . casual-calc-tmenu)
@@ -883,7 +909,7 @@ targets."
     ```
 
 
-<a id="org7f3e9b5"></a>
+<a id="org8bb86e0"></a>
 
 ### Crux
 
@@ -893,7 +919,7 @@ targets."
 
 ```emacs-lisp
 (use-package crux
-  :straight t
+  :ensure t
   :bind
   (("s-o" . crux-smart-open-line-above)
    ("M-o" . crux-smart-open-line)
@@ -907,7 +933,7 @@ targets."
 ```
 
 
-<a id="org02e1416"></a>
+<a id="orge170254"></a>
 
 ### el-patch
 
@@ -916,11 +942,11 @@ targets."
 
 ```emacs-lisp
 (use-package el-patch
-  :straight t)
+  :ensure t)
 ```
 
 
-<a id="org313aea3"></a>
+<a id="orgc03e0c4"></a>
 
 ### emacs-surround
 
@@ -929,12 +955,12 @@ targets."
 
 ```emacs-lisp
 (use-package surround
-  :straight t
+  :ensure t
   :bind-keymap ("M-'" . surround-keymap))
 ```
 
 
-<a id="orgce19e44"></a>
+<a id="org27f4076"></a>
 
 ### expand-region
 
@@ -943,13 +969,13 @@ targets."
 
 ```emacs-lisp
 (use-package expreg
-  :straight t
+  :ensure t
   :bind (("C-=" . expreg-expand)
          ("C--" . expreg-contract)))
 ```
 
 
-<a id="org82924c2"></a>
+<a id="org1cefd9a"></a>
 
 ### Geiser (Scheme)
 
@@ -959,11 +985,11 @@ targets."
 
 ```emacs-lisp
 (use-package geiser-guile
-  :straight t)
+  :ensure t)
 ```
 
 
-<a id="org6ec5238"></a>
+<a id="org371ddf3"></a>
 
 ### Idle Highlight Mode
 
@@ -972,7 +998,7 @@ targets."
     
     ```emacs-lisp
     (use-package idle-highlight-mode
-      :straight t
+      :ensure t
       :config
       (setq idle-highlight-idle-time 0.2
             idle-highlight-exclude-point t
@@ -981,7 +1007,7 @@ targets."
     ```
 
 
-<a id="org2f70ed9"></a>
+<a id="org4cdcbe0"></a>
 
 ### jump-char
 
@@ -990,14 +1016,14 @@ targets."
 
 ```emacs-lisp
 (use-package jump-char
-  :straight (:host github :repo "lewang/jump-char"
+  :ensure (:host github :repo "lewang/jump-char"
                :branch "master")
   :bind (("M-;" . jump-char-forward)
          ("M-:" . jump-char-backward)))
 ```
 
 
-<a id="orgc7239ad"></a>
+<a id="org6e3a562"></a>
 
 ### minions
 
@@ -1006,13 +1032,13 @@ targets."
 
 ```emacs-lisp
 (use-package minions
-  :straight t
+  :ensure t
   :config
   (minions-mode 1))
 ```
 
 
-<a id="org2b04355"></a>
+<a id="orgc9ee2f7"></a>
 
 ### move-lines
 
@@ -1021,7 +1047,7 @@ targets."
     
     ```emacs-lisp
     (use-package move-lines
-      :straight (:host github :repo "targzeta/move-lines"
+      :ensure (:host github :repo "targzeta/move-lines"
                        :branch "master")
       :config
       (global-set-key (kbd "M-<down>") 'move-lines-down))
@@ -1029,7 +1055,7 @@ targets."
     ```
 
 
-<a id="orgc7806d4"></a>
+<a id="orgefc0061"></a>
 
 ### Paredit
 
@@ -1039,7 +1065,7 @@ targets."
 
 ```emacs-lisp
 (use-package paredit
-  :straight t
+  :ensure t
   :hook
   ((lisp-mode . paredit-mode)
    (emacs-lisp-mode . paredit-mode)
@@ -1059,7 +1085,7 @@ targets."
 ```
 
 
-<a id="orgf8351f2"></a>
+<a id="org3a03b94"></a>
 
 ### rg.el
 
@@ -1069,13 +1095,13 @@ targets."
 
 ```emacs-lisp
 (use-package rg
-  :straight t
+  :ensure t
   :config
   (rg-enable-default-bindings))
 ```
 
 
-<a id="org958f48b"></a>
+<a id="org99f6d3b"></a>
 
 ### sicp-info
 
@@ -1085,11 +1111,11 @@ targets."
 
 ```emacs-lisp
 (use-package sicp
-  :straight t)
+  :ensure t)
 ```
 
 
-<a id="org86712c4"></a>
+<a id="orga46d6e4"></a>
 
 ### undo-tree
 
@@ -1099,7 +1125,7 @@ targets."
 
 ```emacs-lisp
 (use-package undo-tree
-  :straight t
+  :ensure t
   :config
   (global-undo-tree-mode)
   (setq undo-tree-history-directory-alist `((".*" . ,temporary-file-directory))
@@ -1110,12 +1136,12 @@ targets."
 ```
 
 
-<a id="orgff113c3"></a>
+<a id="orge011fe2"></a>
 
 ## Appearance
 
 
-<a id="org06f5c15"></a>
+<a id="orgf31d543"></a>
 
 ### Standard Themes
 
@@ -1124,11 +1150,11 @@ targets."
 
 ```emacs-lisp
 (use-package standard-themes
-  :straight t)
+  :ensure t)
 ```
 
 
-<a id="orgb91c15f"></a>
+<a id="orga974596"></a>
 
 ### Nerd Icons
 
@@ -1137,13 +1163,13 @@ targets."
 
 ```emacs-lisp
 (use-package nerd-icons
-  :straight t
+  :ensure t
   :custom
   (nerd-icons-font-family "Symbols Nerd Font Mono"))
 ```
 
 
-<a id="orge3d8279"></a>
+<a id="orgfd41e63"></a>
 
 ### nerd-icons-dired
 
@@ -1152,13 +1178,13 @@ targets."
 
 ```emacs-lisp
 (use-package nerd-icons-dired
-  :straight t
+  :ensure t
   :hook
   (dired-mode . nerd-icons-dired-mode))
 ```
 
 
-<a id="org6914caf"></a>
+<a id="org0196963"></a>
 
 ### nerd-icons-completion
 
@@ -1167,7 +1193,7 @@ targets."
 
 ```emacs-lisp
 (use-package nerd-icons-completion
-  :straight t
+  :ensure t
   :after marginalia
   :hook ((marginalia-mode . nerd-icons-completion-marginalia-setup))
   :init
@@ -1175,7 +1201,7 @@ targets."
 ```
 
 
-<a id="org7f6503f"></a>
+<a id="org846f216"></a>
 
 ### kind-icon
 
@@ -1184,7 +1210,7 @@ targets."
 
 ```emacs-lisp
 (use-package kind-icon
-  :straight t
+  :ensure t
   :after corfu
   :custom
   (kind-icon-default-face 'corfu-default) ; to compute blended backgrounds correctly
@@ -1193,24 +1219,24 @@ targets."
 ```
 
 
-<a id="org89c4c1f"></a>
+<a id="org51896c5"></a>
 
 # GUI Config
 
 Configuration and packages specific to GUI
 
 
-<a id="org42bbb13"></a>
+<a id="org261b877"></a>
 
 ## General Configuration
 
 
-<a id="org75e23b7"></a>
+<a id="org3186563"></a>
 
 ### Variables and Modes
 
 ```emacs-lisp
-(straight-use-package 'project)
+;; (use-package 'project)
 
 (setq-default line-spacing (dot-env-get 'LINE_SPACING 1))
 
@@ -1311,7 +1337,7 @@ Configuration and packages specific to GUI
 ```
 
 
-<a id="orgc5dc5fd"></a>
+<a id="orge6f7173"></a>
 
 ### Functions for custom bindings
 
@@ -1391,7 +1417,7 @@ Also balance windows and move point to new window"
 ```
 
 
-<a id="orga7c177f"></a>
+<a id="orgc296772"></a>
 
 ### Custom Bindings
 
@@ -1423,7 +1449,7 @@ Also balance windows and move point to new window"
 ```
 
 
-<a id="orgaa5514b"></a>
+<a id="org489016e"></a>
 
 ### Functions for hooks
 
@@ -1439,7 +1465,7 @@ Also balance windows and move point to new window"
 ```
 
 
-<a id="orgbadcb18"></a>
+<a id="org1f8dac2"></a>
 
 ### Hooks
 
@@ -1454,7 +1480,7 @@ Also balance windows and move point to new window"
 ```
 
 
-<a id="orgd86cf76"></a>
+<a id="orgf485b92"></a>
 
 ### ibuffer
 
@@ -1466,12 +1492,12 @@ Also balance windows and move point to new window"
 ```
 
 
-<a id="org9d742a7"></a>
+<a id="orgb44a3a1"></a>
 
 ## Programming
 
 
-<a id="orge1e40f5"></a>
+<a id="org5882359"></a>
 
 ### Packages
 
@@ -1482,7 +1508,7 @@ Also balance windows and move point to new window"
     
     ```emacs-lisp
     (use-package treesit-auto
-      :straight t
+      :ensure t
       :custom
       (treesit-auto-install t)
       :config
@@ -1502,8 +1528,7 @@ Also balance windows and move point to new window"
         (eglot-format)))
     
     (use-package eglot
-      :straight t
-      :defer t
+      :ensure nil
       :config
       (setq eglot-ignored-server-capabilites '(:documentHighlightProvider)
             eglot-code-action-indicator "⚙")
@@ -1568,7 +1593,7 @@ Also balance windows and move point to new window"
     
     ```emacs-lisp
     (use-package dape
-      :straight t
+      :ensure t
       :config
       (setq dape-buffer-window-arrangement 'right)
       (setq dape-cwd-fn 'projectile-project-root))
@@ -1581,7 +1606,7 @@ Also balance windows and move point to new window"
     
     ```emacs-lisp
     (use-package imenu-list
-      :straight t
+      :ensure t
       :config
       (setq imenu-list-focus-after-activation t
             imenu-list-position 'left
@@ -1596,7 +1621,7 @@ Also balance windows and move point to new window"
     
     ```emacs-lisp
     (use-package origami
-      :straight t
+      :ensure t
       :bind (("C-c f" . origami-toggle-node))
       :hook (prog-mode . origami-mode))
     ```
@@ -1607,9 +1632,9 @@ Also balance windows and move point to new window"
     -   **Description:** An unofficial Copilot plugin for Emacs.
     
     ```emacs-lisp
-    (use-package copilot
-      :straight (:host github :repo "copilot-emacs/copilot.el" :files ("*.el"))
-      :ensure t)
+    ;; (use-package copilot
+    ;;   :ensure (:host github :repo "copilot-emacs/copilot.el" :files ("*.el"))
+    ;;   :ensure t)
     ```
 
 -   mcp
@@ -1619,7 +1644,7 @@ Also balance windows and move point to new window"
     
     ```emacs-lisp
     (use-package mcp
-      :straight t
+      :ensure t
       :after gptel
       :config ((setopt mcp-hub-servers
                '(("github" . (:command "docker"
@@ -1636,10 +1661,10 @@ Also balance windows and move point to new window"
     -   **Description:** Chat with Github copilot in Emacs !
     
     ```emacs-lisp
-    (use-package copilot-chat
-      ;; :straight (:host github :repo "chep/copilot-chat.el" :files ("*.el"))
-      :straight t
-      :after (request org markdown-mode)
+    (use-package gh-copilot-chat
+      :ensure (:host github :repo "chep/copilot-chat.el" :files ("*.el"))
+      ;; :ensure t
+      ;; :after (request org markdown-mode)
       :init
       :config
       (setq copilot-chat-default-model (dot-env-get 'COPILOT_CHAT_DEFAULT_MODEL "claude-sonnet-4.5"))
@@ -1659,12 +1684,12 @@ Also balance windows and move point to new window"
     
     ```emacs-lisp
     (use-package protobuf-mode
-      :straight t
+      :ensure t
       :mode ("\\.proto\\'" . protobuf-mode))
     ```
 
 
-<a id="orgf154d13"></a>
+<a id="org860b696"></a>
 
 ### Languages
 
@@ -1676,7 +1701,7 @@ Also balance windows and move point to new window"
         
         ```emacs-lisp
         (use-package dockerfile-mode
-          :straight t)
+          :ensure t)
         ```
     
     -   docker-compose-mode
@@ -1685,7 +1710,7 @@ Also balance windows and move point to new window"
         
         ```emacs-lisp
         (use-package docker-compose-mode
-          :straight t)
+          :ensure t)
         ```
 
 -   Flatbuffers
@@ -1695,7 +1720,7 @@ Also balance windows and move point to new window"
     
     ```emacs-lisp
     (use-package flatbuffers-mode
-      :straight t)
+      :ensure t)
     ```
 
 -   Golang
@@ -1721,7 +1746,7 @@ Also balance windows and move point to new window"
         
         ```emacs-lisp
         (use-package haskell-mode
-          :straight t
+          :ensure t
           :config (setq haskell-interactive-popup-errors nil)
           :hook (haskell-mode . (lambda () (interactive-haskell-mode t))))
         ```
@@ -1731,7 +1756,7 @@ Also balance windows and move point to new window"
     -   python-ts-mode
     
         ```emacs-lisp
-        (use-package emacs
+        (use-package emacs :ensure nil
           :hook (python-ts-mode . (lambda () (setq-local tab-width 4)))
           :bind
           ("C-M-f" . python-nav-forward-defun)
@@ -1752,7 +1777,7 @@ Also balance windows and move point to new window"
         
         ```emacs-lisp
         (use-package conda
-          :straight t
+          :ensure t
           :init
           (setq conda-anaconda-home (expand-file-name (dot-env-get 'CONDA_PATH "~/opt/miniconda3"))
                 conda-env-home-directory (expand-file-name (dot-env-get 'CONDA_PATH "~/opt/miniconda3"))
@@ -1769,7 +1794,7 @@ Also balance windows and move point to new window"
         
         ```emacs-lisp
         (use-package pyvenv
-          :straight t
+          :ensure t
           :diminish
           :config
           (setq pyvenv-mode-line-indicator
@@ -1786,7 +1811,7 @@ Also balance windows and move point to new window"
         
         ```emacs-lisp
         (use-package eglot-java
-          :straight t
+          :ensure t
           :bind
           (("C-c l n" . eglot-java-file-new)
            ("C-c l x" . eglot-java-run-main)
@@ -1803,7 +1828,7 @@ Also balance windows and move point to new window"
     
     ```emacs-lisp
     (use-package jinja2-mode
-      :straight t)
+      :ensure t)
     ```
 
 -   SuperCollider
@@ -1823,16 +1848,16 @@ Also balance windows and move point to new window"
     
     ```emacs-lisp
     (use-package vue-mode
-      :straight t)
+      :ensure t)
     ```
 
 
-<a id="orgdfcf76c"></a>
+<a id="orgd468232"></a>
 
 ## Version Control
 
 
-<a id="orgd4a9655"></a>
+<a id="orgcc1cc23"></a>
 
 ### Magit
 
@@ -1841,8 +1866,11 @@ Also balance windows and move point to new window"
 -   **Description:** It's Magit! A Git Porcelain inside Emacs.
 
 ```emacs-lisp
+(use-package transient
+  :ensure t)
 (use-package magit
-  :straight t
+  :ensure t
+  :after transient
   :bind
   (("C-x g" . magit))
   :after nerd-icons
@@ -1854,7 +1882,7 @@ Also balance windows and move point to new window"
 ```
 
 
-<a id="org80cc0e9"></a>
+<a id="org71a50f4"></a>
 
 ### magit-todos
 
@@ -1863,12 +1891,12 @@ Also balance windows and move point to new window"
 
 ```emacs-lisp
 (use-package magit-todos
-  :straight t
+  :ensure t
   :hook ((magit-mode . magit-todos-mode)))
 ```
 
 
-<a id="orgf5a4f15"></a>
+<a id="org3618631"></a>
 
 ### git-messenger
 
@@ -1877,14 +1905,14 @@ Also balance windows and move point to new window"
 
 ```emacs-lisp
 (use-package git-messenger
-  :straight t
+  :ensure t
   :config (setq git-messenger:show-detail t
                 git-messenger:use-magit-popup t)
   :bind ("C-x m" . git-messenger:popup-message))
 ```
 
 
-<a id="orgc4f9fe7"></a>
+<a id="orgf6fce8c"></a>
 
 ### Git time machine
 
@@ -1893,11 +1921,11 @@ Also balance windows and move point to new window"
 
 ```emacs-lisp
 (use-package git-timemachine
-  :straight t)
+  :ensure t)
 ```
 
 
-<a id="orgaca0c04"></a>
+<a id="org1d958f1"></a>
 
 ### diff-hl
 
@@ -1906,7 +1934,7 @@ Also balance windows and move point to new window"
 
 ```emacs-lisp
 (use-package diff-hl
-  :straight t
+  :ensure t
   :config
   (global-diff-hl-mode)
   :hook
@@ -1919,7 +1947,7 @@ Also balance windows and move point to new window"
 ```
 
 
-<a id="orga0e2162"></a>
+<a id="orga44647c"></a>
 
 ### emsg-blame
 
@@ -1928,7 +1956,7 @@ Also balance windows and move point to new window"
 
 ```emacs-lisp
 (use-package emsg-blame
-  :straight (:host github :repo "ISouthRain/emsg-blame")
+  :ensure (:host github :repo "ISouthRain/emsg-blame")
   :config
   (global-emsg-blame-mode)
   (defun my--emsg-blame-display ()
@@ -1955,12 +1983,12 @@ do not both fit in the echo area."
 ```
 
 
-<a id="org73e8031"></a>
+<a id="org8a5c7c2"></a>
 
 ## Minibuffer & Completion
 
 
-<a id="org8341896"></a>
+<a id="orgd0db48c"></a>
 
 ### consult-projectile
 
@@ -1969,7 +1997,8 @@ do not both fit in the echo area."
 
 ```emacs-lisp
 (use-package consult-projectile
-  :straight t
+  :ensure t
+  :after projectile
   :config
   (define-key projectile-command-map (kbd "h") #'consult-projectile)
   (define-key projectile-command-map (kbd "f") #'consult-projectile-find-file)
@@ -1979,7 +2008,7 @@ do not both fit in the echo area."
 ```
 
 
-<a id="org01059c6"></a>
+<a id="orga1d3c74"></a>
 
 ### consult-eglot
 
@@ -1988,11 +2017,12 @@ do not both fit in the echo area."
     
     ```emacs-lisp
     (use-package consult-eglot
-      :straight t)
+      :ensure t
+      :after eglot)
     ```
 
 
-<a id="orgfa5ad0e"></a>
+<a id="orge10380b"></a>
 
 ### consult-org-roam
 
@@ -2001,8 +2031,8 @@ do not both fit in the echo area."
     
     ```emacs-lisp
     (use-package consult-org-roam
-      :straight t
-      :after org-roam
+      :ensure t
+      :after (org-roam consult)
       :init
       (consult-org-roam-mode 1)
     
@@ -2018,12 +2048,12 @@ do not both fit in the echo area."
     ```
 
 
-<a id="org9cdd9c6"></a>
+<a id="orgfab87dc"></a>
 
 ## Org Mode
 
 
-<a id="orge010b6a"></a>
+<a id="org42084cb"></a>
 
 ### Org configuration
 
@@ -2032,6 +2062,8 @@ do not both fit in the echo area."
 
 ```emacs-lisp
 (use-package org
+  :ensure nil
+  :demand t
   :config
   (setq org-directory (dot-env-get 'ORG_DIRECTORY
                                    (concat user-emacs-directory "org-directory"))
@@ -2165,7 +2197,7 @@ do not both fit in the echo area."
 ```
 
 
-<a id="orgd98ea8b"></a>
+<a id="org76ed7b2"></a>
 
 ### org-super-agenda
 
@@ -2174,10 +2206,9 @@ do not both fit in the echo area."
 
 ```emacs-lisp
 (use-package org-super-agenda
-  :straight t
+  :ensure t
   :config
-  (setq org-super-agenda-groups '(
-                                  (:name ""
+  (setq org-super-agenda-groups '((:name ""
                                          :time-grid t
                                          :order 1)
                                   (:auto-group t)
@@ -2185,12 +2216,14 @@ do not both fit in the echo area."
                                          :todo "TOLEARN")
                                   (:name "Later"
                                          :todo "LATER")))
-  :hook
-  (org-mode . org-super-agenda-mode))
+  org-super-agenda-mode
+  ;; :hook
+  ;; (org-mode . org-super-agenda-mode)
+  )
 ```
 
 
-<a id="org22cdb4b"></a>
+<a id="org110b068"></a>
 
 ### ox-gfm
 
@@ -2199,14 +2232,14 @@ do not both fit in the echo area."
     
     ```emacs-lisp
     (use-package ox-gfm
-      :straight t
+      :ensure t
       :config
       (eval-after-load "org"
         '(require 'ox-gfm nil t)))
     ```
 
 
-<a id="orgaf7eac0"></a>
+<a id="org667030b"></a>
 
 ### Org-roam
 
@@ -2216,7 +2249,7 @@ do not both fit in the echo area."
     
     ```emacs-lisp
     (use-package org-roam
-      :straight t
+      :ensure t
       :after org
       :init
       ;; to prevent "non-prefix key" error
@@ -2252,7 +2285,7 @@ do not both fit in the echo area."
     ```
 
 
-<a id="org7720efa"></a>
+<a id="org739abf6"></a>
 
 ### Org Modern
 
@@ -2261,7 +2294,7 @@ do not both fit in the echo area."
     
     ```emacs-lisp
     (use-package org-modern
-      :straight t
+      :ensure t
       :config
       (with-eval-after-load 'org (global-org-modern-mode))
       (setq org-modern-todo nil
@@ -2278,7 +2311,7 @@ do not both fit in the echo area."
     ```
 
 
-<a id="orgb8bafe8"></a>
+<a id="org379aa6a"></a>
 
 ### org-appear
 
@@ -2287,12 +2320,12 @@ do not both fit in the echo area."
 
 ```emacs-lisp
 (use-package org-appear
-  :straight (:type git :host github :repo "awth13/org-appear")
+  :ensure (:type git :host github :repo "awth13/org-appear")
   :hook (org-mode . org-appear-mode))
 ```
 
 
-<a id="orgb1e424e"></a>
+<a id="org99da6b5"></a>
 
 ### org-fragtog
 
@@ -2301,17 +2334,17 @@ do not both fit in the echo area."
 
 ```emacs-lisp
 (use-package org-fragtog
-  :straight t
+  :ensure t
   :hook ((org-mode . org-fragtog-mode)))
 ```
 
 
-<a id="orge1ed1cd"></a>
+<a id="orgf4e0bf8"></a>
 
 ## Other Useful Packages
 
 
-<a id="orgbd8bf18"></a>
+<a id="orgfa400df"></a>
 
 ### buffer-move
 
@@ -2320,7 +2353,7 @@ do not both fit in the echo area."
 
 ```emacs-lisp
 (use-package buffer-move
-  :straight t
+  :ensure t
   :bind
   (("<C-S-up>" . buf-move-up)
    ("<C-S-down>" . buf-move-down)
@@ -2334,7 +2367,7 @@ do not both fit in the echo area."
 ```
 
 
-<a id="org1916f79"></a>
+<a id="org55b9171"></a>
 
 ### exec-path-from-shell
 
@@ -2344,13 +2377,13 @@ do not both fit in the echo area."
 ```emacs-lisp
 (when (memq window-system '(mac ns x)) ;; Linux
   (use-package exec-path-from-shell
-    :straight t
+    :ensure t
     :config
     (exec-path-from-shell-initialize)))
 ```
 
 
-<a id="org1c08c5e"></a>
+<a id="org7495f84"></a>
 
 ### ESUP
 
@@ -2359,13 +2392,13 @@ do not both fit in the echo area."
 
 ```emacs-lisp
 (use-package esup
-  :straight t
+  :ensure t
   :config
   (setq esup-depth 0))
 ```
 
 
-<a id="orga1b92b7"></a>
+<a id="orgb49e905"></a>
 
 ### gptel
 
@@ -2374,7 +2407,7 @@ do not both fit in the echo area."
 
 ```emacs-lisp
 (use-package gptel
-  :straight t
+  :ensure t
   :init
   (define-key global-map (kbd "C-c g") (make-sparse-keymap))
   (setq gptel-directives '((default
@@ -2406,7 +2439,7 @@ do not both fit in the echo area."
 ```
 
 
-<a id="orgc0e7863"></a>
+<a id="orgffe9e4b"></a>
 
 ### helpful
 
@@ -2415,7 +2448,7 @@ do not both fit in the echo area."
 
 ```emacs-lisp
 (use-package helpful
-  :straight t
+  :ensure t
   :bind (("C-z h f" . helpful-callable)
          ("C-z h v" . helpful-variable)
          ("C-z h o" . helpful-symbol)
@@ -2426,7 +2459,7 @@ do not both fit in the echo area."
 ```
 
 
-<a id="org8cc5c21"></a>
+<a id="org4f48d9e"></a>
 
 ### markdown-mode
 
@@ -2435,13 +2468,13 @@ do not both fit in the echo area."
 
 ```emacs-lisp
 (use-package markdown-mode
-  :straight t
+  :ensure t
   :mode ("README\\.md\\'" . gfm-mode)
   :init (setq markdown-command "multimarkdown"))
 ```
 
 
-<a id="orge9ce522"></a>
+<a id="org4ee382e"></a>
 
 ### package-lint
 
@@ -2450,11 +2483,11 @@ do not both fit in the echo area."
 
 ```emacs-lisp
 (use-package package-lint
-  :straight t)
+  :ensure t)
 ```
 
 
-<a id="org952ed0f"></a>
+<a id="org453ad27"></a>
 
 ### perspective-el
 
@@ -2463,7 +2496,7 @@ do not both fit in the echo area."
 
 ```emacs-lisp
 (use-package perspective
-  :straight t
+  :ensure t
   :custom
   (persp-mode-prefix-key (kbd "C-c C-w"))
   (persp-state-default-file (concat user-emacs-directory ".perspective"))
@@ -2490,7 +2523,7 @@ do not both fit in the echo area."
 ```
 
 
-<a id="org03b27c4"></a>
+<a id="org2c111b7"></a>
 
 ### Popper
 
@@ -2499,7 +2532,7 @@ do not both fit in the echo area."
 
 ```emacs-lisp
 (use-package popper
-  :straight t
+  :ensure t
   :bind (("s-3" . popper-toggle)
          ("s-4" . popper-cycle)
          ("s-5" . popper-toggle-type))
@@ -2544,7 +2577,7 @@ do not both fit in the echo area."
 ```
 
 
-<a id="orgf891a40"></a>
+<a id="org71114eb"></a>
 
 ### Projectile
 
@@ -2554,7 +2587,7 @@ do not both fit in the echo area."
 
 ```emacs-lisp
 (use-package projectile
-  :straight t
+  :ensure t
   :config
   (projectile-global-mode)
   (setq projectile-indexing-method 'alien
@@ -2564,7 +2597,7 @@ do not both fit in the echo area."
 ```
 
 
-<a id="orgb379514"></a>
+<a id="org2f9d594"></a>
 
 ### ESS
 
@@ -2574,11 +2607,11 @@ do not both fit in the echo area."
 
 ```emacs-lisp
 (use-package ess
-  :straight t)
+  :ensure t)
 ```
 
 
-<a id="org8e1e492"></a>
+<a id="org369751c"></a>
 
 ### rainbow-delimiters
 
@@ -2587,12 +2620,12 @@ do not both fit in the echo area."
 
 ```emacs-lisp
 (use-package rainbow-delimiters
-  :straight t
+  :ensure t
   :hook (prog-mode . rainbow-delimiters-mode))
 ```
 
 
-<a id="org3e1343c"></a>
+<a id="org036d1d5"></a>
 
 ### Transpose Frame
 
@@ -2601,12 +2634,12 @@ do not both fit in the echo area."
 
 ```emacs-lisp
 (use-package transpose-frame
-  :straight t
+  :ensure t
   :bind (("C->" . transpose-frame)))
 ```
 
 
-<a id="orgd2e778a"></a>
+<a id="org360d14c"></a>
 
 ### YASnippet
 
@@ -2615,23 +2648,24 @@ do not both fit in the echo area."
 
 ```emacs-lisp
 (use-package yasnippet
-  :straight t
+  :ensure t
   :hook ((python-ts-mode . (lambda () (yas-activate-extra-mode 'python-mode))))
   :config
   (yas-global-mode)
   (setq yas-snippet-dirs
         '("~/.emacs.d/snippets")) ;TODO: Don't hardcode
   (use-package yasnippet-snippets
-    :straight t))
+    :ensure t
+    :after yasnippet))
 ```
 
 
-<a id="orga6627d6"></a>
+<a id="orgcb4abf9"></a>
 
 ## Appearance
 
 
-<a id="org581c3ac"></a>
+<a id="org6626e52"></a>
 
 ### Doom Modeline
 
@@ -2639,9 +2673,9 @@ do not both fit in the echo area."
 -   **Description:** A fancy and fast mode-line inspired by minimalism design
 
 ```emacs-lisp
-(straight-use-package '(f :type git :host github :repo "rejeep/f.el"))
+;; (use-package '(f :type git :host github :repo "rejeep/f.el"))
 (use-package doom-modeline
-  :straight t
+  :ensure t
   :after f
   :init (doom-modeline-mode 1)
   :config
@@ -2660,7 +2694,7 @@ do not both fit in the echo area."
 ```
 
 
-<a id="org9687075"></a>
+<a id="org35bae84"></a>
 
 ### Ef Themes
 
@@ -2669,11 +2703,12 @@ do not both fit in the echo area."
 
 ```emacs-lisp
 (use-package ef-themes
-  :straight t)
+  :ensure t
+  :demand t)
 ```
 
 
-<a id="org7032562"></a>
+<a id="org049473f"></a>
 
 ### kaolin-themes
 
@@ -2682,11 +2717,11 @@ do not both fit in the echo area."
 
 ```emacs-lisp
 (use-package kaolin-themes
-  :straight t)
+  :ensure t)
 ```
 
 
-<a id="org9b4857b"></a>
+<a id="orgcd442f5"></a>
 
 ### Modus Themes
 
@@ -2695,11 +2730,11 @@ do not both fit in the echo area."
 
 ```emacs-lisp
 (use-package modus-themes
-  :straight t)
+  :ensure t)
 ```
 
 
-<a id="org24b7002"></a>
+<a id="orgc92b113"></a>
 
 ### nerd-icons-corfu
 
@@ -2708,28 +2743,29 @@ do not both fit in the echo area."
 
 ```emacs-lisp
 (use-package nerd-icons-corfu
-  :straight t)
+  :after corfu
+  :ensure t)
 ```
 
 
-<a id="orgf00af0b"></a>
+<a id="org9d5776a"></a>
 
 # Terminal Config
 
 Configuration and packages specific to terminal
 
 
-<a id="org20d2b82"></a>
+<a id="orge9137fd"></a>
 
 ## General Configuration
 
 
-<a id="orgabe418c"></a>
+<a id="orgdb20542"></a>
 
 ### Variables and Modes
 
 ```emacs-lisp
-(use-package emacs
+(use-package emacs :ensure nil
   :config
   (setq-default left-margin-width 1 right-margin-width 1)
   (set-window-margins nil 1)
@@ -2747,7 +2783,7 @@ Configuration and packages specific to terminal
 ```
 
 
-<a id="org81bb622"></a>
+<a id="orgfc080d1"></a>
 
 ### Functions for custom bindings
 
@@ -2769,7 +2805,7 @@ Configuration and packages specific to terminal
 ```
 
 
-<a id="orgd4ecc17"></a>
+<a id="orgd09734e"></a>
 
 ### Custom Bindings
 
@@ -2779,7 +2815,7 @@ Configuration and packages specific to terminal
 ```
 
 
-<a id="org8c04a4b"></a>
+<a id="orgac05245"></a>
 
 ### Packages
 
@@ -2790,8 +2826,8 @@ Configuration and packages specific to terminal
     
     ```emacs-lisp
     (use-package kkp
-      :straight t
-      :straight (:host github :repo "benotn/kkp")
+      :ensure t
+      :ensure (:host github :repo "benotn/kkp")
     
       :config
       ;; (setq kkp-alt-modifier 'alt) ;; use this if you want to map the Alt keyboard modifier to Alt in Emacs (and not to Meta)
@@ -2805,7 +2841,7 @@ Configuration and packages specific to terminal
     
     ```emacs-lisp
     (use-package modus-themes
-      :straight t
+      :ensure t
       :config
       (amo/modus-themes-toggle t))
     ```
