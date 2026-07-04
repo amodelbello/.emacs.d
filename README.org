@@ -19,19 +19,9 @@ Before opening emacs with this configuration there are a few set up tasks that n
    - ~backups~
 3. Configure environment variables: https://github.com/amodelbello/dot-env.el
    example ~.env~ file: [[file:.env.example][.env.example]]
-* Common Functions
-These are functions needed by both configurations during initial startup.
-#+INCLUDE: "./common/functions.el" src emacs-lisp
 
-* Common General Configuration
-#+INCLUDE: "./common/settings.org"
-
-* Common Packages
-#+INCLUDE: "./common/packages.org"
-
-* GUI Config
-Configuration and packages specific to GUI
-#+INCLUDE: "./gui/settings.org"
+* Configuration
+#+INCLUDE: "./settings.org"
 
 * Terminal Config
 Configuration and packages specific to terminal

@@ -57,8 +57,6 @@ forge-database.sqlite
 .perspective
 customize.el
 settings.el
-common/settings.el
-common/packages.el
 bookmarks
 emojis/
 .dap-breakpoints

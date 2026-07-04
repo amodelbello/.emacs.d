@@ -12,25 +12,21 @@
     (idle-highlight-global-mode -1)
     (setq inhibit-startup-screen t
           x-select-enable-clipboard t
-          auto-save-default nil
-          make-backup-files nil
-          create-lockfiles nil
-          modus-themes-to-toggle '(standard-adwaita modus-vivendi))
+          make-backup-files nil)
       (add-hook 'before-save-hook 'whitespace-cleanup)
       (tool-bar-mode -1)
       (menu-bar-mode -1)
-      (set-background-color "#282c3480")
+      (doom-modeline-mode -1)
+      (emsg-blame-mode -1)
+      (origami-mode -1)
+      (org-modern-mode -1)
+      (org-super-agenda-mode -1)
+      (corfu-echo-mode -1)
+      (corfu-popupinfo-mode -1)
+      (pyvenv-mode -1)
 #+end_src
 ** Functions for custom bindings
 #+begin_src emacs-lisp
-  (defun amo/modus-themes-toggle (&optional ignore-if-set)
-    "Toggle modus theme, sets to vivendi if unset"
-    (interactive)
-    (if (string-match "modus" (symbol-name (car custom-enabled-themes)))
-        (when (not ignore-if-set)
-          (modus-themes-toggle))
-      (load-theme 'modus-vivendi)))
-
   ;; Reload config
   (defun amo/reload-config ()
     "Reload configuration"
@@ -41,32 +37,5 @@
 
 ** Custom Bindings
 #+begin_src emacs-lisp
-  :bind (("C-z r" . amo/reload-config)
-         ("C-z t" . amo/modus-themes-toggle)))
-#+end_src
-
-** Packages
-*** kkp
-- Repo :: https://github.com/benotn/kkp
-- Description :: Emacs support for the Kitty Keyboard Protocol
-
-#+begin_src emacs-lisp
-  (use-package kkp
-    :ensure t
-    :ensure (:host github :repo "benotn/kkp")
-
-    :config
-    ;; (setq kkp-alt-modifier 'alt) ;; use this if you want to map the Alt keyboard modifier to Alt in Emacs (and not to Meta)
-    (global-kkp-mode +1))
-#+end_src
-*** Modus Themes
-- Repo :: https://github.com/protesilaos/modus-themes
-- Description :: Highly accessible themes for GNU Emacs, conforming with the
-  highest standard for colour contrast between background and foreground values
-  (WCAG AAA).
-#+begin_src emacs-lisp
-  (use-package modus-themes
-    :ensure t
-    :config
-    (amo/modus-themes-toggle t))
+  :bind (("C-z r" . amo/reload-config)))
 #+end_src

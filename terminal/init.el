@@ -1,14 +1,4 @@
-(load-file (concat user-emacs-directory "common/functions.el"))
-(amo/load-straight (concat user-emacs-directory "terminal/"))
+(load-file (concat user-emacs-directory "init.el"))
 
-;; Load dot-env envrionment
-;; https://github.com/amodelbello/dot-env.el
-(use-package dot-env
-  :ensure t
-  :config
-  (dot-env-config))
-
-(amo/load-config-file "common/settings.org")
-(amo/load-config-file "common/packages.org")
 (amo/load-config-file "terminal/settings.org")
 (amo/load-customize (concat user-emacs-directory "terminal/"))

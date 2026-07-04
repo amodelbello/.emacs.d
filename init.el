@@ -1,5 +1,3 @@
-(load-file (concat user-emacs-directory "common/functions.el"))
-
 (defvar elpaca-installer-version 0.12)
 (defvar elpaca-directory (expand-file-name "elpaca/" user-emacs-directory))
 (defvar elpaca-builds-directory (expand-file-name "builds/" elpaca-directory))
@@ -57,10 +55,19 @@
         amo/base-font-size (* (string-to-number amo/font-size) 10)
         amo/font (concat amo/font-family " " amo/font-size)))
 
-;; Load config files
-(amo/load-config-file "common/settings.org")
-(amo/load-config-file "gui/settings.org")
-(amo/load-config-file "common/packages.org")
+(defun amo/load-customize (&optional base-dir)
+  (defvar custom-file)
+  (let* ((base-dir (or base-dir user-emacs-directory)))
+    (setq custom-file (concat base-dir "customize.el"))
+    (unless (file-exists-p custom-file)
+      (write-region "" "" custom-file))
+    (load custom-file)))
+
+(defun amo/load-config-file (config-file)
+  (org-babel-load-file (expand-file-name (concat user-emacs-directory config-file))))
+
+;; Load main config
+(amo/load-config-file "settings.org")
 
 (add-hook 'elpaca-after-init-hook (lambda ()
                                     (amo/load-customize)
@@ -69,15 +76,3 @@
                                       (mapc (lambda (theme)
                                               (load-theme theme t))
                                             custom-enabled-themes))))
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(custom-enabled-themes '(tango-dark)))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
