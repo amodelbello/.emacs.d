@@ -28,6 +28,7 @@
     (put 'narrow-to-region 'disabled nil)
 
     (setq save-interprogram-paste-before-kill t
+          backup-directory-alist '(("." . (dot-env-get 'BACKUP_DIRECTORY "~/.emacs.d/backups")))
           text-mode-ispell-word-completion nil
           read-extended-command-predicate #'command-completion-default-include-p
           initial-major-mode 'org-mode
@@ -1522,6 +1523,22 @@ targets."
 #+begin_src emacs-lisp
   (use-package el-patch
     :ensure t)
+#+end_src
+*** eat
+- Repo :: https://codeberg.org/akib/emacs-eat
+- Description :: Emulate A Terminal, in a region, in a buffer and in Eshell
+#+begin_src emacs-lisp
+  (use-package eat
+    :ensure (:host codeberg
+                   :repo "akib/emacs-eat"
+                   :files ("*.el" ("term" "term/*.el") "*.texi"
+                           "*.ti" ("terminfo/e" "terminfo/e/*")
+                           ("terminfo/65" "terminfo/65/*")
+                           ("integration" "integration/*")
+                           (:exclude ".dir-locals.el" "*-tests.el")))
+    :config
+    (eat-eshell-mode 1)
+    (eat-eshell-visual-command-mode-mode 1))
 #+end_src
 *** emacs-surround
 - Repo :: https://github.com/ganmacs/emacs-surround
