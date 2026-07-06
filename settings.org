@@ -690,6 +690,40 @@ targets."
     (setq xref-show-xrefs-function #'consult-xref
           xref-show-definitions-function #'consult-xref)
 
+    ;; Exclude directories/files from consult-git-grep
+    ;; https://github.com/minad/consult/issues/395
+    (defcustom aj8/consult-git-grep-excludes
+      `(,(dot-env-get 'PATH_TO_EMACS_README "/home/amo/.emacs.d/README*")
+        "**/archive/**"
+        "**/build/**")
+      "List of Git pathspec globs to exclude from `consult-git-grep'."
+      :type '(repeat string)
+      :group 'aj8-lisp)
+
+    (defun aj8/consult-git-grep-advice (orig-fun paths)
+      "Advice function to exclude directories from consult-git-grep."
+      ;; Call the original function to get its builder
+      (let ((orig-builder (funcall orig-fun paths)))
+        ;; Return a new builder that wraps the old one:
+        (lambda (input)
+          (let* ((res (funcall orig-builder input))
+                 (cmd (car res))
+                 (hl-fn (cdr res))
+                 ;; Strip off the trailing PATHS
+                 (fixed (butlast cmd (length paths)))
+                 ;; Assemble: flags, "--", each exclude, then the paths again
+                 (new-cmd (append fixed
+                                  (list "--")
+                                  (mapcar (lambda (g) (concat ":(exclude)" g))
+                                          aj8/consult-git-grep-excludes)
+                                  paths)))
+            (cons new-cmd hl-fn)))))
+
+    ;; Exclude some dirs from consult-git-grep
+    (advice-add 'consult--git-grep-make-builder :around
+                #'aj8/consult-git-grep-advice)
+
+
     ;; Configure other variables and modes in the :config section,
     ;; after lazily loading the package.
     :config
@@ -699,7 +733,6 @@ targets."
      consult-bookmark consult-recent-file consult-xref
      consult--source-bookmark consult--source-file-register
      consult--source-recent-file consult--source-project-recent-file
-     ;; :preview-key "M-."
      :preview-key '(:debounce 0.4 any)))
 #+end_src
 
