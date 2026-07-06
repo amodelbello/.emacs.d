@@ -465,8 +465,9 @@ Necessary when the bound function requires arguments
   (global-set-key (kbd "C-z h") 'help-command)
 
   (keymap-global-set "C-z s e" (lambda () (interactive) (amo/open-emacs-config-file ".env")))
+  (keymap-global-set "C-z s i" (lambda () (interactive) (amo/open-emacs-config-file "init.el")))
   (keymap-global-set "C-z s s" (lambda () (interactive) (amo/open-emacs-config-file "settings.org")))
-  (keymap-global-set "C-z s t s" (lambda () (interactive) (amo/open-emacs-config-file "terminal/settings.org")))
+  (keymap-global-set "C-z s t" (lambda () (interactive) (amo/open-emacs-config-file "terminal/settings.org")))
 #+end_src
 ** Functions for hooks
 #+begin_src emacs-lisp

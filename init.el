@@ -1,3 +1,7 @@
+;;; init.el --- Emacs initialization -*- lexical-binding: t -*-
+
+;; Install elpaca
+;; https://github.com/progfolio/elpaca
 (defvar elpaca-installer-version 0.12)
 (defvar elpaca-directory (expand-file-name "elpaca/" user-emacs-directory))
 (defvar elpaca-builds-directory (expand-file-name "builds/" elpaca-directory))
@@ -55,20 +59,21 @@
         amo/base-font-size (* (string-to-number amo/font-size) 10)
         amo/font (concat amo/font-family " " amo/font-size)))
 
+;; Load main config
+(defun amo/load-config-file (config-file)
+  (org-babel-load-file (expand-file-name (concat user-emacs-directory config-file))))
+(amo/load-config-file "settings.org")
+
+;; Load customize.el
 (defun amo/load-customize (&optional base-dir)
+  "Load customize.el from specific location.
+Also used by terminal config"
   (defvar custom-file)
   (let* ((base-dir (or base-dir user-emacs-directory)))
     (setq custom-file (concat base-dir "customize.el"))
     (unless (file-exists-p custom-file)
       (write-region "" "" custom-file))
     (load custom-file)))
-
-(defun amo/load-config-file (config-file)
-  (org-babel-load-file (expand-file-name (concat user-emacs-directory config-file))))
-
-;; Load main config
-(amo/load-config-file "settings.org")
-
 (add-hook 'elpaca-after-init-hook (lambda ()
                                     (amo/load-customize)
                                     ;; Load theme set in customize.el if there is one
