@@ -838,13 +838,30 @@ targets."
 - Repo :: https://github.com/renzmann/treesit-auto
 - Description :: Automatic installation, usage, and fallback for tree-sitter major modes in Emacs
 #+begin_src emacs-lisp
-  (use-package treesit-auto
-    :ensure t
-    :custom
-    (treesit-auto-install t)
+  (use-package gh-copilot-chat
+    :ensure (:host github :repo "chep/gh-copilot-chat.el" :files ("*.el"))
+    :after (request org markdown-mode)
+    :init
     :config
-    (treesit-auto-add-to-auto-mode-alist 'all)
-    (global-treesit-auto-mode))
+    (setq copilot-chat-default-model (dot-env-get 'COPILOT_CHAT_DEFAULT_MODEL "claude-sonnet-4.5"))
+    ;; to prevent "non-prefix key" error
+    ;; (define-key global-map (kbd "C-c g") (make-sparse-keymap))
+    :bind (:map global-map
+                ("C-c g g" . gh-copilot-chat-display)
+                ("C-c g t" . gh-copilot-chat-transient)
+                ("C-c g i" . gh-copilot-chat-goto-input)
+                ("C-c g s" . gh-copilot-chat-save)
+                ("C-c g l" . gh-copilot-chat-load)))
+#+end_src
+**** Dape
+- Repo :: https://github.com/svaante/dape
+- Description :: Debug Adapter Protocol for Emacs
+#+begin_src emacs-lisp
+  (use-package dape
+    :ensure t
+    :config
+    (setq dape-buffer-window-arrangement 'right)
+    (setq dape-cwd-fn 'projectile-project-root))
 #+end_src
 **** Eglot
 - Repo :: https://github.com/joaotavora/eglot
@@ -914,16 +931,6 @@ targets."
    )
 #+end_src
 
-**** Dape
-- Repo :: https://github.com/svaante/dape
-- Description :: Debug Adapter Protocol for Emacs
-#+begin_src emacs-lisp
-  (use-package dape
-    :ensure t
-    :config
-    (setq dape-buffer-window-arrangement 'right)
-    (setq dape-cwd-fn 'projectile-project-root))
-#+end_src
 **** imenu-list
 - Repo :: https://github.com/bmag/imenu-list
 - Description :: Emacs plugin to show the current buffer's imenu entries in a separate buffer
@@ -935,15 +942,6 @@ targets."
           imenu-list-position 'left
           imenu-list-auto-resize t)
     :bind (("M-i" . imenu-list-smart-toggle)))
-#+end_src
-**** Origami
-- Repo :: https://github.com/gregsexton/origami.el
-- Description :: A folding minor mode for Emacs
-#+begin_src emacs-lisp
-  (use-package origami
-    :ensure t
-    :bind (("C-c f" . origami-toggle-node))
-    :hook (prog-mode . origami-mode))
 #+end_src
 **** mcp
 - Repo :: https://github.com/lizqwerscott/mcp.el
@@ -960,24 +958,14 @@ targets."
              :config (require 'mcp-hub)
              :hook (after-init . mcp-hub-start-all-server)))))
 #+end_src
-**** copilot-chat
-- Repo :: https://github.com/chep/gh-copilot-chat.el
-- Description :: Chat with Github copilot in Emacs !
+**** Origami
+- Repo :: https://github.com/gregsexton/origami.el
+- Description :: A folding minor mode for Emacs
 #+begin_src emacs-lisp
-  (use-package gh-copilot-chat
-    :ensure (:host github :repo "chep/gh-copilot-chat.el" :files ("*.el"))
-    :after (request org markdown-mode)
-    :init
-    :config
-    (setq copilot-chat-default-model (dot-env-get 'COPILOT_CHAT_DEFAULT_MODEL "claude-sonnet-4.5"))
-    ;; to prevent "non-prefix key" error
-    ;; (define-key global-map (kbd "C-c g") (make-sparse-keymap))
-    :bind (:map global-map
-                ("C-c g g" . gh-copilot-chat-display)
-                ("C-c g t" . gh-copilot-chat-transient)
-                ("C-c g i" . gh-copilot-chat-goto-input)
-                ("C-c g s" . gh-copilot-chat-save)
-                ("C-c g l" . gh-copilot-chat-load)))
+  (use-package origami
+    :ensure t
+    :bind (("C-c f" . origami-toggle-node))
+    :hook (prog-mode . origami-mode))
 #+end_src
 **** protobuf-mode
 - Repo :: https://github.com/protocolbuffers/protobuf/blob/main/editors/protobuf-mode.el
@@ -985,6 +973,18 @@ targets."
   (use-package protobuf-mode
     :ensure t
     :mode ("\\.proto\\'" . protobuf-mode))
+#+end_src
+**** treesit-auto
+- Repo :: https://github.com/renzmann/treesit-auto
+- Description :: Automatic installation, usage, and fallback for tree-sitter major modes in Emacs
+#+begin_src emacs-lisp
+  (use-package treesit-auto
+    :ensure t
+    :custom
+    (treesit-auto-install t)
+    :config
+    (treesit-auto-add-to-auto-mode-alist 'all)
+    (global-treesit-auto-mode))
 #+end_src
 *** Languages
 **** Docker
