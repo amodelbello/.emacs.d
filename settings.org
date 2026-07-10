@@ -834,9 +834,22 @@ targets."
 
 ** Programming
 *** Packages
-**** treesit-auto
-- Repo :: https://github.com/renzmann/treesit-auto
-- Description :: Automatic installation, usage, and fallback for tree-sitter major modes in Emacs
+**** agent-shell
+- Repo :: https://github.com/xenodium/agent-shell
+- Description :: A native Emacs buffer to interact with LLM agents powered by ACP
+  #+begin_src emacs-lisp
+    (use-package agent-shell
+      :ensure t
+      :ensure-system-package
+      :config
+      (setq agent-shell-anthropic-authentication
+            (agent-shell-anthropic-make-authentication :login t)
+            agent-shell-cursor-authentication
+            (agent-shell-cursor-make-authentication :login t)))
+  #+end_src
+**** copilot-chat
+- Repo :: https://github.com/chep/gh-copilot-chat.el
+- Description :: Chat with Github copilot in Emacs !
 #+begin_src emacs-lisp
   (use-package gh-copilot-chat
     :ensure (:host github :repo "chep/gh-copilot-chat.el" :files ("*.el"))
