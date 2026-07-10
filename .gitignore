@@ -16,7 +16,8 @@ org-roam.db
 # flymake-mode
 *_flymake.*
 
-/eshell/
+/eshell/*
+!eshell/alias
 
 # packages, etc
 /straight/
