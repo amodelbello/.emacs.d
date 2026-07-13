@@ -840,12 +840,12 @@ targets."
   #+begin_src emacs-lisp
     (use-package agent-shell
       :ensure t
-      :ensure-system-package
       :config
       (setq agent-shell-anthropic-authentication
             (agent-shell-anthropic-make-authentication :login t)
             agent-shell-cursor-authentication
-            (agent-shell-cursor-make-authentication :login t)))
+            (agent-shell-cursor-make-authentication :login t)
+            agent-shell-prefer-viewport-interaction t))
   #+end_src
 **** copilot-chat
 - Repo :: https://github.com/chep/gh-copilot-chat.el

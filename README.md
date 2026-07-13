@@ -3,33 +3,33 @@ An emacs configuration for both GUI and terminal. Instructions on setting up ema
 
 # Table of Contents
 
--   [Initial Setup](#org7e5053c)
--   [Configuration](#org2ad4482)
-    -   [Config](#orgb7c1e07)
-        -   [Variables and Modes](#orgd712474)
-        -   [Functions for custom bindings](#org1d9fd1a)
-        -   [use-package Style Bindings](#org8e0841a)
-        -   [Traditional-Style Bindings](#org12e8668)
-        -   [Functions for hooks](#orga08f7e4)
-        -   [Hooks](#org589a686)
-        -   [dired](#org151aa28)
-        -   [ibuffer](#orgbaea240)
-        -   [Advice](#org11ffd95)
-    -   [Packages](#orgce83ba1)
-        -   [Minibuffer & Completion](#org74b1bbb)
-        -   [Programming](#orged4c261)
-        -   [Version Control](#org7a5239b)
-        -   [Org Mode](#org79e903c)
-        -   [Other Useful Packages](#orgbe17236)
-        -   [Appearance](#orge256dc4)
--   [Terminal Config](#org79edd3a)
-    -   [General Configuration](#orgdad4e0f)
-        -   [Variables and Modes](#orgfd733a6)
-        -   [Functions for custom bindings](#orgf9d6d7b)
-        -   [Custom Bindings](#orge7ad23f)
+-   [Initial Setup](#orgdaa53b0)
+-   [Configuration](#orge0d945a)
+    -   [Config](#org7bf2a75)
+        -   [Variables and Modes](#orge711df1)
+        -   [Functions for custom bindings](#org8a87af2)
+        -   [use-package Style Bindings](#org537490a)
+        -   [Traditional-Style Bindings](#orgde032e3)
+        -   [Functions for hooks](#org7387632)
+        -   [Hooks](#org11afcdd)
+        -   [dired](#org1af9ed8)
+        -   [ibuffer](#orga80aa17)
+        -   [Advice](#orga319209)
+    -   [Packages](#orgdb450fd)
+        -   [Minibuffer & Completion](#orgf24e3bc)
+        -   [Programming](#org10227cf)
+        -   [Version Control](#org2be3794)
+        -   [Org Mode](#org02ecc8f)
+        -   [Other Useful Packages](#orgb0ced7f)
+        -   [Appearance](#org1a26ea2)
+-   [Terminal Config](#org241eaef)
+    -   [General Configuration](#org5e18586)
+        -   [Variables and Modes](#org76861b6)
+        -   [Functions for custom bindings](#org6d80506)
+        -   [Custom Bindings](#org441bc83)
 
 
-<a id="org7e5053c"></a>
+<a id="orgdaa53b0"></a>
 
 # Initial Setup
 
@@ -43,18 +43,18 @@ Before opening emacs with this configuration there are a few set up tasks that n
 3.  Configure environment variables: <https://github.com/amodelbello/dot-env.el> example `.env` file: [.env.example](.env.example)
 
 
-<a id="org2ad4482"></a>
+<a id="orge0d945a"></a>
 
 # Configuration
 
 
 
-<a id="orgb7c1e07"></a>
+<a id="org7bf2a75"></a>
 
 ## Config
 
 
-<a id="orgd712474"></a>
+<a id="orge711df1"></a>
 
 ### Variables and Modes
 
@@ -223,7 +223,7 @@ Before opening emacs with this configuration there are a few set up tasks that n
 ```
 
 
-<a id="org1d9fd1a"></a>
+<a id="org8a87af2"></a>
 
 ### Functions for custom bindings
 
@@ -474,7 +474,7 @@ Otherwise use the projectile project root if present"
 ```
 
 
-<a id="org8e0841a"></a>
+<a id="org537490a"></a>
 
 ### use-package Style Bindings
 
@@ -520,7 +520,7 @@ Otherwise use the projectile project root if present"
 ```
 
 
-<a id="org12e8668"></a>
+<a id="orgde032e3"></a>
 
 ### Traditional-Style Bindings
 
@@ -532,12 +532,13 @@ Necessary when the bound function requires arguments
 (global-set-key (kbd "C-z h") 'help-command)
 
 (keymap-global-set "C-z s e" (lambda () (interactive) (amo/open-emacs-config-file ".env")))
+(keymap-global-set "C-z s i" (lambda () (interactive) (amo/open-emacs-config-file "init.el")))
 (keymap-global-set "C-z s s" (lambda () (interactive) (amo/open-emacs-config-file "settings.org")))
-(keymap-global-set "C-z s t s" (lambda () (interactive) (amo/open-emacs-config-file "terminal/settings.org")))
+(keymap-global-set "C-z s t" (lambda () (interactive) (amo/open-emacs-config-file "terminal/settings.org")))
 ```
 
 
-<a id="orga08f7e4"></a>
+<a id="org7387632"></a>
 
 ### Functions for hooks
 
@@ -553,7 +554,7 @@ Necessary when the bound function requires arguments
 ```
 
 
-<a id="org589a686"></a>
+<a id="org11afcdd"></a>
 
 ### Hooks
 
@@ -574,7 +575,7 @@ Necessary when the bound function requires arguments
 ```
 
 
-<a id="org151aa28"></a>
+<a id="org1af9ed8"></a>
 
 ### dired
 
@@ -588,7 +589,7 @@ Necessary when the bound function requires arguments
 ```
 
 
-<a id="orgbaea240"></a>
+<a id="orga80aa17"></a>
 
 ### ibuffer
 
@@ -600,7 +601,7 @@ Necessary when the bound function requires arguments
 ```
 
 
-<a id="org11ffd95"></a>
+<a id="orga319209"></a>
 
 ### Advice
 
@@ -616,12 +617,12 @@ Necessary when the bound function requires arguments
 ```
 
 
-<a id="orgce83ba1"></a>
+<a id="orgdb450fd"></a>
 
 ## Packages
 
 
-<a id="org74b1bbb"></a>
+<a id="orgf24e3bc"></a>
 
 ### Minibuffer & Completion
 
@@ -797,6 +798,40 @@ Necessary when the bound function requires arguments
       (setq xref-show-xrefs-function #'consult-xref
             xref-show-definitions-function #'consult-xref)
     
+      ;; Exclude directories/files from consult-git-grep
+      ;; https://github.com/minad/consult/issues/395
+      (defcustom aj8/consult-git-grep-excludes
+        `(,(dot-env-get 'PATH_TO_EMACS_README "/home/amo/.emacs.d/README*")
+          "**/archive/**"
+          "**/build/**")
+        "List of Git pathspec globs to exclude from `consult-git-grep'."
+        :type '(repeat string)
+        :group 'aj8-lisp)
+    
+      (defun aj8/consult-git-grep-advice (orig-fun paths)
+        "Advice function to exclude directories from consult-git-grep."
+        ;; Call the original function to get its builder
+        (let ((orig-builder (funcall orig-fun paths)))
+          ;; Return a new builder that wraps the old one:
+          (lambda (input)
+            (let* ((res (funcall orig-builder input))
+                   (cmd (car res))
+                   (hl-fn (cdr res))
+                   ;; Strip off the trailing PATHS
+                   (fixed (butlast cmd (length paths)))
+                   ;; Assemble: flags, "--", each exclude, then the paths again
+                   (new-cmd (append fixed
+                                    (list "--")
+                                    (mapcar (lambda (g) (concat ":(exclude)" g))
+                                            aj8/consult-git-grep-excludes)
+                                    paths)))
+              (cons new-cmd hl-fn)))))
+    
+      ;; Exclude some dirs from consult-git-grep
+      (advice-add 'consult--git-grep-make-builder :around
+                  #'aj8/consult-git-grep-advice)
+    
+    
       ;; Configure other variables and modes in the :config section,
       ;; after lazily loading the package.
       :config
@@ -806,7 +841,6 @@ Necessary when the bound function requires arguments
        consult-bookmark consult-recent-file consult-xref
        consult--source-bookmark consult--source-file-register
        consult--source-recent-file consult--source-project-recent-file
-       ;; :preview-key "M-."
        :preview-key '(:debounce 0.4 any)))
     ```
 
@@ -920,25 +954,61 @@ Necessary when the bound function requires arguments
     ```
 
 
-<a id="orged4c261"></a>
+<a id="org10227cf"></a>
 
 ### Programming
 
 -   Packages
 
-    -   treesit-auto
+    -   agent-shell
     
-        -   **Repo:** <https://github.com/renzmann/treesit-auto>
-        -   **Description:** Automatic installation, usage, and fallback for tree-sitter major modes in Emacs
+        -   **Repo:** <https://github.com/xenodium/agent-shell>
+        -   **Description:** A native Emacs buffer to interact with LLM agents powered by ACP
+            
+            ```emacs-lisp
+            (use-package agent-shell
+              :ensure t
+              :config
+              (setq agent-shell-anthropic-authentication
+                    (agent-shell-anthropic-make-authentication :login t)
+                    agent-shell-cursor-authentication
+                    (agent-shell-cursor-make-authentication :login t)
+                    agent-shell-prefer-viewport-interaction t))
+            ```
+    
+    -   copilot-chat
+    
+        -   **Repo:** <https://github.com/chep/gh-copilot-chat.el>
+        -   **Description:** Chat with Github copilot in Emacs !
         
         ```emacs-lisp
-        (use-package treesit-auto
-          :ensure t
-          :custom
-          (treesit-auto-install t)
+        (use-package gh-copilot-chat
+          :ensure (:host github :repo "chep/gh-copilot-chat.el" :files ("*.el"))
+          :after (request org markdown-mode)
+          :init
           :config
-          (treesit-auto-add-to-auto-mode-alist 'all)
-          (global-treesit-auto-mode))
+          (setq copilot-chat-default-model (dot-env-get 'COPILOT_CHAT_DEFAULT_MODEL "claude-sonnet-4.5"))
+          ;; to prevent "non-prefix key" error
+          ;; (define-key global-map (kbd "C-c g") (make-sparse-keymap))
+          :bind (:map global-map
+                      ("C-c g g" . gh-copilot-chat-display)
+                      ("C-c g t" . gh-copilot-chat-transient)
+                      ("C-c g i" . gh-copilot-chat-goto-input)
+                      ("C-c g s" . gh-copilot-chat-save)
+                      ("C-c g l" . gh-copilot-chat-load)))
+        ```
+    
+    -   Dape
+    
+        -   **Repo:** <https://github.com/svaante/dape>
+        -   **Description:** Debug Adapter Protocol for Emacs
+        
+        ```emacs-lisp
+        (use-package dape
+          :ensure t
+          :config
+          (setq dape-buffer-window-arrangement 'right)
+          (setq dape-cwd-fn 'projectile-project-root))
         ```
     
     -   Eglot
@@ -1011,19 +1081,6 @@ Necessary when the bound function requires arguments
          )
         ```
     
-    -   Dape
-    
-        -   **Repo:** <https://github.com/svaante/dape>
-        -   **Description:** Debug Adapter Protocol for Emacs
-        
-        ```emacs-lisp
-        (use-package dape
-          :ensure t
-          :config
-          (setq dape-buffer-window-arrangement 'right)
-          (setq dape-cwd-fn 'projectile-project-root))
-        ```
-    
     -   imenu-list
     
         -   **Repo:** <https://github.com/bmag/imenu-list>
@@ -1037,18 +1094,6 @@ Necessary when the bound function requires arguments
                 imenu-list-position 'left
                 imenu-list-auto-resize t)
           :bind (("M-i" . imenu-list-smart-toggle)))
-        ```
-    
-    -   Origami
-    
-        -   **Repo:** <https://github.com/gregsexton/origami.el>
-        -   **Description:** A folding minor mode for Emacs
-        
-        ```emacs-lisp
-        (use-package origami
-          :ensure t
-          :bind (("C-c f" . origami-toggle-node))
-          :hook (prog-mode . origami-mode))
         ```
     
     -   mcp
@@ -1069,26 +1114,16 @@ Necessary when the bound function requires arguments
                    :hook (after-init . mcp-hub-start-all-server)))))
         ```
     
-    -   copilot-chat
+    -   Origami
     
-        -   **Repo:** <https://github.com/chep/gh-copilot-chat.el>
-        -   **Description:** Chat with Github copilot in Emacs !
+        -   **Repo:** <https://github.com/gregsexton/origami.el>
+        -   **Description:** A folding minor mode for Emacs
         
         ```emacs-lisp
-        (use-package gh-copilot-chat
-          :ensure (:host github :repo "chep/gh-copilot-chat.el" :files ("*.el"))
-          :after (request org markdown-mode)
-          :init
-          :config
-          (setq copilot-chat-default-model (dot-env-get 'COPILOT_CHAT_DEFAULT_MODEL "claude-sonnet-4.5"))
-          ;; to prevent "non-prefix key" error
-          ;; (define-key global-map (kbd "C-c g") (make-sparse-keymap))
-          :bind (:map global-map
-                      ("C-c g g" . gh-copilot-chat-display)
-                      ("C-c g t" . gh-copilot-chat-transient)
-                      ("C-c g i" . gh-copilot-chat-goto-input)
-                      ("C-c g s" . gh-copilot-chat-save)
-                      ("C-c g l" . gh-copilot-chat-load)))
+        (use-package origami
+          :ensure t
+          :bind (("C-c f" . origami-toggle-node))
+          :hook (prog-mode . origami-mode))
         ```
     
     -   protobuf-mode
@@ -1099,6 +1134,21 @@ Necessary when the bound function requires arguments
         (use-package protobuf-mode
           :ensure t
           :mode ("\\.proto\\'" . protobuf-mode))
+        ```
+    
+    -   treesit-auto
+    
+        -   **Repo:** <https://github.com/renzmann/treesit-auto>
+        -   **Description:** Automatic installation, usage, and fallback for tree-sitter major modes in Emacs
+        
+        ```emacs-lisp
+        (use-package treesit-auto
+          :ensure t
+          :custom
+          (treesit-auto-install t)
+          :config
+          (treesit-auto-add-to-auto-mode-alist 'all)
+          (global-treesit-auto-mode))
         ```
 
 -   Languages
@@ -1262,7 +1312,7 @@ Necessary when the bound function requires arguments
         ```
 
 
-<a id="org7a5239b"></a>
+<a id="org2be3794"></a>
 
 ### Version Control
 
@@ -1375,7 +1425,7 @@ Necessary when the bound function requires arguments
     ```
 
 
-<a id="org79e903c"></a>
+<a id="org02ecc8f"></a>
 
 ### Org Mode
 
@@ -1643,7 +1693,7 @@ Necessary when the bound function requires arguments
     ```
 
 
-<a id="orgbe17236"></a>
+<a id="orgb0ced7f"></a>
 
 ### Other Useful Packages
 
@@ -2166,7 +2216,7 @@ Necessary when the bound function requires arguments
     ```
 
 
-<a id="orge256dc4"></a>
+<a id="org1a26ea2"></a>
 
 ### Appearance
 
@@ -2301,19 +2351,19 @@ Necessary when the bound function requires arguments
     ```
 
 
-<a id="org79edd3a"></a>
+<a id="org241eaef"></a>
 
 # Terminal Config
 
 Configuration and packages specific to terminal
 
 
-<a id="orgdad4e0f"></a>
+<a id="org5e18586"></a>
 
 ## General Configuration
 
 
-<a id="orgfd733a6"></a>
+<a id="org76861b6"></a>
 
 ### Variables and Modes
 
@@ -2340,7 +2390,7 @@ Configuration and packages specific to terminal
 ```
 
 
-<a id="orgf9d6d7b"></a>
+<a id="org6d80506"></a>
 
 ### Functions for custom bindings
 
@@ -2354,7 +2404,7 @@ Configuration and packages specific to terminal
 ```
 
 
-<a id="orge7ad23f"></a>
+<a id="org441bc83"></a>
 
 ### Custom Bindings
 
