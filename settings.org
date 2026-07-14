@@ -694,7 +694,10 @@ targets."
     ;; Exclude directories/files from consult-git-grep
     ;; https://github.com/minad/consult/issues/395
     (defcustom aj8/consult-git-grep-excludes
-      `(,(dot-env-get 'PATH_TO_EMACS_README "/home/amo/.emacs.d/README*")
+      ;; `(,(dot-env-get 'PATH_TO_EMACS_README "/home/amo/.emacs.d/README*")
+      (
+        "**/.emacs.d/README.md"
+        "**/.emacs.d/README.org"
         "**/archive/**"
         "**/build/**")
       "List of Git pathspec globs to exclude from `consult-git-grep'."
@@ -844,9 +847,19 @@ targets."
       (setq agent-shell-anthropic-authentication
             (agent-shell-anthropic-make-authentication :login t)
             agent-shell-cursor-authentication
-            (agent-shell-cursor-make-authentication :login t)
-            agent-shell-prefer-viewport-interaction t))
+            (agent-shell-cursor-make-authentication :login t)))
   #+end_src
+**** agent-shell-org-transcript
+- Repo ::
+- Description ::
+#+begin_src emacs-lisp
+  (use-package agent-shell-org-transcript
+    :ensure (:host github :repo "lllShamanlll/agent-shell-org-transcript")
+    :after agent-shell
+    :config
+    (setq agent-shell-org-transcript-directory "~/.emacs.d/agent-shell/org-transcripts/")
+    )
+#+end_src
 **** copilot-chat
 - Repo :: https://github.com/chep/gh-copilot-chat.el
 - Description :: Chat with Github copilot in Emacs !

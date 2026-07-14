@@ -3,33 +3,33 @@ An emacs configuration for both GUI and terminal. Instructions on setting up ema
 
 # Table of Contents
 
--   [Initial Setup](#orgdaa53b0)
--   [Configuration](#orge0d945a)
-    -   [Config](#org7bf2a75)
-        -   [Variables and Modes](#orge711df1)
-        -   [Functions for custom bindings](#org8a87af2)
-        -   [use-package Style Bindings](#org537490a)
-        -   [Traditional-Style Bindings](#orgde032e3)
-        -   [Functions for hooks](#org7387632)
-        -   [Hooks](#org11afcdd)
-        -   [dired](#org1af9ed8)
-        -   [ibuffer](#orga80aa17)
-        -   [Advice](#orga319209)
-    -   [Packages](#orgdb450fd)
-        -   [Minibuffer & Completion](#orgf24e3bc)
-        -   [Programming](#org10227cf)
-        -   [Version Control](#org2be3794)
-        -   [Org Mode](#org02ecc8f)
-        -   [Other Useful Packages](#orgb0ced7f)
-        -   [Appearance](#org1a26ea2)
--   [Terminal Config](#org241eaef)
-    -   [General Configuration](#org5e18586)
-        -   [Variables and Modes](#org76861b6)
-        -   [Functions for custom bindings](#org6d80506)
-        -   [Custom Bindings](#org441bc83)
+-   [Initial Setup](#org3ade5a7)
+-   [Configuration](#org833850a)
+    -   [Config](#orgc820b72)
+        -   [Variables and Modes](#org2ad0b75)
+        -   [Functions for custom bindings](#org0ddcd32)
+        -   [use-package Style Bindings](#org72b11f6)
+        -   [Traditional-Style Bindings](#orge6ebc6c)
+        -   [Functions for hooks](#org41e8399)
+        -   [Hooks](#org28a9f57)
+        -   [dired](#org0ac01d1)
+        -   [ibuffer](#org3ea933f)
+        -   [Advice](#orgedd3dca)
+    -   [Packages](#orga6b0551)
+        -   [Minibuffer & Completion](#orgdf586ba)
+        -   [Programming](#org20e23c2)
+        -   [Version Control](#org5e44fd6)
+        -   [Org Mode](#org27964e7)
+        -   [Other Useful Packages](#org3f4f688)
+        -   [Appearance](#org7ce6d19)
+-   [Terminal Config](#org153914d)
+    -   [General Configuration](#orgdfb9133)
+        -   [Variables and Modes](#org0bf2fe8)
+        -   [Functions for custom bindings](#org65adbad)
+        -   [Custom Bindings](#orgfb1d457)
 
 
-<a id="orgdaa53b0"></a>
+<a id="org3ade5a7"></a>
 
 # Initial Setup
 
@@ -43,18 +43,18 @@ Before opening emacs with this configuration there are a few set up tasks that n
 3.  Configure environment variables: <https://github.com/amodelbello/dot-env.el> example `.env` file: [.env.example](.env.example)
 
 
-<a id="orge0d945a"></a>
+<a id="org833850a"></a>
 
 # Configuration
 
 
 
-<a id="org7bf2a75"></a>
+<a id="orgc820b72"></a>
 
 ## Config
 
 
-<a id="orge711df1"></a>
+<a id="org2ad0b75"></a>
 
 ### Variables and Modes
 
@@ -223,7 +223,7 @@ Before opening emacs with this configuration there are a few set up tasks that n
 ```
 
 
-<a id="org8a87af2"></a>
+<a id="org0ddcd32"></a>
 
 ### Functions for custom bindings
 
@@ -474,7 +474,7 @@ Otherwise use the projectile project root if present"
 ```
 
 
-<a id="org537490a"></a>
+<a id="org72b11f6"></a>
 
 ### use-package Style Bindings
 
@@ -520,7 +520,7 @@ Otherwise use the projectile project root if present"
 ```
 
 
-<a id="orgde032e3"></a>
+<a id="orge6ebc6c"></a>
 
 ### Traditional-Style Bindings
 
@@ -538,7 +538,7 @@ Necessary when the bound function requires arguments
 ```
 
 
-<a id="org7387632"></a>
+<a id="org41e8399"></a>
 
 ### Functions for hooks
 
@@ -554,7 +554,7 @@ Necessary when the bound function requires arguments
 ```
 
 
-<a id="org11afcdd"></a>
+<a id="org28a9f57"></a>
 
 ### Hooks
 
@@ -575,7 +575,7 @@ Necessary when the bound function requires arguments
 ```
 
 
-<a id="org1af9ed8"></a>
+<a id="org0ac01d1"></a>
 
 ### dired
 
@@ -589,7 +589,7 @@ Necessary when the bound function requires arguments
 ```
 
 
-<a id="orga80aa17"></a>
+<a id="org3ea933f"></a>
 
 ### ibuffer
 
@@ -601,7 +601,7 @@ Necessary when the bound function requires arguments
 ```
 
 
-<a id="orga319209"></a>
+<a id="orgedd3dca"></a>
 
 ### Advice
 
@@ -617,12 +617,12 @@ Necessary when the bound function requires arguments
 ```
 
 
-<a id="orgdb450fd"></a>
+<a id="orga6b0551"></a>
 
 ## Packages
 
 
-<a id="orgf24e3bc"></a>
+<a id="orgdf586ba"></a>
 
 ### Minibuffer & Completion
 
@@ -801,7 +801,10 @@ Necessary when the bound function requires arguments
       ;; Exclude directories/files from consult-git-grep
       ;; https://github.com/minad/consult/issues/395
       (defcustom aj8/consult-git-grep-excludes
-        `(,(dot-env-get 'PATH_TO_EMACS_README "/home/amo/.emacs.d/README*")
+        ;; `(,(dot-env-get 'PATH_TO_EMACS_README "/home/amo/.emacs.d/README*")
+        (
+          "**/.emacs.d/README.md"
+          "**/.emacs.d/README.org"
           "**/archive/**"
           "**/build/**")
         "List of Git pathspec globs to exclude from `consult-git-grep'."
@@ -954,7 +957,7 @@ Necessary when the bound function requires arguments
     ```
 
 
-<a id="org10227cf"></a>
+<a id="org20e23c2"></a>
 
 ### Programming
 
@@ -972,9 +975,23 @@ Necessary when the bound function requires arguments
               (setq agent-shell-anthropic-authentication
                     (agent-shell-anthropic-make-authentication :login t)
                     agent-shell-cursor-authentication
-                    (agent-shell-cursor-make-authentication :login t)
-                    agent-shell-prefer-viewport-interaction t))
+                    (agent-shell-cursor-make-authentication :login t)))
             ```
+    
+    -   agent-shell-org-transcript
+    
+        -   **Repo:** 
+        
+        -   **Description:** 
+        
+        ```emacs-lisp
+        (use-package agent-shell-org-transcript
+          :ensure (:host github :repo "lllShamanlll/agent-shell-org-transcript")
+          :after agent-shell
+          :config
+          (setq agent-shell-org-transcript-directory "~/.emacs.d/agent-shell/org-transcripts/")
+          )
+        ```
     
     -   copilot-chat
     
@@ -1312,7 +1329,7 @@ Necessary when the bound function requires arguments
         ```
 
 
-<a id="org2be3794"></a>
+<a id="org5e44fd6"></a>
 
 ### Version Control
 
@@ -1425,7 +1442,7 @@ Necessary when the bound function requires arguments
     ```
 
 
-<a id="org02ecc8f"></a>
+<a id="org27964e7"></a>
 
 ### Org Mode
 
@@ -1693,7 +1710,7 @@ Necessary when the bound function requires arguments
     ```
 
 
-<a id="orgb0ced7f"></a>
+<a id="org3f4f688"></a>
 
 ### Other Useful Packages
 
@@ -2216,7 +2233,7 @@ Necessary when the bound function requires arguments
     ```
 
 
-<a id="org1a26ea2"></a>
+<a id="org7ce6d19"></a>
 
 ### Appearance
 
@@ -2351,19 +2368,19 @@ Necessary when the bound function requires arguments
     ```
 
 
-<a id="org241eaef"></a>
+<a id="org153914d"></a>
 
 # Terminal Config
 
 Configuration and packages specific to terminal
 
 
-<a id="org5e18586"></a>
+<a id="orgdfb9133"></a>
 
 ## General Configuration
 
 
-<a id="org76861b6"></a>
+<a id="org0bf2fe8"></a>
 
 ### Variables and Modes
 
@@ -2390,7 +2407,7 @@ Configuration and packages specific to terminal
 ```
 
 
-<a id="org6d80506"></a>
+<a id="org65adbad"></a>
 
 ### Functions for custom bindings
 
@@ -2404,7 +2421,7 @@ Configuration and packages specific to terminal
 ```
 
 
-<a id="org441bc83"></a>
+<a id="orgfb1d457"></a>
 
 ### Custom Bindings
 
