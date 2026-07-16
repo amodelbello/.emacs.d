@@ -454,6 +454,7 @@
          ("C-s-n" . scroll-up-line)
          ("C-x K" . kill-buffer-and-window)
          ("M-SPC" . cycle-spacing)
+         ("C-x t w" . tab-bar-mode)
          ))
 #+end_src
 
