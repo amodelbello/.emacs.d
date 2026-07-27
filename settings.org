@@ -1781,6 +1781,7 @@ targets."
            ("," . persp-rename)
            ("." . persp-switch)
            ("'" . persp-switch-last)
+           ("b" . persp-switch-to-buffer*)
            ("\"" . persp-kill)))
 #+end_src
 *** Popper
