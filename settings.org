@@ -1025,7 +1025,7 @@ targets."
 - Repo :: https://github.com/meqif/docker-compose-mode
 #+begin_src emacs-lisp
   (use-package docker-compose-mode
-    :ensure t)
+    :ensure (:host github :repo "meqif/docker-compose-mode"))
 #+end_src
 **** Flatbuffers
 - Repo :: https://github.com/Asalle/flatbuffers-mode
