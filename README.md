@@ -3,33 +3,33 @@ An emacs configuration for both GUI and terminal. Instructions on setting up ema
 
 # Table of Contents
 
--   [Initial Setup](#orga493941)
--   [Configuration](#org34cc975)
-    -   [Config](#org10e5d50)
-        -   [Variables and Modes](#orgba2c8b8)
-        -   [Functions for custom bindings](#org7840b5f)
-        -   [use-package Style Bindings](#org9e57719)
-        -   [Traditional-Style Bindings](#org8b60145)
-        -   [Functions for hooks](#org9a1a7c2)
-        -   [Hooks](#org04d4fa9)
-        -   [dired](#orgb3c0f75)
-        -   [ibuffer](#orgcb1a645)
-        -   [Advice](#org141bcfb)
-    -   [Packages](#orgd324c72)
-        -   [Minibuffer & Completion](#org463371c)
-        -   [Programming](#org661799e)
-        -   [Version Control](#org3605fb4)
-        -   [Org Mode](#orgdcbd7f1)
-        -   [Other Useful Packages](#org571f00b)
-        -   [Appearance](#org17e8dba)
--   [Terminal Config](#orga7e1942)
-    -   [General Configuration](#orga23d381)
-        -   [Variables and Modes](#org7ce1c9b)
-        -   [Functions for custom bindings](#org2d6bb89)
-        -   [Custom Bindings](#org466c2e5)
+-   [Initial Setup](#orgf9b1192)
+-   [Configuration](#org1e158a6)
+    -   [Config](#org9c94009)
+        -   [Variables and Modes](#org758807c)
+        -   [Functions for custom bindings](#orgf144b35)
+        -   [use-package Style Bindings](#org370603c)
+        -   [Traditional-Style Bindings](#org4508ad2)
+        -   [Functions for hooks](#orgd144c1e)
+        -   [Hooks](#org211515c)
+        -   [dired](#org2a321fc)
+        -   [ibuffer](#org056e7e8)
+        -   [Advice](#orgdea6173)
+    -   [Packages](#org454f8c9)
+        -   [Minibuffer & Completion](#org89425c6)
+        -   [Programming](#org893c187)
+        -   [Version Control](#orgcf2ac18)
+        -   [Org Mode](#orgc05503b)
+        -   [Other Useful Packages](#org7f8250f)
+        -   [Appearance](#org07873a9)
+-   [Terminal Config](#org9258e58)
+    -   [General Configuration](#orgd53f8fc)
+        -   [Variables and Modes](#org75d6d0d)
+        -   [Functions for custom bindings](#org6d458d2)
+        -   [Custom Bindings](#org9a9dcc4)
 
 
-<a id="orga493941"></a>
+<a id="orgf9b1192"></a>
 
 # Initial Setup
 
@@ -43,18 +43,18 @@ Before opening emacs with this configuration there are a few set up tasks that n
 3.  Configure environment variables: <https://github.com/amodelbello/dot-env.el> example `.env` file: [.env.example](.env.example)
 
 
-<a id="org34cc975"></a>
+<a id="org1e158a6"></a>
 
 # Configuration
 
 
 
-<a id="org10e5d50"></a>
+<a id="org9c94009"></a>
 
 ## Config
 
 
-<a id="orgba2c8b8"></a>
+<a id="org758807c"></a>
 
 ### Variables and Modes
 
@@ -223,7 +223,7 @@ Before opening emacs with this configuration there are a few set up tasks that n
 ```
 
 
-<a id="org7840b5f"></a>
+<a id="orgf144b35"></a>
 
 ### Functions for custom bindings
 
@@ -474,7 +474,7 @@ Otherwise use the projectile project root if present"
 ```
 
 
-<a id="org9e57719"></a>
+<a id="org370603c"></a>
 
 ### use-package Style Bindings
 
@@ -521,7 +521,7 @@ Otherwise use the projectile project root if present"
 ```
 
 
-<a id="org8b60145"></a>
+<a id="org4508ad2"></a>
 
 ### Traditional-Style Bindings
 
@@ -539,7 +539,7 @@ Necessary when the bound function requires arguments
 ```
 
 
-<a id="org9a1a7c2"></a>
+<a id="orgd144c1e"></a>
 
 ### Functions for hooks
 
@@ -555,7 +555,7 @@ Necessary when the bound function requires arguments
 ```
 
 
-<a id="org04d4fa9"></a>
+<a id="org211515c"></a>
 
 ### Hooks
 
@@ -576,7 +576,7 @@ Necessary when the bound function requires arguments
 ```
 
 
-<a id="orgb3c0f75"></a>
+<a id="org2a321fc"></a>
 
 ### dired
 
@@ -590,7 +590,7 @@ Necessary when the bound function requires arguments
 ```
 
 
-<a id="orgcb1a645"></a>
+<a id="org056e7e8"></a>
 
 ### ibuffer
 
@@ -602,7 +602,7 @@ Necessary when the bound function requires arguments
 ```
 
 
-<a id="org141bcfb"></a>
+<a id="orgdea6173"></a>
 
 ### Advice
 
@@ -618,12 +618,12 @@ Necessary when the bound function requires arguments
 ```
 
 
-<a id="orgd324c72"></a>
+<a id="org454f8c9"></a>
 
 ## Packages
 
 
-<a id="org463371c"></a>
+<a id="org89425c6"></a>
 
 ### Minibuffer & Completion
 
@@ -958,7 +958,7 @@ Necessary when the bound function requires arguments
     ```
 
 
-<a id="org661799e"></a>
+<a id="org893c187"></a>
 
 ### Programming
 
@@ -1330,7 +1330,7 @@ Necessary when the bound function requires arguments
         ```
 
 
-<a id="org3605fb4"></a>
+<a id="orgcf2ac18"></a>
 
 ### Version Control
 
@@ -1350,7 +1350,8 @@ Necessary when the bound function requires arguments
       (("C-x g" . magit))
       :after nerd-icons
       :config
-      (setq magit-diff-refine-ignore-whitespace t)
+      (setq magit-diff-refine-ignore-whitespace t
+            magit-diff-auto-show nil)
       :custom
       (magit-git-executable (dot-env-get 'GIT_EXECUTABLE_PATH "/usr/bin/git"))
       (magit-format-file-function #'magit-format-file-nerd-icons))
@@ -1443,7 +1444,7 @@ Necessary when the bound function requires arguments
     ```
 
 
-<a id="orgdcbd7f1"></a>
+<a id="orgc05503b"></a>
 
 ### Org Mode
 
@@ -1711,7 +1712,7 @@ Necessary when the bound function requires arguments
     ```
 
 
-<a id="org571f00b"></a>
+<a id="org7f8250f"></a>
 
 ### Other Useful Packages
 
@@ -2235,7 +2236,7 @@ Necessary when the bound function requires arguments
     ```
 
 
-<a id="org17e8dba"></a>
+<a id="org07873a9"></a>
 
 ### Appearance
 
@@ -2370,19 +2371,19 @@ Necessary when the bound function requires arguments
     ```
 
 
-<a id="orga7e1942"></a>
+<a id="org9258e58"></a>
 
 # Terminal Config
 
 Configuration and packages specific to terminal
 
 
-<a id="orga23d381"></a>
+<a id="orgd53f8fc"></a>
 
 ## General Configuration
 
 
-<a id="org7ce1c9b"></a>
+<a id="org75d6d0d"></a>
 
 ### Variables and Modes
 
@@ -2409,7 +2410,7 @@ Configuration and packages specific to terminal
 ```
 
 
-<a id="org2d6bb89"></a>
+<a id="org6d458d2"></a>
 
 ### Functions for custom bindings
 
@@ -2423,7 +2424,7 @@ Configuration and packages specific to terminal
 ```
 
 
-<a id="org466c2e5"></a>
+<a id="org9a9dcc4"></a>
 
 ### Custom Bindings
 
